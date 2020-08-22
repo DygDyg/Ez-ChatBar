@@ -1,0 +1,19 @@
+## Interface: 20400
+## Title: DygDyg_test
+## Version: 0.2
+## Author: ДугДуг
+## Notes: test
+## RequiredDeps:
+## OptionalDeps:
+## LoadWith: Blizzard_TalentUI
+## SavedVariables: DygTestData, WindowPosition, data, Message, Settings
+
+test_api.lua
+Settings_Menu.lua
+Data.lua
+
+WindowMoving.lua
+base64.lua
+Message.lua
+MesButton.lua
+
