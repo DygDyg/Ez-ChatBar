@@ -107,6 +107,9 @@ Dyg_Frame()
 
 
 function Dyg_pars(Messages)
+    if(Messages == nil) then
+        Messages = {}
+    end
     local Dyg_Mes_type;
         if(Dyg_st_temp == 1) then
             local i = 1;

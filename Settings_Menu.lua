@@ -8,6 +8,7 @@ MyAddon.panel.name = "DygDyg Addons";
 MyAddon.panel.okay = function (self) Settings = Settings_local; Start_Settings(); end;
 MyAddon.panel.cancel = function (self) Settings = Settings_local; Start_Settings(); end;
 
+
 InterfaceOptions_AddCategory(MyAddon.panel);
 
     function Dyg_OPT_Create_Button(i, My_text, My_toltip, default, My_Name)
@@ -57,6 +58,11 @@ local Event2 = CreateFrame("Frame");
 Event2:RegisterEvent("ADDON_LOADED");
 Event2.test = true;
 Event2:SetScript("OnEvent", function(...)
+
+    if(Settings == nil) then
+        Settings = {}
+    end
+
     if(Event2.test == true) then
         Settings_local = Settings;
         Start_Option();
