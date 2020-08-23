@@ -1,5 +1,5 @@
 ## Interface: 20400
-## Title: DygDyg_test
+## Title: DygDyg_Addons
 ## Version: 0.2
 ## Author: ДугДуг
 ## Notes: test

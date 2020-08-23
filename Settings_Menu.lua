@@ -38,17 +38,9 @@ InterfaceOptions_AddCategory(MyAddon.panel);
 end
 
 function Start_Option()
-
     Dyg_OPT_Create_Button(1, "Стандартная панель", "Включить стандартную панель", true);
     Dyg_OPT_Create_Button(2, "Боковая панель", "Включить боковую панель", true);
     Dyg_OPT_Create_Button(3, "Логирование чата", "Включить сохранение истории личных переписок", true);
-
-
-    --local pos = -20;
-    --for i = 1, 5 do
-    --    Dyg_OPT_Create_Button(i, "Кнопка "..i, "Это НЕ кнопка")
-    --    pos = pos - 20;
-    --end
 end
 
 
