@@ -33,7 +33,7 @@ Event1:RegisterEvent("CHAT_MSG_WHISPER");
 --Event1:RegisterEvent("CHAT_MSG_BN_WHISPER");
 --Event1:RegisterEvent("CHAT_MSG_BN_WHISPER_INFORM");
 Event1:SetScript("OnEvent", function(...)
-    if(Settings["Логирование чата"] == true) then
+    if(Settings["LogChat"] == true) then
         local args = {...};
         messeng(args)
     end

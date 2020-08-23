@@ -42,13 +42,13 @@ menu = {
 
 
 function Start_Settings()
-    if(Settings["Стандартная панель"] == true) then
+    if(Settings["DefaultPanel"] == true) then
         GeneralDockManagerScrollFrameChild:Show();
     else
         GeneralDockManagerScrollFrameChild:Hide();
     end
 
-        if(Settings["Боковая панель"]) then
+        if(Settings["MyPanel"] == true) then
         DygMesTab:Show();
     else
         DygMesTab:Hide();
@@ -102,8 +102,11 @@ function MesButton()
     }
 
 
-local name = {}
+    local name = {}
 
+    if(Settings["OffsetPanel"] == nil) then
+        Settings["OffsetPanel"] = 2;
+    end
 
     for i = 1, #DygMesTabLocal do
         if(DygMesTab[i] == nil) then
@@ -117,7 +120,7 @@ local name = {}
     if(DygMesTab[i] ~= nil) then
         DygMesTab[i]:Hide();
     end
-        if(DygMesTabLocal[i]~=nil and DygMesTabLocal[i]:IsShown() == true and i > a1) then
+        if(DygMesTabLocal[i]~=nil and DygMesTabLocal[i]:IsShown() == true and i > Settings["OffsetPanel"]) then
             if(DygMesTab[i] == nil) then
                 DygMesTab:SetHeight(DygMesTab:GetHeight() + 20);
                 DygMesTab[i] = CreateFrame("Button", "button"..i, DygMesTab, "GameMenuButtonTemplate");
@@ -160,7 +163,7 @@ Event1:RegisterEvent("CHAT_MSG_WHISPER");
 Event1:RegisterEvent("CHAT_MSG_BN_WHISPER");
 Event1:RegisterEvent("CHAT_MSG_BN_WHISPER_INFORM");
 Event1:SetScript("OnEvent", function(...)
-    local args = {...};
+    --local args = {...};
     MesButton()
 end)
 
@@ -169,3 +172,18 @@ Event1:RegisterEvent("PLAYER_ENTERING_WORLD");
 Event1:SetScript("OnEvent", function(...)
     MesButton()
 end)
+
+function OffsetPanel(msg)
+    msg = tonumber(msg);
+    --print(type(t_mes));
+    --print(t_mes);
+
+    if(msg~=nil) then
+        --print(msg);
+        Settings["OffsetPanel"] = msg;
+        MesButton()
+    end
+end
+
+SlashCmdList["OffsetPanel"] = OffsetPanel;
+SLASH_OffsetPanel1 = "/DygOffsetPanel"

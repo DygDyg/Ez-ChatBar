@@ -10,7 +10,7 @@ MyAddon.panel.cancel = function (self) Settings = Settings_local; Start_Settings
 
 InterfaceOptions_AddCategory(MyAddon.panel);
 
-    function Dyg_OPT_Create_Button(i, My_text, My_toltip, default)
+    function Dyg_OPT_Create_Button(i, My_text, My_toltip, default, My_Name)
 
         if(MyAddon.myCheckButtons[i] == nil) then
             MyAddon.myCheckButtons[i] = CreateFrame("CheckButton", nil, MyAddon.panel, "ChatConfigCheckButtonTemplate");
@@ -23,24 +23,24 @@ InterfaceOptions_AddCategory(MyAddon.panel);
             MyAddon.myCheckButtons[i].Text:SetText(My_text);
             MyAddon.myCheckButtons[i].tooltip = My_toltip;
         end
-            if(Settings[My_text]~=nil) then
-                MyAddon.myCheckButtons[i]:SetChecked(Settings_local[My_text]);
+            if(Settings[My_Name]~=nil) then
+                MyAddon.myCheckButtons[i]:SetChecked(Settings_local[My_Name]);
             else
-                Settings_local[My_text] = MyAddon.myCheckButtons[i]:GetChecked();
+                Settings_local[My_Name] = MyAddon.myCheckButtons[i]:GetChecked();
 
             end
 
         MyAddon.myCheckButtons[i]:SetScript("OnClick",
         function(self, button, down)
-            Settings_local[My_text] = self:GetChecked();
+            Settings_local[My_Name] = self:GetChecked();
 
         end)
 end
 
 function Start_Option()
-    Dyg_OPT_Create_Button(1, "Стандартная панель", "Включить стандартную панель", true);
-    Dyg_OPT_Create_Button(2, "Боковая панель", "Включить боковую панель", true);
-    Dyg_OPT_Create_Button(3, "Логирование чата", "Включить сохранение истории личных переписок", true);
+    Dyg_OPT_Create_Button(1, "Стандартная панель", "Включить стандартную панель", true, "DefaultPanel");
+    Dyg_OPT_Create_Button(2, "Боковая панель", "Включить боковую панель", true, "MyPanel");
+    Dyg_OPT_Create_Button(3, "Логирование чата", "Включить сохранение истории личных переписок", true, "LogChat");
 end
 
 
