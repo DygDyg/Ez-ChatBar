@@ -1,4 +1,4 @@
-local cor = -5;
+local cor = -16;
 local a1 = 2;
 
 function MesButtonPanel()
@@ -13,7 +13,7 @@ function MesButtonPanel()
 
         --DygMesTab:SetBackdropColor(48/255,48/255,48/255,0.5);
         --DygMesTab:SetPoint("CENTER");
-        DygMesTab:SetPoint("RIGHT", ChatFrame1.ScrollBar, 150, 0);
+        DygMesTab:SetPoint("RIGHT", ChatFrame1.ScrollBar, "TOP", 150, 0);
         WindowMoving(DygMesTab, "DygMesTab");
         DygMesTab:SetUserPlaced(true);
         --GeneralDockManagerScrollFrameChild:Hide();
@@ -89,7 +89,7 @@ function MesButton()
         [27] = ChatFrame27Tab,
         [28] = ChatFrame28Tab,
         [29] = ChatFrame29Tab,
-        [30] = ChatFrame230Tab,
+        [30] = ChatFrame30Tab,
         [31] = ChatFrame31Tab,
         [32] = ChatFrame32Tab,
         [33] = ChatFrame33Tab,
@@ -110,41 +110,38 @@ function MesButton()
 
     for i = 1, #DygMesTabLocal do
         if(DygMesTab[i] == nil) then
-
+                        --DygMesTab:SetHeight(DygMesTab:GetHeight() + 20);
+            DygMesTab[i] = CreateFrame("Button", "button"..i, DygMesTab, "GameMenuButtonTemplate");
+            DygMesTab[i]:SetWidth(120);
+            DygMesTab[i]:SetHeight(20);
+            DygMesTab[i]:SetPoint("TOP", 0, cor);
+            cor = cor - 20;
         end
 
     end
 
     local num1 = 1
     for i = 1, #DygMesTabLocal do
-    if(DygMesTab[i] ~= nil) then
-        DygMesTab[i]:Hide();
-    end
+        if(DygMesTab[i] ~= nil) then
+            DygMesTab[i]:Hide();
+        end
         if(DygMesTabLocal[i]~=nil and DygMesTabLocal[i]:IsShown() == true and i > Settings["OffsetPanel"]) then
             if(DygMesTab[i] == nil) then
-                DygMesTab:SetHeight(DygMesTab:GetHeight() + 20);
-                DygMesTab[i] = CreateFrame("Button", "button"..i, DygMesTab, "GameMenuButtonTemplate");
-                DygMesTab[i]:SetWidth(120);
-                DygMesTab[i]:SetHeight(20);
-                DygMesTab[i]:SetPoint("TOP", 0, cor);
-                cor = cor - 20
-            end
-                DygMesTab[i]:Show();
-                DygMesTab[i].Text:SetTextColor(DygMesTabLocal[i].Text:GetTextColor());
-                DygMesTab[i]:SetScript("OnMouseDown", function(self, button)
-                DygMesTabLocal[i]:Click(button);
 
+            end
+            DygMesTab[num1]:Show();
+            DygMesTab[num1].Text:SetTextColor(DygMesTabLocal[i].Text:GetTextColor());
+            DygMesTab[num1]:SetScript("OnMouseDown", function(self, button)
+            DygMesTabLocal[i]:Click(button);
                 if(button == "RightButton") then
                     local x, y = GetCursorPosition();
                     local scale = UIParent:GetEffectiveScale();
                     DropDownList1:SetPoint("TOPLEFT", nil, "BOTTOMLEFT", x/scale, y/scale);
-
                 elseif(button == "MiddleButton") then
                     MesButton()
                     print(button)
-                    DygMesTab:SetHeight(DygMesTab:GetHeight() - 20);
+                    --DygMesTab:SetHeight(DygMesTab:GetHeight() - 20);
                 end
-
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
             end);
             name[1], name[2] = strsplit("-", (DygMesTabLocal[i]:GetText()))
@@ -152,7 +149,8 @@ function MesButton()
                 name[1] = DygMesTabLocal[i]:GetText();
                 name[2] = "?";
             end
-            DygMesTab[i]:SetText(name[1])
+            DygMesTab[num1]:SetText(name[1]);
+            num1 = num1 + 1;
         end
     end
 end
