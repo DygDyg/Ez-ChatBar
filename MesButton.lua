@@ -1,12 +1,12 @@
-local cor = -16;
+local cor = -17;
 local a1 = 2;
 
 function MesButtonPanel()
 
     if(DygMesTab==nil) then
         DygMesTab = CreateFrame("FRAME", "DygMesTab1", UIParent);
-        DygMesTab:SetWidth(125);
-        DygMesTab:SetHeight(12);
+        DygMesTab:SetWidth(115);
+        DygMesTab:SetHeight(15);
         DygMesTab:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",});--  edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Gold-Border",});
         --DygMesTab:SetBackdrop({bgFile = "Interface\\AddOns\\WeakAuras\\Media\\Textures\\Square_Smooth_Border2.tga",})
         --DygMesTab:SetBackdrop({bgFile = "Interface\\CHATFRAME\\ChatFrameBorder",})
@@ -19,27 +19,6 @@ function MesButtonPanel()
         --GeneralDockManagerScrollFrameChild:Hide();
     end
 end
-
-menu = {
-    { text = "Select an Option", isTitle = true},
-    { text = "Option 1", func = function() print("You've chosen option 1"); end },
-    { text = "Option 2", func = function() print("You've chosen option 2"); end },
-    { text = "More Options", hasArrow = true,
-        menuList = {
-            { text = "Option 3", func = function() print("You've chosen option 3"); end }
-        }
-    }
-}
--- Note that this frame must be named for the dropdowns to work.
---menuFrame = CreateFrame("Frame", "ExampleMenuFrame", UIParent, "UIDropDownMenuTemplate")
-
--- Make the menu appear at the cursor:
---EasyMenu(menu, menuFrame, "cursor", 0 , 0, "MENU");
--- Or make the menu appear at the frame:
---menuFrame:SetPoint("Center", UIParent, "Center")
-
---EasyMenu(menu, menuFrame, menuFrame, 0 , 0, "MENU");
-
 
 function Start_Settings()
     if(Settings["DefaultPanel"] == true) then
@@ -139,7 +118,7 @@ function MesButton()
                     DropDownList1:SetPoint("TOPLEFT", nil, "BOTTOMLEFT", x/scale, y/scale);
                 elseif(button == "MiddleButton") then
                     MesButton()
-                    print(button)
+                    --print(button)
                     --DygMesTab:SetHeight(DygMesTab:GetHeight() - 20);
                 end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
@@ -161,8 +140,15 @@ Event1:RegisterEvent("CHAT_MSG_WHISPER");
 Event1:RegisterEvent("CHAT_MSG_BN_WHISPER");
 Event1:RegisterEvent("CHAT_MSG_BN_WHISPER_INFORM");
 Event1:SetScript("OnEvent", function(...)
-    --local args = {...};
+    local args = {...};
+    --DygTestData = args;
     MesButton()
+    if(Settings["SoundMes"] == true) then
+        if("CHAT_MSG_BN_WHISPER"==args[2] or "CHAT_MSG_WHISPER"==args[2]) then
+            print(args[2]);
+            PlaySoundFile("Interface\\AddOns\\DygDyg_Addons\\sound\\message_Utka.mp3", "SFX");
+        end
+    end
 end)
 
 local Event1 = CreateFrame("Frame");

@@ -78,7 +78,35 @@ function Dyg_Frame()
     Dyg.myframes2:SetHeight(Dyg.myframes:GetHeight());
     Dyg.myframes2:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Gold-Background",  edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Gold-Border",});
     Dyg.myframes2:SetPoint("LEFT",Dyg.myframes,-230,0);
+    Dyg.myframes.Users = {}
 
+    --Dyg.myframes.ScrollFrame = CreateFrame("ScrollFrame", nil, Dyg.myframes, "UIPanelScrollFrameTemplate");
+    --Dyg.myframes.ScrollFrame:SetPoint("TOPLEFT", Dyg.myframes, "TOPLEFT", 4, -21);
+    --Dyg.myframes.ScrollFrame:SetPoint("BOTTOMRIGHT", Dyg.myframes, "BOTTOMRIGHT", -3, 10);
+    --Dyg.myframes.ScrollFrame:SetClipsChildren(true);
+    --Dyg.myframes.ScrollFrame:SetScript("OnMouseWheel", ScrollFrame_OnMouseWheel);
+    --Dyg.myframes.ScrollFrame.ScrollBar:ClearAllPoints();
+    --Dyg.myframes.ScrollFrame.ScrollBar:SetPoint("TOPLEFT", Dyg.myframes.ScrollFrame, "TOPRIGHT", -18, -32);
+    --Dyg.myframes.ScrollFrame.ScrollBar:SetPoint("BOTTOMRIGHT", Dyg.myframes.ScrollFrame, "BOTTOMRIGHT", -7, 18);
+--
+    --Dyg.myframes.TextEditor = CreateFrame("EditBox", nil, Dyg.myframes.ScrollFrame);
+    --Dyg.myframes.TextEditor:Disable();
+    --Dyg.myframes.TextEditor:SetWidth(430);
+    --Dyg.myframes.TextEditor:SetFontObject(GameFontNormal);
+    --Dyg.myframes.TextEditor:SetBackdropColor(0, 0, 0, 0.8);
+    --Dyg.myframes.TextEditor:SetBackdropBorderColor(0.6, 0.6, 0.6, 1);
+    --Dyg.myframes.TextEditor:SetPoint("TOP",Dyg.myframes,0,-30);
+    --Dyg.myframes.TextEditor:SetMultiLine(true);
+--
+    --Dyg.myframes.ScrollFrame:SetScrollChild(Dyg.myframes.TextEditor);
+end
+
+Dyg_Frame()
+
+-----------------------------------------------------------------------------
+
+function Dyg_EditBox()
+    --Dyg.myframes = {};
     Dyg.myframes.ScrollFrame = CreateFrame("ScrollFrame", nil, Dyg.myframes, "UIPanelScrollFrameTemplate");
     Dyg.myframes.ScrollFrame:SetPoint("TOPLEFT", Dyg.myframes, "TOPLEFT", 4, -21);
     Dyg.myframes.ScrollFrame:SetPoint("BOTTOMRIGHT", Dyg.myframes, "BOTTOMRIGHT", -3, 10);
@@ -87,7 +115,6 @@ function Dyg_Frame()
     Dyg.myframes.ScrollFrame.ScrollBar:ClearAllPoints();
     Dyg.myframes.ScrollFrame.ScrollBar:SetPoint("TOPLEFT", Dyg.myframes.ScrollFrame, "TOPRIGHT", -18, -32);
     Dyg.myframes.ScrollFrame.ScrollBar:SetPoint("BOTTOMRIGHT", Dyg.myframes.ScrollFrame, "BOTTOMRIGHT", -7, 18);
-
     Dyg.myframes.TextEditor = CreateFrame("EditBox", nil, Dyg.myframes.ScrollFrame);
     Dyg.myframes.TextEditor:Disable();
     Dyg.myframes.TextEditor:SetWidth(430);
@@ -96,27 +123,54 @@ function Dyg_Frame()
     Dyg.myframes.TextEditor:SetBackdropBorderColor(0.6, 0.6, 0.6, 1);
     Dyg.myframes.TextEditor:SetPoint("TOP",Dyg.myframes,0,-30);
     Dyg.myframes.TextEditor:SetMultiLine(true);
-
     Dyg.myframes.ScrollFrame:SetScrollChild(Dyg.myframes.TextEditor);
-
 end
-
-Dyg_Frame()
 
 -----------------------------------------------------------------------------
 
 
 function Dyg_pars(Messages)
+Dyg_EditBox();
     if(Messages == nil) then
         Messages = {}
     end
     local Dyg_Mes_type;
-        if(Dyg_st_temp == 1) then
-            local i = 1;
-            local Dyg_tex = "";
-            local Dyg_Data_Letr = "";
-            local a = nil;
+    if(Dyg_st_temp == 1) then
+        local i = 1;
+        local Dyg_tex = "";
+        local Dyg_Data_Letr = "";
+        local a = nil;
+        local list_t = {};
+        local list = {};
+        local hash = {};
+        menu = {};
+        --menu[i] = {};
+
+        for i = 1, #Messages do
+            list_t[i] = Messages[i]["name"];
+        end
+
+        for _,v in ipairs(list_t) do
+            if (not hash[v]) then
+                list[#list+1] = v
+                hash[v] = true
+            end
+        end
+
+        for i = 1, #list do
+            --print(list[i])
+            --menu[i] = { text = list[i], isTitle = true}
+            menu[i] = { text = list[i], func = function() end }
+
+        end
+
             while i < #Messages do
+                --if(Dyg.myframes.Users[i].TextEditor == nil) then
+                --    Dyg_EditBox(i);
+                --end
+
+
+
                 if(Messages[i]["name"] == "Дугдуг-Дракономор") then
 
                     if(a == nil) then
@@ -151,6 +205,8 @@ function Dyg_pars(Messages)
     --Dyg.myframes.TextEditor:SetText(Dyg_tex);
 end;
 
+--======================================================================================================================
+
 function OpenMsgFrame(msg) Dyg.myframes:Show(); end
 
 SlashCmdList["OpenMsgFrame"] = OpenMsgFrame;
@@ -184,3 +240,27 @@ SLASH_DygClearMsg1 = "/DygClearMsg"
 --datetime = date("!*t",seconds_since_epoch)
 --print(tostring(datetime.year))
 -----------------------------------------------------------------------------
+
+--menu = {
+--    { text = "Select an Option", isTitle = true},
+--    { text = "Option 1", func = function() print("You've chosen option 1"); end },
+--    { text = "Option 2", func = function() print("You've chosen option 2"); end },
+--    { text = "More Options", hasArrow = true,
+--        menuList = {
+--            { text = "Option 3", func = function() print("You've chosen option 3"); end }
+--        }
+--    }
+--}
+--
+
+-- Note that this frame must be named for the dropdowns to work.
+menuFrame = CreateFrame("Frame", "ExampleMenuFrame", UIParent, "UIDropDownMenuTemplate")
+
+-- Make the menu appear at the cursor:
+
+-- Or make the menu appear at the frame:
+menuFrame:SetPoint("Center", UIParent, "Center")
+menuFrame:Hide()
+--EasyMenu(menu, menuFrame, "cursor", 0 , 0, "MENU");
+
+--EasyMenu(menu, menuFrame, menuFrame, 0 , 0, "MENU");

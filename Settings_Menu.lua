@@ -42,6 +42,7 @@ function Start_Option()
     Dyg_OPT_Create_Button(1, "Стандартная панель", "Включить стандартную панель", true, "DefaultPanel");
     Dyg_OPT_Create_Button(2, "Боковая панель", "Включить боковую панель", true, "MyPanel");
     Dyg_OPT_Create_Button(3, "Логирование чата", "Включить сохранение истории личных переписок", true, "LogChat");
+    Dyg_OPT_Create_Button(4, "Звук входящего сообщения", "Уведомление о входящем сообщении", true, "SoundMes");
 end
 
 
