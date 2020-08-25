@@ -146,7 +146,12 @@ Event1:SetScript("OnEvent", function(...)
     if(Settings["SoundMes"] == true) then
         if("CHAT_MSG_BN_WHISPER"==args[2] or "CHAT_MSG_WHISPER"==args[2]) then
             print(args[2]);
-            PlaySoundFile("Interface\\AddOns\\DygDyg_Addons\\sound\\message_Utka.mp3", "SFX");
+
+            if(Settings["SoundMesFile"] == nil) then
+                Settings["SoundMesFile"] = "message.mp3";
+            end
+
+            PlaySoundFile("Interface\\AddOns\\DygDyg_Addons\\sound\\"..Settings["SoundMesFile"], "SFX");
         end
     end
 end)
@@ -168,6 +173,22 @@ function OffsetPanel(msg)
         MesButton()
     end
 end
+function DygMesSoundFile(file)
+    if(file ~= "") then
+        Settings["SoundMesFile"] = file;
+        print("Звук сообщений "..file.." установлен")
+    else
+        print("Текущий звук сообщений "..Settings["SoundMesFile"])
+        print("Для смены звука пропишите команду:")
+        print(" /DygMesSoundFile <название файла>.mp3")
+        print("Предварительно закинув файл звука в")
+        print("  ..\\Interface\\AddOns\\DygDyg_Addons\\sound")
+    end
+end
+
 
 SlashCmdList["OffsetPanel"] = OffsetPanel;
 SLASH_OffsetPanel1 = "/DygOffsetPanel"
+
+SlashCmdList["DygMesSoundFile"] = DygMesSoundFile;
+SLASH_DygMesSoundFile1 = "/DygMesSoundFile"
