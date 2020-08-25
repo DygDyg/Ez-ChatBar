@@ -1,6 +1,6 @@
 ## Interface: 20400
 ## Title: DygDyg_Addons
-## Version: 0.2
+## Version: 8.3.0
 ## Author: ДугДуг
 ## Notes: test
 ## RequiredDeps:
