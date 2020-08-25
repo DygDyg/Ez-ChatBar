@@ -3,6 +3,9 @@
 ## Version: 0.3
 ## Author: ДугДуг
 ## Notes: test
+## X-Website: https://www.curseforge.com/wow/addons/dygdyg-addons
+## X-Curse-Project-ID: 403805
+## X-Category: Interface Enhancements
 ## RequiredDeps:
 ## OptionalDeps:
 ## LoadWith: Blizzard_TalentUI

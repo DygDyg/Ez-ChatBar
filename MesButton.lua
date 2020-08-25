@@ -118,8 +118,6 @@ function MesButton()
                     DropDownList1:SetPoint("TOPLEFT", nil, "BOTTOMLEFT", x/scale, y/scale);
                 elseif(button == "MiddleButton") then
                     MesButton()
-                    --print(button)
-                    --DygMesTab:SetHeight(DygMesTab:GetHeight() - 20);
                 end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
             end);
@@ -145,8 +143,6 @@ Event1:SetScript("OnEvent", function(...)
     MesButton()
     if(Settings["SoundMes"] == true) then
         if("CHAT_MSG_BN_WHISPER"==args[2] or "CHAT_MSG_WHISPER"==args[2]) then
-            print(args[2]);
-
             if(Settings["SoundMesFile"] == nil) then
                 Settings["SoundMesFile"] = "message.mp3";
             end
@@ -164,11 +160,8 @@ end)
 
 function OffsetPanel(msg)
     msg = tonumber(msg);
-    --print(type(t_mes));
-    --print(t_mes);
 
     if(msg~=nil) then
-        --print(msg);
         Settings["OffsetPanel"] = msg;
         MesButton()
     end
