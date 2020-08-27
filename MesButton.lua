@@ -141,8 +141,10 @@ function MesButton(args)
             DygMesTab[num1]:SetText(name[1]);
 
             if(args~=nil)then
-                if(args[4]==DygMesTabLocal[i]:GetText()) then
-                    DygMesTab[num1].NewMes:Show();
+                if("CHAT_MSG_BN_WHISPER"==args[2] or "CHAT_MSG_WHISPER"==args[2])then
+                    if(args[4]==DygMesTabLocal[i]:GetText()) then
+                        DygMesTab[num1].NewMes:Show();
+                    end
                 end
             end
 
