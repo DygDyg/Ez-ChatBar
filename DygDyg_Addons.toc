@@ -8,13 +8,11 @@
 ## X-Category: Interface Enhancements
 ## RequiredDeps:
 ## OptionalDeps:
-## LoadWith: Blizzard_TalentUI
-## SavedVariables: DygTestData, WindowPosition, data, Message, Settings
+## SavedVariables: DygTestData, WindowPosition, data, Message, Settings, DebugCheck
 
 test_api.lua
 Settings_Menu.lua
 Data.lua
-
 WindowMoving.lua
 base64.lua
 Message.lua

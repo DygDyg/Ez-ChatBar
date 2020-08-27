@@ -1,3 +1,34 @@
+function Debug(mes)
+    if(DebugCheck == true) then
+        print(mes)
+    else
+        --print("Дебаг не включён");
+    end
+end
+
+function DebugEnable(check)
+
+    if (check == "true") then
+        DebugCheck = true;
+        print("Debug режим включён");
+    elseif (check == "false") then
+        DebugCheck = false;
+        print("Debug режим выключен");
+    else
+        print("Сейчс установлено:");
+        print(DebugCheck);
+        print("Для переключения дебага введите:");
+        print("/Debug true или /Debug false")
+    end
+
+end
+
+SlashCmdList["DebugEnable"] = DebugEnable;
+SLASH_DebugEnable1 = "/Debug"
+
+
+
+
 local MyAddon = {};
 --if Settings == nil then Settings = {}; end
 pos2342355 = -20;
@@ -41,8 +72,9 @@ end
 function Start_Option()
     Dyg_OPT_Create_Button(1, "Стандартная панель", "Включить стандартную панель", true, "DefaultPanel");
     Dyg_OPT_Create_Button(2, "Боковая панель", "Включить боковую панель", true, "MyPanel");
-    Dyg_OPT_Create_Button(3, "Логирование чата", "Включить сохранение истории личных переписок", true, "LogChat");
-    Dyg_OPT_Create_Button(4, "Звук входящего сообщения", "Уведомление о входящем сообщении", true, "SoundMes");
+    Dyg_OPT_Create_Button(3, "Логирование чата", "Включить сохранение истории личных переписок", false, "LogChat");
+    Dyg_OPT_Create_Button(4, "Звук входящего сообщения", "Уведомление о входящем личном сообщении", true, "SoundMes");
+--    Dyg_OPT_Create_Button(4, "Звук входящего сообщения гильдии", "Уведомление о входящем сообщении гильдии", true, "SoundMesGuild");
 end
 
 
