@@ -37,7 +37,7 @@ end
 
 MesButtonPanel()
 
-function MesButton()
+function MesButton(args)
     local DygMesTabLocal = {
         [1] = ChatFrame1Tab,
         [2] = ChatFrame2Tab,
@@ -94,9 +94,14 @@ function MesButton()
             DygMesTab[i]:SetWidth(120);
             DygMesTab[i]:SetHeight(20);
             DygMesTab[i]:SetPoint("TOP", 0, cor);
+            DygMesTab[i].NewMes = CreateFrame("Frame", "NewMesTexture", DygMesTab[i]);
+            DygMesTab[i].NewMes:SetHeight(10);
+            DygMesTab[i].NewMes:SetWidth(10);
+            DygMesTab[i].NewMes:SetPoint("RIGHT", DygMesTab[i], "RIGHT", -5, 0);
+            DygMesTab[i].NewMes:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\glow",});
+            DygMesTab[i].NewMes:Hide();
             cor = cor - 20;
         end
-
     end
 
     local num1 = 1
@@ -113,11 +118,18 @@ function MesButton()
             DygMesTab[num1]:SetScript("OnMouseDown", function(self, button)
             DygMesTabLocal[i]:Click(button);
                 if(button == "RightButton") then
+
+                    if(IsControlKeyDown() == true)then
+                        Debug("Contrl");
+                    end
                     local x, y = GetCursorPosition();
                     local scale = UIParent:GetEffectiveScale();
                     DropDownList1:SetPoint("TOPLEFT", nil, "BOTTOMLEFT", x/scale, y/scale);
                 elseif(button == "MiddleButton") then
                     MesButton()
+                elseif(button == "LeftButton") then
+                    self.NewMes:Hide();
+
                 end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
             end);
@@ -127,6 +139,13 @@ function MesButton()
                 name[2] = "?";
             end
             DygMesTab[num1]:SetText(name[1]);
+
+            if(args~=nil)then
+                if(args[4]==DygMesTabLocal[i]:GetText()) then
+                    DygMesTab[num1].NewMes:Show();
+                end
+            end
+
             num1 = num1 + 1;
         end
     end
@@ -139,14 +158,16 @@ Event1:RegisterEvent("CHAT_MSG_BN_WHISPER");
 Event1:RegisterEvent("CHAT_MSG_BN_WHISPER_INFORM");
 Event1:SetScript("OnEvent", function(...)
     local args = {...};
-    --DygTestData = args;
-    MesButton()
+    DygTestData = args;
+    MesButton(args)
     if(Settings["SoundMes"] == true) then
         if("CHAT_MSG_BN_WHISPER"==args[2] or "CHAT_MSG_WHISPER"==args[2]) then
+
+
+
             if(Settings["SoundMesFile"] == nil) then
                 Settings["SoundMesFile"] = "message.mp3";
             end
-
             PlaySoundFile("Interface\\AddOns\\DygDyg_Addons\\sound\\"..Settings["SoundMesFile"], "SFX");
         end
     end
