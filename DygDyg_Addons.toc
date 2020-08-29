@@ -10,7 +10,8 @@
 ## OptionalDeps:
 ## SavedVariables: DygTestData, WindowPosition, data, Message, Settings, DebugCheck
 
-test_api.lua
+UI_Dyg.xml
+##test_api.lua
 Settings_Menu.lua
 Data.lua
 WindowMoving.lua

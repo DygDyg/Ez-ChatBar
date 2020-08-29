@@ -3,7 +3,7 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
 
 
-    <Button name="Dyg_UI_Button" frameStrata="LOW" parent="UIParent" virtual="true" inherits="Dyg_UI_Button_Template">
+    <Button name="Dyg_UI_Button" frameStrata="LOW" parent="UIParent" virtual="true" inherits="GameMenuButtonTemplate">
 		<Anchors>
 			<Anchor point="BOTTOMLEFT" x="0" y="2"/>
 		</Anchors>
@@ -49,81 +49,4 @@ xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
 		<NormalFont style="GameFontNormalSmall"/>
 	</Button>
 
-    <Button name="Dyg_UI_Button_Template" virtual="true" alpha="0.4">
-		<Size x="64" y="32"/>
-		<Layers>
-			<Layer level="BACKGROUND">
-				<Texture name="$parentLeft" file="Interface\ChatFrame\ChatFrameTab-BGLeft" parentKey="leftTexture">
-					<Size x="16" y="32"/>
-					<Anchors>
-						<Anchor point="TOPLEFT"/>
-					</Anchors>
-				</Texture>
-				<Texture name="$parentMiddle" file="Interface\ChatFrame\ChatFrameTab-BGMid" horizTile="true" parentKey="middleTexture">
-					<Size x="44" y="32"/>
-					<Anchors>
-						<Anchor point="LEFT" relativeKey="$parent.leftTexture" relativePoint="RIGHT"/>
-					</Anchors>
-				</Texture>
-				<Texture name="$parentRight" file="Interface\ChatFrame\ChatFrameTab-BGRight" parentKey="rightTexture">
-					<Size x="16" y="32"/>
-					<Anchors>
-						<Anchor point="LEFT" relativeKey="$parent.middleTexture" relativePoint="RIGHT"/>
-					</Anchors>
-				</Texture>
-			</Layer>
-			<Layer level="BORDER">
-				<Texture name="$parentSelectedLeft" file="Interface\ChatFrame\ChatFrameTab-SelectedLeft" alphaMode="ADD" parentKey="leftSelectedTexture">
-					<Size x="16" y="32"/>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeKey="$parent.leftTexture" relativePoint="TOPLEFT"/>
-						<Anchor point="BOTTOMRIGHT" relativeKey="$parent.leftTexture" relativePoint="BOTTOMRIGHT"/>
-					</Anchors>
-				</Texture>
-				<Texture name="$parentSelectedMiddle" file="Interface\ChatFrame\ChatFrameTab-SelectedMid" horizTile="true" alphaMode="ADD" parentKey="middleSelectedTexture">
-					<Size x="44" y="32"/>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeKey="$parent.middleTexture" relativePoint="TOPLEFT"/>
-						<Anchor point="BOTTOMRIGHT" relativeKey="$parent.middleTexture" relativePoint="BOTTOMRIGHT"/>
-					</Anchors>
-				</Texture>
-				<Texture name="$parentSelectedRight" file="Interface\ChatFrame\ChatFrameTab-SelectedRight" alphaMode="ADD" parentKey="rightSelectedTexture">
-					<Size x="16" y="32"/>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeKey="$parent.rightTexture" relativePoint="TOPLEFT"/>
-						<Anchor point="BOTTOMRIGHT" relativeKey="$parent.rightTexture" relativePoint="BOTTOMRIGHT"/>
-					</Anchors>
-				</Texture>
-				<Texture name="$parentGlow" file="Interface\ChatFrame\ChatFrameTab-NewMessage" parentKey="glow" alphaMode="ADD" hidden="true">
-					<Anchors>
-						<Anchor point="BOTTOMLEFT" x="8"/>
-						<Anchor point="BOTTOMRIGHT" x="-8"/>
-					</Anchors>
-				</Texture>
-			</Layer>
-			<Layer level="HIGHLIGHT">
-				<Texture name="$parentHighlightLeft" file="Interface\ChatFrame\ChatFrameTab-HighlightLeft" alphaMode="ADD" parentKey="leftHighlightTexture">
-					<Size x="16" y="32"/>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeKey="$parent.leftTexture" relativePoint="TOPLEFT"/>
-						<Anchor point="BOTTOMRIGHT" relativeKey="$parent.leftTexture" relativePoint="BOTTOMRIGHT"/>
-					</Anchors>
-				</Texture>
-				<Texture name="$parentHighlightMiddle" file="Interface\ChatFrame\ChatFrameTab-HighlightMid" horizTile="true" alphaMode="ADD" parentKey="middleHighlightTexture">
-					<Size x="44" y="32"/>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeKey="$parent.middleTexture" relativePoint="TOPLEFT"/>
-						<Anchor point="BOTTOMRIGHT" relativeKey="$parent.middleTexture" relativePoint="BOTTOMRIGHT"/>
-					</Anchors>
-				</Texture>
-				<Texture name="$parentHighlightRight" file="Interface\ChatFrame\ChatFrameTab-HighlightRight" alphaMode="ADD" parentKey="rightHighlightTexture">
-					<Size x="16" y="32"/>
-					<Anchors>
-						<Anchor point="TOPLEFT" relativeKey="$parent.rightTexture" relativePoint="TOPLEFT"/>
-						<Anchor point="BOTTOMRIGHT" relativeKey="$parent.rightTexture" relativePoint="BOTTOMRIGHT"/>
-					</Anchors>
-				</Texture>
-			</Layer>
-		</Layers>
-	</Button>
 </Ui>

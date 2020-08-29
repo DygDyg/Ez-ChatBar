@@ -1,30 +1,33 @@
 local cor = -17;
 local a1 = 2;
 
+    if(C_CVar.GetCVar("whisperMode") == "inline") then
+        print("-------------------------------------------")
+        C_CVar.SetCVar("whisperMode", "popout");
+        print("Настройка "..InterfaceOptionsSocialPanelWhisperModeLabel:GetText().." изменена")
+        --print("установлено: ")
+        --print(InterfaceOptionsSocialPanelWhisperModeText:GetText())
+    end
+
+
 function MesButtonPanel()
 
     if(DygMesTab==nil) then
         DygMesTab = CreateFrame("FRAME", "DygMesTab1", UIParent);
         DygMesTab:SetWidth(115);
         DygMesTab:SetHeight(15);
-        DygMesTab:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",});--  edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Gold-Border",});
-        --DygMesTab:SetBackdrop({bgFile = "Interface\\AddOns\\WeakAuras\\Media\\Textures\\Square_Smooth_Border2.tga",})
-        --DygMesTab:SetBackdrop({bgFile = "Interface\\CHATFRAME\\ChatFrameBorder",})
-
-        --DygMesTab:SetBackdropColor(48/255,48/255,48/255,0.5);
-        --DygMesTab:SetPoint("CENTER");
+        DygMesTab:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",});
         DygMesTab:SetPoint("RIGHT", ChatFrame1.ScrollBar, "TOP", 150, 0);
         WindowMoving(DygMesTab, "DygMesTab");
         DygMesTab:SetUserPlaced(true);
-        --GeneralDockManagerScrollFrameChild:Hide();
     end
 end
 
 function Start_Settings()
     if(Settings["DefaultPanel"] == true) then
-        GeneralDockManagerScrollFrameChild:Show();
+        GeneralDockManager:Show();
     else
-        GeneralDockManagerScrollFrameChild:Hide();
+        GeneralDockManager:Hide();
     end
 
         if(Settings["MyPanel"] == true) then
@@ -83,6 +86,50 @@ function MesButton(args)
 
     local name = {}
 
+    if(DygMesTab.GeberalTab == nil) then
+        DygMesTab.GeberalTab = CreateFrame("FRAME", "GeberalTab", DygMesTab);
+        DygMesTab.GeberalTab:SetWidth(15);
+        DygMesTab.GeberalTab:SetHeight(15);
+        DygMesTab.GeberalTab:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\glow"});
+        DygMesTab.GeberalTab:SetPoint("LEFT", DygMesTab, "LEFT", 0, 0);
+        DygMesTab.GeberalTab:SetScript("OnMouseDown", function(self, button)
+            DygMesTabLocal[1]:Click(button);
+                if(button == "RightButton") then
+                    if(IsControlKeyDown() == true)then
+                        Debug("Contrl");
+                    end
+                    local x, y = GetCursorPosition();
+                    local scale = UIParent:GetEffectiveScale();
+                    DropDownList1:SetPoint("TOPLEFT", DygMesTab, "TOPRIGHT", 0, 0);
+                elseif(button == "LeftButton") then
+                    OpenTabHide();
+                end
+                PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
+            end);
+    end
+
+    if(DygMesTab.CombatLog == nil) then
+        DygMesTab.CombatLog = CreateFrame("FRAME", "GeberalTab", DygMesTab);
+        DygMesTab.CombatLog:SetWidth(15);
+        DygMesTab.CombatLog:SetHeight(15);
+        DygMesTab.CombatLog:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\glow"});
+        DygMesTab.CombatLog:SetPoint("LEFT", DygMesTab.GeberalTab, "RIGHT", 0, 0);
+        DygMesTab.CombatLog:SetScript("OnMouseDown", function(self, button)
+            DygMesTabLocal[2]:Click(button);
+                if(button == "RightButton") then
+                    if(IsControlKeyDown() == true)then
+                        Debug("Contrl");
+                    end
+                    local x, y = GetCursorPosition();
+                    local scale = UIParent:GetEffectiveScale();
+                    DropDownList1:SetPoint("TOPLEFT", DygMesTab, "TOPRIGHT", 0, 0);
+                elseif(button == "LeftButton") then
+                    OpenTabHide();
+                end
+                PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
+            end);
+    end
+
     if(Settings["OffsetPanel"] == nil) then
         Settings["OffsetPanel"] = 2;
     end
@@ -100,7 +147,20 @@ function MesButton(args)
             DygMesTab[i].NewMes:SetPoint("RIGHT", DygMesTab[i], "RIGHT", -5, 0);
             DygMesTab[i].NewMes:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\glow",});
             DygMesTab[i].NewMes:Hide();
+            DygMesTab[i].OpenTab = CreateFrame("Frame", "OpenTabTexture", DygMesTab[i]);
+            DygMesTab[i].OpenTab:SetWidth(DygMesTab[i]:GetWidth());
+            DygMesTab[i].OpenTab:SetHeight(DygMesTab[i]:GetHeight());
+            DygMesTab[i].OpenTab:SetPoint("CENTER");
+            DygMesTab[i].OpenTab:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\ButtonGlowBlue", insets = { left = 0, right = 0, top = -30, bottom = -30}});
+            DygMesTab[i].OpenTab:Hide();
+
             cor = cor - 20;
+        end
+    end
+
+    function OpenTabHide()
+        for i = 1, #DygMesTab do
+            DygMesTab[i].OpenTab:Hide();
         end
     end
 
@@ -124,11 +184,13 @@ function MesButton(args)
                     end
                     local x, y = GetCursorPosition();
                     local scale = UIParent:GetEffectiveScale();
-                    DropDownList1:SetPoint("TOPLEFT", nil, "BOTTOMLEFT", x/scale, y/scale);
+                    DropDownList1:SetPoint("TOPLEFT", DygMesTab, "TOPRIGHT", 0, 0);
                 elseif(button == "MiddleButton") then
                     MesButton()
                 elseif(button == "LeftButton") then
                     self.NewMes:Hide();
+                    OpenTabHide();
+                    self.OpenTab:Show();
 
                 end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);

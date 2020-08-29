@@ -92,7 +92,7 @@ end
 function Start_Option()
 
     local pan = MyAddon.childpanelChat;
-    Dyg_OPT_Create_Button(1, "Стандартная панель", "Включить стандартную панель", true, "DefaultPanel", pan);
+    Dyg_OPT_Create_Button(1, "Стандартная панель", "Включить стандартную панель", false, "DefaultPanel", pan);
     Dyg_OPT_Create_Button(2, "Боковая панель", "Включить боковую панель", true, "MyPanel", pan);
     Dyg_OPT_Create_Button(3, "Звук входящего сообщения", "Уведомление о входящем личном сообщении", true, "SoundMes", pan);
 
@@ -125,4 +125,4 @@ MyAddon.panel.logo = CreateFrame("Frame", nil, MyAddon.panel);
 MyAddon.panel.logo:SetWidth(300);
 MyAddon.panel.logo:SetHeight(300);
 MyAddon.panel.logo:SetPoint("CENTER");
-MyAddon.panel.logo:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\icon",});
+MyAddon.panel.logo:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\logo",});
