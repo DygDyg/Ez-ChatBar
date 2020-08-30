@@ -123,23 +123,7 @@ function MesButton(args)
     end
 
     if(DygMesTab.GeberalTab == nil) then
-        DygMesTab.GeberalTab = CreateFrame("FRAME", "GeberalTab", DygMesTab);
-        DygMesTab.GeberalTab:SetWidth(15);
-        DygMesTab.GeberalTab:SetHeight(15);
-        DygMesTab.GeberalTab:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\general", insets = { left = 1, right = 1, top = 1, bottom = 1}});
-        DygMesTab.GeberalTab:SetBackdropColor(r, g, b, a);
-        DygMesTab.GeberalTab:SetPoint("LEFT", DygMesTab, "LEFT", 0, 0);
-
-        DygMesTab.GeberalTab:SetScript("OnEnter", function(self)
-            DygMesTab.GeberalTab:SetBackdropColor(r+(ColorSa/255), g+(ColorSa/255), b+(ColorSa/255), a);
-            DygMesTab.TextPanel:Show();
-            DygMesTab.TextPanel.Text:SetText("Общий чат");
-        end)
-
-        DygMesTab.GeberalTab:SetScript("OnLeave", function(self)
-            DygMesTab.GeberalTab:SetBackdropColor(r, g, b, a);
-            DygMesTab.TextPanel:Hide();
-        end)
+        DygMesTab.GeberalTab = Dyg_Button("GeberalTab", "Общий чат", "general", DygMesTab, {"LEFT", DygMesTab, "LEFT", 0, 0})
 
         DygMesTab.GeberalTab:SetScript("OnMouseDown", function(self, button)
             self:SetBackdropColor(1, 1, 1, 1);
@@ -163,24 +147,7 @@ function MesButton(args)
     end
 
     if(DygMesTab.CombatLog == nil) then
-        DygMesTab.CombatLog = CreateFrame("FRAME", "GeberalTab", DygMesTab);
-        DygMesTab.CombatLog:SetWidth(15);
-        DygMesTab.CombatLog:SetHeight(15);
-        DygMesTab.CombatLog:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\CombatLog", insets = { left = 1, right = 1, top = 1, bottom = 1}});
-        DygMesTab.CombatLog:SetBackdropColor(r, g, b, a);
-        DygMesTab.CombatLog:SetPoint("LEFT", DygMesTab.GeberalTab, "RIGHT", 0, 0);
-
-        DygMesTab.CombatLog:SetScript("OnEnter", function(self)
-            self:SetBackdropColor(r+(ColorSa/255), g+(ColorSa/255), b+(ColorSa/255), a);
-            DygMesTab.TextPanel:Show();
-            DygMesTab.TextPanel.Text:SetText("Журнал боя");
-        end)
-
-        DygMesTab.CombatLog:SetScript("OnLeave", function(self)
-            self:SetBackdropColor(r, g, b, a);
-            DygMesTab.TextPanel:Hide();
-        end)
-
+        DygMesTab.CombatLog = Dyg_Button("CombatLog", "Журнал боя", "CombatLog", DygMesTab, {"LEFT", DygMesTab.GeberalTab, "RIGHT", 0, 0})
         DygMesTab.CombatLog:SetScript("OnMouseDown", function(self, button)
                 if(button == "RightButton") then
                     if(IsControlKeyDown() == true)then
@@ -218,23 +185,7 @@ function MesButton(args)
     end
 
     if(DygMesTab.Settings == nil) then
-        DygMesTab.Settings = CreateFrame("FRAME", "SettingsButton", DygMesTab);
-        DygMesTab.Settings:SetWidth(15);
-        DygMesTab.Settings:SetHeight(15);
-        DygMesTab.Settings:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\Settings", insets = { left = 1, right = 1, top = 1, bottom = 1}});
-        DygMesTab.Settings:SetBackdropColor(r, g, b, a);
-        DygMesTab.Settings:SetPoint("RIGHT", DygMesTab, "RIGHT", 0, 0);
-
-        DygMesTab.Settings:SetScript("OnEnter", function(self)
-            self:SetBackdropColor(r+(ColorSa/255), g+(ColorSa/255), b+(ColorSa/255), a);
-            DygMesTab.TextPanel:Show();
-            DygMesTab.TextPanel.Text:SetText("Настройки");
-        end)
-
-        DygMesTab.Settings:SetScript("OnLeave", function(self)
-            self:SetBackdropColor(r, g, b, a);
-            DygMesTab.TextPanel:Hide();
-        end)
+        DygMesTab.Settings = Dyg_Button("SettingsButton", "Настройки", "Settings", DygMesTab, {"RIGHT", DygMesTab, "RIGHT", 0, 0})
 
         DygMesTab.Settings:SetScript("OnMouseDown", function(self, button)
             self:SetBackdropColor(1, 1, 1, 1);
@@ -252,25 +203,8 @@ function MesButton(args)
             self:SetBackdropColor(r, g, b, a);
         end)
     end
-
     if(DygMesTab.Close == nil) then
-        DygMesTab.Close = CreateFrame("FRAME", "CloseButton", DygMesTab);
-        DygMesTab.Close:SetWidth(15);
-        DygMesTab.Close:SetHeight(15);
-        DygMesTab.Close:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\Close", insets = { left = 1, right = 1, top = 1, bottom = 1}});
-        DygMesTab.Close:SetBackdropColor(r, g, b, a);
-        DygMesTab.Close:SetPoint("RIGHT", DygMesTab.Settings, "LEFT", 0, 0);
-
-        DygMesTab.Close:SetScript("OnEnter", function(self)
-            self:SetBackdropColor(r+(ColorSa/255), g+(ColorSa/255), b+(ColorSa/255), a);
-            DygMesTab.TextPanel:Show();
-            DygMesTab.TextPanel.Text:SetText("Закрыть всё");
-        end)
-
-        DygMesTab.Close:SetScript("OnLeave", function(self)
-            self:SetBackdropColor(r, g, b, a);
-            DygMesTab.TextPanel:Hide();
-        end)
+        DygMesTab.Close = Dyg_Button("CloseButton", "Закрыть всё", "Close", DygMesTab, {"RIGHT", DygMesTab.Settings, "LEFT", 0, 0});
 
         DygMesTab.Close:SetScript("OnMouseDown", function(self, button)
             self:SetBackdropColor(1, 1, 1, 1);
@@ -290,7 +224,6 @@ function MesButton(args)
                             OnAccept = function()
                                 CloseAllTab();
                             end,
-
                             timeout = 0,
                             whileDead = true,
                             hideOnEscape = true,
@@ -301,10 +234,10 @@ function MesButton(args)
                 end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
             end);
+    end
 
-        DygMesTab.Close:SetScript("OnMouseUp", function(self, button)
-            self:SetBackdropColor(r, g, b, a);
-        end)
+    if(DygMesTab.testButton==nil) then
+        --DygMesTab.testButton = Dyg_Button("test", "ПРоверка", "Close", DygMesTab, {"RIGHT", DygMesTab.Close, "LEFT", 0, 0})
     end
 
     if(Settings["OffsetPanel"] == nil) then
@@ -392,6 +325,8 @@ end
             if(args~=nil)then
                 if("CHAT_MSG_BN_WHISPER"==args[2] or "CHAT_MSG_WHISPER"==args[2])then
                     if(args[4]==DygMesTabLocal[i]:GetText() and DygMesTabLocal[i].mouseOverAlpha<1) then
+                        DygMesTab[num1].NewMes:Hide();
+                    elseif(args[4]==DygMesTabLocal[i]:GetText() and DygMesTabLocal[i].mouseOverAlpha>=1) then
                         DygMesTab[num1].NewMes:Show();
                     end
                 end

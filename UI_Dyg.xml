@@ -49,4 +49,22 @@ xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
 		<NormalFont style="GameFontNormalSmall"/>
 	</Button>
 
+    <Frame name="Dyg_UI_Button1" frameStrata="LOW" parent="UIParent" virtual="true">
+		<Anchors>
+			<Anchor point="BOTTOMLEFT" x="0" y="0"/>
+		</Anchors>
+		<Frames>
+			<Frame name="$parentFlash" hidden="true">
+				<Anchors>
+				</Anchors>
+				<Layers>
+					<Layer level="BACKGROUND">
+						<Texture file="Interface\\AddOns\\DygDyg_Addons\\image\\Close" alphaMode="ADD" setAllPoints="true"/>
+					</Layer>
+				</Layers>
+			</Frame>
+        </Frames>
+		<NormalFont style="GameFontNormalSmall"/>
+	</Frame>
+
 </Ui>
