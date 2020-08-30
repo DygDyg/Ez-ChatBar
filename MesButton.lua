@@ -26,8 +26,6 @@ local a1 = 2;
 --EasyMenu(menu, menuFrame, menuFrame, 0 , 0, "MENU");
 
 
-
-
 function MesButtonPanel()
 
     if(DygMesTab==nil) then
@@ -281,6 +279,25 @@ function MesButton(args)
 
                     end
                 elseif(button == "LeftButton") then
+                    if(IsControlKeyDown() == true)then
+                        Debug("Contrl");
+                        CloseAllTab();
+                    else
+                        StaticPopupDialogs["DygCloseAllTab"] = {
+                            text = "Закрыть все вкладки?",
+                            button1 = "Да",
+                            button2 = "Нет",
+                            OnAccept = function()
+                                CloseAllTab();
+                            end,
+
+                            timeout = 0,
+                            whileDead = true,
+                            hideOnEscape = true,
+                            preferredIndex = 3,
+                        }
+                        StaticPopup_Show("DygCloseAllTab");
+                    end
                 end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
             end);
@@ -318,11 +335,22 @@ function MesButton(args)
         end
     end
 
-    function OpenTabHide()
-        for i = 1, #DygMesTab do
-            DygMesTab[i].OpenTab:Hide();
+function CloseAllTab()
+    for i = 1, #DygMesTabLocal do
+        local r, g, b, a = DygMesTabLocal[i].Text:GetTextColor();
+        if(tostring(g) == "0.50195968151093" or tostring(g) == "0.99999779462814") then
+            DygMesTabLocal[i]:Click("MiddleButton");
+            --Log(DygMesTabLocal[i].Text:GetText());
+            MesButton()
         end
     end
+end
+
+function OpenTabHide()
+    for i = 1, #DygMesTab do
+        DygMesTab[i].OpenTab:Hide();
+    end
+end
 
     local num1 = 1
     for i = 1, #DygMesTabLocal do
@@ -338,7 +366,6 @@ function MesButton(args)
             DygMesTab[num1]:SetScript("OnMouseDown", function(self, button)
             DygMesTabLocal[i]:Click(button);
                 if(button == "RightButton") then
-
                     if(IsControlKeyDown() == true)then
                         Debug("Contrl");
                     end
@@ -351,10 +378,10 @@ function MesButton(args)
                     self.NewMes:Hide();
                     OpenTabHide();
                     self.OpenTab:Show();
-
                 end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
             end);
+
             name[1], name[2] = strsplit("-", (DygMesTabLocal[i]:GetText()))
             if(name[1] == nil) then
                 name[1] = DygMesTabLocal[i]:GetText();
