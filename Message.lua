@@ -254,13 +254,13 @@ SLASH_DygClearMsg1 = "/DygClearMsg"
 --
 
 -- Note that this frame must be named for the dropdowns to work.
-menuFrame = CreateFrame("Frame", "ExampleMenuFrame", UIParent, "UIDropDownMenuTemplate")
+--menuFrame = CreateFrame("Frame", "ExampleMenuFrame", UIParent, "UIDropDownMenuTemplate")
 
 -- Make the menu appear at the cursor:
 
 -- Or make the menu appear at the frame:
-menuFrame:SetPoint("Center", UIParent, "Center")
-menuFrame:Hide()
+--menuFrame:SetPoint("Center", UIParent, "Center")
+--menuFrame:Hide()
 --EasyMenu(menu, menuFrame, "cursor", 0 , 0, "MENU");
 
 --EasyMenu(menu, menuFrame, menuFrame, 0 , 0, "MENU");

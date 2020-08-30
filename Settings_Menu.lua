@@ -1,3 +1,8 @@
+local menuFrame = CreateFrame("Frame", "ExampleMenuFrame", UIParent, "UIDropDownMenuTemplate")
+menuFrame:SetPoint("Center", UIParent, "Center")
+menuFrame:Hide()
+
+
 function Debug(mes)
     if(DebugCheck == true) then
         print(mes)
@@ -32,26 +37,26 @@ SLASH_DebugEnable1 = "/Debug"
 
 
 
-local MyAddon = {};
+SettingsMyAddon = {};
 --if Settings == nil then Settings = {}; end
 --pos2342355 = -20;
-MyAddon.myCheckButtons = {};
+SettingsMyAddon.myCheckButtons = {};
 
-MyAddon.panel = CreateFrame( "Frame", "MyAddonPanel", UIParent );
-MyAddon.panel.name = "DygDyg Addons";
-MyAddon.panel.okay = function (self) Settings = Settings_local; Start_Settings(); end;
-MyAddon.panel.cancel = function (self) Settings = Settings_local; Start_Settings(); end;
-InterfaceOptions_AddCategory(MyAddon.panel);
+SettingsMyAddon.panel = CreateFrame( "Frame", "MyAddonPanel", UIParent );
+SettingsMyAddon.panel.name = "DygDyg Addons";
+SettingsMyAddon.panel.okay = function (self) Settings = Settings_local; Start_Settings(); end;
+SettingsMyAddon.panel.cancel = function (self) Settings = Settings_local; Start_Settings(); end;
+InterfaceOptions_AddCategory(SettingsMyAddon.panel);
 
-MyAddon.childpanelChat = CreateFrame( "Frame", "MyAddonPanel", MyAddon.panel);
-MyAddon.childpanelChat.name = "Настройки списка диалогов";
-MyAddon.childpanelChat.parent = MyAddon.panel.name;
-InterfaceOptions_AddCategory(MyAddon.childpanelChat);
+SettingsMyAddon.childpanelChat = CreateFrame( "Frame", "MyAddonPanel", SettingsMyAddon.panel);
+SettingsMyAddon.childpanelChat.name = "Настройки списка диалогов";
+SettingsMyAddon.childpanelChat.parent = SettingsMyAddon.panel.name;
+InterfaceOptions_AddCategory(SettingsMyAddon.childpanelChat);
 
-MyAddon.childpanelIstory = CreateFrame( "Frame", "MyAddonPanel", MyAddon.panel);
-MyAddon.childpanelIstory.name = "Настройки истории чата";
-MyAddon.childpanelIstory.parent = MyAddon.panel.name;
-InterfaceOptions_AddCategory(MyAddon.childpanelIstory);
+SettingsMyAddon.childpanelIstory = CreateFrame( "Frame", "MyAddonPanel", SettingsMyAddon.panel);
+SettingsMyAddon.childpanelIstory.name = "Настройки истории чата";
+SettingsMyAddon.childpanelIstory.parent = SettingsMyAddon.panel.name;
+InterfaceOptions_AddCategory(SettingsMyAddon.childpanelIstory);
 
 
 
@@ -91,12 +96,12 @@ end
 
 function Start_Option()
 
-    local pan = MyAddon.childpanelChat;
+    local pan = SettingsMyAddon.childpanelChat;
     Dyg_OPT_Create_Button(1, "Стандартная панель", "Включить стандартную панель", false, "DefaultPanel", pan);
     Dyg_OPT_Create_Button(2, "Боковая панель", "Включить боковую панель", true, "MyPanel", pan);
     Dyg_OPT_Create_Button(3, "Звук входящего сообщения", "Уведомление о входящем личном сообщении", true, "SoundMes", pan);
 
-    pan = MyAddon.childpanelIstory;
+    pan = SettingsMyAddon.childpanelIstory;
     Dyg_OPT_Create_Button(1, "Логирование чата", "Включить сохранение истории личных переписок", false, "LogChat", pan);
 --    Dyg_OPT_Create_Button(4, "Звук входящего сообщения гильдии", "Уведомление о входящем сообщении гильдии", true, "SoundMesGuild", pan);
 end
@@ -121,8 +126,8 @@ Event2:SetScript("OnEvent", function(...)
     end
 end)
 
-MyAddon.panel.logo = CreateFrame("Frame", nil, MyAddon.panel);
-MyAddon.panel.logo:SetWidth(300);
-MyAddon.panel.logo:SetHeight(300);
-MyAddon.panel.logo:SetPoint("CENTER");
-MyAddon.panel.logo:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\logo",});
+SettingsMyAddon.panel.logo = CreateFrame("Frame", nil, SettingsMyAddon.panel);
+SettingsMyAddon.panel.logo:SetWidth(300);
+SettingsMyAddon.panel.logo:SetHeight(300);
+SettingsMyAddon.panel.logo:SetPoint("CENTER");
+SettingsMyAddon.panel.logo:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\logo",});

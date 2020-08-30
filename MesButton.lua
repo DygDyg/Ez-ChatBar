@@ -5,9 +5,27 @@ local a1 = 2;
         print("-------------------------------------------")
         C_CVar.SetCVar("whisperMode", "popout");
         print("Настройка "..InterfaceOptionsSocialPanelWhisperModeLabel:GetText().." изменена")
-        --print("установлено: ")
-        --print(InterfaceOptionsSocialPanelWhisperModeText:GetText())
     end
+
+--menu = {
+--    { text = "Select an Option", isTitle = true},
+--    { text = "Option 1", func = function() print("You've chosen option 1"); end },
+--    { text = "Option 2", func = function() print("You've chosen option 2"); end },
+--    { text = "More Options", hasArrow = true,
+--        menuList = {
+--            { text = "Option 3", func = function() print("You've chosen option 3"); end }
+--        }
+--    }
+--}
+--
+
+
+
+--EasyMenu(menu, menuFrame, "cursor", 0 , 0, "MENU");
+
+--EasyMenu(menu, menuFrame, menuFrame, 0 , 0, "MENU");
+
+
 
 
 function MesButtonPanel()
@@ -86,13 +104,47 @@ function MesButton(args)
 
     local name = {}
 
+    local r, g, b, a = DygMesTabLocal[1].Text:GetTextColor()
+    local ColorSa = 40;
+
+    if(DygMesTab.TextPanel == nil) then
+        DygMesTab.TextPanel = CreateFrame("FRAME", "TextPanel", DygMesTab);
+        DygMesTab.TextPanel:SetWidth(115);
+        DygMesTab.TextPanel:SetHeight(15);
+        DygMesTab.TextPanel:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",});
+        DygMesTab.TextPanel:SetPoint("BOTTOM", DygMesTab, "TOP", 0, 0);
+        DygMesTab.TextPanel.Text = CreateFrame("EditBox", "Text", DygMesTab.TextPanel);
+        DygMesTab.TextPanel.Text:SetWidth(115);
+        DygMesTab.TextPanel.Text:SetHeight(15);
+        DygMesTab.TextPanel.Text:SetFontObject(GameFontNormal);
+        DygMesTab.TextPanel.Text:Disable();
+        DygMesTab.TextPanel.Text:SetText("Text Info");
+        DygMesTab.TextPanel.Text:SetPoint("CENTER");
+        DygMesTab.TextPanel:Hide();
+
+    end
+
     if(DygMesTab.GeberalTab == nil) then
         DygMesTab.GeberalTab = CreateFrame("FRAME", "GeberalTab", DygMesTab);
         DygMesTab.GeberalTab:SetWidth(15);
         DygMesTab.GeberalTab:SetHeight(15);
-        DygMesTab.GeberalTab:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\glow"});
+        DygMesTab.GeberalTab:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\general", insets = { left = 1, right = 1, top = 1, bottom = 1}});
+        DygMesTab.GeberalTab:SetBackdropColor(r, g, b, a);
         DygMesTab.GeberalTab:SetPoint("LEFT", DygMesTab, "LEFT", 0, 0);
+
+        DygMesTab.GeberalTab:SetScript("OnEnter", function(self)
+            DygMesTab.GeberalTab:SetBackdropColor(r+(ColorSa/255), g+(ColorSa/255), b+(ColorSa/255), a);
+            DygMesTab.TextPanel:Show();
+            DygMesTab.TextPanel.Text:SetText("Общий чат");
+        end)
+
+        DygMesTab.GeberalTab:SetScript("OnLeave", function(self)
+            DygMesTab.GeberalTab:SetBackdropColor(r, g, b, a);
+            DygMesTab.TextPanel:Hide();
+        end)
+
         DygMesTab.GeberalTab:SetScript("OnMouseDown", function(self, button)
+            self:SetBackdropColor(1, 1, 1, 1);
             DygMesTabLocal[1]:Click(button);
                 if(button == "RightButton") then
                     if(IsControlKeyDown() == true)then
@@ -106,28 +158,136 @@ function MesButton(args)
                 end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
             end);
+
+        DygMesTab.GeberalTab:SetScript("OnMouseUp", function(self, button)
+            self:SetBackdropColor(r, g, b, a);
+        end)
     end
 
     if(DygMesTab.CombatLog == nil) then
         DygMesTab.CombatLog = CreateFrame("FRAME", "GeberalTab", DygMesTab);
         DygMesTab.CombatLog:SetWidth(15);
         DygMesTab.CombatLog:SetHeight(15);
-        DygMesTab.CombatLog:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\glow"});
+        DygMesTab.CombatLog:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\CombatLog", insets = { left = 1, right = 1, top = 1, bottom = 1}});
+        DygMesTab.CombatLog:SetBackdropColor(r, g, b, a);
         DygMesTab.CombatLog:SetPoint("LEFT", DygMesTab.GeberalTab, "RIGHT", 0, 0);
+
+        DygMesTab.CombatLog:SetScript("OnEnter", function(self)
+            self:SetBackdropColor(r+(ColorSa/255), g+(ColorSa/255), b+(ColorSa/255), a);
+            DygMesTab.TextPanel:Show();
+            DygMesTab.TextPanel.Text:SetText("Журнал боя");
+        end)
+
+        DygMesTab.CombatLog:SetScript("OnLeave", function(self)
+            self:SetBackdropColor(r, g, b, a);
+            DygMesTab.TextPanel:Hide();
+        end)
+
         DygMesTab.CombatLog:SetScript("OnMouseDown", function(self, button)
-            DygMesTabLocal[2]:Click(button);
                 if(button == "RightButton") then
                     if(IsControlKeyDown() == true)then
                         Debug("Contrl");
+                        --local menu = {
+                        --        {
+                        --            { text = "Select an Option", isTitle = true},
+                        --            { text = "Option 1", func = function() print("You've chosen option 1"); end },
+                        --            { text = "Option 2", func = function() print("You've chosen option 2"); end },
+                        --            { text = "More Options", hasArrow = true,
+                        --                menuList = {
+                        --                    { text = "Option 3", func = function() print("You've chosen option 3"); end }
+                        --                }
+                        --            }
+                        --        }
+                        --    }
+                        --EasyMenu(menu, ExampleMenuFrame, DygMesTab, 0 , 0, "MENU");
+                    else
+                        DygMesTabLocal[2]:Click(button);
+                        local x, y = GetCursorPosition();
+                        local scale = UIParent:GetEffectiveScale();
+                        DropDownList1:SetPoint("TOPLEFT", DygMesTab, "TOPRIGHT", 0, 0);
                     end
-                    local x, y = GetCursorPosition();
-                    local scale = UIParent:GetEffectiveScale();
-                    DropDownList1:SetPoint("TOPLEFT", DygMesTab, "TOPRIGHT", 0, 0);
                 elseif(button == "LeftButton") then
+                    DygMesTabLocal[2]:Click(button);
                     OpenTabHide();
                 end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
+                self:SetBackdropColor(1, 1, 1, 1);
             end);
+
+        DygMesTab.CombatLog:SetScript("OnMouseUp", function(self, button)
+            self:SetBackdropColor(r, g, b, a);
+        end)
+    end
+
+    if(DygMesTab.Settings == nil) then
+        DygMesTab.Settings = CreateFrame("FRAME", "SettingsButton", DygMesTab);
+        DygMesTab.Settings:SetWidth(15);
+        DygMesTab.Settings:SetHeight(15);
+        DygMesTab.Settings:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\Settings", insets = { left = 1, right = 1, top = 1, bottom = 1}});
+        DygMesTab.Settings:SetBackdropColor(r, g, b, a);
+        DygMesTab.Settings:SetPoint("RIGHT", DygMesTab, "RIGHT", 0, 0);
+
+        DygMesTab.Settings:SetScript("OnEnter", function(self)
+            self:SetBackdropColor(r+(ColorSa/255), g+(ColorSa/255), b+(ColorSa/255), a);
+            DygMesTab.TextPanel:Show();
+            DygMesTab.TextPanel.Text:SetText("Настройки");
+        end)
+
+        DygMesTab.Settings:SetScript("OnLeave", function(self)
+            self:SetBackdropColor(r, g, b, a);
+            DygMesTab.TextPanel:Hide();
+        end)
+
+        DygMesTab.Settings:SetScript("OnMouseDown", function(self, button)
+            self:SetBackdropColor(1, 1, 1, 1);
+                if(button == "RightButton") then
+                    if(IsControlKeyDown() == true)then
+
+                    end
+                elseif(button == "LeftButton") then
+                    InterfaceOptionsFrame_OpenToCategory(SettingsMyAddon.panel);
+                end
+                PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
+            end);
+
+        DygMesTab.Settings:SetScript("OnMouseUp", function(self, button)
+            self:SetBackdropColor(r, g, b, a);
+        end)
+    end
+
+    if(DygMesTab.Close == nil) then
+        DygMesTab.Close = CreateFrame("FRAME", "CloseButton", DygMesTab);
+        DygMesTab.Close:SetWidth(15);
+        DygMesTab.Close:SetHeight(15);
+        DygMesTab.Close:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\Close", insets = { left = 1, right = 1, top = 1, bottom = 1}});
+        DygMesTab.Close:SetBackdropColor(r, g, b, a);
+        DygMesTab.Close:SetPoint("RIGHT", DygMesTab.Settings, "LEFT", 0, 0);
+
+        DygMesTab.Close:SetScript("OnEnter", function(self)
+            self:SetBackdropColor(r+(ColorSa/255), g+(ColorSa/255), b+(ColorSa/255), a);
+            DygMesTab.TextPanel:Show();
+            DygMesTab.TextPanel.Text:SetText("Закрыть всё");
+        end)
+
+        DygMesTab.Close:SetScript("OnLeave", function(self)
+            self:SetBackdropColor(r, g, b, a);
+            DygMesTab.TextPanel:Hide();
+        end)
+
+        DygMesTab.Close:SetScript("OnMouseDown", function(self, button)
+            self:SetBackdropColor(1, 1, 1, 1);
+                if(button == "RightButton") then
+                    if(IsControlKeyDown() == true)then
+
+                    end
+                elseif(button == "LeftButton") then
+                end
+                PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
+            end);
+
+        DygMesTab.Close:SetScript("OnMouseUp", function(self, button)
+            self:SetBackdropColor(r, g, b, a);
+        end)
     end
 
     if(Settings["OffsetPanel"] == nil) then
