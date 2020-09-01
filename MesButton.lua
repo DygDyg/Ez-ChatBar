@@ -7,6 +7,7 @@ local a1 = 2;
         print("Настройка "..InterfaceOptionsSocialPanelWhisperModeLabel:GetText().." изменена")
     end
 
+
 --menu = {
 --    { text = "Select an Option", isTitle = true},
 --    { text = "Option 1", func = function() print("You've chosen option 1"); end },
@@ -103,6 +104,7 @@ function MesButton(args)
     local name = {}
 
     local r, g, b, a = DygMesTabLocal[1].Text:GetTextColor()
+
     local ColorSa = 40;
 
     if(DygMesTab.TextPanel == nil) then
@@ -123,7 +125,7 @@ function MesButton(args)
     end
 
     if(DygMesTab.GeberalTab == nil) then
-        DygMesTab.GeberalTab = Dyg_Button("GeberalTab", "Общий чат", "general", DygMesTab, {"LEFT", DygMesTab, "LEFT", 0, 0})
+        DygMesTab.GeberalTab = Dyg_Button_Panel("GeberalTab", "Общий чат", "general", DygMesTab, {"LEFT", DygMesTab, "LEFT", 0, 0})
 
         DygMesTab.GeberalTab:SetScript("OnMouseDown", function(self, button)
             self:SetBackdropColor(1, 1, 1, 1);
@@ -147,24 +149,11 @@ function MesButton(args)
     end
 
     if(DygMesTab.CombatLog == nil) then
-        DygMesTab.CombatLog = Dyg_Button("CombatLog", "Журнал боя", "CombatLog", DygMesTab, {"LEFT", DygMesTab.GeberalTab, "RIGHT", 0, 0})
+        DygMesTab.CombatLog = Dyg_Button_Panel("CombatLog", "Журнал боя", "CombatLog", DygMesTab, {"LEFT", DygMesTab.GeberalTab, "RIGHT", 0, 0})
         DygMesTab.CombatLog:SetScript("OnMouseDown", function(self, button)
                 if(button == "RightButton") then
                     if(IsControlKeyDown() == true)then
                         Debug("Contrl");
-                        --local menu = {
-                        --        {
-                        --            { text = "Select an Option", isTitle = true},
-                        --            { text = "Option 1", func = function() print("You've chosen option 1"); end },
-                        --            { text = "Option 2", func = function() print("You've chosen option 2"); end },
-                        --            { text = "More Options", hasArrow = true,
-                        --                menuList = {
-                        --                    { text = "Option 3", func = function() print("You've chosen option 3"); end }
-                        --                }
-                        --            }
-                        --        }
-                        --    }
-                        --EasyMenu(menu, ExampleMenuFrame, DygMesTab, 0 , 0, "MENU");
                     else
                         DygMesTabLocal[2]:Click(button);
                         local x, y = GetCursorPosition();
@@ -185,7 +174,7 @@ function MesButton(args)
     end
 
     if(DygMesTab.Settings == nil) then
-        DygMesTab.Settings = Dyg_Button("SettingsButton", "Настройки", "Settings", DygMesTab, {"RIGHT", DygMesTab, "RIGHT", 0, 0})
+        DygMesTab.Settings = Dyg_Button_Panel("SettingsButton", "Настройки", "Settings", DygMesTab, {"RIGHT", DygMesTab, "RIGHT", 0, 0})
 
         DygMesTab.Settings:SetScript("OnMouseDown", function(self, button)
             self:SetBackdropColor(1, 1, 1, 1);
@@ -204,7 +193,7 @@ function MesButton(args)
         end)
     end
     if(DygMesTab.Close == nil) then
-        DygMesTab.Close = Dyg_Button("CloseButton", "Закрыть всё", "Close", DygMesTab, {"RIGHT", DygMesTab.Settings, "LEFT", 0, 0});
+        DygMesTab.Close = Dyg_Button_Panel("CloseButton", "Закрыть всё", "Close", DygMesTab, {"RIGHT", DygMesTab.Settings, "LEFT", 0, 0});
 
         DygMesTab.Close:SetScript("OnMouseDown", function(self, button)
             self:SetBackdropColor(1, 1, 1, 1);
@@ -236,10 +225,6 @@ function MesButton(args)
             end);
     end
 
-    if(DygMesTab.testButton==nil) then
-        --DygMesTab.testButton = Dyg_Button("test", "ПРоверка", "Close", DygMesTab, {"RIGHT", DygMesTab.Close, "LEFT", 0, 0})
-    end
-
     if(Settings["OffsetPanel"] == nil) then
         Settings["OffsetPanel"] = 2;
     end
@@ -247,10 +232,34 @@ function MesButton(args)
     for i = 1, #DygMesTabLocal do
         if(DygMesTab[i] == nil) then
                         --DygMesTab:SetHeight(DygMesTab:GetHeight() + 20);
-            DygMesTab[i] = CreateFrame("Button", "button"..i, DygMesTab, "GameMenuButtonTemplate");
-            DygMesTab[i]:SetWidth(120);
-            DygMesTab[i]:SetHeight(20);
+            DygMesTab[i] = CreateFrame("Button", "button"..i, DygMesTab);
+
+            DygMesTab[i].b = CreateFrame("Button", nil, DygMesTab[i], "GameMenuButtonTemplate");
+            DygMesTab[i].b:SetWidth(115);
+            DygMesTab[i].b:SetHeight(17);
+            DygMesTab[i].b.Text:SetParent(DygMesTab[i])
+            DygMesTab[i].b.Text:SetPoint("CENTER");
+            DygMesTab[i].b.Text:SetWidth(115);
+            DygMesTab[i].b.Text:SetHeight(17);
+            DygMesTab[i].b:Hide()
+            DygMesTab[i]:SetText("ttt")
+
+
+            DygMesTab[i]:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",  insets = { left = 0, right = 0, top = 0, bottom = 0}});
+            DygMesTab[i]:SetBackdropColor(0, 0, 0, 1);
+            DygMesTab[i]:SetWidth(115);
+            DygMesTab[i]:SetHeight(17);
             DygMesTab[i]:SetPoint("TOP", 0, cor);
+
+
+            --DygMesTab[i].Text = CreateFrame("FontString", nil, DygMesTab[i]);
+            --DygMesTab[i].Text:Disable();
+            --DygMesTab[i].Text:SetFontObject(GameFontNormal);
+            --DygMesTab[i].Text:SetWidth(115);
+            --DygMesTab[i].Text:SetHeight(15);
+            --DygMesTab[i].Text:SetPoint("CENTER");
+            --DygMesTab[i].Text:SetText("кнопка "..i);
+
             DygMesTab[i].NewMes = CreateFrame("Frame", "NewMesTexture", DygMesTab[i]);
             DygMesTab[i].NewMes:SetHeight(10);
             DygMesTab[i].NewMes:SetWidth(10);
@@ -264,7 +273,7 @@ function MesButton(args)
             DygMesTab[i].OpenTab:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\ButtonGlowBlue", insets = { left = 0, right = 0, top = -30, bottom = -30}});
             DygMesTab[i].OpenTab:Hide();
 
-            cor = cor - 20;
+            cor = cor - 19;
         end
     end
 
@@ -290,24 +299,48 @@ end
         if(DygMesTab[i] ~= nil) then
             DygMesTab[i]:Hide();
         end
+
         if(DygMesTabLocal[i]~=nil and DygMesTabLocal[i]:IsShown() == true and i > Settings["OffsetPanel"]) then
             if(DygMesTab[i] == nil) then
 
             end
+
+
             DygMesTab[num1]:Show();
-            DygMesTab[num1].Text:SetTextColor(DygMesTabLocal[i].Text:GetTextColor());
+            --DygMesTab[num1].TextColor =
+            DygMesTab[num1].b.Text:SetTextColor(DygMesTabLocal[i].Text:GetTextColor());
+
+            --DygMesTab[num1].b.Text:SetHighlightTextColor(r, g, b, a);
+
             DygMesTab[num1]:SetScript("OnMouseDown", function(self, button)
-            DygMesTabLocal[i]:Click(button);
-                if(button == "RightButton") then
+                DygMesTabLocal[i]:Click(button);
+                if(button == "RightButton") then                                                           --Правая кнопка
                     if(IsControlKeyDown() == true)then
                         Debug("Contrl");
                     end
                     local x, y = GetCursorPosition();
                     local scale = UIParent:GetEffectiveScale();
                     DropDownList1:SetPoint("TOPLEFT", DygMesTab, "TOPRIGHT", 0, 0);
-                elseif(button == "MiddleButton") then
+
+                    if(DropDownList1Button4.value == "Закрыть окно личных сообщений") then
+                        --Log("Закрыть окно личных сообщений")
+                        DropDownList1Button4:SetScript("OnClick", function(self, button)
+                                DygMesTabLocal[i]:Click("MiddleButton");
+                                MesButton()
+                        end)
+                    end
+
+                    if(DropDownList1Button5.value == "Закрыть окно чата") then
+                        --Log("Закрыть окно личных сообщений")
+                        DropDownList1Button5:SetScript("OnClick", function(self, button)
+                                DygMesTabLocal[i]:Click("MiddleButton");
+                                MesButton()
+                        end)
+                    end
+
+                elseif(button == "MiddleButton") then                                                      --Колёсико
                     MesButton()
-                elseif(button == "LeftButton") then
+                elseif(button == "LeftButton") then                                                        --Левая кнопка
                     self.NewMes:Hide();
                     OpenTabHide();
                     self.OpenTab:Show();
@@ -315,18 +348,36 @@ end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
             end);
 
-            name[1], name[2] = strsplit("-", (DygMesTabLocal[i]:GetText()))
-            if(name[1] == nil) then
-                name[1] = DygMesTabLocal[i]:GetText();
-                name[2] = "?";
+            DygMesTab[num1].UserName, DygMesTab[num1].ServerName = strsplit("-", (DygMesTabLocal[i]:GetText()))
+
+            --DygMesTab[num1].ServerName = name[2];
+
+            if(DygMesTab[num1].UserName == nil) then
+                DygMesTab[num1].UserName = DygMesTabLocal[i]:GetText();
+                DygMesTab[num1].ServerName = "?";
             end
-            DygMesTab[num1]:SetText(name[1]);
+
+
+            DygMesTab[num1]:SetScript("OnEnter", function(self)
+                local r, g, b, a = DygMesTabLocal[i].Text:GetTextColor()
+                self.b.Text:SetTextColor(r*1.5, g*1.5, b*1.5, a);
+                if(self.ServerName ~= nil) then
+                    DygMesTab.TextPanel:Show();
+                    DygMesTab.TextPanel.Text:SetText(tostring(self.ServerName));
+                end
+            end)
+
+            DygMesTab[num1]:SetScript("OnLeave", function(self)
+                --local r, g, b, a = DygMesTabLocal[i].Text:GetTextColor()
+                self.b.Text:SetTextColor(DygMesTabLocal[i].Text:GetTextColor());
+                DygMesTab.TextPanel:Hide();
+            end)
+
+            DygMesTab[num1].b.Text:SetText(DygMesTab[num1].UserName);
 
             if(args~=nil)then
                 if("CHAT_MSG_BN_WHISPER"==args[2] or "CHAT_MSG_WHISPER"==args[2])then
-                    if(args[4]==DygMesTabLocal[i]:GetText() and DygMesTabLocal[i].mouseOverAlpha<1) then
-                        DygMesTab[num1].NewMes:Hide();
-                    elseif(args[4]==DygMesTabLocal[i]:GetText() and DygMesTabLocal[i].mouseOverAlpha>=1) then
+                    if(args[4]==DygMesTabLocal[i]:GetText() and DygMesTabLocal[i].mouseOverAlpha < 1) then
                         DygMesTab[num1].NewMes:Show();
                     end
                 end
@@ -392,3 +443,15 @@ SLASH_OffsetPanel1 = "/DygOffsetPanel"
 
 SlashCmdList["DygMesSoundFile"] = DygMesSoundFile;
 SLASH_DygMesSoundFile1 = "/DygMesSoundFile"
+
+
+local Event1 = CreateFrame("Frame");
+Event1:RegisterEvent("CHAT_MSG_ADDON");
+
+Event1:SetScript("OnEvent", function(...)
+    local aa = {...}
+    --for i=1, #aa do
+    --    print(aa[i])
+    --end
+
+end)

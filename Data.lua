@@ -1,5 +1,10 @@
-function Dyg_Button(name, title, tex, parent, point)
-    local r, g, b, a = ChatFrame1TabText:GetTextColor();
+function Dyg_Button_Panel(name, title, tex, parent, point)
+    --local r, g, b, a = ChatFrame1TabText:GetTextColor();
+    local r = 189/255
+    local g = 116/255
+    local b = 8/255
+    local a = 200/255
+    print(g)
     local Dyg_Button = CreateFrame("Button", name, parent);
     local ColorSa = 40;
     Dyg_Button:SetWidth(15);
@@ -26,9 +31,3 @@ function Dyg_Button(name, title, tex, parent, point)
     return Dyg_Button
 end
 
-        --DygMesTab.Close = CreateFrame("FRAME", "CloseButton", DygMesTab);
-        --DygMesTab.Close:SetWidth(15);
-        --DygMesTab.Close:SetHeight(15);
-        --DygMesTab.Close:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\Close", insets = { left = 1, right = 1, top = 1, bottom = 1}});
-        --DygMesTab.Close:SetBackdropColor(r, g, b, a);
-        --DygMesTab.Close:SetPoint("RIGHT", DygMesTab.Settings, "LEFT", 0, 0);

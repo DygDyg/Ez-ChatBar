@@ -67,4 +67,6 @@ xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
 		<NormalFont style="GameFontNormalSmall"/>
 	</Frame>
 
+
+
 </Ui>
