@@ -7,33 +7,16 @@ local a1 = 2;
         print("Настройка "..InterfaceOptionsSocialPanelWhisperModeLabel:GetText().." изменена")
     end
 
-
---menu = {
---    { text = "Select an Option", isTitle = true},
---    { text = "Option 1", func = function() print("You've chosen option 1"); end },
---    { text = "Option 2", func = function() print("You've chosen option 2"); end },
---    { text = "More Options", hasArrow = true,
---        menuList = {
---            { text = "Option 3", func = function() print("You've chosen option 3"); end }
---        }
---    }
---}
---
-
-
-
---EasyMenu(menu, menuFrame, "cursor", 0 , 0, "MENU");
-
---EasyMenu(menu, menuFrame, menuFrame, 0 , 0, "MENU");
-
-
 function MesButtonPanel()
 
     if(DygMesTab==nil) then
         DygMesTab = CreateFrame("FRAME", "DygMesTab1", UIParent);
         DygMesTab:SetWidth(115);
         DygMesTab:SetHeight(15);
-        DygMesTab:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",});
+        --DygMesTab:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",});
+        DygMesTab:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\Background",});
+        --DygMesTab:SetBackdropColor(0, 0, 0, 0.5);
+        DygMesTab:SetBackdropColor(Settings["Color1"]["r"], Settings["Color1"]["g"], Settings["Color1"]["b"], Settings["Color1"]["a"]);
         DygMesTab:SetPoint("RIGHT", ChatFrame1.ScrollBar, "TOP", 150, 0);
         WindowMoving(DygMesTab, "DygMesTab");
         DygMesTab:SetUserPlaced(true);
@@ -47,15 +30,17 @@ function Start_Settings()
         GeneralDockManager:Hide();
     end
 
-        if(Settings["MyPanel"] == true) then
+    if(Settings["MyPanel"] == true) then
         DygMesTab:Show();
     else
         DygMesTab:Hide();
     end
+    if(Settings["Color1"] == nil) then
+        Settings["Color1"] = {["r"] = 0, ["g"] = 0, ["b"] = 0, ["a"] = 0.5};
+    end
 
 end
 
-MesButtonPanel()
 
 function MesButton(args)
     local DygMesTabLocal = {
@@ -111,7 +96,10 @@ function MesButton(args)
         DygMesTab.TextPanel = CreateFrame("FRAME", "TextPanel", DygMesTab);
         DygMesTab.TextPanel:SetWidth(115);
         DygMesTab.TextPanel:SetHeight(15);
-        DygMesTab.TextPanel:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",});
+        --DygMesTab.TextPanel:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",});
+        DygMesTab.TextPanel:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\Background",});
+        --DygMesTab.TextPanel:SetBackdropColor(0, 0, 0, 0.5);
+        DygMesTab.TextPanel:SetBackdropColor(Settings["Color1"]["r"], Settings["Color1"]["g"], Settings["Color1"]["b"], Settings["Color1"]["a"]);
         DygMesTab.TextPanel:SetPoint("BOTTOM", DygMesTab, "TOP", 0, 0);
         DygMesTab.TextPanel.Text = CreateFrame("EditBox", "Text", DygMesTab.TextPanel);
         DygMesTab.TextPanel.Text:SetWidth(115);
@@ -121,7 +109,6 @@ function MesButton(args)
         DygMesTab.TextPanel.Text:SetText("Text Info");
         DygMesTab.TextPanel.Text:SetPoint("CENTER");
         DygMesTab.TextPanel:Hide();
-
     end
 
     if(DygMesTab.GeberalTab == nil) then
@@ -245,8 +232,12 @@ function MesButton(args)
             DygMesTab[i]:SetText("ttt")
 
 
-            DygMesTab[i]:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",  insets = { left = 0, right = 0, top = 0, bottom = 0}});
-            DygMesTab[i]:SetBackdropColor(0, 0, 0, 1);
+            --DygMesTab[i]:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",  insets = { left = 0, right = 0, top = 0, bottom = 0}});
+            --DygMesTab[i]:SetBackdropColor(0, 0, 0, 1);
+
+            DygMesTab[i]:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\Background",  insets = { left = 0, right = 0, top = 0, bottom = 0}});
+            DygMesTab[i]:SetBackdropColor(Settings["Color1"]["r"], Settings["Color1"]["g"], Settings["Color1"]["b"], Settings["Color1"]["a"]);
+
             DygMesTab[i]:SetWidth(115);
             DygMesTab[i]:SetHeight(17);
             DygMesTab[i]:SetPoint("TOP", 0, cor);
@@ -388,6 +379,58 @@ end
     end
 end
 
+function DygColorPanel()
+    ColorPickerFrame:Hide();
+    local r, g, b, a = DygMesTab:GetBackdropColor();
+    local oldr = Settings["Color1"]["r"];
+    local oldg = Settings["Color1"]["g"];
+    local oldb = Settings["Color1"]["b"];
+    local olda = Settings["Color1"]["a"];
+    ColorPickerFrame:SetColorRGB(r,g,b);
+    ColorPickerFrame.hasOpacity, ColorPickerFrame.opacity = (a ~= nil), a;
+    ColorPickerFrame.previousValues = {r,g,b,a};
+    ColorPickerFrame:Show();
+    WindowMoving(ColorPickerFrame);
+
+    ColorPickerFrame.func = function()
+        local r, g, b = ColorPickerFrame:GetColorRGB();
+        local a = OpacitySliderFrame:GetValue();
+        DygMesTab:SetBackdropColor(r, g, b, a);
+        DygMesTab.TextPanel:SetBackdropColor(r, g, b, a);
+
+        for i = 1, #DygMesTab do
+            DygMesTab[i]:SetBackdropColor(r, g, b, a);
+        end
+
+    end;
+
+    ColorPickerFrame.opacityFunc = function()
+        local r, g, b = ColorPickerFrame:GetColorRGB();
+        local a = OpacitySliderFrame:GetValue();
+        DygMesTab:SetBackdropColor(r, g, b, a);
+        DygMesTab.TextPanel:SetBackdropColor(r, g, b, a);
+
+        for i = 1, #DygMesTab do
+            DygMesTab[i]:SetBackdropColor(r, g, b, a);
+        end
+
+        Settings["Color1"]["r"] = r;
+        Settings["Color1"]["g"] = g;
+        Settings["Color1"]["b"] = b;
+        Settings["Color1"]["a"] = a;
+    end;
+
+    ColorPickerFrame.cancelFunc = function()
+        DygMesTab:SetBackdropColor(oldr, oldg, oldb, olda);
+        DygMesTab.TextPanel:SetBackdropColor(oldr, oldg, oldb, olda);
+        for i = 1, #DygMesTab do
+            DygMesTab[i]:SetBackdropColor(oldr, oldg, oldb, olda);
+        end
+
+    end
+
+end
+
 local Event1 = CreateFrame("Frame");
 Event1:RegisterEvent("CHAT_MSG_WHISPER_INFORM");
 Event1:RegisterEvent("CHAT_MSG_WHISPER");
@@ -410,11 +453,6 @@ Event1:SetScript("OnEvent", function(...)
     end
 end)
 
-local Event1 = CreateFrame("Frame");
-Event1:RegisterEvent("PLAYER_ENTERING_WORLD");
-Event1:SetScript("OnEvent", function(...)
-    MesButton()
-end)
 
 function OffsetPanel(msg)
     msg = tonumber(msg);
@@ -443,6 +481,9 @@ SLASH_OffsetPanel1 = "/DygOffsetPanel"
 
 SlashCmdList["DygMesSoundFile"] = DygMesSoundFile;
 SLASH_DygMesSoundFile1 = "/DygMesSoundFile"
+
+SlashCmdList["DygColorPanel"] = DygColorPanel;
+SLASH_DygColorPanel1 = "/DygColorPanel"
 
 
 local Event1 = CreateFrame("Frame");

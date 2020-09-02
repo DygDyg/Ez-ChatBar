@@ -4,9 +4,9 @@ function Dyg_Button_Panel(name, title, tex, parent, point)
     local g = 116/255
     local b = 8/255
     local a = 200/255
-    print(g)
     local Dyg_Button = CreateFrame("Button", name, parent);
     local ColorSa = 40;
+
     Dyg_Button:SetWidth(15);
     Dyg_Button:SetHeight(15);
     Dyg_Button:SetPoint(point[1], point[2], point[3], point[4], point[5], point[6]);

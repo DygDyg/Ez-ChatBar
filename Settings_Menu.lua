@@ -121,10 +121,21 @@ Event2:SetScript("OnEvent", function(...)
     if(Event2.test == true) then
         Settings_local = Settings;
         Start_Option();
+        MesButtonPanel();
+        MesButton();
         Start_Settings();
         Event2.test = false;
+
+
     end
 end)
+
+local Event2 = CreateFrame("Frame");
+Event2:RegisterEvent("CHAT_MSG_CHANNEL_NOTICE");
+Event2:SetScript("OnEvent", function(...)
+    MesButton();
+end)
+
 
 SettingsMyAddon.panel.logo = CreateFrame("Frame", nil, SettingsMyAddon.panel);
 SettingsMyAddon.panel.logo:SetWidth(300);
