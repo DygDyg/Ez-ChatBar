@@ -270,7 +270,7 @@ function MesButton(args)
             DygMesTab[i].OpenTab:SetWidth(DygMesTab[i]:GetWidth());
             DygMesTab[i].OpenTab:SetHeight(DygMesTab[i]:GetHeight());
             DygMesTab[i].OpenTab:SetPoint("CENTER");
-            DygMesTab[i].OpenTab:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\ButtonGlowBlue", insets = { left = 0, right = 0, top = -30, bottom = -30}});
+            DygMesTab[i].OpenTab:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\ButtonGlowBlue", insets = { left = -2, right = -2, top = -31, bottom = -30}});
             DygMesTab[i].OpenTab:Hide();
 
             cor = cor - 19;
@@ -405,7 +405,7 @@ Event1:SetScript("OnEvent", function(...)
             if(Settings["SoundMesFile"] == nil) then
                 Settings["SoundMesFile"] = "message.mp3";
             end
-            PlaySoundFile("Interface\\AddOns\\DygDyg_Addons\\sound\\"..Settings["SoundMesFile"], "SFX");
+            PlaySoundFile("Interface\\AddOns\\DygDyg_Addons\\sound\\"..Settings["SoundMesFile"], "master");
         end
     end
 end)
