@@ -1,11 +1,26 @@
-local cor = -17;
+local cor = -2-- -17;
 local a1 = 2;
+local start = start or true;
+local HideButtonColl = 0;
 
     if(C_CVar.GetCVar("whisperMode") == "inline") then
         print("-------------------------------------------")
         C_CVar.SetCVar("whisperMode", "popout");
         print("Настройка "..InterfaceOptionsSocialPanelWhisperModeLabel:GetText().." изменена")
     end
+
+local function ScrollFrame_OnMouseWheel(self, delta)
+	local newValue = self:GetVerticalScroll() - (delta * 20) / #DygMesTab * HideButtonColl;
+	if (newValue < 0) then
+		newValue = 0;
+	elseif (newValue > self:GetVerticalScrollRange() / #DygMesTab * HideButtonColl) then
+		newValue = self:GetVerticalScrollRange() / #DygMesTab * HideButtonColl;
+	end
+        --print(HideButtonColl)
+        --print(self:GetVerticalScrollRange())
+	self:SetVerticalScroll(newValue);
+end
+
 
 function MesButtonPanel()
 
@@ -20,6 +35,24 @@ function MesButtonPanel()
         DygMesTab:SetPoint("RIGHT", ChatFrame1.ScrollBar, "TOP", 150, 0);
         WindowMoving(DygMesTab, "DygMesTab");
         DygMesTab:SetUserPlaced(true);
+    end
+
+    if(DygMesTab.ScrollFrame==nil) then
+        DygMesTab.frame = CreateFrame("Frame", nil, DygMesTab);
+        DygMesTab.frame:SetWidth(115);
+        DygMesTab.frame:SetHeight(ChatFrame1:GetHeight());
+        DygMesTab.frame:SetPoint("TOPLEFT", DygMesTab, "BOTTOMLEFT", 0, 0);
+
+        DygMesTab.frame.ScrollFrame = CreateFrame("ScrollFrame", nil, DygMesTab.frame);
+        DygMesTab.frame.ScrollFrame:SetPoint("TOPLEFT", DygMesTab.frame, "TOPLEFT", 0, 0);
+        DygMesTab.frame.ScrollFrame:SetPoint("BOTTOMRIGHT", DygMesTab.frame, "BOTTOMRIGHT", 0, 0);
+        DygMesTab.frame.ScrollFrame:SetScript("OnMouseWheel", ScrollFrame_OnMouseWheel);
+
+        DygMesTab.frame2 = CreateFrame("Frame", "frame2", DygMesTab.frame.ScrollFrame);
+        DygMesTab.frame2:SetWidth(115);
+        DygMesTab.frame2:SetHeight(1);
+        DygMesTab.frame2:SetPoint("TOPLEFT", DygMesTab, "BOTTOMLEFT", 0, 0);
+        DygMesTab.frame.ScrollFrame:SetScrollChild(DygMesTab.frame2);
     end
 end
 
@@ -39,11 +72,31 @@ function Start_Settings()
         Settings["Color1"] = {["r"] = 0, ["g"] = 0, ["b"] = 0, ["a"] = 0.5};
     end
 
+    if(Settings["favorit"] == nil) then
+        Settings["favorit"] = ChatFrame1Tab.Text:GetText();
+    end
+        --Settings["favorit"]:Click();
+end
+
+function Favorit()
+    --print("1============")
+    if(DygMesTabLocal~=nil) then
+        --print("2============")
+        for i=1, #DygMesTabLocal do
+            if(DygMesTabLocal[i].Text:GetText() == Settings["favorit"]) then
+                --print(i)
+                --C_Timer.After(30, function()
+                    --DygMesTabLocal[i]:Click();
+                --end)
+                --DygMesTabLocal[i]:Click();
+            end
+        end
+    end
 end
 
 
 function MesButton(args)
-    local DygMesTabLocal = {
+    DygMesTabLocal = {
         [1] = ChatFrame1Tab,
         [2] = ChatFrame2Tab,
         [3] = ChatFrame3Tab,
@@ -84,6 +137,7 @@ function MesButton(args)
         [38] = ChatFrame38Tab,
         [39] = ChatFrame39Tab,
     }
+
 
 
     local name = {}
@@ -219,7 +273,7 @@ function MesButton(args)
     for i = 1, #DygMesTabLocal do
         if(DygMesTab[i] == nil) then
                         --DygMesTab:SetHeight(DygMesTab:GetHeight() + 20);
-            DygMesTab[i] = CreateFrame("Button", "button"..i, DygMesTab);
+            DygMesTab[i] = CreateFrame("Button", "button"..i, DygMesTab.frame2);
 
             DygMesTab[i].b = CreateFrame("Button", nil, DygMesTab[i], "GameMenuButtonTemplate");
             DygMesTab[i].b:SetWidth(115);
@@ -231,25 +285,12 @@ function MesButton(args)
             DygMesTab[i].b:Hide()
             DygMesTab[i]:SetText("ttt")
 
-
-            --DygMesTab[i]:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",  insets = { left = 0, right = 0, top = 0, bottom = 0}});
-            --DygMesTab[i]:SetBackdropColor(0, 0, 0, 1);
-
             DygMesTab[i]:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\Background",  insets = { left = 0, right = 0, top = 0, bottom = 0}});
             DygMesTab[i]:SetBackdropColor(Settings["Color1"]["r"], Settings["Color1"]["g"], Settings["Color1"]["b"], Settings["Color1"]["a"]);
 
             DygMesTab[i]:SetWidth(115);
             DygMesTab[i]:SetHeight(17);
             DygMesTab[i]:SetPoint("TOP", 0, cor);
-
-
-            --DygMesTab[i].Text = CreateFrame("FontString", nil, DygMesTab[i]);
-            --DygMesTab[i].Text:Disable();
-            --DygMesTab[i].Text:SetFontObject(GameFontNormal);
-            --DygMesTab[i].Text:SetWidth(115);
-            --DygMesTab[i].Text:SetHeight(15);
-            --DygMesTab[i].Text:SetPoint("CENTER");
-            --DygMesTab[i].Text:SetText("кнопка "..i);
 
             DygMesTab[i].NewMes = CreateFrame("Frame", "NewMesTexture", DygMesTab[i]);
             DygMesTab[i].NewMes:SetHeight(10);
@@ -286,10 +327,15 @@ function OpenTabHide()
 end
 
     local num1 = 1
+    HideButtonColl = 0;
     for i = 1, #DygMesTabLocal do
         if(DygMesTab[i] ~= nil) then
             DygMesTab[i]:Hide();
         end
+
+            if(DygMesTabLocal[i].Text:GetText() == Settings["favorit"]) then
+                --DygMesTabLocal[i]:Click();
+            end
 
         if(DygMesTabLocal[i]~=nil and DygMesTabLocal[i]:IsShown() == true and i > Settings["OffsetPanel"]) then
             if(DygMesTab[i] == nil) then
@@ -298,17 +344,11 @@ end
 
 
             DygMesTab[num1]:Show();
-            --DygMesTab[num1].TextColor =
+            HideButtonColl = HideButtonColl + 1;
             DygMesTab[num1].b.Text:SetTextColor(DygMesTabLocal[i].Text:GetTextColor());
-
-            --DygMesTab[num1].b.Text:SetHighlightTextColor(r, g, b, a);
-
             DygMesTab[num1]:SetScript("OnMouseDown", function(self, button)
                 DygMesTabLocal[i]:Click(button);
                 if(button == "RightButton") then                                                           --Правая кнопка
-                    if(IsControlKeyDown() == true)then
-                        Debug("Contrl");
-                    end
                     local x, y = GetCursorPosition();
                     local scale = UIParent:GetEffectiveScale();
                     DropDownList1:SetPoint("TOPLEFT", DygMesTab, "TOPRIGHT", 0, 0);
@@ -332,6 +372,11 @@ end
                 elseif(button == "MiddleButton") then                                                      --Колёсико
                     MesButton()
                 elseif(button == "LeftButton") then                                                        --Левая кнопка
+                    if(IsControlKeyDown() == true) then
+                        Debug("Contrl");
+                        Settings["favorit"] = DygMesTabLocal[i].Text:GetText();
+                        print("Сохранено в избранное: "..Settings["favorit"])
+                    end
                     self.NewMes:Hide();
                     OpenTabHide();
                     self.OpenTab:Show();

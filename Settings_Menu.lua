@@ -109,26 +109,48 @@ end
 
 
 
-local Event2 = CreateFrame("Frame");
-Event2:RegisterEvent("ADDON_LOADED");
-Event2.test = true;
-Event2:SetScript("OnEvent", function(...)
+local Event = CreateFrame("Frame");
+Event:RegisterEvent("ADDON_LOADED");
+Event.start = false;
+Event:SetScript("OnEvent", function(...)
 
     if(Settings == nil) then
         Settings = {}
     end
 
-    if(Event2.test == true) then
+    if(Event.start == true) then
         Settings_local = Settings;
         Start_Option();
         MesButtonPanel();
         MesButton();
         Start_Settings();
-        Event2.test = false;
-
-
+        Favorit();
+        Event.start = false;
     end
 end)
+
+local Event = CreateFrame("Frame");
+Event:RegisterEvent("PLAYER_ENTERING_WORLD");
+Event.start = true;
+Event:SetScript("OnEvent", function(...)
+
+    if(Settings == nil) then
+        Settings = {}
+    end
+
+    if(Event.start == true) then
+        Settings_local = Settings;
+        Start_Option();
+        MesButtonPanel();
+        MesButton();
+        Start_Settings();
+        Favorit();
+        Event.start = false;
+    end
+
+end)
+
+
 
 local Event2 = CreateFrame("Frame");
 Event2:RegisterEvent("CHAT_MSG_CHANNEL_NOTICE");
