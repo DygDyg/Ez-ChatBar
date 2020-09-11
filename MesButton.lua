@@ -10,11 +10,13 @@ local HideButtonColl = 0;
     end
 
 local function ScrollFrame_OnMouseWheel(self, delta)
-	local newValue = self:GetVerticalScroll() - (delta * 20) / #DygMesTab * HideButtonColl;
+    local newValue = self:GetVerticalScroll() - (delta * 20) / #DygMesTab * HideButtonColl;
+
 	if (newValue < 0) then
-		newValue = 0;
-	elseif (newValue > self:GetVerticalScrollRange() / #DygMesTab * HideButtonColl) then
-		newValue = self:GetVerticalScrollRange() / #DygMesTab * HideButtonColl;
+        newValue = 0;
+
+	elseif (newValue > (self:GetVerticalScrollRange()+19) / #DygMesTab * HideButtonColl) then
+		newValue = (self:GetVerticalScrollRange()+19) / #DygMesTab * HideButtonColl;
 	end
         --print(HideButtonColl)
         --print(self:GetVerticalScrollRange())
@@ -302,7 +304,7 @@ function MesButton(args)
             DygMesTab[i].OpenTab:SetWidth(DygMesTab[i]:GetWidth());
             DygMesTab[i].OpenTab:SetHeight(DygMesTab[i]:GetHeight());
             DygMesTab[i].OpenTab:SetPoint("CENTER");
-            DygMesTab[i].OpenTab:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\ButtonGlowBlue", insets = { left = -2, right = -2, top = -31, bottom = -30}});
+            DygMesTab[i].OpenTab:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\ButtonGlowGold", insets = { left = -2, right = -2, top = -31, bottom = -30}});
             DygMesTab[i].OpenTab:Hide();
 
             cor = cor - 19;
@@ -435,7 +437,7 @@ function DygColorPanel()
     ColorPickerFrame.hasOpacity, ColorPickerFrame.opacity = (a ~= nil), a;
     ColorPickerFrame.previousValues = {r,g,b,a};
     ColorPickerFrame:Show();
-    WindowMoving(ColorPickerFrame);
+    --WindowMoving(ColorPickerFrame);
 
     ColorPickerFrame.func = function()
         local r, g, b = ColorPickerFrame:GetColorRGB();
@@ -531,13 +533,3 @@ SlashCmdList["DygColorPanel"] = DygColorPanel;
 SLASH_DygColorPanel1 = "/DygColorPanel"
 
 
-local Event1 = CreateFrame("Frame");
-Event1:RegisterEvent("CHAT_MSG_ADDON");
-
-Event1:SetScript("OnEvent", function(...)
-    local aa = {...}
-    --for i=1, #aa do
-    --    print(aa[i])
-    --end
-
-end)
