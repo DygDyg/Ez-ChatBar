@@ -40,7 +40,7 @@ SLASH_DebugEnable1 = "/Debug"
 SettingsMyAddon = {};
 --if Settings == nil then Settings = {}; end
 --pos2342355 = -20;
-SettingsMyAddon.myCheckButtons = {};
+SettingsMyAddon.myButton = {};
 
 SettingsMyAddon.panel = CreateFrame( "Frame", "MyAddonPanel", UIParent );
 SettingsMyAddon.panel.name = "DygDyg Addons";
@@ -61,49 +61,97 @@ InterfaceOptions_AddCategory(SettingsMyAddon.childpanelIstory);
 
 
 
-    function Dyg_OPT_Create_Button(i, My_text, My_toltip, default, My_Name, panel)
+    function Dyg_OPT_Create_CheckBox(i, My_text, My_toltip, default, My_Name, panel)
 
-        pos2342355 = -20 * i;
+        local pos2342355 = -20 * i;
 
-        if(panel.myCheckButtons == nil) then
-            panel.myCheckButtons = {}
+        if(panel.myButton == nil) then
+            panel.myButton = {}
         end
 
-        if(panel.myCheckButtons[i] == nil) then
-            panel.myCheckButtons[i] = CreateFrame("CheckButton", nil, panel, "ChatConfigCheckButtonTemplate");
-            panel.myCheckButtons[i]:SetID(i);
-            panel.myCheckButtons[i]:SetWidth(27);
-            panel.myCheckButtons[i]:SetHeight(27);
-            panel.myCheckButtons[i]:SetChecked(default);
-            panel.myCheckButtons[i]:SetPoint("TOPLEFT", 20, pos2342355);
+        if(panel.myButton[i] == nil) then
+            panel.myButton[i] = CreateFrame("CheckButton", nil, panel, "ChatConfigCheckButtonTemplate");
+            panel.myButton[i]:SetID(i);
+            panel.myButton[i]:SetWidth(27);
+            panel.myButton[i]:SetHeight(27);
+            panel.myButton[i]:SetChecked(default);
+            panel.myButton[i]:SetPoint("TOPLEFT", 20, pos2342355);
             --pos2342355 = pos2342355 - 20;
-            panel.myCheckButtons[i].Text:SetText(My_text);
-            panel.myCheckButtons[i].tooltip = My_toltip;
+            panel.myButton[i].Text:SetText(My_text);
+            panel.myButton[i].tooltip = My_toltip;
         end
             if(Settings[My_Name]~=nil) then
-                panel.myCheckButtons[i]:SetChecked(Settings_local[My_Name]);
+                panel.myButton[i]:SetChecked(Settings_local[My_Name]);
             else
-                Settings_local[My_Name] = panel.myCheckButtons[i]:GetChecked();
+                Settings_local[My_Name] = panel.myButton[i]:GetChecked();
 
             end
 
-        panel.myCheckButtons[i]:SetScript("OnClick",
+        panel.myButton[i]:SetScript("OnClick",
         function(self, button, down)
             Settings_local[My_Name] = self:GetChecked();
 
         end)
-end
+    end
+
+    function Dyg_OPT_Create_Button_Color(i, My_text, My_toltip, default, My_Name, panel)
+
+        local pos2342355 = -20 * i;
+
+        if(panel.myButton == nil) then
+            panel.myButton = {}
+        end
+
+        if(panel.myButton[i] == nil) then
+            panel.myButton[i] = CreateFrame("frame", nil, panel);
+            panel.myButton[i]:SetID(i);
+            panel.myButton[i]:SetWidth(25);
+            panel.myButton[i]:SetHeight(25);
+            --panel.myButton[i]:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\Background",});
+            --panel.myButton[i]:SetBackdropColor(0, 0, 0, 0.8);
+            panel.myButton[i]:SetPoint("TOPLEFT", 20, pos2342355);
+
+            panel.myButton[i].color = CreateFrame("frame", nil, panel.myButton[i]);
+            panel.myButton[i].color:SetWidth(panel.myButton[i]:GetWidth());
+            panel.myButton[i].color:SetHeight(panel.myButton[i]:GetHeight());
+            panel.myButton[i].color:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\Background",});
+            panel.myButton[i].color:SetBackdropColor(Settings["Color1"]["r"], Settings["Color1"]["g"], Settings["Color1"]["b"], Settings["Color1"]["a"]);
+            panel.myButton[i].color:SetScale(0.6)
+            panel.myButton[i].color:SetPoint("CENTER");
+
+            panel.myButton[i].Text = CreateFrame("EditBox", "Text", panel.myButton[i]);
+            panel.myButton[i].Text:SetWidth(400);
+            panel.myButton[i].Text:SetHeight(20);
+            panel.myButton[i].Text:SetPoint("LEFT", panel.myButton[i], "RIGHT", 0, 0);
+            panel.myButton[i].Text:SetFontObject(GameFontNormal);
+            panel.myButton[i].Text:Disable();
+            panel.myButton[i].Text:SetMultiLine(true);
+            panel.myButton[i].Text:SetText(My_text);
+            panel.myButton[i].Text:SetTextColor(1, 1, 1, 1);
+
+            panel.myButton[i].tooltip = My_toltip;
+        end
+
+        panel.myButton[i]:SetScript("OnMouseDown",
+        function(self, button, down)
+            DygColorPanel(panel.myButton[i].color, My_Name)
+
+        end)
+    end
+
 
 function Start_Option()
 
     local pan = SettingsMyAddon.childpanelChat;
-    Dyg_OPT_Create_Button(1, "Стандартная панель", "Включить стандартную панель", false, "DefaultPanel", pan);
-    Dyg_OPT_Create_Button(2, "Боковая панель", "Включить боковую панель", true, "MyPanel", pan);
-    Dyg_OPT_Create_Button(3, "Звук входящего сообщения", "Уведомление о входящем личном сообщении", true, "SoundMes", pan);
+    Dyg_OPT_Create_CheckBox(1, "Стандартная панель", "Включить стандартную панель", false, "DefaultPanel", pan);
+    Dyg_OPT_Create_CheckBox(2, "Боковая панель", "Включить боковую панель", true, "MyPanel", pan);
+    Dyg_OPT_Create_CheckBox(3, "Звук входящего сообщения", "Уведомление о входящем личном сообщении", true, "SoundMes", pan);
+    Dyg_OPT_Create_Button_Color(4, "Цвет фона", "Уведомление о входящем личном сообщении", true, 1, pan);
+    --Dyg_OPT_Create_Button_Color(5, "Цвет Значков", "Уведомление о входящем личном сообщении", true, 2, pan);
 
     pan = SettingsMyAddon.childpanelIstory;
-    Dyg_OPT_Create_Button(1, "Логирование чата", "Включить сохранение истории личных переписок", false, "LogChat", pan);
---    Dyg_OPT_Create_Button(4, "Звук входящего сообщения гильдии", "Уведомление о входящем сообщении гильдии", true, "SoundMesGuild", pan);
+    Dyg_OPT_Create_CheckBox(1, "Логирование чата", "Включить сохранение истории личных переписок", false, "LogChat", pan);
+--    Dyg_OPT_Create_CheckBox(4, "Звук входящего сообщения гильдии", "Уведомление о входящем сообщении гильдии", true, "SoundMesGuild", pan);
 end
 
 

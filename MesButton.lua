@@ -426,7 +426,7 @@ end
     end
 end
 
-function DygColorPanel()
+function DygColorPanel(self, type)
     ColorPickerFrame:Hide();
     local r, g, b, a = DygMesTab:GetBackdropColor();
     local oldr = Settings["Color1"]["r"];
@@ -437,6 +437,7 @@ function DygColorPanel()
     ColorPickerFrame.hasOpacity, ColorPickerFrame.opacity = (a ~= nil), a;
     ColorPickerFrame.previousValues = {r,g,b,a};
     ColorPickerFrame:Show();
+
     --WindowMoving(ColorPickerFrame);
 
     ColorPickerFrame.func = function()
@@ -447,6 +448,10 @@ function DygColorPanel()
 
         for i = 1, #DygMesTab do
             DygMesTab[i]:SetBackdropColor(r, g, b, a);
+        end
+        self:SetBackdropColor(r, g, b, a);
+        if (self ~= nil) then
+            self:SetBackdropColor(r, g, b, a);
         end
 
     end;
@@ -529,7 +534,7 @@ SLASH_OffsetPanel1 = "/DygOffsetPanel"
 SlashCmdList["DygMesSoundFile"] = DygMesSoundFile;
 SLASH_DygMesSoundFile1 = "/DygMesSoundFile"
 
-SlashCmdList["DygColorPanel"] = DygColorPanel;
-SLASH_DygColorPanel1 = "/DygColorPanel"
+--SlashCmdList["DygColorPanel"] = DygColorPanel;
+--SLASH_DygColorPanel1 = "/DygColorPanel"
 
 
