@@ -1,0 +1,10 @@
+tag 51272d15074a275e6481a049f8dcd9462ab73f76 release-0.23
+Author:	DygDyg <33259562+DygDyg@users.noreply.github.com>
+Date:	Sun Sep 13 02:43:19 2020 +0300
+
+commit c14067dc4c317b469eca49642c983710846b51ad
+Author: DygDyg <33259562+DygDyg@users.noreply.github.com>
+Date:   Sun Sep 13 02:43:04 2020 +0300
+
+    Добавил в настройки смену цвета фона
+

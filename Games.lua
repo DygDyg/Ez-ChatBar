@@ -29,7 +29,7 @@ local function ScrollFrame_OnMouseWheel(self, delta)
 end
 
 local function sss()
-        test111 = CreateFrame("FRAME", "TEST111", UIParent);
+        test111 = CreateFrame("FRAME", "TEST111", UIParent, BackdropTemplateMixin and "BackdropTemplate");
         test111:Hide();
         test111:SetWidth(150);
         test111:SetHeight(150);
@@ -42,7 +42,7 @@ local function sss()
         test111.ScrollFrame:SetClipsChildren(true);
         test111.ScrollFrame:SetScript("OnMouseWheel", ScrollFrame_OnMouseWheel);
 
-        test111.ScrollFrame.frame = CreateFrame("FRAME", "TEST111", test111.ScrollFrame);
+        test111.ScrollFrame.frame = CreateFrame("FRAME", "TEST111", test111.ScrollFrame, BackdropTemplateMixin and "BackdropTemplate");
         test111.ScrollFrame.frame:SetWidth(150);
         test111.ScrollFrame.frame:SetHeight(350);
         test111.ScrollFrame.frame:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\34480",});

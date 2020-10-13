@@ -7,14 +7,14 @@ function test(dats)
     myframes:SetPoint("CENTER");
     myframes:Hide();
 
-    local myframes2 = CreateFrame("FRAME","My_Text_Frame_Control",My_Text_Frame);
+    local myframes2 = CreateFrame("FRAME","My_Text_Frame_Control",My_Text_Frame, BackdropTemplateMixin and "BackdropTemplate");
     myframes2:SetWidth(230);
     myframes2:SetHeight(myframes:GetHeight());
     myframes2:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Gold-Background",  edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Gold-Border",});
     myframes2:SetPoint("LEFT",myframes,-230,0);
 
     DygDygText = {}
-    DygDygText.EditsBox = CreateFrame("EditBox",nil,myframes);
+    DygDygText.EditsBox = CreateFrame("EditBox",nil,myframes, BackdropTemplateMixin and "BackdropTemplate");
 
     DygDygText.EditsBox:SetWidth(430);
     DygDygText.EditsBox:SetFontObject(GameFontNormal);

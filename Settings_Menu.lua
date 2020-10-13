@@ -42,18 +42,18 @@ SettingsMyAddon = {};
 --pos2342355 = -20;
 SettingsMyAddon.myButton = {};
 
-SettingsMyAddon.panel = CreateFrame( "Frame", "MyAddonPanel", UIParent );
+SettingsMyAddon.panel = CreateFrame( "Frame", "MyAddonPanel", UIParent, BackdropTemplateMixin and "BackdropTemplate" );
 SettingsMyAddon.panel.name = "DygDyg Addons";
 SettingsMyAddon.panel.okay = function (self) Settings = Settings_local; Start_Settings(); end;
 SettingsMyAddon.panel.cancel = function (self) Settings = Settings_local; Start_Settings(); end;
 InterfaceOptions_AddCategory(SettingsMyAddon.panel);
 
-SettingsMyAddon.childpanelChat = CreateFrame( "Frame", "MyAddonPanel", SettingsMyAddon.panel);
+SettingsMyAddon.childpanelChat = CreateFrame( "Frame", "MyAddonPanel", SettingsMyAddon.panel, BackdropTemplateMixin and "BackdropTemplate");
 SettingsMyAddon.childpanelChat.name = "Настройки списка диалогов";
 SettingsMyAddon.childpanelChat.parent = SettingsMyAddon.panel.name;
 InterfaceOptions_AddCategory(SettingsMyAddon.childpanelChat);
 
-SettingsMyAddon.childpanelIstory = CreateFrame( "Frame", "MyAddonPanel", SettingsMyAddon.panel);
+SettingsMyAddon.childpanelIstory = CreateFrame( "Frame", "MyAddonPanel", SettingsMyAddon.panel, BackdropTemplateMixin and "BackdropTemplate");
 SettingsMyAddon.childpanelIstory.name = "Настройки истории чата";
 SettingsMyAddon.childpanelIstory.parent = SettingsMyAddon.panel.name;
 InterfaceOptions_AddCategory(SettingsMyAddon.childpanelIstory);
@@ -103,7 +103,7 @@ InterfaceOptions_AddCategory(SettingsMyAddon.childpanelIstory);
         end
 
         if(panel.myButton[i] == nil) then
-            panel.myButton[i] = CreateFrame("frame", nil, panel);
+            panel.myButton[i] = CreateFrame("frame", nil, panel, BackdropTemplateMixin and "BackdropTemplate");
             panel.myButton[i]:SetID(i);
             panel.myButton[i]:SetWidth(25);
             panel.myButton[i]:SetHeight(25);
@@ -111,7 +111,7 @@ InterfaceOptions_AddCategory(SettingsMyAddon.childpanelIstory);
             --panel.myButton[i]:SetBackdropColor(0, 0, 0, 0.8);
             panel.myButton[i]:SetPoint("TOPLEFT", 20, pos2342355);
 
-            panel.myButton[i].color = CreateFrame("frame", nil, panel.myButton[i]);
+            panel.myButton[i].color = CreateFrame("frame", nil, panel.myButton[i], BackdropTemplateMixin and "BackdropTemplate");
             panel.myButton[i].color:SetWidth(panel.myButton[i]:GetWidth());
             panel.myButton[i].color:SetHeight(panel.myButton[i]:GetHeight());
             panel.myButton[i].color:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\Background",});
@@ -119,7 +119,7 @@ InterfaceOptions_AddCategory(SettingsMyAddon.childpanelIstory);
             panel.myButton[i].color:SetScale(0.6)
             panel.myButton[i].color:SetPoint("CENTER");
 
-            panel.myButton[i].Text = CreateFrame("EditBox", "Text", panel.myButton[i]);
+            panel.myButton[i].Text = CreateFrame("EditBox", "Text", panel.myButton[i], BackdropTemplateMixin and "BackdropTemplate");
             panel.myButton[i].Text:SetWidth(400);
             panel.myButton[i].Text:SetHeight(20);
             panel.myButton[i].Text:SetPoint("LEFT", panel.myButton[i], "RIGHT", 0, 0);
@@ -207,7 +207,7 @@ Event2:SetScript("OnEvent", function(...)
 end)
 
 
-SettingsMyAddon.panel.logo = CreateFrame("Frame", nil, SettingsMyAddon.panel);
+SettingsMyAddon.panel.logo = CreateFrame("Frame", nil, SettingsMyAddon.panel, BackdropTemplateMixin and "BackdropTemplate");
 SettingsMyAddon.panel.logo:SetWidth(300);
 SettingsMyAddon.panel.logo:SetHeight(300);
 SettingsMyAddon.panel.logo:SetPoint("CENTER");

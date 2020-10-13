@@ -27,7 +27,7 @@ end
 function MesButtonPanel()
 
     if(DygMesTab==nil) then
-        DygMesTab = CreateFrame("FRAME", "DygMesTab1", UIParent);
+        DygMesTab = CreateFrame("FRAME", "DygMesTab1", UIParent, BackdropTemplateMixin and "BackdropTemplate");
         DygMesTab:SetWidth(115);
         DygMesTab:SetHeight(15);
         --DygMesTab:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",});
@@ -40,17 +40,17 @@ function MesButtonPanel()
     end
 
     if(DygMesTab.ScrollFrame==nil) then
-        DygMesTab.frame = CreateFrame("Frame", nil, DygMesTab);
+        DygMesTab.frame = CreateFrame("Frame", nil, DygMesTab, BackdropTemplateMixin and "BackdropTemplate");
         DygMesTab.frame:SetWidth(115);
         DygMesTab.frame:SetHeight(ChatFrame1:GetHeight());
         DygMesTab.frame:SetPoint("TOPLEFT", DygMesTab, "BOTTOMLEFT", 0, 0);
 
-        DygMesTab.frame.ScrollFrame = CreateFrame("ScrollFrame", nil, DygMesTab.frame);
+        DygMesTab.frame.ScrollFrame = CreateFrame("ScrollFrame", nil, DygMesTab.frame, BackdropTemplateMixin and "BackdropTemplate");
         DygMesTab.frame.ScrollFrame:SetPoint("TOPLEFT", DygMesTab.frame, "TOPLEFT", 0, 0);
         DygMesTab.frame.ScrollFrame:SetPoint("BOTTOMRIGHT", DygMesTab.frame, "BOTTOMRIGHT", 0, 0);
         DygMesTab.frame.ScrollFrame:SetScript("OnMouseWheel", ScrollFrame_OnMouseWheel);
 
-        DygMesTab.frame2 = CreateFrame("Frame", "frame2", DygMesTab.frame.ScrollFrame);
+        DygMesTab.frame2 = CreateFrame("Frame", "frame2", DygMesTab.frame.ScrollFrame, BackdropTemplateMixin and "BackdropTemplate");
         DygMesTab.frame2:SetWidth(115);
         DygMesTab.frame2:SetHeight(1);
         DygMesTab.frame2:SetPoint("TOPLEFT", DygMesTab, "BOTTOMLEFT", 0, 0);
@@ -149,7 +149,7 @@ function MesButton(args)
     local ColorSa = 40;
 
     if(DygMesTab.TextPanel == nil) then
-        DygMesTab.TextPanel = CreateFrame("FRAME", "TextPanel", DygMesTab);
+        DygMesTab.TextPanel = CreateFrame("FRAME", "TextPanel", DygMesTab, BackdropTemplateMixin and "BackdropTemplate");
         DygMesTab.TextPanel:SetWidth(115);
         DygMesTab.TextPanel:SetHeight(15);
         --DygMesTab.TextPanel:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",});
@@ -157,7 +157,7 @@ function MesButton(args)
         --DygMesTab.TextPanel:SetBackdropColor(0, 0, 0, 0.5);
         DygMesTab.TextPanel:SetBackdropColor(Settings["Color1"]["r"], Settings["Color1"]["g"], Settings["Color1"]["b"], Settings["Color1"]["a"]);
         DygMesTab.TextPanel:SetPoint("BOTTOM", DygMesTab, "TOP", 0, 0);
-        DygMesTab.TextPanel.Text = CreateFrame("EditBox", "Text", DygMesTab.TextPanel);
+        DygMesTab.TextPanel.Text = CreateFrame("EditBox", "Text", DygMesTab.TextPanel, BackdropTemplateMixin and "BackdropTemplate");
         DygMesTab.TextPanel.Text:SetWidth(115);
         DygMesTab.TextPanel.Text:SetHeight(15);
         DygMesTab.TextPanel.Text:SetFontObject(GameFontNormal);
@@ -275,7 +275,7 @@ function MesButton(args)
     for i = 1, #DygMesTabLocal do
         if(DygMesTab[i] == nil) then
                         --DygMesTab:SetHeight(DygMesTab:GetHeight() + 20);
-            DygMesTab[i] = CreateFrame("Button", "button"..i, DygMesTab.frame2);
+            DygMesTab[i] = CreateFrame("Button", "button"..i, DygMesTab.frame2, BackdropTemplateMixin and "BackdropTemplate");
 
             DygMesTab[i].b = CreateFrame("Button", nil, DygMesTab[i], "GameMenuButtonTemplate");
             DygMesTab[i].b:SetWidth(115);
@@ -294,13 +294,13 @@ function MesButton(args)
             DygMesTab[i]:SetHeight(17);
             DygMesTab[i]:SetPoint("TOP", 0, cor);
 
-            DygMesTab[i].NewMes = CreateFrame("Frame", "NewMesTexture", DygMesTab[i]);
+            DygMesTab[i].NewMes = CreateFrame("Frame", "NewMesTexture", DygMesTab[i], BackdropTemplateMixin and "BackdropTemplate");
             DygMesTab[i].NewMes:SetHeight(10);
             DygMesTab[i].NewMes:SetWidth(10);
             DygMesTab[i].NewMes:SetPoint("RIGHT", DygMesTab[i], "RIGHT", -5, 0);
             DygMesTab[i].NewMes:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\glow",});
             DygMesTab[i].NewMes:Hide();
-            DygMesTab[i].OpenTab = CreateFrame("Frame", "OpenTabTexture", DygMesTab[i]);
+            DygMesTab[i].OpenTab = CreateFrame("Frame", "OpenTabTexture", DygMesTab[i], BackdropTemplateMixin and "BackdropTemplate");
             DygMesTab[i].OpenTab:SetWidth(DygMesTab[i]:GetWidth());
             DygMesTab[i].OpenTab:SetHeight(DygMesTab[i]:GetHeight());
             DygMesTab[i].OpenTab:SetPoint("CENTER");

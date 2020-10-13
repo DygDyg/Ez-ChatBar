@@ -4,7 +4,7 @@ function Dyg_Button_Panel(name, title, tex, parent, point)
     local g = 116/255
     local b = 8/255
     local a = 200/255
-    local Dyg_Button = CreateFrame("Button", name, parent);
+    local Dyg_Button = CreateFrame("Button", name, parent, BackdropTemplateMixin and "BackdropTemplate");
     local ColorSa = 40;
 
     Dyg_Button:SetWidth(15);

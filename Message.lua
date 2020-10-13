@@ -73,7 +73,7 @@ function Dyg_Frame()
     Dyg.myframes:SetPoint("CENTER");
     Dyg.myframes.TitleText:SetText("*Username*");
 
-    Dyg.myframes2 = CreateFrame("FRAME","My_Mes_Frame_Control",My_Mes_Frame);
+    Dyg.myframes2 = CreateFrame("FRAME","My_Mes_Frame_Control",My_Mes_Frame, BackdropTemplateMixin and "BackdropTemplate");
     Dyg.myframes2:SetWidth(230);
     Dyg.myframes2:SetHeight(Dyg.myframes:GetHeight());
     Dyg.myframes2:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Gold-Background",  edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Gold-Border",});
@@ -115,7 +115,7 @@ function Dyg_EditBox()
     Dyg.myframes.ScrollFrame.ScrollBar:ClearAllPoints();
     Dyg.myframes.ScrollFrame.ScrollBar:SetPoint("TOPLEFT", Dyg.myframes.ScrollFrame, "TOPRIGHT", -18, -32);
     Dyg.myframes.ScrollFrame.ScrollBar:SetPoint("BOTTOMRIGHT", Dyg.myframes.ScrollFrame, "BOTTOMRIGHT", -7, 18);
-    Dyg.myframes.TextEditor = CreateFrame("EditBox", nil, Dyg.myframes.ScrollFrame);
+    Dyg.myframes.TextEditor = CreateFrame("EditBox", nil, Dyg.myframes.ScrollFrame, BackdropTemplateMixin and "BackdropTemplate");
     Dyg.myframes.TextEditor:Disable();
     Dyg.myframes.TextEditor:SetWidth(430);
     Dyg.myframes.TextEditor:SetFontObject(GameFontNormal);
