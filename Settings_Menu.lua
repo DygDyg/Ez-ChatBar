@@ -2,7 +2,6 @@ local menuFrame = CreateFrame("Frame", "ExampleMenuFrame", UIParent, "UIDropDown
 menuFrame:SetPoint("Center", UIParent, "Center")
 menuFrame:Hide()
 
-
 function Debug(mes)
     if(DebugCheck == true) then
         print(mes)
@@ -44,8 +43,8 @@ SettingsMyAddon.myButton = {};
 
 SettingsMyAddon.panel = CreateFrame( "Frame", "MyAddonPanel", UIParent, BackdropTemplateMixin and "BackdropTemplate" );
 SettingsMyAddon.panel.name = "DygDyg Addons";
-SettingsMyAddon.panel.okay = function (self) Settings = Settings_local; Start_Settings(); end;
-SettingsMyAddon.panel.cancel = function (self) Settings = Settings_local; Start_Settings(); end;
+SettingsMyAddon.panel.okay = function (self) DygSettings = Settings_local; Start_Settings(); end;
+SettingsMyAddon.panel.cancel = function (self) DygSettings = Settings_local; Start_Settings(); end;
 InterfaceOptions_AddCategory(SettingsMyAddon.panel);
 
 SettingsMyAddon.childpanelChat = CreateFrame( "Frame", "MyAddonPanel", SettingsMyAddon.panel, BackdropTemplateMixin and "BackdropTemplate");
@@ -80,7 +79,7 @@ InterfaceOptions_AddCategory(SettingsMyAddon.childpanelIstory);
             panel.myButton[i].Text:SetText(My_text);
             panel.myButton[i].tooltip = My_toltip;
         end
-            if(Settings[My_Name]~=nil) then
+            if(DygSettings[My_Name]~=nil) then
                 panel.myButton[i]:SetChecked(Settings_local[My_Name]);
             else
                 Settings_local[My_Name] = panel.myButton[i]:GetChecked();
@@ -95,6 +94,14 @@ InterfaceOptions_AddCategory(SettingsMyAddon.childpanelIstory);
     end
 
     function Dyg_OPT_Create_Button_Color(i, My_text, My_toltip, default, My_Name, panel)
+
+        if(DygSettings == nil) then
+            DygSettings = {}
+        end
+
+        if(DygSettings["Color1"] == nil) then
+            DygSettings["Color1"] = {["r"] = 0, ["g"] = 0, ["b"] = 0, ["a"] = 0.5};
+        end
 
         local pos2342355 = -20 * i;
 
@@ -115,7 +122,8 @@ InterfaceOptions_AddCategory(SettingsMyAddon.childpanelIstory);
             panel.myButton[i].color:SetWidth(panel.myButton[i]:GetWidth());
             panel.myButton[i].color:SetHeight(panel.myButton[i]:GetHeight());
             panel.myButton[i].color:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\Background",});
-            panel.myButton[i].color:SetBackdropColor(Settings["Color1"]["r"], Settings["Color1"]["g"], Settings["Color1"]["b"], Settings["Color1"]["a"]);
+
+            panel.myButton[i].color:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
             panel.myButton[i].color:SetScale(0.6)
             panel.myButton[i].color:SetPoint("CENTER");
 
@@ -162,12 +170,12 @@ Event:RegisterEvent("ADDON_LOADED");
 Event.start = false;
 Event:SetScript("OnEvent", function(...)
 
-    if(Settings == nil) then
-        Settings = {}
+    if(DygSettings == nil) then
+        DygSettings = {}
     end
 
     if(Event.start == true) then
-        Settings_local = Settings;
+        Settings_local = DygSettings;
         Start_Option();
         MesButtonPanel();
         MesButton();
@@ -182,17 +190,16 @@ Event:RegisterEvent("PLAYER_ENTERING_WORLD");
 Event.start = true;
 Event:SetScript("OnEvent", function(...)
 
-    if(Settings == nil) then
-        Settings = {}
+    if(DygSettings == nil) then
+        DygSettings = {}
     end
 
     if(Event.start == true) then
-        Settings_local = Settings;
+        Settings_local = DygSettings;
         Start_Option();
         MesButtonPanel();
         MesButton();
         Start_Settings();
-        Favorit();
         Event.start = false;
     end
 

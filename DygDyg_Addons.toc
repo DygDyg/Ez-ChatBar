@@ -8,7 +8,7 @@
 ## X-Category: Interface Enhancements
 ## RequiredDeps:
 ## OptionalDeps:
-## SavedVariables: DygTestData, WindowPosition, data, Message, Settings, DebugCheck
+## SavedVariables: DygTestData, WindowPosition, data, Message, DygSettings, DebugCheck
 
 UI_Dyg.xml
 ##test_api.lua

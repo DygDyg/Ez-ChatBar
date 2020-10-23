@@ -33,7 +33,7 @@ function MesButtonPanel()
         --DygMesTab:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",});
         DygMesTab:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\Background",});
         --DygMesTab:SetBackdropColor(0, 0, 0, 0.5);
-        DygMesTab:SetBackdropColor(Settings["Color1"]["r"], Settings["Color1"]["g"], Settings["Color1"]["b"], Settings["Color1"]["a"]);
+        DygMesTab:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
         DygMesTab:SetPoint("RIGHT", ChatFrame1.ScrollBar, "TOP", 150, 0);
         WindowMoving(DygMesTab, "DygMesTab");
         DygMesTab:SetUserPlaced(true);
@@ -59,43 +59,22 @@ function MesButtonPanel()
 end
 
 function Start_Settings()
-    if(Settings["DefaultPanel"] == true) then
+    if(DygSettings["DefaultPanel"] == true) then
         GeneralDockManager:Show();
     else
         GeneralDockManager:Hide();
     end
 
-    if(Settings["MyPanel"] == true) then
+    if(DygSettings["MyPanel"] == true) then
         DygMesTab:Show();
     else
         DygMesTab:Hide();
     end
-    if(Settings["Color1"] == nil) then
-        Settings["Color1"] = {["r"] = 0, ["g"] = 0, ["b"] = 0, ["a"] = 0.5};
+    if(DygSettings["Color1"] == nil) then
+        DygSettings["Color1"] = {["r"] = 0, ["g"] = 0, ["b"] = 0, ["a"] = 0.5};
     end
 
-    if(Settings["favorit"] == nil) then
-        Settings["favorit"] = ChatFrame1Tab.Text:GetText();
-    end
-        --Settings["favorit"]:Click();
 end
-
-function Favorit()
-    --print("1============")
-    if(DygMesTabLocal~=nil) then
-        --print("2============")
-        for i=1, #DygMesTabLocal do
-            if(DygMesTabLocal[i].Text:GetText() == Settings["favorit"]) then
-                --print(i)
-                --C_Timer.After(30, function()
-                    --DygMesTabLocal[i]:Click();
-                --end)
-                --DygMesTabLocal[i]:Click();
-            end
-        end
-    end
-end
-
 
 function MesButton(args)
     DygMesTabLocal = {
@@ -155,7 +134,7 @@ function MesButton(args)
         --DygMesTab.TextPanel:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",});
         DygMesTab.TextPanel:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\Background",});
         --DygMesTab.TextPanel:SetBackdropColor(0, 0, 0, 0.5);
-        DygMesTab.TextPanel:SetBackdropColor(Settings["Color1"]["r"], Settings["Color1"]["g"], Settings["Color1"]["b"], Settings["Color1"]["a"]);
+        DygMesTab.TextPanel:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
         DygMesTab.TextPanel:SetPoint("BOTTOM", DygMesTab, "TOP", 0, 0);
         DygMesTab.TextPanel.Text = CreateFrame("EditBox", "Text", DygMesTab.TextPanel, BackdropTemplateMixin and "BackdropTemplate");
         DygMesTab.TextPanel.Text:SetWidth(115);
@@ -216,6 +195,32 @@ function MesButton(args)
         end)
     end
 
+    if(DygMesTab.TestButton1 == nil) then
+        DygMesTab.TestButton1 = Dyg_Button_Panel("TestButton1", "Тест чата", "TestButton1", DygMesTab, {"LEFT", DygMesTab.CombatLog, "RIGHT", 0, 0})
+        DygMesTab.TestButton1:SetScript("OnMouseDown", function(self, button)
+                if(button == "RightButton") then
+                    --if(IsControlKeyDown() == true)then
+                    --    Debug("Contrl");
+                    --else
+                    --    DygMesTabLocal[2]:Click(button);
+                    --    local x, y = GetCursorPosition();
+                    --    local scale = UIParent:GetEffectiveScale();
+                    --    DropDownList1:SetPoint("TOPLEFT", DygMesTab, "TOPRIGHT", 0, 0);
+                    --end
+                elseif(button == "LeftButton") then
+                    --DygMesTabLocal[2]:Click(button);
+                    --OpenTabHide();
+                    TestButton1();
+                end
+                PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
+                self:SetBackdropColor(1, 1, 1, 1);
+            end);
+
+        DygMesTab.TestButton1:SetScript("OnMouseUp", function(self, button)
+            self:SetBackdropColor(r, g, b, a);
+        end)
+    end
+
     if(DygMesTab.Settings == nil) then
         DygMesTab.Settings = Dyg_Button_Panel("SettingsButton", "Настройки", "Settings", DygMesTab, {"RIGHT", DygMesTab, "RIGHT", 0, 0})
 
@@ -268,8 +273,8 @@ function MesButton(args)
             end);
     end
 
-    if(Settings["OffsetPanel"] == nil) then
-        Settings["OffsetPanel"] = 2;
+    if(DygSettings["OffsetPanel"] == nil) then
+        DygSettings["OffsetPanel"] = 2;
     end
 
     for i = 1, #DygMesTabLocal do
@@ -288,7 +293,7 @@ function MesButton(args)
             DygMesTab[i]:SetText("ttt")
 
             DygMesTab[i]:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\Background",  insets = { left = 0, right = 0, top = 0, bottom = 0}});
-            DygMesTab[i]:SetBackdropColor(Settings["Color1"]["r"], Settings["Color1"]["g"], Settings["Color1"]["b"], Settings["Color1"]["a"]);
+            DygMesTab[i]:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
 
             DygMesTab[i]:SetWidth(115);
             DygMesTab[i]:SetHeight(17);
@@ -335,11 +340,9 @@ end
             DygMesTab[i]:Hide();
         end
 
-            if(DygMesTabLocal[i].Text:GetText() == Settings["favorit"]) then
-                --DygMesTabLocal[i]:Click();
-            end
 
-        if(DygMesTabLocal[i]~=nil and DygMesTabLocal[i]:IsShown() == true and i > Settings["OffsetPanel"]) then
+
+        if(DygMesTabLocal[i]~=nil and DygMesTabLocal[i]:IsShown() == true and i > DygSettings["OffsetPanel"]) then
             if(DygMesTab[i] == nil) then
 
             end
@@ -376,8 +379,8 @@ end
                 elseif(button == "LeftButton") then                                                        --Левая кнопка
                     if(IsControlKeyDown() == true) then
                         Debug("Contrl");
-                        Settings["favorit"] = DygMesTabLocal[i].Text:GetText();
-                        print("Сохранено в избранное: "..Settings["favorit"])
+                        DygSettings["favorit"] = DygMesTabLocal[i].Text:GetText();
+                        print("Сохранено в избранное: "..DygSettings["favorit"])
                     end
                     self.NewMes:Hide();
                     OpenTabHide();
@@ -426,13 +429,17 @@ end
     end
 end
 
+function TestButton1()
+    print("click")
+end
+
 function DygColorPanel(self, type)
     ColorPickerFrame:Hide();
     local r, g, b, a = DygMesTab:GetBackdropColor();
-    local oldr = Settings["Color1"]["r"];
-    local oldg = Settings["Color1"]["g"];
-    local oldb = Settings["Color1"]["b"];
-    local olda = Settings["Color1"]["a"];
+    local oldr = DygSettings["Color1"]["r"];
+    local oldg = DygSettings["Color1"]["g"];
+    local oldb = DygSettings["Color1"]["b"];
+    local olda = DygSettings["Color1"]["a"];
     ColorPickerFrame:SetColorRGB(r,g,b);
     ColorPickerFrame.hasOpacity, ColorPickerFrame.opacity = (a ~= nil), a;
     ColorPickerFrame.previousValues = {r,g,b,a};
@@ -466,10 +473,10 @@ function DygColorPanel(self, type)
             DygMesTab[i]:SetBackdropColor(r, g, b, a);
         end
 
-        Settings["Color1"]["r"] = r;
-        Settings["Color1"]["g"] = g;
-        Settings["Color1"]["b"] = b;
-        Settings["Color1"]["a"] = a;
+        DygSettings["Color1"]["r"] = r;
+        DygSettings["Color1"]["g"] = g;
+        DygSettings["Color1"]["b"] = b;
+        DygSettings["Color1"]["a"] = a;
     end;
 
     ColorPickerFrame.cancelFunc = function()
@@ -492,15 +499,15 @@ Event1:SetScript("OnEvent", function(...)
     local args = {...};
     DygTestData = args;
     MesButton(args)
-    if(Settings["SoundMes"] == true) then
+    if(DygSettings["SoundMes"] == true) then
         if("CHAT_MSG_BN_WHISPER"==args[2] or "CHAT_MSG_WHISPER"==args[2]) then
 
 
 
-            if(Settings["SoundMesFile"] == nil) then
-                Settings["SoundMesFile"] = "message.mp3";
+            if(DygSettings["SoundMesFile"] == nil) then
+                DygSettings["SoundMesFile"] = "message.mp3";
             end
-            PlaySoundFile("Interface\\AddOns\\DygDyg_Addons\\sound\\"..Settings["SoundMesFile"], "master");
+            PlaySoundFile("Interface\\AddOns\\DygDyg_Addons\\sound\\"..DygSettings["SoundMesFile"], "master");
         end
     end
 end)
@@ -510,16 +517,16 @@ function OffsetPanel(msg)
     msg = tonumber(msg);
 
     if(msg~=nil) then
-        Settings["OffsetPanel"] = msg;
+        DygSettings["OffsetPanel"] = msg;
         MesButton()
     end
 end
 function DygMesSoundFile(file)
     if(file ~= "") then
-        Settings["SoundMesFile"] = file;
+        DygSettings["SoundMesFile"] = file;
         print("Звук сообщений "..file.." установлен")
     else
-        print("Текущий звук сообщений "..Settings["SoundMesFile"])
+        print("Текущий звук сообщений "..DygSettings["SoundMesFile"])
         print("Для смены звука пропишите команду:")
         print(" /DygMesSoundFile <название файла>.mp3")
         print("Предварительно закинув файл звука в")
