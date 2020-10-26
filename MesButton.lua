@@ -23,11 +23,20 @@ local function ScrollFrame_OnMouseWheel(self, delta)
 	self:SetVerticalScroll(newValue);
 end
 
+function CBCPanelUpdate()
+    local editBox = ChatEdit_ChooseBoxForSend();
+    local chatFrame = editBox.chatFrame;
+    --local chatType, channelIndex = string.gmatch(chatType, "([^%d]*)([%d]*)$")();
+    local messageTypeList = editBox.chatFrame.messageTypeList;
+    local channelList = editBox.chatFrame.channelList;
+
+
+    return editBox, chatFrame, messageTypeList, channelList;
+end
 
 function MesButtonPanel()
 
-    local editBox = ChatEdit_ChooseBoxForSend();
-	local chatFrame = editBox.chatFrame;
+    local editBox, chatFrame = CBCPanelUpdate();
 
     if(DygMesTab==nil) then
         DygMesTab = CreateFrame("FRAME", "DygMesTab1", UIParent, BackdropTemplateMixin and "BackdropTemplate");
@@ -202,6 +211,19 @@ function MesButton(args)
         DygMesTab.TestButton1 = Dyg_Button_Panel("TestButton1", "Тест чата", "TestButton1", DygMesTab, {"LEFT", DygMesTab.CombatLog, "RIGHT", 0, 0})
         DygMesTab.TestButton1:SetScript("OnMouseDown", function(self, button)
                 if(button == "RightButton") then
+                    local editBox, chatFrame, messageTypeList, channelList = CBCPanelUpdate();
+                    print("=========================")
+                    for i = 1, #messageTypeList do
+                        --ChatTypeInfo["GUILD"]
+                        print(messageTypeList[i])
+                    end
+                    print("-------------------------")
+                    for i = 1, #channelList do
+                        print(channelList[i])
+                    end
+                    print("=========================")
+                    --/script DygTestData = ChatEdit_ChooseBoxForSend();
+
 
                 elseif(button == "LeftButton") then
 
@@ -426,7 +448,7 @@ end
 
 function TestButton1()
     --print("click")
-    ChatFrame_OpenChat("/г ", chatFrame);
+    ChatFrame_OpenChat("/g ", chatFrame);
 end
 
 function DygColorPanel(self, type)
