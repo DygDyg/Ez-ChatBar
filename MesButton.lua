@@ -26,6 +26,9 @@ end
 
 function MesButtonPanel()
 
+    local editBox = ChatEdit_ChooseBoxForSend();
+	local chatFrame = editBox.chatFrame;
+
     if(DygMesTab==nil) then
         DygMesTab = CreateFrame("FRAME", "DygMesTab1", UIParent, BackdropTemplateMixin and "BackdropTemplate");
         DygMesTab:SetWidth(115);
@@ -195,21 +198,13 @@ function MesButton(args)
         end)
     end
 
-    if(DygMesTab.TestButton1 == nil) then
+    if(DygMesTab.TestButton1 == nil and DebugCheck == true) then
         DygMesTab.TestButton1 = Dyg_Button_Panel("TestButton1", "Тест чата", "TestButton1", DygMesTab, {"LEFT", DygMesTab.CombatLog, "RIGHT", 0, 0})
         DygMesTab.TestButton1:SetScript("OnMouseDown", function(self, button)
                 if(button == "RightButton") then
-                    --if(IsControlKeyDown() == true)then
-                    --    Debug("Contrl");
-                    --else
-                    --    DygMesTabLocal[2]:Click(button);
-                    --    local x, y = GetCursorPosition();
-                    --    local scale = UIParent:GetEffectiveScale();
-                    --    DropDownList1:SetPoint("TOPLEFT", DygMesTab, "TOPRIGHT", 0, 0);
-                    --end
+
                 elseif(button == "LeftButton") then
-                    --DygMesTabLocal[2]:Click(button);
-                    --OpenTabHide();
+
                     TestButton1();
                 end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
@@ -430,7 +425,8 @@ end
 end
 
 function TestButton1()
-    print("click")
+    --print("click")
+    ChatFrame_OpenChat("/г ", chatFrame);
 end
 
 function DygColorPanel(self, type)
