@@ -42,7 +42,7 @@ SettingsMyAddon = {};
 SettingsMyAddon.myButton = {};
 
 SettingsMyAddon.panel = CreateFrame( "Frame", "MyAddonPanel", UIParent, BackdropTemplateMixin and "BackdropTemplate" );
-SettingsMyAddon.panel.name = "DygDyg Addons";
+SettingsMyAddon.panel.name = "EzChatBar";
 SettingsMyAddon.panel.okay = function (self) DygSettings = Settings_local; Start_Settings(); end;
 SettingsMyAddon.panel.cancel = function (self) DygSettings = Settings_local; Start_Settings(); end;
 InterfaceOptions_AddCategory(SettingsMyAddon.panel);
