@@ -22,7 +22,7 @@ function DebugEnable(check)
         DebugCheck = false;
         print("Debug режим выключен");
     else
-        print("Сейчс установлено:");
+        print("Сейчас установлено:");
         print(DebugCheck);
         print("Для переключения дебага введите:");
         print("/Debug true или /Debug false")
@@ -114,14 +114,14 @@ InterfaceOptions_AddCategory(SettingsMyAddon.childpanelIstory);
             panel.myButton[i]:SetID(i);
             panel.myButton[i]:SetWidth(25);
             panel.myButton[i]:SetHeight(25);
-            --panel.myButton[i]:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\Background",});
+            --panel.myButton[i]:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background",});
             --panel.myButton[i]:SetBackdropColor(0, 0, 0, 0.8);
             panel.myButton[i]:SetPoint("TOPLEFT", 20, pos2342355);
 
             panel.myButton[i].color = CreateFrame("frame", nil, panel.myButton[i], BackdropTemplateMixin and "BackdropTemplate");
             panel.myButton[i].color:SetWidth(panel.myButton[i]:GetWidth());
             panel.myButton[i].color:SetHeight(panel.myButton[i]:GetHeight());
-            panel.myButton[i].color:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\Background",});
+            panel.myButton[i].color:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background",});
 
             panel.myButton[i].color:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
             panel.myButton[i].color:SetScale(0.6)
@@ -220,4 +220,4 @@ SettingsMyAddon.panel.logo = CreateFrame("Frame", nil, SettingsMyAddon.panel, Ba
 SettingsMyAddon.panel.logo:SetWidth(300);
 SettingsMyAddon.panel.logo:SetHeight(300);
 SettingsMyAddon.panel.logo:SetPoint("CENTER");
-SettingsMyAddon.panel.logo:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\logo",});
+SettingsMyAddon.panel.logo:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\logo",});

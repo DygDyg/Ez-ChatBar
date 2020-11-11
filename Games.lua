@@ -33,7 +33,7 @@ local function sss()
         test111:Hide();
         test111:SetWidth(150);
         test111:SetHeight(150);
-        --test111:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\34480",});
+        --test111:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\34480",});
         test111:SetPoint("CENTER");
 
         test111.ScrollFrame = CreateFrame("ScrollFrame", nil, test111, "UIPanelScrollFrameTemplate");
@@ -45,7 +45,7 @@ local function sss()
         test111.ScrollFrame.frame = CreateFrame("FRAME", "TEST111", test111.ScrollFrame, BackdropTemplateMixin and "BackdropTemplate");
         test111.ScrollFrame.frame:SetWidth(150);
         test111.ScrollFrame.frame:SetHeight(350);
-        test111.ScrollFrame.frame:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\34480",});
+        test111.ScrollFrame.frame:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\34480",});
         test111.ScrollFrame.frame:SetPoint("CENTER");
         test111.ScrollFrame:SetScrollChild(test111.ScrollFrame.frame);
 

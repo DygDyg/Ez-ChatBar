@@ -21,7 +21,7 @@ function Dyg_Button_Panel(name, title, tex, parent, point)
     Dyg_Button:SetWidth(15);
     Dyg_Button:SetHeight(15);
     Dyg_Button:SetPoint(point[1], point[2], point[3], point[4], point[5], point[6]);
-    Dyg_Button:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\"..tex, insets = { left = 1, right = 1, top = 1, bottom = 1}});
+    Dyg_Button:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\"..tex, insets = { left = 1, right = 1, top = 1, bottom = 1}});
     Dyg_Button:SetBackdropColor(r, g, b, a);
 
     Dyg_Button:SetScript("PreClick", function(self, button)

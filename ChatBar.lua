@@ -1,75 +1,87 @@
 
 --Создание фона
 function ChatBar()
-    if(DebugCheck == true) then
-        if(ChatBarFrame==nil) then
-            ChatBarFrame = CreateFrame("FRAME", "ChatBar", DygMesTab1.frame, BackdropTemplateMixin and "BackdropTemplate");
-            ChatBarFrame:SetWidth(21);
-            ChatBarFrame:SetHeight(8);
-            ChatBarFrame:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\Background",});
-            --ChatBarFrame:SetBackdropColor(0, 0, 0, 1);
-            ChatBarFrame:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
-            ChatBarFrame:SetPoint("TOPRIGHT", DygMesTab1, "LEFT", -2, 7);
+    --if(DebugCheck == true) then
+        if(DygChatBarFrame==nil) then
+            DygChatBarFrame = CreateFrame("FRAME", "ChatBar", DygMesTab1.frame, BackdropTemplateMixin and "BackdropTemplate");
+            DygChatBarFrame:SetWidth(21);
+            DygChatBarFrame:SetHeight(8);
+            DygChatBarFrame:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background2",});
+            --DygChatBarFrame:SetBackdropColor(0, 0, 0, 1);
+            DygChatBarFrame:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
+            DygChatBarFrame:SetPoint("TOPRIGHT", DygMesTab1, "LEFT", -2, 7);
         end
         ChatBarButton()
-    end
+    --end
 end
 
 --Создание кнопок
 function ChatBarButton()
     local editBox, chatFrame, messageTypeList, channelList = CBCPanelUpdate();
 
-    if(ChatBarFrame.button==nil) then
-        ChatBarFrame.button = {}
+    if(DygChatBarFrame.button==nil) then
+        DygChatBarFrame.button = {}
     end
-    local buttonframechatbar = ChatBarFrame;
+    local buttonframechatbar = DygChatBarFrame;
     local numerx = 4;
     local numery = -4;
     local num1 = #messageTypeList;
     local ColorChat = nil;
 
 
-    for i = 1, #ChatBarFrame.button do
-        if(ChatBarFrame.button[i]~=nil) then
-            ChatBarFrame.button[i]:Hide();
-            ChatBarFrame:SetHeight(4);
+    for i = 1, #DygChatBarFrame.button do
+        if(DygChatBarFrame.button[i]~=nil) then
+            DygChatBarFrame.button[i]:Hide();
+            DygChatBarFrame:SetHeight(4);
         end
     end
 
     for i = 1, num1 do
         local act, color_r, color_g, color_b, title, cmd = ChatBarColor(messageTypeList[i]);
         if(act == true) then
-            if(ChatBarFrame.button[i]==nil) then
-                ChatBarFrame.button[i] = CreateFrame("FRAME", "ChatBarButton"..i, ChatBarFrame, BackdropTemplateMixin and "BackdropTemplate");
-                ChatBarFrame.button[i]:Hide();
+            if(DygChatBarFrame.button[i]==nil) then
+                DygChatBarFrame.button[i] = CreateFrame("FRAME", "ChatBarButton"..i, DygChatBarFrame, BackdropTemplateMixin and "BackdropTemplate");
+                DygChatBarFrame.button[i]:Hide();
+
+                DygChatBarFrame.button[i].glow = CreateFrame("FRAME", "glow", DygChatBarFrame.button[i], BackdropTemplateMixin and "BackdropTemplate");
+                DygChatBarFrame.button[i].glow:Hide();
+                DygChatBarFrame.button[i].glow:SetWidth(14);
+                DygChatBarFrame.button[i].glow:SetHeight(14);
+                DygChatBarFrame.button[i].glow:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\glow3",});
+                DygChatBarFrame.button[i].glow:SetPoint("CENTER", DygChatBarFrame.button[i], "CENTER");
+                DygChatBarFrame.button[i].glow:SetBackdropColor(1, 1, 1, 0.3);
             end
 
 
-            ChatBarFrame.button[i]:SetWidth(15);
-            ChatBarFrame.button[i]:SetHeight(15);
-            ChatBarFrame.button[i]:SetPoint("TOPLEFT", buttonframechatbar, "TOPLEFT", numerx, numery);
-            ChatBarFrame.button[i]:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\ButtonChatBar1",});
-            ChatBarFrame.button[i]:SetBackdropColor(color_r/255, color_g/255, color_b/255, 255/255);
-            ChatBarFrame:SetHeight(ChatBarFrame:GetHeight()+19);
-            ChatBarFrame.button[i]:Show();
+            DygChatBarFrame.button[i]:SetWidth(15);
+            DygChatBarFrame.button[i]:SetHeight(15);
+            DygChatBarFrame.button[i]:SetPoint("TOPLEFT", buttonframechatbar, "TOPLEFT", numerx, numery);
+            DygChatBarFrame.button[i]:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\ButtonChatBar1",});
+            DygChatBarFrame.button[i]:SetBackdropColor(color_r/255, color_g/255, color_b/255, 255/255);
+            DygChatBarFrame:SetHeight(DygChatBarFrame:GetHeight()+19);
+            DygChatBarFrame.button[i]:Show();
 
-            --ChatBarFrame.button[i]:SetScript("OnMouseDown", function(self, button) ChatBarButton() end);
+            --DygChatBarFrame.button[i]:SetScript("OnMouseDown", function(self, button) ChatBarButton() end);
 
-            ChatBarFrame.button[i]:SetScript("OnMouseDown", function(self, button)
+            DygChatBarFrame.button[i]:SetScript("OnMouseDown", function(self, button)
                 ChatFrame_OpenChat("/"..cmd, chatFrame);
             end);
 
-            ChatBarFrame.button[i]:SetScript("OnEnter", function(self)
+            DygChatBarFrame.button[i]:SetScript("OnEnter", function(self)
                 DygMesTab.TextPanel:Show();
+                DygChatBarFrame.button[i].glow:Show();
                 DygMesTab.TextPanel.Text:SetText(title);
+                DygChatBarFrame.button[i]:SetBackdropColor((color_r+100)/255, (color_g+100)/255, (color_b+100)/255, 255/255);
             end)
 
-            ChatBarFrame.button[i]:SetScript("OnLeave", function(self)
+            DygChatBarFrame.button[i]:SetScript("OnLeave", function(self)
                 DygMesTab.TextPanel:Hide();
+                DygChatBarFrame.button[i]:SetBackdropColor(color_r/255, color_g/255, color_b/255, 255/255);
+                DygChatBarFrame.button[i].glow:Hide();
             end)
 
 
-            buttonframechatbar = ChatBarFrame.button[i];
+            buttonframechatbar = DygChatBarFrame.button[i];
             numerx = 0;
             numery = -19;
         end

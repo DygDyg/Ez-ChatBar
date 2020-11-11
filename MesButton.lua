@@ -43,7 +43,7 @@ function MesButtonPanel()
         DygMesTab:SetWidth(115);
         DygMesTab:SetHeight(15);
         --DygMesTab:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",});
-        DygMesTab:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\Background",});
+        DygMesTab:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background",});
         --DygMesTab:SetBackdropColor(0, 0, 0, 0.5);
         DygMesTab:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
         DygMesTab:SetPoint("RIGHT", ChatFrame1.ScrollBar, "TOP", 150, 0);
@@ -144,7 +144,7 @@ function MesButton(args)
         DygMesTab.TextPanel:SetWidth(115);
         DygMesTab.TextPanel:SetHeight(15);
         --DygMesTab.TextPanel:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",});
-        DygMesTab.TextPanel:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\Background",});
+        DygMesTab.TextPanel:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background",});
         --DygMesTab.TextPanel:SetBackdropColor(0, 0, 0, 0.5);
         DygMesTab.TextPanel:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
         DygMesTab.TextPanel:SetPoint("BOTTOM", DygMesTab, "TOP", 0, 0);
@@ -210,7 +210,7 @@ function MesButton(args)
         end)
     end
 
-    if(DygMesTab.TestButton1 == nil and DebugCheck == true) then
+    if(DygMesTab.TestButton1 == nil and DebugCheck == "ssss") then
         DygMesTab.TestButton1 = Dyg_Button_Panel("TestButton1", "Тест чата", "TestButton1", DygMesTab, {"LEFT", DygMesTab.CombatLog, "RIGHT", 0, 0})
         DygMesTab.TestButton1:SetScript("OnMouseDown", function(self, button)
                 if(button == "RightButton") then
@@ -313,7 +313,7 @@ function MesButton(args)
             DygMesTab[i].b:Hide()
             DygMesTab[i]:SetText("ttt")
 
-            DygMesTab[i]:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\Background",  insets = { left = 0, right = 0, top = 0, bottom = 0}});
+            DygMesTab[i]:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background",  insets = { left = 0, right = 0, top = 0, bottom = 0}});
             DygMesTab[i]:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
 
             DygMesTab[i]:SetWidth(115);
@@ -324,13 +324,13 @@ function MesButton(args)
             DygMesTab[i].NewMes:SetHeight(10);
             DygMesTab[i].NewMes:SetWidth(10);
             DygMesTab[i].NewMes:SetPoint("RIGHT", DygMesTab[i], "RIGHT", -5, 0);
-            DygMesTab[i].NewMes:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\glow",});
+            DygMesTab[i].NewMes:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\glow",});
             DygMesTab[i].NewMes:Hide();
             DygMesTab[i].OpenTab = CreateFrame("Frame", "OpenTabTexture", DygMesTab[i], BackdropTemplateMixin and "BackdropTemplate");
             DygMesTab[i].OpenTab:SetWidth(DygMesTab[i]:GetWidth());
             DygMesTab[i].OpenTab:SetHeight(DygMesTab[i]:GetHeight());
             DygMesTab[i].OpenTab:SetPoint("CENTER");
-            DygMesTab[i].OpenTab:SetBackdrop({bgFile = "Interface\\AddOns\\DygDyg_Addons\\image\\ButtonGlowGold", insets = { left = -2, right = -2, top = -31, bottom = -30}});
+            DygMesTab[i].OpenTab:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\ButtonGlowGold", insets = { left = -2, right = -2, top = -31, bottom = -30}});
             DygMesTab[i].OpenTab:Hide();
 
             cor = cor - 19;
@@ -530,7 +530,7 @@ Event1:SetScript("OnEvent", function(...)
             if(DygSettings["SoundMesFile"] == nil) then
                 DygSettings["SoundMesFile"] = "message.mp3";
             end
-            PlaySoundFile("Interface\\AddOns\\DygDyg_Addons\\sound\\"..DygSettings["SoundMesFile"], "master");
+            PlaySoundFile("Interface\\AddOns\\EzChatBar\\sound\\"..DygSettings["SoundMesFile"], "master");
         end
     end
 end)
@@ -553,7 +553,7 @@ function DygMesSoundFile(file)
         print("Для смены звука пропишите команду:")
         print(" /DygMesSoundFile <название файла>.mp3")
         print("Предварительно закинув файл звука в")
-        print("  ..\\Interface\\AddOns\\DygDyg_Addons\\sound")
+        print("  ..\\Interface\\AddOns\\EzChatBar\\sound")
     end
 end
 
