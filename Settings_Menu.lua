@@ -185,6 +185,8 @@ Event:SetScript("OnEvent", function(...)
     end
 end)
 
+
+--Событие при старте игры, чтоб прогрузились сохранённые данные
 local Event = CreateFrame("Frame");
 Event:RegisterEvent("PLAYER_ENTERING_WORLD");
 Event.start = true;
@@ -202,7 +204,7 @@ Event:SetScript("OnEvent", function(...)
         Start_Settings();
         Event.start = false;
     end
-
+    ChatBar();
 end)
 
 

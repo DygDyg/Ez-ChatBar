@@ -39,7 +39,7 @@ function MesButtonPanel()
     local editBox, chatFrame = CBCPanelUpdate();
 
     if(DygMesTab==nil) then
-        DygMesTab = CreateFrame("FRAME", "DygMesTab1", UIParent, BackdropTemplateMixin and "BackdropTemplate");
+        DygMesTab = CreateFrame("FRAME", "DygMesTab1", BaseFrameAddons(), BackdropTemplateMixin and "BackdropTemplate");
         DygMesTab:SetWidth(115);
         DygMesTab:SetHeight(15);
         --DygMesTab:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",});
@@ -173,6 +173,7 @@ function MesButton(args)
                     DropDownList1:SetPoint("TOPLEFT", DygMesTab, "TOPRIGHT", 0, 0);
                 elseif(button == "LeftButton") then
                     OpenTabHide();
+                    ChatBarButton();
                 end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
             end);
@@ -197,6 +198,7 @@ function MesButton(args)
                 elseif(button == "LeftButton") then
                     DygMesTabLocal[2]:Click(button);
                     OpenTabHide();
+                    ChatBarButton();
                 end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
                 self:SetBackdropColor(1, 1, 1, 1);
@@ -204,6 +206,7 @@ function MesButton(args)
 
         DygMesTab.CombatLog:SetScript("OnMouseUp", function(self, button)
             self:SetBackdropColor(r, g, b, a);
+
         end)
     end
 
@@ -223,6 +226,7 @@ function MesButton(args)
                     end
                     print("=========================")
                     --/script DygTestData = ChatEdit_ChooseBoxForSend();
+                    DygTestData = ChatEdit_ChooseBoxForSend();
 
 
                 elseif(button == "LeftButton") then
@@ -402,6 +406,7 @@ end
                     self.NewMes:Hide();
                     OpenTabHide();
                     self.OpenTab:Show();
+                    ChatBarButton();
                 end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
             end);

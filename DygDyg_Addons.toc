@@ -18,4 +18,6 @@ WindowMoving.lua
 base64.lua
 Message.lua
 MesButton.lua
+ChatBar.lua
 Games.lua
+

@@ -1,3 +1,14 @@
+function BaseFrameAddons()
+    local BaseFrame = DygDyg_Addons
+    local BaseFrameName = "DygDyg_Addons"
+    if BaseFrame == nil then
+        BaseFrame = CreateFrame("FRAME", BaseFrameName, UIParent, BackdropTemplateMixin and "BackdropTemplate");
+    end
+    return BaseFrame, BaseFrameName;
+end
+
+
+
 function Dyg_Button_Panel(name, title, tex, parent, point)
     --local r, g, b, a = ChatFrame1TabText:GetTextColor();
     local r = 189/255
