@@ -49,15 +49,15 @@ function ChatBarButton()
                 DygChatBarFrame.button[i].glow:SetHeight(14);
                 DygChatBarFrame.button[i].glow:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\glow3",});
                 DygChatBarFrame.button[i].glow:SetPoint("CENTER", DygChatBarFrame.button[i], "CENTER");
-                DygChatBarFrame.button[i].glow:SetBackdropColor(1, 1, 1, 0.3);
+                DygChatBarFrame.button[i].glow:SetBackdropColor(1, 1, 1, 0.7);
             end
 
 
             DygChatBarFrame.button[i]:SetWidth(15);
             DygChatBarFrame.button[i]:SetHeight(15);
             DygChatBarFrame.button[i]:SetPoint("TOPLEFT", buttonframechatbar, "TOPLEFT", numerx, numery);
-            DygChatBarFrame.button[i]:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\ButtonChatBar1",});
-            DygChatBarFrame.button[i]:SetBackdropColor(color_r/255, color_g/255, color_b/255, 255/255);
+            DygChatBarFrame.button[i]:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\ButtonChatBar2",});
+            DygChatBarFrame.button[i]:SetBackdropColor(color_r/255, color_g/255, color_b/255, 200/255);
             DygChatBarFrame:SetHeight(DygChatBarFrame:GetHeight()+19);
             DygChatBarFrame.button[i]:Show();
 
@@ -101,7 +101,7 @@ function ChatBarColor(messageType)
         color_g = 255;
         color_b = 255;
         act = true;
-        title = "Речь"
+        title = EzChatBar_ChatBarColor_title_SAY;
         cmd = "SAY"
     end
 
@@ -110,7 +110,7 @@ function ChatBarColor(messageType)
         color_g = 140;
         color_b = 69;
         act = true;
-        title = "Эмоции"
+        title = EzChatBar_ChatBarColor_title_EMOTE;
         cmd = "EMOTE"
     end
 
@@ -119,7 +119,7 @@ function ChatBarColor(messageType)
         color_g = 69;
         color_b = 69;
         act = true;
-        title = "Крикнуть"
+        title = EzChatBar_ChatBarColor_title_YELL;
         cmd = "YELL"
     end
 
@@ -128,7 +128,7 @@ function ChatBarColor(messageType)
         color_g = 186;
         color_b = 255;
         act = true;
-        title = "Группа"
+        title = EzChatBar_ChatBarColor_title_PARTY;
         cmd = "PARTY"
     end
 
@@ -137,7 +137,7 @@ function ChatBarColor(messageType)
         color_g = 138;
         color_b = 0;
         act = true;
-        title = "Рейд"
+        title = EzChatBar_ChatBarColor_title_RAID;
         cmd = "RAID"
     end
 
@@ -146,7 +146,7 @@ function ChatBarColor(messageType)
         color_g = 78;
         color_b = 0;
         act = true;
-        title = "Сообщение рейда"
+        title = EzChatBar_ChatBarColor_title_RAID_WARNING;
         cmd = "RW"
     end
 
@@ -155,16 +155,16 @@ function ChatBarColor(messageType)
         color_g = 255;
         color_b = 69;
         act = true;
-        title = "Гильдия"
+        title = EzChatBar_ChatBarColor_title_GUILD;
         cmd = "GUILD"
     end
 
     if(messageType == "OFFICER") then
         color_r = 69;
-        color_g = 210;
+        color_g = 150;
         color_b = 69;
         act = true;
-        title = "Офицер"
+        title = EzChatBar_ChatBarColor_title_OFFICER;
         cmd = "OFFICER"
     end
 

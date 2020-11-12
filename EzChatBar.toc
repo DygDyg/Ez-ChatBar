@@ -12,6 +12,7 @@
 
 ##UI_Dyg.xml
 ##test_api.lua
+locals.xml
 Settings_Menu.lua
 Data.lua
 WindowMoving.lua
@@ -20,4 +21,5 @@ Message.lua
 MesButton.lua
 ChatBar.lua
 Games.lua
+
 

@@ -48,12 +48,12 @@ SettingsMyAddon.panel.cancel = function (self) DygSettings = Settings_local; Sta
 InterfaceOptions_AddCategory(SettingsMyAddon.panel);
 
 SettingsMyAddon.childpanelChat = CreateFrame( "Frame", "MyAddonPanel", SettingsMyAddon.panel, BackdropTemplateMixin and "BackdropTemplate");
-SettingsMyAddon.childpanelChat.name = "Настройки списка диалогов";
+SettingsMyAddon.childpanelChat.name = EzChatBar_Settings1_PanelName1;
 SettingsMyAddon.childpanelChat.parent = SettingsMyAddon.panel.name;
 InterfaceOptions_AddCategory(SettingsMyAddon.childpanelChat);
 
 SettingsMyAddon.childpanelIstory = CreateFrame( "Frame", "MyAddonPanel", SettingsMyAddon.panel, BackdropTemplateMixin and "BackdropTemplate");
-SettingsMyAddon.childpanelIstory.name = "Настройки истории чата";
+SettingsMyAddon.childpanelIstory.name = EzChatBar_Settings1_PanelName2;
 SettingsMyAddon.childpanelIstory.parent = SettingsMyAddon.panel.name;
 InterfaceOptions_AddCategory(SettingsMyAddon.childpanelIstory);
 
@@ -151,14 +151,14 @@ InterfaceOptions_AddCategory(SettingsMyAddon.childpanelIstory);
 function Start_Option()
 
     local pan = SettingsMyAddon.childpanelChat;
-    Dyg_OPT_Create_CheckBox(1, "Стандартная панель", "Включить стандартную панель", false, "DefaultPanel", pan);
-    Dyg_OPT_Create_CheckBox(2, "Боковая панель", "Включить боковую панель", true, "MyPanel", pan);
-    Dyg_OPT_Create_CheckBox(3, "Звук входящего сообщения", "Уведомление о входящем личном сообщении", true, "SoundMes", pan);
-    Dyg_OPT_Create_Button_Color(4, "Цвет фона", "Уведомление о входящем личном сообщении", true, 1, pan);
+    Dyg_OPT_Create_CheckBox(1, EzChatBar_Settings1_CheckBox1, EzChatBar_Settings1_CheckBox1_title, false, "DefaultPanel", pan);
+    Dyg_OPT_Create_CheckBox(2, EzChatBar_Settings1_CheckBox2, EzChatBar_Settings1_CheckBox2_title, true, "MyPanel", pan);
+    Dyg_OPT_Create_CheckBox(3, EzChatBar_Settings1_CheckBox3, EzChatBar_Settings1_CheckBox3_title, true, "SoundMes", pan);
+    Dyg_OPT_Create_Button_Color(4, EzChatBar_Settings1_Color1, EzChatBar_Settings1_Color1_title, true, 1, pan);
     --Dyg_OPT_Create_Button_Color(5, "Цвет Значков", "Уведомление о входящем личном сообщении", true, 2, pan);
 
     pan = SettingsMyAddon.childpanelIstory;
-    Dyg_OPT_Create_CheckBox(1, "Логирование чата", "Включить сохранение истории личных переписок", false, "LogChat", pan);
+    Dyg_OPT_Create_CheckBox(1, EzChatBar_Settings2_CheckBox1, EzChatBar_Settings2_CheckBox1_title, false, "LogChat", pan);
 --    Dyg_OPT_Create_CheckBox(4, "Звук входящего сообщения гильдии", "Уведомление о входящем сообщении гильдии", true, "SoundMesGuild", pan);
 end
 
