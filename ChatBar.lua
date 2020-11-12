@@ -29,7 +29,7 @@ function ChatBarButton()
     local ColorChat = nil;
 
     --print(#DygChatBarFrame.button)
-    for i = 1, 20 do
+    for i = 1, 100 do
         if(DygChatBarFrame.button[i]~=nil) then
             DygChatBarFrame.button[i]:Hide();
         end
