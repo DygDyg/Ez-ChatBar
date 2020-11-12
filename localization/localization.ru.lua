@@ -2,7 +2,7 @@
 if ( GetLocale() == "ruRU" ) then
 
     EzChatBar_Settings1_PanelName1 = "Настройки списка диалогов";
-    EzChatBar_Settings1_PanelName2 = "Настройки истории чата";
+    EzChatBar_Settings1_PanelName2 = "Настройки истории чата (В разработке)";
 
     EzChatBar_Settings1_CheckBox1 = "Стандартная панель";
     EzChatBar_Settings1_CheckBox1_title = "Включить стандартную панель";
@@ -16,7 +16,7 @@ if ( GetLocale() == "ruRU" ) then
     EzChatBar_Settings1_Color1 = "Цвет фона";
     EzChatBar_Settings1_Color1_title = "Уведомление о входящем личном сообщении";
 
-    EzChatBar_Settings2_CheckBox1 = "Логирование чата";
+    EzChatBar_Settings2_CheckBox1 = "Логирование чата (В разработке)";
     EzChatBar_Settings2_CheckBox1_title = "Включить сохранение истории личных переписок";
 
     EzChatBar_GeneralTab_Button_General = "Общий чат";
@@ -31,6 +31,7 @@ if ( GetLocale() == "ruRU" ) then
     EzChatBar_ChatBarColor_title_SAY = "Речь";
     EzChatBar_ChatBarColor_title_EMOTE = "Эмоции";
     EzChatBar_ChatBarColor_title_YELL = "Крикнуть";
+    EzChatBar_ChatBarColor_title_INSTANCE_CHAT = "Подземелье";
     EzChatBar_ChatBarColor_title_PARTY = "Группа";
     EzChatBar_ChatBarColor_title_RAID = "Рейд";
     EzChatBar_ChatBarColor_title_RAID_WARNING = "Сообщение рейда";

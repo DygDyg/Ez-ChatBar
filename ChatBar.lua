@@ -28,12 +28,12 @@ function ChatBarButton()
     local num1 = #messageTypeList;
     local ColorChat = nil;
 
-
-    for i = 1, #DygChatBarFrame.button do
+    --print(#DygChatBarFrame.button)
+    for i = 1, 20 do
         if(DygChatBarFrame.button[i]~=nil) then
             DygChatBarFrame.button[i]:Hide();
-            DygChatBarFrame:SetHeight(4);
         end
+        DygChatBarFrame:SetHeight(4);
     end
 
     for i = 1, num1 do
@@ -41,7 +41,7 @@ function ChatBarButton()
         if(act == true) then
             if(DygChatBarFrame.button[i]==nil) then
                 DygChatBarFrame.button[i] = CreateFrame("FRAME", "ChatBarButton"..i, DygChatBarFrame, BackdropTemplateMixin and "BackdropTemplate");
-                DygChatBarFrame.button[i]:Hide();
+                --DygChatBarFrame.button[i]:Hide();
 
                 DygChatBarFrame.button[i].glow = CreateFrame("FRAME", "glow", DygChatBarFrame.button[i], BackdropTemplateMixin and "BackdropTemplate");
                 DygChatBarFrame.button[i].glow:Hide();
@@ -167,6 +167,17 @@ function ChatBarColor(messageType)
         title = EzChatBar_ChatBarColor_title_OFFICER;
         cmd = "OFFICER"
     end
+
+    if(messageType == "INSTANCE_CHAT") then
+        color_r = 255;
+        color_g = 78;
+        color_b = 9;
+        act = true;
+        title = EzChatBar_ChatBarColor_title_INSTANCE_CHAT;
+        cmd = "INSTANCE_CHAT"
+    end
+
+
 
     return act, color_r, color_g, color_b, title, cmd;
 end

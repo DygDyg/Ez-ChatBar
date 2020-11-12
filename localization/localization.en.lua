@@ -2,7 +2,7 @@
 if ( GetLocale() ~= "ruRU" ) then
 
     EzChatBar_Settings1_PanelName1 = "Dialog list settings";
-    EzChatBar_Settings1_PanelName2 = "Chat history settings";
+    EzChatBar_Settings1_PanelName2 = "Chat history settings (In the development)";
 
     EzChatBar_Settings1_CheckBox1 = "Standard panel";
     EzChatBar_Settings1_CheckBox1_title = "Enable the standard panel";
@@ -16,7 +16,7 @@ if ( GetLocale() ~= "ruRU" ) then
     EzChatBar_Settings1_Color1 = "Background color";
     EzChatBar_Settings1_Color1_title = "Notification of an incoming personal message";
 
-    EzChatBar_Settings2_CheckBox1 = "Logging of chat";
+    EzChatBar_Settings2_CheckBox1 = "Logging of chat (In the development)";
     EzChatBar_Settings2_CheckBox1_title = "To include the preservation of the history of personal correspondence";
 
     EzChatBar_GeneralTab_Button_General = "General";
@@ -36,4 +36,5 @@ if ( GetLocale() ~= "ruRU" ) then
     EzChatBar_ChatBarColor_title_RAID_WARNING = "Raid warning";
     EzChatBar_ChatBarColor_title_GUILD = "Guild";
     EzChatBar_ChatBarColor_title_OFFICER = "Officer";
+    EzChatBar_ChatBarColor_title_INSTANCE_CHAT = "Instance";
 end
