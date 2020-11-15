@@ -50,7 +50,17 @@ function ChatBarButton()
                 DygChatBarFrame.button[i].glow:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\glow3",});
                 DygChatBarFrame.button[i].glow:SetPoint("CENTER", DygChatBarFrame.button[i], "CENTER");
                 DygChatBarFrame.button[i].glow:SetBackdropColor(1, 1, 1, 0.7);
+
+                DygChatBarFrame.button[i].text = CreateFrame("EditBox", "Text", DygChatBarFrame.button[i], BackdropTemplateMixin and "BackdropTemplate");
+                DygChatBarFrame.button[i].text:SetWidth(15);
+                DygChatBarFrame.button[i].text:SetHeight(15);
+                DygChatBarFrame.button[i].text:SetPoint("CENTER");
+                DygChatBarFrame.button[i].text:SetFontObject(GameFontNormal);
+                DygChatBarFrame.button[i].text:Disable();
+                DygChatBarFrame.button[i].text:SetText("B");
+                DygChatBarFrame.button[i].text:Hide();
             end
+
 
 
             DygChatBarFrame.button[i]:SetWidth(15);
@@ -181,3 +191,20 @@ function ChatBarColor(messageType)
 
     return act, color_r, color_g, color_b, title, cmd;
 end
+
+
+
+--menuFrame45645 = CreateFrame("Frame", "ExampleMenuFrame11", UIParent, "UIDropDownMenuTemplate");
+--menuFrame45645:Show();
+-- Or make the menu appear at the frame:
+--menuFrame45645:SetPoint("Center", UIParent, "Center");
+--EasyMenu(menu1, menuFrame45645, menuFrame45645, 0 , 0, "MENU");
+
+
+
+
+--menuFrame:Hide()
+--EasyMenu(menu1, ExampleMenuFrame, ExampleMenuFrame, 0 , 0);
+--/script EasyMenu(menu1, menuFrame, menuFrame, 0 , 0);
+--/script EasyMenu(menu1, menuFrame45645, menuFrame45645, 0 , 0, "MENU"); menuFrame45645:Show();
+--/script EasyMenu(menu1, menuFrame45645, "cursor", 0 , 0, "MENU");

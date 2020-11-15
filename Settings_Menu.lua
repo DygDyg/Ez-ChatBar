@@ -1,7 +1,11 @@
-local menuFrame = CreateFrame("Frame", "ExampleMenuFrame", UIParent, "UIDropDownMenuTemplate")
-menuFrame:SetPoint("Center", UIParent, "Center")
-menuFrame:Hide()
-
+--local menuFrame = CreateFrame("Frame", "ExampleMenuFrame", UIParent, "UIDropDownMenuTemplate")
+--menuFrame:SetPoint("Center", UIParent, "Center")
+--menuFrame:Hide()
+if(DropBoxFrame == nil) then
+    DropBoxFrame = CreateFrame("Frame", "ExampleMenuFrame", UIParent, "UIDropDownMenuTemplate")
+    DropBoxFrame:SetPoint("Center", UIParent, "Center");
+    DropBoxFrame:Hide();
+end
 function Debug(mes)
     if(DebugCheck == true) then
         print(mes)
@@ -9,6 +13,7 @@ function Debug(mes)
         --print("Дебаг не включён");
     end
 end
+
 function Log(mes)
     Debug(mes)
 end
@@ -147,6 +152,53 @@ InterfaceOptions_AddCategory(SettingsMyAddon.childpanelIstory);
         end)
     end
 
+    function Dyg_OPT_Create_InputBox(i, My_text, My_toltip, default, My_Name, panel)
+        local pos2342355 = -20 * i;
+        if(panel.imputBox[i]==nil) then
+            panel.imputBox[i] = CreateFrame("EditBox", nil, frame, "InputBoxTemplate");
+            panel.imputBox[i]:SetID(i);
+            panel.imputBox[i]:SetWidth(27);
+            panel.imputBox[i]:SetHeight(27);
+            panel.imputBox[i]:SetPoint("TOPLEFT", 20, pos2342355);
+        end
+    end
+
+    function Dyg_OPT_Create_DropBox(i, text, panel)
+        local pos2342355 = -20 * i;
+        local menu1 = {
+
+        { text = "Option 1", func = function() print("You've chosen option 1"); end },
+
+        }
+        for i = 1, #Dyg_Sound_PlayList_Message do
+            menu1[i] = { text = Dyg_Sound_PlayList_Message[i], func = function() Dyg_OPT_Sound_edit(Dyg_Sound_PlayList_Message[i]); end }
+        end
+
+        if(panel.DropBoxFrame == nil) then
+            panel.DropBoxFrame = {};
+        end
+        if(panel.DropBoxFrame[i] == nil) then
+            panel.DropBoxFrame[i] = CreateFrame("Button", nil, panel, "GameMenuButtonTemplate");
+            panel.DropBoxFrame[i]:SetID(i);
+            panel.DropBoxFrame[i]:SetText(text);
+            panel.DropBoxFrame[i]:SetWidth(150);
+            panel.DropBoxFrame[i]:SetHeight(22);
+            panel.DropBoxFrame[i]:SetPoint("TOPLEFT", 20, pos2342355);
+            BuferButtonEdit12342345 = panel.DropBoxFrame[i];
+            panel.DropBoxFrame[i]:SetScript("OnMouseDown", function(self, button)
+                EasyMenu(menu1, DropBoxFrame, panel.DropBoxFrame[i], 0 , 0, "MENU");
+                BuferButtonEdit12342345 = panel.DropBoxFrame[i];
+            end)
+        end
+    end
+
+function Dyg_OPT_Sound_edit(file)
+    --print(file);
+    PlaySoundFile("Interface\\AddOns\\EzChatBar\\sound\\"..file, "master");
+    DygSettings["SoundMesFile"] = file;
+    BuferButtonEdit12342345:SetText(file);
+end
+
 
 function Start_Option()
 
@@ -155,6 +207,7 @@ function Start_Option()
     Dyg_OPT_Create_CheckBox(2, EzChatBar_Settings1_CheckBox2, EzChatBar_Settings1_CheckBox2_title, true, "MyPanel", pan);
     Dyg_OPT_Create_CheckBox(3, EzChatBar_Settings1_CheckBox3, EzChatBar_Settings1_CheckBox3_title, true, "SoundMes", pan);
     Dyg_OPT_Create_Button_Color(4, EzChatBar_Settings1_Color1, EzChatBar_Settings1_Color1_title, true, 1, pan);
+    Dyg_OPT_Create_DropBox(5, DygSettings["SoundMesFile"], pan);
     --Dyg_OPT_Create_Button_Color(5, "Цвет Значков", "Уведомление о входящем личном сообщении", true, 2, pan);
 
     pan = SettingsMyAddon.childpanelIstory;

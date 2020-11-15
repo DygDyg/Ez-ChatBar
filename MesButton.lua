@@ -176,6 +176,7 @@ function MesButton(args)
                     ChatBarButton();
                 end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
+                C_Timer.After(1, function() self:SetBackdropColor(r, g, b, a)end);
             end);
 
         DygMesTab.GeberalTab:SetScript("OnMouseUp", function(self, button)
@@ -186,6 +187,7 @@ function MesButton(args)
     if(DygMesTab.CombatLog == nil) then
         DygMesTab.CombatLog = Dyg_Button_Panel("CombatLog", EzChatBar_GeneralTab_Button_CombatLog, "CombatLog", DygMesTab, {"LEFT", DygMesTab.GeberalTab, "RIGHT", 0, 0})
         DygMesTab.CombatLog:SetScript("OnMouseDown", function(self, button)
+                self:SetBackdropColor(r, g, b, a);
                 if(button == "RightButton") then
                     if(IsControlKeyDown() == true)then
                         Debug("Contrl");
@@ -201,7 +203,7 @@ function MesButton(args)
                     ChatBarButton();
                 end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
-                self:SetBackdropColor(1, 1, 1, 1);
+                C_Timer.After(1, function() self:SetBackdropColor(r, g, b, a)end);
             end);
 
         DygMesTab.CombatLog:SetScript("OnMouseUp", function(self, button)
@@ -255,10 +257,11 @@ function MesButton(args)
                     InterfaceOptionsFrame_OpenToCategory(SettingsMyAddon.panel);
                 end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
+                self:SetBackdropColor(r, g, b, a);
             end);
 
         DygMesTab.Settings:SetScript("OnMouseUp", function(self, button)
-            self:SetBackdropColor(r, g, b, a);
+            C_Timer.After(1, function() self:SetBackdropColor(r, g, b, a)end);
         end)
     end
     if(DygMesTab.Close == nil) then
@@ -291,6 +294,8 @@ function MesButton(args)
                     end
                 end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
+                C_Timer.After(1, function() self:SetBackdropColor(r, g, b, a)end);
+
             end);
     end
 

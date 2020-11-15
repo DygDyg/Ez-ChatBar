@@ -13,6 +13,7 @@
 ##UI_Dyg.xml
 ##test_api.lua
 locals.xml
+sound\base.lua
 Settings_Menu.lua
 Data.lua
 WindowMoving.lua
