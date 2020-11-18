@@ -42,5 +42,43 @@ function Dyg_Button_Panel(name, title, tex, parent, point)
     return Dyg_Button
 end
 
+function DygScaleAnim(self, time)
+    self.fps = self.fps or GetFramerate();
+    self.OldScale  = self.OldScale or self:GetScale();
+    self.del = self.del or self.OldScale / ((time * 1000)/self.fps);
+    local time = time or 1;
+    if(self.enables==nil)then
+        self.enables = true;
+    end
+
+    if(self.enables ~= false) then
+        if(self:GetScale()-self.del > 0) then
+            self:SetScale(self:GetScale()-self.del);
+            C_Timer.After(self.del, function() DygScaleAnim(self, time) end);
+            --print("Уменьшаю: "..self:GetScale())
+        else
+            self:Hide();
+            --print(self.enables);
+            self.enables = false;
+            --print("Скрыл")
+            --print(self:GetScale().."|"..self.OldScale);
+
+        end
+    elseif(self.enables == false) then
+        self:Show();
+        if(self:GetScale() < self.OldScale) then
+            self:SetScale(self:GetScale()+self.del);
+            C_Timer.After(self.del, function() DygScaleAnim(self, time) end);
+            --print("Увеличиваю: "..self:GetScale())
+        else
+            --print("Показал");
+            --print(self:GetScale().."|"..self.OldScale);
+            --print(self.enables);
+            self.enables = true;
+
+        end
+    end
+end
+
 
 

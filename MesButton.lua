@@ -176,7 +176,7 @@ function MesButton(args)
                     ChatBarButton();
                 end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
-                C_Timer.After(1, function() self:SetBackdropColor(r, g, b, a)end);
+                --C_Timer.After(1, function() self:SetBackdropColor(r, g, b, a)end);
             end);
 
         DygMesTab.GeberalTab:SetScript("OnMouseUp", function(self, button)
@@ -203,7 +203,7 @@ function MesButton(args)
                     ChatBarButton();
                 end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
-                C_Timer.After(1, function() self:SetBackdropColor(r, g, b, a)end);
+                --C_Timer.After(1, function() self:SetBackdropColor(r, g, b, a)end);
             end);
 
         DygMesTab.CombatLog:SetScript("OnMouseUp", function(self, button)
@@ -261,7 +261,7 @@ function MesButton(args)
             end);
 
         DygMesTab.Settings:SetScript("OnMouseUp", function(self, button)
-            C_Timer.After(1, function() self:SetBackdropColor(r, g, b, a)end);
+            --C_Timer.After(1, function() self:SetBackdropColor(r, g, b, a)end);
         end)
     end
     if(DygMesTab.Close == nil) then
@@ -294,7 +294,7 @@ function MesButton(args)
                     end
                 end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
-                C_Timer.After(1, function() self:SetBackdropColor(r, g, b, a)end);
+                --C_Timer.After(1, function() self:SetBackdropColor(r, g, b, a)end);
 
             end);
     end
