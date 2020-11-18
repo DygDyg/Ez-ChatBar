@@ -203,7 +203,7 @@ end
 function Start_Option()
 
     local pan = SettingsMyAddon.childpanelChat;
-    Dyg_OPT_Create_CheckBox(1, EzChatBar_Settings1_CheckBox1, EzChatBar_Settings1_CheckBox1_title, false, "DefaultPanel", pan);
+    Dyg_OPT_Create_CheckBox(1, EzChatBar_Settings1_CheckBox1, EzChatBar_Settings1_CheckBox1_title, true, "DefaultPanel", pan);
     Dyg_OPT_Create_CheckBox(2, EzChatBar_Settings1_CheckBox2, EzChatBar_Settings1_CheckBox2_title, true, "MyPanel", pan);
     Dyg_OPT_Create_CheckBox(3, EzChatBar_Settings1_CheckBox3, EzChatBar_Settings1_CheckBox3_title, true, "SoundMes", pan);
     Dyg_OPT_Create_Button_Color(4, EzChatBar_Settings1_Color1, EzChatBar_Settings1_Color1_title, true, 1, pan);
