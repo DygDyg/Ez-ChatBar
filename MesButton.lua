@@ -47,7 +47,7 @@ function MesButtonPanel()
         --DygMesTab:SetBackdropColor(0, 0, 0, 0.5);
         DygMesTab:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
         DygMesTab:SetPoint("RIGHT", ChatFrame1.ScrollBar, "TOP", 150, 0);
-        WindowMoving(DygMesTab, "DygMesTab");
+        WindowMoving(DygMesTab, true);
         DygMesTab:SetUserPlaced(true);
     end
 

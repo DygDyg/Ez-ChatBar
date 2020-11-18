@@ -13,6 +13,9 @@ if ( GetLocale() == "ruRU" ) then
     EzChatBar_Settings1_CheckBox3 = "Звук входящего сообщения";
     EzChatBar_Settings1_CheckBox3_title = "Уведомление о входящем личном сообщении";
 
+    EzChatBar_Settings1_CheckBox4 = "Фиксация окна";
+    EzChatBar_Settings1_CheckBox4_title = "Блокирует перетаскивание окна";
+
     EzChatBar_Settings1_Color1 = "Цвет фона";
     EzChatBar_Settings1_Color1_title = "Уведомление о входящем личном сообщении";
 

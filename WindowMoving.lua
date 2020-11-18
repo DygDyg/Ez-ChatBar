@@ -20,23 +20,25 @@ local window = {
     KeyBindingFrame,
 }
 
-function WindowMoving(Mov, Sav)
+function WindowMoving(Mov, pickup)
 
     if(Mov) then
         Mov:SetMovable(true)
-
         Mov:SetScript("OnMouseDown", function(self, button)
-        if button == "LeftButton" then
+            if (button == "LeftButton" ) then
+                if(pickup ~= true or DygSettings["FixBar"] == false) then
                     Mov:StartMoving()
                     Mov:SetUserPlaced(true)
                 end
+            end
         end)
 
         Mov:SetScript("OnMouseUp", function(self, button)
-        if button == "LeftButton" then
-            Mov:StopMovingOrSizing();
-
+            if (button == "LeftButton") then
+                if(pickup ~= true or DygSettings["FixBar"] == false) then
+                Mov:StopMovingOrSizing();
                 end
+            end
         end)
     else
         print(Mov)
