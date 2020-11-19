@@ -159,7 +159,7 @@ function MesButton(args)
     end
 
     if(DygMesTab.GeberalTab == nil) then
-        DygMesTab.GeberalTab = Dyg_Button_Panel("GeberalTab", EzChatBar_GeneralTab_Button_General, "general", DygMesTab, {"LEFT", DygMesTab, "LEFT", 0, 0})
+        DygMesTab.GeberalTab = Dyg_Button_Panel("GeberalTab", EZCHATBAR_GENERALTAB_BUTTON_GENERAL, "general", DygMesTab, {"LEFT", DygMesTab, "LEFT", 0, 0})
 
         DygMesTab.GeberalTab:SetScript("OnMouseDown", function(self, button)
             self:SetBackdropColor(1, 1, 1, 1);
@@ -185,7 +185,7 @@ function MesButton(args)
     end
 
     if(DygMesTab.CombatLog == nil) then
-        DygMesTab.CombatLog = Dyg_Button_Panel("CombatLog", EzChatBar_GeneralTab_Button_CombatLog, "CombatLog", DygMesTab, {"LEFT", DygMesTab.GeberalTab, "RIGHT", 0, 0})
+        DygMesTab.CombatLog = Dyg_Button_Panel("CombatLog", EZCHATBAR_GENERALTAB_BUTTON_COMBATLOG, "CombatLog", DygMesTab, {"LEFT", DygMesTab.GeberalTab, "RIGHT", 0, 0})
         DygMesTab.CombatLog:SetScript("OnMouseDown", function(self, button)
                 self:SetBackdropColor(r, g, b, a);
                 if(button == "RightButton") then
@@ -245,7 +245,7 @@ function MesButton(args)
     end
 
     if(DygMesTab.Settings == nil) then
-        DygMesTab.Settings = Dyg_Button_Panel("SettingsButton", EzChatBar_GeneralTab_Button_Settings, "Settings", DygMesTab, {"RIGHT", DygMesTab, "RIGHT", 0, 0})
+        DygMesTab.Settings = Dyg_Button_Panel("SettingsButton", EZCHATBAR_GENERALTAB_BUTTON_SETTINGS, "Settings", DygMesTab, {"RIGHT", DygMesTab, "RIGHT", 0, 0})
 
         DygMesTab.Settings:SetScript("OnMouseDown", function(self, button)
             self:SetBackdropColor(1, 1, 1, 1);
@@ -265,7 +265,7 @@ function MesButton(args)
         end)
     end
     if(DygMesTab.Close == nil) then
-        DygMesTab.Close = Dyg_Button_Panel("CloseButton", EzChatBar_GeneralTab_Button_Close, "Close", DygMesTab, {"RIGHT", DygMesTab.Settings, "LEFT", 0, 0});
+        DygMesTab.Close = Dyg_Button_Panel("CloseButton", EZCHATBAR_GENERALTAB_BUTTON_CLOSE, "Close", DygMesTab, {"RIGHT", DygMesTab.Settings, "LEFT", 0, 0});
 
         DygMesTab.Close:SetScript("OnMouseDown", function(self, button)
             self:SetBackdropColor(1, 1, 1, 1);
@@ -279,9 +279,9 @@ function MesButton(args)
                         CloseAllTab();
                     else
                         StaticPopupDialogs["DygCloseAllTab"] = {
-                            text = EzChatBar_GeneralTab_Button_DygCloseAllTab,
-                            button1 = EzChatBar_GeneralTab_Button_Yes,
-                            button2 = EzChatBar_GeneralTab_Button_No,
+                            text = EZCHATBAR_GENERALTAB_BUTTON_DYGCLOSEALLTAB,
+                            button1 = EZCHATBAR_GENERALTAB_BUTTON_YES,
+                            button2 = EZCHATBAR_GENERALTAB_BUTTON_NO,
                             OnAccept = function()
                                 CloseAllTab();
                             end,

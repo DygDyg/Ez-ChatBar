@@ -111,7 +111,7 @@ function ChatBarColor(messageType)
         color_g = 255;
         color_b = 255;
         act = true;
-        title = EzChatBar_ChatBarColor_title_SAY;
+        title = EZCHATBAR_CHATBARCOLOR_TITLE_SAY;
         cmd = "SAY"
     end
 
@@ -120,7 +120,7 @@ function ChatBarColor(messageType)
         color_g = 140;
         color_b = 69;
         act = true;
-        title = EzChatBar_ChatBarColor_title_EMOTE;
+        title = EZCHATBAR_CHATBARCOLOR_TITLE_EMOTE;
         cmd = "EMOTE"
     end
 
@@ -129,7 +129,7 @@ function ChatBarColor(messageType)
         color_g = 69;
         color_b = 69;
         act = true;
-        title = EzChatBar_ChatBarColor_title_YELL;
+        title = EZCHATBAR_CHATBARCOLOR_TITLE_YELL;
         cmd = "YELL"
     end
 
@@ -138,7 +138,7 @@ function ChatBarColor(messageType)
         color_g = 186;
         color_b = 255;
         act = true;
-        title = EzChatBar_ChatBarColor_title_PARTY;
+        title = EZCHATBAR_CHATBARCOLOR_TITLE_PARTY;
         cmd = "PARTY"
     end
 
@@ -147,7 +147,7 @@ function ChatBarColor(messageType)
         color_g = 138;
         color_b = 0;
         act = true;
-        title = EzChatBar_ChatBarColor_title_RAID;
+        title = EZCHATBAR_CHATBARCOLOR_TITLE_RAID;
         cmd = "RAID"
     end
 
@@ -156,7 +156,7 @@ function ChatBarColor(messageType)
         color_g = 78;
         color_b = 0;
         act = true;
-        title = EzChatBar_ChatBarColor_title_RAID_WARNING;
+        title = EZCHATBAR_CHATBARCOLOR_TITLE_RAID_WARNING;
         cmd = "RW"
     end
 
@@ -165,7 +165,7 @@ function ChatBarColor(messageType)
         color_g = 255;
         color_b = 69;
         act = true;
-        title = EzChatBar_ChatBarColor_title_GUILD;
+        title = EZCHATBAR_CHATBARCOLOR_TITLE_EMOTE;
         cmd = "GUILD"
     end
 
@@ -174,7 +174,7 @@ function ChatBarColor(messageType)
         color_g = 150;
         color_b = 69;
         act = true;
-        title = EzChatBar_ChatBarColor_title_OFFICER;
+        title = EZCHATBAR_CHATBARCOLOR_TITLE_OFFICER;
         cmd = "OFFICER"
     end
 
@@ -183,7 +183,7 @@ function ChatBarColor(messageType)
         color_g = 78;
         color_b = 9;
         act = true;
-        title = EzChatBar_ChatBarColor_title_INSTANCE_CHAT;
+        title = EZCHATBAR_CHATBARCOLOR_TITLE_INSTANCE_CHAT;
         cmd = "INSTANCE_CHAT"
     end
 

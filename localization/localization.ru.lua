@@ -1,47 +1,36 @@
 if ( GetLocale() == "ruRU" ) then
 
-    --Названия настроек
-    EzChatBar_Settings1_PanelName1 = "Настройки списка диалогов";
-    EzChatBar_Settings1_PanelName2 = "Настройки истории чата (В разработке)";
 
-    EzChatBar_Settings1_CheckBox1 = "Стандартная панель";
-    EzChatBar_Settings1_CheckBox1_title = "Включить стандартную панель";
+EZCHATBAR_CHATBARCOLOR_TITLE_EMOTE = "Эмоции"
+EZCHATBAR_CHATBARCOLOR_TITLE_EMOTE = "Гильдия"
+EZCHATBAR_CHATBARCOLOR_TITLE_INSTANCE_CHAT = "Подземелье"
+EZCHATBAR_CHATBARCOLOR_TITLE_OFFICER = "Офицер"
+EZCHATBAR_CHATBARCOLOR_TITLE_PARTY = "Группа"
+EZCHATBAR_CHATBARCOLOR_TITLE_RAID = "Рейд"
+EZCHATBAR_CHATBARCOLOR_TITLE_RAID_WARNING = "Сообщение рейда"
+EZCHATBAR_CHATBARCOLOR_TITLE_SAY = "Речь"
+EZCHATBAR_CHATBARCOLOR_TITLE_YELL = "Крикнуть"
+EZCHATBAR_GENERALTAB_BUTTON_CLOSE = "Закрыть всё"
+EZCHATBAR_GENERALTAB_BUTTON_COMBATLOG = "Журнал боя"
+EZCHATBAR_GENERALTAB_BUTTON_DYGCLOSEALLTAB = "Закрыть все вкладки?"
+EZCHATBAR_GENERALTAB_BUTTON_GENERAL = "Общий чат"
+EZCHATBAR_GENERALTAB_BUTTON_NO = "Нет"
+EZCHATBAR_GENERALTAB_BUTTON_SETTINGS = "Настройки"
+EZCHATBAR_GENERALTAB_BUTTON_YES = "Да"
+EZCHATBAR_SETTINGS1_CHECKBOX1 = "Стандартная панель Blizzard"
+EZCHATBAR_SETTINGS1_CHECKBOX1_TITLE = "Включить стандартную панель Blizzard"
+EZCHATBAR_SETTINGS1_CHECKBOX2 = "Окно аддона"
+EZCHATBAR_SETTINGS1_CHECKBOX2_TITLE = "Включить окно аддона"
+EZCHATBAR_SETTINGS1_CHECKBOX3 = "Звук входящего сообщения"
+EZCHATBAR_SETTINGS1_CHECKBOX3_TITLE = "Уведомление о входящем личном сообщении"
+EZCHATBAR_SETTINGS1_CHECKBOX4 = "Фиксация окна аддона"
+EZCHATBAR_SETTINGS1_CHECKBOX4_TITLE = "Блокирует перетаскивание окна аддона"
+EZCHATBAR_SETTINGS1_COLOR1 = "Цвет фона окна аддона"
+EZCHATBAR_SETTINGS1_COLOR1_TITLE = "Изменить цвет окна аддона"
+EZCHATBAR_SETTINGS1_PANELNAME1 = "Настройки списка диалогов"
+EZCHATBAR_SETTINGS1_PANELNAME2 = "Настройки истории чата (В разработке)"
+EZCHATBAR_SETTINGS2_CHECKBOX1 = "Логирование чата (В разработке)"
+EZCHATBAR_SETTINGS2_CHECKBOX1_TITLE = "Включить сохранение истории личных переписок"
 
-    EzChatBar_Settings1_CheckBox2 = "Панель аддона";
-    EzChatBar_Settings1_CheckBox2_title = "Включить панель аддона";
-
-    EzChatBar_Settings1_CheckBox3 = "Звук входящего сообщения";
-    EzChatBar_Settings1_CheckBox3_title = "Уведомление о входящем личном сообщении";
-
-    EzChatBar_Settings1_CheckBox4 = "Фиксация окна";
-    EzChatBar_Settings1_CheckBox4_title = "Блокирует перетаскивание окна";
-
-    EzChatBar_Settings1_Color1 = "Цвет фона";
-    EzChatBar_Settings1_Color1_title = "Уведомление о входящем личном сообщении";
-
-    EzChatBar_Settings2_CheckBox1 = "Логирование чата (В разработке)";
-    EzChatBar_Settings2_CheckBox1_title = "Включить сохранение истории личных переписок";
-
-    --Кнопки на панели
-    EzChatBar_GeneralTab_Button_General = "Общий чат";
-    EzChatBar_GeneralTab_Button_CombatLog = "Журнал боя";
-    EzChatBar_GeneralTab_Button_Settings = "Настройки";
-    EzChatBar_GeneralTab_Button_Close = "Закрыть всё";
-
-    --Диалоговое окно закрытия вкладок
-    EzChatBar_GeneralTab_Button_DygCloseAllTab = "Закрыть все вкладки?";
-    EzChatBar_GeneralTab_Button_Yes = "Да";
-    EzChatBar_GeneralTab_Button_No = "Нет";
-
-    --Названия каналов
-    EzChatBar_ChatBarColor_title_SAY = "Речь";
-    EzChatBar_ChatBarColor_title_EMOTE = "Эмоции";
-    EzChatBar_ChatBarColor_title_YELL = "Крикнуть";
-    EzChatBar_ChatBarColor_title_INSTANCE_CHAT = "Подземелье";
-    EzChatBar_ChatBarColor_title_PARTY = "Группа";
-    EzChatBar_ChatBarColor_title_RAID = "Рейд";
-    EzChatBar_ChatBarColor_title_RAID_WARNING = "Сообщение рейда";
-    EzChatBar_ChatBarColor_title_GUILD = "Гильдия";
-    EzChatBar_ChatBarColor_title_OFFICER = "Офицер";
 
 end

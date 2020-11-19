@@ -53,12 +53,12 @@ SettingsMyAddon.panel.cancel = function (self) DygSettings = Settings_local; Sta
 InterfaceOptions_AddCategory(SettingsMyAddon.panel);
 
 SettingsMyAddon.childpanelChat = CreateFrame( "Frame", "MyAddonPanel", SettingsMyAddon.panel, BackdropTemplateMixin and "BackdropTemplate");
-SettingsMyAddon.childpanelChat.name = EzChatBar_Settings1_PanelName1;
+SettingsMyAddon.childpanelChat.name = EZCHATBAR_SETTINGS1_PANELNAME1;
 SettingsMyAddon.childpanelChat.parent = SettingsMyAddon.panel.name;
 InterfaceOptions_AddCategory(SettingsMyAddon.childpanelChat);
 
 SettingsMyAddon.childpanelIstory = CreateFrame( "Frame", "MyAddonPanel", SettingsMyAddon.panel, BackdropTemplateMixin and "BackdropTemplate");
-SettingsMyAddon.childpanelIstory.name = EzChatBar_Settings1_PanelName2;
+SettingsMyAddon.childpanelIstory.name = EZCHATBAR_SETTINGS1_PANELNAME2;
 SettingsMyAddon.childpanelIstory.parent = SettingsMyAddon.panel.name;
 InterfaceOptions_AddCategory(SettingsMyAddon.childpanelIstory);
 
@@ -200,17 +200,17 @@ function Start_Option()
 
     local pan = SettingsMyAddon.childpanelChat;
     local num = 1;
-    Dyg_OPT_Create_CheckBox(num, EzChatBar_Settings1_CheckBox1, EzChatBar_Settings1_CheckBox1_title, true, "DefaultPanel", pan); num = num + 1;
-    Dyg_OPT_Create_CheckBox(num, EzChatBar_Settings1_CheckBox2, EzChatBar_Settings1_CheckBox2_title, true, "MyPanel", pan); num = num + 1;
-    Dyg_OPT_Create_CheckBox(num, EzChatBar_Settings1_CheckBox3, EzChatBar_Settings1_CheckBox3_title, true, "SoundMes", pan); num = num + 1;
-    Dyg_OPT_Create_CheckBox(num, EzChatBar_Settings1_CheckBox4, EzChatBar_Settings1_CheckBox4_title, false, "FixBar", pan); num = num + 1;
-    Dyg_OPT_Create_Button_Color(num, EzChatBar_Settings1_Color1, EzChatBar_Settings1_Color1_title, true, 1, pan); num = num + 1;
+    Dyg_OPT_Create_CheckBox(num, EZCHATBAR_SETTINGS1_CHECKBOX1, EZCHATBAR_SETTINGS1_CHECKBOX1_TITLE, true, "DefaultPanel", pan); num = num + 1;
+    Dyg_OPT_Create_CheckBox(num, EZCHATBAR_SETTINGS1_CHECKBOX2, EZCHATBAR_SETTINGS1_CHECKBOX2_TITLE, true, "MyPanel", pan); num = num + 1;
+    Dyg_OPT_Create_CheckBox(num, EZCHATBAR_SETTINGS1_CHECKBOX3, EZCHATBAR_SETTINGS1_CHECKBOX3_TITLE, true, "SoundMes", pan); num = num + 1;
+    Dyg_OPT_Create_CheckBox(num, EZCHATBAR_SETTINGS1_CHECKBOX4, EZCHATBAR_SETTINGS1_CHECKBOX4_TITLE, false, "FixBar", pan); num = num + 1;
+    Dyg_OPT_Create_Button_Color(num, EZCHATBAR_SETTINGS1_COLOR1, EZCHATBAR_SETTINGS1_COLOR1_TITLE, true, 1, pan); num = num + 1;
     Dyg_OPT_Create_DropBox(num, DygSettings["SoundMesFile"], pan); num = num + 1;
     --Dyg_OPT_Create_Button_Color(5, "Цвет Значков", "Уведомление о входящем личном сообщении", true, 2, pan); num = num + 1;
 
     num = 1;
     pan = SettingsMyAddon.childpanelIstory;
-    Dyg_OPT_Create_CheckBox(1, EzChatBar_Settings2_CheckBox1, EzChatBar_Settings2_CheckBox1_title, false, "LogChat", pan); num = num + 1;
+    Dyg_OPT_Create_CheckBox(1, EZCHATBAR_SETTINGS2_CHECKBOX1, EZCHATBAR_SETTINGS2_CHECKBOX1_TITLE, false, "LogChat", pan); num = num + 1;
 --  Dyg_OPT_Create_CheckBox(4, "Звук входящего сообщения гильдии", "Уведомление о входящем сообщении гильдии", true, "SoundMesGuild", pan); num = num + 1;
 end
 

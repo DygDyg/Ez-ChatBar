@@ -35,9 +35,7 @@ function WindowMoving(Mov, pickup)
 
         Mov:SetScript("OnMouseUp", function(self, button)
             if (button == "LeftButton") then
-                if(pickup ~= true or DygSettings["FixBar"] == false) then
                 Mov:StopMovingOrSizing();
-                end
             end
         end)
     else

@@ -1,40 +1,40 @@
 
 if ( GetLocale() ~= "ruRU" ) then
 
-    EzChatBar_Settings1_PanelName1 = "Dialog list settings";
-    EzChatBar_Settings1_PanelName2 = "Chat history settings (In the development)";
+    EZCHATBAR_SETTINGS1_PANELNAME1 = "Dialog list settings";
+    EZCHATBAR_SETTINGS1_PANELNAME2 = "Chat history settings (In the development)";
 
-    EzChatBar_Settings1_CheckBox1 = "Standard panel";
-    EzChatBar_Settings1_CheckBox1_title = "Enable the standard panel";
+    EZCHATBAR_SETTINGS1_CHECKBOX1 = "Standard panel";
+    EZCHATBAR_SETTINGS1_CHECKBOX1_TITLE = "Enable the standard panel";
 
-    EzChatBar_Settings1_CheckBox2 = "Addon panel";
-    EzChatBar_Settings1_CheckBox2_title = "Show the addon Panel";
+    EZCHATBAR_SETTINGS1_CHECKBOX2 = "Addon panel";
+    EZCHATBAR_SETTINGS1_CHECKBOX2_TITLE = "Show the addon Panel";
 
-    EzChatBar_Settings1_CheckBox3 = "The sound of an incoming message";
-    EzChatBar_Settings1_CheckBox3_title = "Notification of an incoming personal message";
+    EZCHATBAR_SETTINGS1_CHECKBOX3 = "The sound of an incoming message";
+    EZCHATBAR_SETTINGS1_CHECKBOX3_TITLE = "Notification of an incoming personal message";
 
-    EzChatBar_Settings1_Color1 = "Background color";
-    EzChatBar_Settings1_Color1_title = "Notification of an incoming personal message";
+    EZCHATBAR_SETTINGS1_COLOR1 = "Background color";
+    EZCHATBAR_SETTINGS1_COLOR1_TITLE = "Notification of an incoming personal message";
 
-    EzChatBar_Settings2_CheckBox1 = "Logging of chat (In the development)";
-    EzChatBar_Settings2_CheckBox1_title = "To include the preservation of the history of personal correspondence";
+    EZCHATBAR_SETTINGS2_CHECKBOX1 = "Logging of chat (In the development)";
+    EZCHATBAR_SETTINGS2_CHECKBOX1_TITLE = "To include the preservation of the history of personal correspondence";
 
-    EzChatBar_GeneralTab_Button_General = "General";
-    EzChatBar_GeneralTab_Button_CombatLog = "Combat Log";
-    EzChatBar_GeneralTab_Button_Settings = "Settings";
-    EzChatBar_GeneralTab_Button_Close = "Close all";
+    EZCHATBAR_GENERALTAB_BUTTON_GENERAL = "General";
+    EZCHATBAR_GENERALTAB_BUTTON_COMBATLOG = "Combat Log";
+    EZCHATBAR_GENERALTAB_BUTTON_SETTINGS = "Settings";
+    EZCHATBAR_GENERALTAB_BUTTON_CLOSE = "Close all";
 
-    EzChatBar_GeneralTab_Button_DygCloseAllTab = "Close all tabs?";
-    EzChatBar_GeneralTab_Button_Yes = "Yes";
-    EzChatBar_GeneralTab_Button_No = "No";
+    EZCHATBAR_GENERALTAB_BUTTON_DYGCLOSEALLTAB = "Close all tabs?";
+    EZCHATBAR_GENERALTAB_BUTTON_YES = "Yes";
+    EZCHATBAR_GENERALTAB_BUTTON_NO = "No";
 
-    EzChatBar_ChatBarColor_title_SAY = "Say";
-    EzChatBar_ChatBarColor_title_EMOTE = "Emote";
-    EzChatBar_ChatBarColor_title_YELL = "Yell";
-    EzChatBar_ChatBarColor_title_PARTY = "Party";
-    EzChatBar_ChatBarColor_title_RAID = "Raid";
-    EzChatBar_ChatBarColor_title_RAID_WARNING = "Raid warning";
-    EzChatBar_ChatBarColor_title_GUILD = "Guild";
-    EzChatBar_ChatBarColor_title_OFFICER = "Officer";
-    EzChatBar_ChatBarColor_title_INSTANCE_CHAT = "Instance";
+    EZCHATBAR_CHATBARCOLOR_TITLE_SAY = "Say";
+    EZCHATBAR_CHATBARCOLOR_TITLE_EMOTE = "Emote";
+    EZCHATBAR_CHATBARCOLOR_TITLE_YELL = "Yell";
+    EZCHATBAR_CHATBARCOLOR_TITLE_PARTY = "Party";
+    EZCHATBAR_CHATBARCOLOR_TITLE_RAID = "Raid";
+    EZCHATBAR_CHATBARCOLOR_TITLE_RAID_WARNING = "Raid warning";
+    EZCHATBAR_CHATBARCOLOR_TITLE_EMOTE = "Guild";
+    EZCHATBAR_CHATBARCOLOR_TITLE_OFFICER = "Officer";
+    EZCHATBAR_CHATBARCOLOR_TITLE_INSTANCE_CHAT = "Instance";
 end
