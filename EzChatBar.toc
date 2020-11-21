@@ -3,12 +3,14 @@
 ## Version: 0.32.2
 ## Author: ДугДуг
 ## Notes: Addon for to simplify the use of the standard chat.
+## Notes-ruRU: Аддон для упрощения использования стандартного чата.
 ## X-Website: https://www.curseforge.com/wow/addons/ezchatbar
 ## X-Curse-Project-ID: 403805
-## X-Category: Interface Enhancements
+## X-Category: Chat
 ## RequiredDeps:
 ## OptionalDeps:
 ## SavedVariables: DygTestData, WindowPosition, data, Message, DygSettings, DebugCheck
+## SavedVariablesPerCharacter:
 
 ##UI_Dyg.xml
 ##test_api.lua

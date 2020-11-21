@@ -179,7 +179,7 @@ function ChatBarColor(messageType)
         cmd = "YELL"
     end
 
-    if(messageType == "PARTY") then
+    if(messageType == "PARTY" and UnitExists("party1")) then
         color_r = 186;
         color_g = 186;
         color_b = 255;
