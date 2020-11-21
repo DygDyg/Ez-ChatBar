@@ -33,8 +33,7 @@ if(SaveName ~= nil)then
     if(WindowPosition[Uid][SaveName]~=nil)then
         if(WindowPosition[Uid][SaveName][1] ~=nil)then
             Mov:ClearAllPoints();
-            Mov:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", WindowPosition[Uid][SaveName][1], WindowPosition[Uid][SaveName][2]);
-            --Mov:SetSize(WindowPosition[Uid][SaveName][3], WindowPosition[Uid][SaveName][4])
+            Mov:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", WindowPosition[Uid][SaveName][1]/UIParent:GetScale(), WindowPosition[Uid][SaveName][2]/UIParent:GetScale());
         end
     end
 end
@@ -43,12 +42,14 @@ WindowPosition = WindowPosition or {};
     if(Mov) then
         Mov:SetMovable(true)
         Mov:SetUserPlaced(true)
-        Mov:StartMoving()
-        Mov:StopMovingOrSizing()
+        --Mov:StartMoving()
+        --Mov:StopMovingOrSizing()
         Mov:SetScript("OnMouseDown", function(self, button)
             if (button == "LeftButton" ) then
-                if(pickup ~= true or DygSettings["FixBar"] == false) then
-                    Mov:StartMoving()
+                if(UnitAffectingCombat("player") ~= true or DygSettings["FixBarCombat"] ~= true) then
+                    if(pickup ~= true or DygSettings["FixBar"] ~= true) then
+                        Mov:StartMoving()
+                    end
                 end
             end
         end)
@@ -57,7 +58,7 @@ WindowPosition = WindowPosition or {};
             if (button == "LeftButton") then
                 Mov:StopMovingOrSizing();
                 if(SaveName~=nil)then
-                    WindowPosition[Uid][SaveName] = {self:GetRect()}
+                    WindowPosition[Uid][SaveName] = {self:GetScaledRect()}
                 end
             end
         end)

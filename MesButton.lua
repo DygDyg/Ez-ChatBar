@@ -72,6 +72,7 @@ function MesButtonPanel()
 end
 
 function Start_Settings()
+    ChatBar()
     if(DygSettings["DefaultPanel"] == true) then
         GeneralDockManager:Show();
     else

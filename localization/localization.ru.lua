@@ -2,7 +2,7 @@ if ( GetLocale() == "ruRU" ) then
 
 
 EZCHATBAR_CHATBARCOLOR_TITLE_EMOTE = "Эмоции"
-EZCHATBAR_CHATBARCOLOR_TITLE_EMOTE = "Гильдия"
+EZCHATBAR_CHATBARCOLOR_TITLE_GUILD = "Гильдия"
 EZCHATBAR_CHATBARCOLOR_TITLE_INSTANCE_CHAT = "Подземелье"
 EZCHATBAR_CHATBARCOLOR_TITLE_OFFICER = "Офицер"
 EZCHATBAR_CHATBARCOLOR_TITLE_PARTY = "Группа"
@@ -28,6 +28,8 @@ EZCHATBAR_SETTINGS1_CHECKBOX4 = "Фиксация окна аддона"
 EZCHATBAR_SETTINGS1_CHECKBOX4_TITLE = "Блокирует перетаскивание окна аддона"
 EZCHATBAR_SETTINGS1_CHECKBOX5 = "ЧатБар Панель горизонтально"
 EZCHATBAR_SETTINGS1_CHECKBOX5_TITLE = "Сделать панель быстрого доступа к чату горизонтальной"
+EZCHATBAR_SETTINGS1_CHECKBOX6 = "Фиксация окна аддона в бою"
+EZCHATBAR_SETTINGS1_CHECKBOX6_TITLE = "Блокирует перетаскивание окна аддона в бою"
 EZCHATBAR_SETTINGS1_COLOR1 = "Цвет фона окна аддона"
 EZCHATBAR_SETTINGS1_COLOR1_TITLE = "Изменить цвет окна аддона"
 EZCHATBAR_SETTINGS1_PANELNAME1 = "Настройки списка диалогов"

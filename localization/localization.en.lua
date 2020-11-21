@@ -1,6 +1,7 @@
 if ( GetLocale() ~= "ruRU" ) then
 
-EZCHATBAR_CHATBARCOLOR_TITLE_EMOTE = "Guild"
+EZCHATBAR_CHATBARCOLOR_TITLE_EMOTE = "Emote"
+EZCHATBAR_CHATBARCOLOR_TITLE_GUILD = "Guild"
 EZCHATBAR_CHATBARCOLOR_TITLE_INSTANCE_CHAT = "Instance"
 EZCHATBAR_CHATBARCOLOR_TITLE_OFFICER = "Officer"
 EZCHATBAR_CHATBARCOLOR_TITLE_PARTY = "Party"
@@ -10,6 +11,7 @@ EZCHATBAR_CHATBARCOLOR_TITLE_SAY = "Say"
 EZCHATBAR_CHATBARCOLOR_TITLE_YELL = "Yell"
 EZCHATBAR_GENERALTAB_BUTTON_CLOSE = "Close all"
 EZCHATBAR_GENERALTAB_BUTTON_COMBATLOG = "Combat Log"
+EZCHATBAR_GENERALTAB_BUTTON_COPY = "Copy chat"
 EZCHATBAR_GENERALTAB_BUTTON_DYGCLOSEALLTAB = "Close all tabs?"
 EZCHATBAR_GENERALTAB_BUTTON_GENERAL = "General"
 EZCHATBAR_GENERALTAB_BUTTON_NO = "No"
@@ -21,10 +23,14 @@ EZCHATBAR_SETTINGS1_CHECKBOX2 = "Addon bar"
 EZCHATBAR_SETTINGS1_CHECKBOX2_TITLE = "Show the addon bar"
 EZCHATBAR_SETTINGS1_CHECKBOX3 = "The sound of an incoming message"
 EZCHATBAR_SETTINGS1_CHECKBOX3_TITLE = "Notification of an incoming personal message"
+EZCHATBAR_SETTINGS1_CHECKBOX4 = "Fixing the addon window"
+EZCHATBAR_SETTINGS1_CHECKBOX4_TITLE = "Blocks drag and drop window of the addon"
+EZCHATBAR_SETTINGS1_CHECKBOX5 = "ChatBar is horizontally"
+EZCHATBAR_SETTINGS1_CHECKBOX5_TITLE = "Make the chat quick access toolbar horizontal"
 --[[Translation missing --]]
---[[ EZCHATBAR_SETTINGS1_CHECKBOX4 = "Фиксация окна аддона"--]]
+--[[ EZCHATBAR_SETTINGS1_CHECKBOX6 = "Фиксация окна аддона в бою"--]]
 --[[Translation missing --]]
---[[ EZCHATBAR_SETTINGS1_CHECKBOX4_TITLE = "Блокирует перетаскивание окна аддона"--]]
+--[[ EZCHATBAR_SETTINGS1_CHECKBOX6_TITLE = "Блокирует перетаскивание окна аддона в бою"--]]
 EZCHATBAR_SETTINGS1_COLOR1 = "Background color"
 EZCHATBAR_SETTINGS1_COLOR1_TITLE = "Notification of an incoming personal message"
 EZCHATBAR_SETTINGS1_PANELNAME1 = "Dialog list settings"

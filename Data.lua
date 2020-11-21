@@ -1,12 +1,11 @@
 function BaseFrameAddons()
-    local BaseFrame = DygDyg_Addons
-    local BaseFrameName = "DygDyg_Addons"
+    local BaseFrame = EZChatBar
+    local BaseFrameName = "EZChatBar"
     if BaseFrame == nil then
         BaseFrame = CreateFrame("FRAME", BaseFrameName, UIParent);--, BackdropTemplateMixin and "BackdropTemplate");
         BaseFrame:SetPoint("CENTER", UIParent);
         BaseFrame:SetWidth(1);
         BaseFrame:SetHeight(1);
-        --BaseFrame:SetScale(1);
     end
     return BaseFrame, BaseFrameName;
 end
@@ -28,10 +27,8 @@ local function ScrollFrame_OnMouseWheel(self, delta)
 end
 
 Dyg_CopyChatFrame = Dyg_CopyChatFrame or CreateFrame("FRAME", "Dyg_CopyChatFrame", UIParent, "BasicFrameTemplateWithInset");
---if(WindowMovingDetecting == true) then
---    WindowMoving(Dyg_CopyChatFrame);
---end
-WindowMoving(Dyg_CopyChatFrame);
+
+WindowMoving(Dyg_CopyChatFrame, nil, "CopyChatFrame");
 
 Dyg_CopyChatFrame:Hide();
 

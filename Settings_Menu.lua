@@ -206,6 +206,7 @@ function Start_Option()
     Dyg_OPT_Create_CheckBox(num, EZCHATBAR_SETTINGS1_CHECKBOX2, EZCHATBAR_SETTINGS1_CHECKBOX2_TITLE, true, "MyPanel", pan); num = num + 1;
     Dyg_OPT_Create_CheckBox(num, EZCHATBAR_SETTINGS1_CHECKBOX3, EZCHATBAR_SETTINGS1_CHECKBOX3_TITLE, true, "SoundMes", pan); num = num + 1;
     Dyg_OPT_Create_CheckBox(num, EZCHATBAR_SETTINGS1_CHECKBOX4, EZCHATBAR_SETTINGS1_CHECKBOX4_TITLE, false, "FixBar", pan); num = num + 1;
+    Dyg_OPT_Create_CheckBox(num, EZCHATBAR_SETTINGS1_CHECKBOX6, EZCHATBAR_SETTINGS1_CHECKBOX6_TITLE, false, "FixBarCombat", pan); num = num + 1;
     Dyg_OPT_Create_CheckBox(num, EZCHATBAR_SETTINGS1_CHECKBOX5, EZCHATBAR_SETTINGS1_CHECKBOX5_TITLE, false, "PanelHorizontal", pan); num = num + 1;
     Dyg_OPT_Create_Button_Color(num, EZCHATBAR_SETTINGS1_COLOR1, EZCHATBAR_SETTINGS1_COLOR1_TITLE, true, 1, pan); num = num + 1;
     Dyg_OPT_Create_DropBox(num, DygSettings["SoundMesFile"], pan); num = num + 1;
@@ -257,9 +258,10 @@ Event:SetScript("OnEvent", function(...)
         MesButtonPanel();
         MesButton();
         Start_Settings();
+
         Event.start = false;
     end
-    ChatBar();
+
 end)
 
 

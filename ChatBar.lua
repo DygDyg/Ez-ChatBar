@@ -3,25 +3,18 @@
 function ChatBar()
     --if(DebugCheck == true) then
         if(DygChatBarFrame==nil) then
-            DygChatBarFrame = DygChatBarFrame or CreateFrame("FRAME", "ChatBar", BaseFrameAddons(), BackdropTemplateMixin and "BackdropTemplate");
+            DygChatBarFrameCore = DygChatBarFrameCore or CreateFrame("FRAME", "ChatBarPanel", BaseFrameAddons(), BackdropTemplateMixin and "BackdropTemplate");
+            DygChatBarFrame = DygChatBarFrame or CreateFrame("FRAME", "ChatBar", DygChatBarFrameCore, BackdropTemplateMixin and "BackdropTemplate");
+            DygChatBarFrame:ClearAllPoints();
+            DygChatBarFrameCore:ClearAllPoints();
+            DygChatBarFrameCore:SetPoint("RIGHT", ChatFrame1.ScrollBar, "TOP", 150, 0);
+            DygChatBarFrameCore:SetWidth(21);
+            DygChatBarFrameCore:SetHeight(21);
+            DygChatBarFrameCore:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background",});
+            DygChatBarFrameCore:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
+            DygChatBarFrame:SetPoint("TOP", DygChatBarFrameCore, "BOTTOM", 0, -2);
             DygSettings["PanelHorizontal"] = DygSettings["PanelHorizontal"] or false
-            if(DygSettings["PanelHorizontal"] == true)then
-                DygChatBarFrame:SetWidth(8);
-                DygChatBarFrame:SetHeight(21);
-                DygChatBarFrame:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background2_90",});
-            else
-                DygChatBarFrame:SetWidth(21);
-                DygChatBarFrame:SetHeight(8);
-                DygChatBarFrame:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background2",});
-            end
-
-            DygChatBarFrame:SetPoint("TOPRIGHT", BaseFrameAddons(), DygMesTab1, "LEFT", -2, 7);
-
-            --DygChatBarFrame:SetParent(BaseFrameAddons());
-            --DygChatBarFrame:SetPoint("TOPRIGHT", BaseFrameAddons(), "LEFT", -2, 7);
-            --DygChatBarFrame:SetBackdropColor(0, 0, 0, 1);
-            DygChatBarFrame:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
-            WindowMoving(DygChatBarFrame, true, "DygChatBarFrame");
+            WindowMoving(DygChatBarFrameCore, true, "DygChatBarFrame_Core");
         end
         ChatBarButton()
     --end
@@ -30,6 +23,30 @@ end
 --Создание кнопок
 function ChatBarButton()
     local editBox, chatFrame, messageTypeList, channelList = CBCPanelUpdate();
+
+    DygChatBarFrameCore:SetWidth(21);
+    DygChatBarFrameCore:SetHeight(21);
+    DygChatBarFrameCore:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background",});
+    DygChatBarFrameCore:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
+    DygChatBarFrame:ClearAllPoints();
+    DygChatBarFrame:SetPoint("TOP", DygChatBarFrameCore, "BOTTOM", 0, -2);
+
+    if(DygSettings["PanelHorizontal"] == true)then
+        DygChatBarFrame:SetWidth(8);
+        DygChatBarFrame:SetHeight(21);
+        DygChatBarFrameCore:SetWidth(9);
+        DygChatBarFrame:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background2_90",});
+        DygChatBarFrame:ClearAllPoints();
+        DygChatBarFrame:SetPoint("TOPLEFT", DygChatBarFrameCore, "TOPRIGHT", 2, 0);
+    else
+        DygChatBarFrame:SetWidth(21);
+        DygChatBarFrame:SetHeight(8);
+        DygChatBarFrameCore:SetHeight(9);
+        DygChatBarFrame:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background2",});
+        DygChatBarFrame:ClearAllPoints();
+        DygChatBarFrame:SetPoint("TOP", DygChatBarFrameCore, "BOTTOM", 0, -2);
+    end
+    DygChatBarFrame:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
 
     if(DygChatBarFrame.button==nil) then
         DygChatBarFrame.button = {}
@@ -40,7 +57,6 @@ function ChatBarButton()
     local num1 = #messageTypeList;
     local ColorChat = nil;
 
-    --print(#DygChatBarFrame.button)
     for i = 1, 100 do
         if(DygChatBarFrame.button[i]~=nil) then
             DygChatBarFrame.button[i]:Hide();
@@ -77,10 +93,14 @@ function ChatBarButton()
                 DygChatBarFrame.button[i].text:Hide();
             end
 
-
-
             DygChatBarFrame.button[i]:SetWidth(15);
             DygChatBarFrame.button[i]:SetHeight(15);
+
+            if(DygSettings["PanelHorizontal"] == true)then
+
+            else
+
+            end
             DygChatBarFrame.button[i]:SetPoint("TOPLEFT", buttonframechatbar, "TOPLEFT", numerx, numery);
             DygChatBarFrame.button[i]:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\ButtonChatBar2",});
             --ButtonChatBar2
@@ -168,7 +188,7 @@ function ChatBarColor(messageType)
         cmd = "PARTY"
     end
 
-    if(messageType == "RAID") then
+    if(messageType == "RAID"and IsInRaid()) then
         color_r = 255;
         color_g = 138;
         color_b = 0;
@@ -177,7 +197,7 @@ function ChatBarColor(messageType)
         cmd = "RAID"
     end
 
-    if(messageType == "RAID_WARNING") then
+    if(messageType == "RAID_WARNING" and IsInRaid() and (UnitIsGroupLeader("player") or UnitIsGroupAssistant("player"))) then
         color_r = 255;
         color_g = 78;
         color_b = 0;
@@ -186,16 +206,16 @@ function ChatBarColor(messageType)
         cmd = "RW"
     end
 
-    if(messageType == "GUILD") then
+    if(messageType == "GUILD" and IsInGuild()) then
         color_r = 69;
         color_g = 255;
         color_b = 69;
         act = true;
-        title = EZCHATBAR_CHATBARCOLOR_TITLE_EMOTE;
+        title = EZCHATBAR_CHATBARCOLOR_TITLE_GUILD;
         cmd = "GUILD"
     end
 
-    if(messageType == "OFFICER") then
+    if(messageType == "OFFICER" and C_GuildInfo.CanEditOfficerNote()) then
         color_r = 69;
         color_g = 150;
         color_b = 69;
@@ -204,7 +224,7 @@ function ChatBarColor(messageType)
         cmd = "OFFICER"
     end
 
-    if(messageType == "INSTANCE_CHAT") then
+    if(messageType == "INSTANCE_CHAT" and IsInInstance()) then
         color_r = 255;
         color_g = 78;
         color_b = 9;
@@ -217,20 +237,13 @@ function ChatBarColor(messageType)
 
     return act, color_r, color_g, color_b, title, cmd;
 end
+    local f = CreateFrame("Frame");
+	f:RegisterEvent("UPDATE_CHAT_COLOR");
+	f:RegisterEvent("CHAT_MSG_CHANNEL_NOTICE");
+	f:RegisterEvent("GROUP_ROSTER_UPDATE");
+	f:RegisterEvent("PLAYER_GUILD_UPDATE");
+    f:RegisterEvent("VARIABLES_LOADED");
 
-
-
---menuFrame45645 = CreateFrame("Frame", "ExampleMenuFrame11", UIParent, "UIDropDownMenuTemplate");
---menuFrame45645:Show();
--- Or make the menu appear at the frame:
---menuFrame45645:SetPoint("Center", UIParent, "Center");
---EasyMenu(menu1, menuFrame45645, menuFrame45645, 0 , 0, "MENU");
-
-
-
-
---menuFrame:Hide()
---EasyMenu(menu1, ExampleMenuFrame, ExampleMenuFrame, 0 , 0);
---/script EasyMenu(menu1, menuFrame, menuFrame, 0 , 0);
---/script EasyMenu(menu1, menuFrame45645, menuFrame45645, 0 , 0, "MENU"); menuFrame45645:Show();
---/script EasyMenu(menu1, menuFrame45645, "cursor", 0 , 0, "MENU");
+    f:SetScript("OnEvent", function(...)
+        ChatBar()
+    end)
