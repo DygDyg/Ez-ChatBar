@@ -38,18 +38,19 @@ function MesButtonPanel()
 
     local editBox, chatFrame = CBCPanelUpdate();
 
-    if(DygMesTab==nil) then
-        DygMesTab = CreateFrame("FRAME", "DygMesTab1", BaseFrameAddons(), BackdropTemplateMixin and "BackdropTemplate");
+
+
+        DygMesTab = DygMesTab or CreateFrame("FRAME", "DygMesTab", BaseFrameAddons(), BackdropTemplateMixin and "BackdropTemplate");
+        DygMesTab:SetPoint("RIGHT", ChatFrame1.ScrollBar, "TOP", 150, 0);
+        WindowMoving(DygMesTab, true, "DygMesTab");
         DygMesTab:SetWidth(115);
         DygMesTab:SetHeight(15);
-        --DygMesTab:SetBackdrop({bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",});
+
+
         DygMesTab:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background",});
-        --DygMesTab:SetBackdropColor(0, 0, 0, 0.5);
+
         DygMesTab:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
-        DygMesTab:SetPoint("RIGHT", ChatFrame1.ScrollBar, "TOP", 150, 0);
-        WindowMoving(DygMesTab, true);
-        DygMesTab:SetUserPlaced(true);
-    end
+
 
     if(DygMesTab.ScrollFrame==nil) then
         DygMesTab.frame = CreateFrame("Frame", nil, DygMesTab, BackdropTemplateMixin and "BackdropTemplate");
@@ -212,34 +213,21 @@ function MesButton(args)
         end)
     end
 
-    if(DygMesTab.TestButton1 == nil and DebugCheck == "ssss") then
-        DygMesTab.TestButton1 = Dyg_Button_Panel("TestButton1", "Тест чата", "TestButton1", DygMesTab, {"LEFT", DygMesTab.CombatLog, "RIGHT", 0, 0})
-        DygMesTab.TestButton1:SetScript("OnMouseDown", function(self, button)
+    if(DygMesTab.CopyButton == nil) then  --DebugCheck == true
+        DygMesTab.CopyButton = Dyg_Button_Panel("CopyButton", EZCHATBAR_GENERALTAB_BUTTON_COPY, "Copy", DygMesTab, {"CENTER", DygMesTab, "CENTER", 0, 0})
+        DygMesTab.CopyButton:SetScript("OnMouseDown", function(self, button)
+            OpenCopyChatFrame(button);
                 if(button == "RightButton") then
-                    local editBox, chatFrame, messageTypeList, channelList = CBCPanelUpdate();
-                    print("=========================")
-                    for i = 1, #messageTypeList do
-                        --ChatTypeInfo["GUILD"]
-                        print(messageTypeList[i])
-                    end
-                    print("-------------------------")
-                    for i = 1, #channelList do
-                        print(channelList[i])
-                    end
-                    print("=========================")
-                    --/script DygTestData = ChatEdit_ChooseBoxForSend();
-                    DygTestData = ChatEdit_ChooseBoxForSend();
-
 
                 elseif(button == "LeftButton") then
 
-                    TestButton1();
+                    --CopyButton();
                 end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
                 self:SetBackdropColor(1, 1, 1, 1);
             end);
 
-        DygMesTab.TestButton1:SetScript("OnMouseUp", function(self, button)
+        DygMesTab.CopyButton:SetScript("OnMouseUp", function(self, button)
             self:SetBackdropColor(r, g, b, a);
         end)
     end
@@ -456,7 +444,7 @@ end
     end
 end
 
-function TestButton1()
+function CopyButton()
     --print("click")
     ChatFrame_OpenChat("/g ", chatFrame);
 end
@@ -525,7 +513,7 @@ Event1:RegisterEvent("CHAT_MSG_BN_WHISPER");
 Event1:RegisterEvent("CHAT_MSG_BN_WHISPER_INFORM");
 Event1:SetScript("OnEvent", function(...)
     local args = {...};
-    DygTestData = args;
+    --DygTestData = args;
     MesButton(args)
     if(DygSettings["SoundMes"] == true) then
         if("CHAT_MSG_BN_WHISPER"==args[2] or "CHAT_MSG_WHISPER"==args[2]) then

@@ -1,6 +1,6 @@
 ## Interface: 90002
 ## Title: EzChatBar
-## Version: 0.5
+## Version: 0.32.0
 ## Author: ДугДуг
 ## Notes: Addon for to simplify the use of the standard chat.
 ## X-Website: https://www.curseforge.com/wow/addons/ezchatbar
@@ -13,11 +13,11 @@
 ##UI_Dyg.xml
 ##test_api.lua
 locals.xml
+WindowMoving.lua
+base64.lua
 sound\base.lua
 Settings_Menu.lua
 Data.lua
-WindowMoving.lua
-base64.lua
 Message.lua
 MesButton.lua
 ChatBar.lua

@@ -3,13 +3,25 @@
 function ChatBar()
     --if(DebugCheck == true) then
         if(DygChatBarFrame==nil) then
-            DygChatBarFrame = CreateFrame("FRAME", "ChatBar", DygMesTab1.frame, BackdropTemplateMixin and "BackdropTemplate");
-            DygChatBarFrame:SetWidth(21);
-            DygChatBarFrame:SetHeight(8);
-            DygChatBarFrame:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background2",});
+            DygChatBarFrame = DygChatBarFrame or CreateFrame("FRAME", "ChatBar", BaseFrameAddons(), BackdropTemplateMixin and "BackdropTemplate");
+            DygSettings["PanelHorizontal"] = DygSettings["PanelHorizontal"] or false
+            if(DygSettings["PanelHorizontal"] == true)then
+                DygChatBarFrame:SetWidth(8);
+                DygChatBarFrame:SetHeight(21);
+                DygChatBarFrame:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background2_90",});
+            else
+                DygChatBarFrame:SetWidth(21);
+                DygChatBarFrame:SetHeight(8);
+                DygChatBarFrame:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background2",});
+            end
+
+            DygChatBarFrame:SetPoint("TOPRIGHT", BaseFrameAddons(), DygMesTab1, "LEFT", -2, 7);
+
+            --DygChatBarFrame:SetParent(BaseFrameAddons());
+            --DygChatBarFrame:SetPoint("TOPRIGHT", BaseFrameAddons(), "LEFT", -2, 7);
             --DygChatBarFrame:SetBackdropColor(0, 0, 0, 1);
             DygChatBarFrame:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
-            DygChatBarFrame:SetPoint("TOPRIGHT", DygMesTab1, "LEFT", -2, 7);
+            WindowMoving(DygChatBarFrame, true, "DygChatBarFrame");
         end
         ChatBarButton()
     --end
@@ -33,7 +45,11 @@ function ChatBarButton()
         if(DygChatBarFrame.button[i]~=nil) then
             DygChatBarFrame.button[i]:Hide();
         end
-        DygChatBarFrame:SetHeight(4);
+        if(DygSettings["PanelHorizontal"] == true)then
+            DygChatBarFrame:SetWidth(4);
+        else
+            DygChatBarFrame:SetHeight(4);
+        end
     end
 
     for i = 1, num1 do
@@ -67,8 +83,13 @@ function ChatBarButton()
             DygChatBarFrame.button[i]:SetHeight(15);
             DygChatBarFrame.button[i]:SetPoint("TOPLEFT", buttonframechatbar, "TOPLEFT", numerx, numery);
             DygChatBarFrame.button[i]:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\ButtonChatBar2",});
+            --ButtonChatBar2
             DygChatBarFrame.button[i]:SetBackdropColor(color_r/255, color_g/255, color_b/255, 200/255);
-            DygChatBarFrame:SetHeight(DygChatBarFrame:GetHeight()+19);
+            if(DygSettings["PanelHorizontal"] == true)then
+                DygChatBarFrame:SetWidth(DygChatBarFrame:GetWidth()+19);
+            else
+                DygChatBarFrame:SetHeight(DygChatBarFrame:GetHeight()+19);
+            end
             DygChatBarFrame.button[i]:Show();
 
             --DygChatBarFrame.button[i]:SetScript("OnMouseDown", function(self, button) ChatBarButton() end);
@@ -92,8 +113,13 @@ function ChatBarButton()
 
 
             buttonframechatbar = DygChatBarFrame.button[i];
-            numerx = 0;
-            numery = -19;
+            if(DygSettings["PanelHorizontal"] == true)then
+                numerx = 19;
+                numery = 0;
+            else
+                numerx = 0;
+                numery = -19;
+            end
         end
     end
     --C_Timer.After(3, ChatBar)
