@@ -1,4 +1,4 @@
-if ( GetLocale() == "ruRU" ) then
+--if ( GetLocale() == "ruRU" ) then
 
 
 EZCHATBAR_CHATBARCOLOR_TITLE_EMOTE = "Эмоции"
@@ -38,4 +38,4 @@ EZCHATBAR_SETTINGS2_CHECKBOX1 = "Логирование чата (В разра�
 EZCHATBAR_SETTINGS2_CHECKBOX1_TITLE = "Включить сохранение истории личных переписок"
 
 
-end
+--end
