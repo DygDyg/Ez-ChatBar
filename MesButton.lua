@@ -3,6 +3,8 @@ local a1 = 2;
 local start = start or true;
 local HideButtonColl = 0;
 
+TabHide =  TabHide or CreateFrame("frame", "TabHide"); TabHide:Hide();
+
     if(C_CVar.GetCVar("whisperMode") == "inline") then
         print("-------------------------------------------")
         C_CVar.SetCVar("whisperMode", "popout");
@@ -133,7 +135,12 @@ function MesButton(args)
         [39] = ChatFrame39Tab,
     }
 
-
+    for i=1, 50 do
+        if(_G['ChatFrame'..i..'Tab']) then
+            _G['ChatFrame'..i..'Tab']:SetScript("OnHide", function(self) self:SetParent(TabHide); MesButton() end);
+            _G['ChatFrame'..i..'Tab']:SetScript("OnShow", function(self) if(self:GetParent() == TabHide) then self:Hide(); end; MesButton() end);
+        end
+    end
 
     local name = {}
 
@@ -373,21 +380,21 @@ end
                     local scale = UIParent:GetEffectiveScale();
                     DropDownList1:SetPoint("TOPLEFT", DygMesTab, "TOPRIGHT", 0, 0);
 
-                    if(DropDownList1Button4.value == "Закрыть окно личных сообщений") then
-                        --Log("Закрыть окно личных сообщений")
-                        DropDownList1Button4:SetScript("OnClick", function(self, button)
-                                DygMesTabLocal[i]:Click("MiddleButton");
-                                MesButton()
-                        end)
-                    end
+                    --if(DropDownList1Button4.value == "Закрыть окно личных сообщений") then
+                    --    --Log("Закрыть окно личных сообщений")
+                    --    DropDownList1Button4:SetScript("OnClick", function(self, button)
+                    --            DygMesTabLocal[i]:Click("MiddleButton");
+                    --            MesButton()
+                    --    end)
+                    --end
 
-                    if(DropDownList1Button5.value == "Закрыть окно чата") then
-                        --Log("Закрыть окно личных сообщений")
-                        DropDownList1Button5:SetScript("OnClick", function(self, button)
-                                DygMesTabLocal[i]:Click("MiddleButton");
-                                MesButton()
-                        end)
-                    end
+                    --if(DropDownList1Button5.value == "Закрыть окно чата") then
+                    --    --Log("Закрыть окно личных сообщений")
+                    --    DropDownList1Button5:SetScript("OnClick", function(self, button)
+                    --            DygMesTabLocal[i]:Click("MiddleButton");
+                    --            MesButton()
+                    --    end)
+                    --end
 
                 elseif(button == "MiddleButton") then                                                      --Колёсико
                     MesButton()
@@ -506,6 +513,11 @@ function DygColorPanel(self, type)
     end
 
 end
+
+
+
+
+
 
 local Event1 = CreateFrame("Frame");
 Event1:RegisterEvent("CHAT_MSG_WHISPER_INFORM");
