@@ -53,14 +53,21 @@ Dyg_CopyChatFrame.TextEditor:SetFontObject(GameFontNormal);
 Dyg_CopyChatFrame.TextEditor:SetPoint("TOP",Dyg_CopyChatFrame,0,-30);
 Dyg_CopyChatFrame.ScrollFrame:SetScrollChild(Dyg_CopyChatFrame.TextEditor);
 Dyg_CopyChatFrame.ScrollFrame:SetScript("OnMouseWheel", ScrollFrame_OnMouseWheel);
+Dyg_CopyChatFrame.CloseButton:SetScript("OnClick", function() UIFrameFadeIn(Dyg_CopyChatFrame, 0.5, 1, 0); Dyg_CopyChatFrame.fadeInfo.finishedFunc = function() Dyg_CopyChatFrame:Hide() end; end)
 
 function OpenCopyChatFrame(button)
+    local pattern = "%|T[^()]*%|t"
+    local replace = "";
+    local TextGsub = nil;
 
+    --Dyg_CopyChatFrame:Show();
+    if(Dyg_CopyChatFrame:IsShown()==false) then
+        UIFrameFadeOut(Dyg_CopyChatFrame, 0.5, 0, 1);
+    end
 
-    Dyg_CopyChatFrame:Show();
     local editBox, chatFrame, messageTypeList, channelList = CBCPanelUpdate();
     local text = nil;
-print(button)
+--print(button)
     if(IsControlKeyDown() == false and (button == "LeftButton" or button=="MiddleButton"))then
         text = chatFrame["visibleLines"];
         Dyg_CopyChatFrame.TextEditor:SetText("");
@@ -76,17 +83,50 @@ print(button)
                     }
                     Dyg_CopyChatFrame.TextEditor:Insert("|cff"..format("%02X%02X%02X",color[1],color[2],color[3]).." ")
                 end
-                Dyg_CopyChatFrame.TextEditor:Insert(text[A]["messageInfo"]["message"].."|r\n")
+                DygTestData = DygTestData or {}
+                TextGsub = string.gsub(text[A]["messageInfo"]["message"], pattern, replace)
+                DygTestData[#DygTestData+1] = TextGsub;
+                Dyg_CopyChatFrame.TextEditor:Insert(TextGsub.."|r\n")
             end
             A = A - 1;
         end
     end
 
+if(IsControlKeyDown() == false or button == "MiddleButton")then
 
+    --Dyg_CopyChatFrame.TextEditor:SetText("|TInterface\\AddOns\\EzChatBar\\image\\smiley-1635449_640:15|t");
+    --for i=1, 5 do
+    --    Dyg_CopyChatFrame.TextEditor:Insert(Dyg_CopyChatFrame.TextEditor:GetText());
+    --end
+
+
+    --text = chatFrame["historyBuffer"]["elements"];
+    --Dyg_CopyChatFrame.TextEditor:SetText("");
+    --A = 1;
+    --while A < #text+1 do
+    --    if(text[A]["message"]~=nil)then
+    --        if(text[A]["r"]~=nil)then
+    --            color = {
+    --                math.ceil(text[A]["r"]*255),
+    --                math.ceil(text[A]["g"]*255),
+    --                math.ceil(text[A]["b"]*255),
+    --            }
+    --            Dyg_CopyChatFrame.TextEditor:Insert("|cff"..format("%02X%02X%02X",color[1],color[2],color[3]).." ")
+    --        end
+    --        patternM = ":%)"
+    --        replaceM = "|TInterface\\AddOns\\EzChatBar\\image\\smiley-1635449_640:15|t";
+    --        TextGsubM = nil;
+    --        TextGsubM = string.gsub(text[A]["message"], patternM, replaceM)
+    --        text[A]["message"] = string.gsub(text[A]["message"], patternM, replaceM)
+    --        Dyg_CopyChatFrame.TextEditor:Insert(TextGsubM.."|r\n")
+    --    end
+    --    A = A + 1;
+    --end
+end
 
     if(IsControlKeyDown() == true or button == "RightButton")then
         text = chatFrame["historyBuffer"]["elements"];
-        Dyg_CopyChatFrame.TextEditor:SetText("");
+            Dyg_CopyChatFrame.TextEditor:SetText("");
         A = 1;
 
         while A < #text+1 do
@@ -99,7 +139,8 @@ print(button)
                     }
                     Dyg_CopyChatFrame.TextEditor:Insert("|cff"..format("%02X%02X%02X",color[1],color[2],color[3]).." ")
                 end
-                Dyg_CopyChatFrame.TextEditor:Insert(text[A]["message"].."|r\n")
+                TextGsub = string.gsub(text[A]["message"], pattern, replace)
+                Dyg_CopyChatFrame.TextEditor:Insert(TextGsub.."|r\n")
             end
             A = A + 1;
         end
