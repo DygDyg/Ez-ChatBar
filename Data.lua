@@ -83,9 +83,9 @@ function OpenCopyChatFrame(button)
                     }
                     Dyg_CopyChatFrame.TextEditor:Insert("|cff"..format("%02X%02X%02X",color[1],color[2],color[3]).." ")
                 end
-                DygTestData = DygTestData or {}
+                --DygTestData = DygTestData or {}
                 TextGsub = string.gsub(text[A]["messageInfo"]["message"], pattern, replace)
-                DygTestData[#DygTestData+1] = TextGsub;
+                --DygTestData[#DygTestData+1] = TextGsub;
                 Dyg_CopyChatFrame.TextEditor:Insert(TextGsub.."|r\n")
             end
             A = A - 1;

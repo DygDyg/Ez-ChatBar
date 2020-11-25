@@ -24,19 +24,22 @@ local window = {
 }
 
 
-function WindowMoving(Mov, pickup, SaveName)
-WindowPosition = WindowPosition or {};
-local Uid = UnitGUID("player");
-WindowPosition[Uid] = WindowPosition[Uid] or {}
+function WindowMoving(Mov, pickup)
+    if(Mov~=nil)then
+        local SaveName = Mov:GetName();
 
-if(SaveName ~= nil)then
-    if(WindowPosition[Uid][SaveName]~=nil)then
-        if(WindowPosition[Uid][SaveName][1] ~=nil)then
-            Mov:ClearAllPoints();
-            Mov:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", WindowPosition[Uid][SaveName][1]/UIParent:GetScale(), WindowPosition[Uid][SaveName][2]/UIParent:GetScale());
+        WindowPosition = WindowPosition or {};
+        local Uid = UnitGUID("player");
+        WindowPosition[Uid] = WindowPosition[Uid] or {}
+
+        if(SaveName ~= nil)then
+            if(WindowPosition[Uid][SaveName]~=nil)then
+                if(WindowPosition[Uid][SaveName][1] ~=nil)then
+                    Mov:ClearAllPoints();
+                    Mov:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", WindowPosition[Uid][SaveName][1]/UIParent:GetScale(), WindowPosition[Uid][SaveName][2]/UIParent:GetScale());
+                end
+            end
         end
-    end
-end
 
 WindowPosition = WindowPosition or {};
     if(Mov) then
@@ -48,6 +51,7 @@ WindowPosition = WindowPosition or {};
             if (button == "LeftButton" ) then
                 if(UnitAffectingCombat("player") ~= true or DygSettings["FixBarCombat"] ~= true) then
                     if(pickup ~= true or DygSettings["FixBar"] ~= true) then
+                        print(Mov:GetName())
                         Mov:StartMoving()
                     end
                 end
@@ -62,7 +66,34 @@ WindowPosition = WindowPosition or {};
                 end
             end
         end)
+        Mov.ShowScript1 = Mov:GetScript("OnShow");
+
+        Mov.ShowScript2 = function(self)
+            if(SaveName ~= nil)then
+                if(WindowPosition[Uid][SaveName]~=nil)then
+                    if(WindowPosition[Uid][SaveName][1] ~=nil)then
+                        self:ClearAllPoints();
+                        self:SetPoint("BOTTOMLEFT", UIParent, "BOTTOMLEFT", WindowPosition[Uid][SaveName][1]/UIParent:GetScale(), WindowPosition[Uid][SaveName][2]/UIParent:GetScale());
+                    end
+                end
+            end
+        end
+
+        Mov:SetScript("OnShow", function(self)
+            --Mov.ShowScript1();
+            if(Mov.ShowScript1)then
+                Mov.ShowScript1(self);
+            end
+
+            if(Mov.ShowScript2)then
+                Mov.ShowScript2(self);
+            end
+        end
+    )
+
+    Mov.Scripts = function(self) print("2") end
     end
+end
 end
 
 for i = 1, #window do
