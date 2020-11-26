@@ -52,7 +52,7 @@ WindowPosition = WindowPosition or {};
             if (button == "LeftButton" ) then
                 if(UnitAffectingCombat("player") ~= true or DygSettings["FixBarCombat"] ~= true) then
                     if(pickup ~= true or DygSettings["FixBar"] ~= true) then
-                        print(Mov:GetName())
+                        --print(Mov:GetName())
                         Mov:StartMoving()
                     end
                 end

@@ -580,7 +580,7 @@ end
 function DygBindingTab(comand)
     local asfasfas = CBCPanelUpdate();
     if(comand=="nil") then
-        DygSettings["DygBindingTab"] = nil;
+        DygSettings["DygBindingTab"][asfasfas["chatFrame"]["name"]] = nil;
         message("Бинд удалён");
        -- if(DygSettings["DygBindingTab"]) then
        --
