@@ -400,14 +400,28 @@ end
                     MesButton()
                 elseif(button == "LeftButton") then                                                        --Левая кнопка
                     if(IsControlKeyDown() == true) then
-                        Debug("Contrl");
-                        DygSettings["favorit"] = DygMesTabLocal[i].Text:GetText();
-                        print("Сохранено в избранное: "..DygSettings["favorit"])
+                        --Debug("Contrl");
+                        --DygSettings["favorit"] = DygMesTabLocal[i].Text:GetText();
+                        --print("Сохранено в избранное: "..DygSettings["favorit"])
                     end
+
+                    local dasdf = CBCPanelUpdate();
+
                     self.NewMes:Hide();
                     OpenTabHide();
                     self.OpenTab:Show();
                     ChatBarButton();
+                    local NameTabText = self.b.Text:GetText();
+                    --print(NameTabText);
+                    --print(DygSettings["DygBindingTab"]);
+                    --print(DygSettings["DygBindingTab"][NameTabText]);
+                    if(DygSettings["DygBindingTab"])then
+                        if(DygSettings["DygBindingTab"][NameTabText])then
+                            --print("okay")
+                            ChatFrame_OpenChat("/"..DygSettings["DygBindingTab"][NameTabText], chatFrame);
+                        end
+                    end
+
                 end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
             end);
@@ -563,6 +577,25 @@ function DygMesSoundFile(file)
     end
 end
 
+function DygBindingTab(comand)
+    local asfasfas = CBCPanelUpdate();
+    if(comand=="nil") then
+        DygSettings["DygBindingTab"] = nil;
+        message("Бинд удалён");
+       -- if(DygSettings["DygBindingTab"]) then
+       --
+       -- end
+    elseif(comand=="") then
+       -- if()
+        message("Текущий бинд: /"..DygSettings["DygBindingTab"][asfasfas["chatFrame"]["name"]].."\nЧтобы изменить, введите:\n  /DygBindingTab <Команда>\n\n Чтобы удалить бинд введите \n /DygBindingTab nil");
+
+    else
+        DygSettings["DygBindingTab"] = DygSettings["DygBindingTab"] or {};
+        DygSettings["DygBindingTab"][asfasfas["chatFrame"]["name"]] = comand;
+        message("Бинд изменён на: /"..comand);
+    end
+end
+
 
 SlashCmdList["OffsetPanel"] = OffsetPanel;
 SLASH_OffsetPanel1 = "/DygOffsetPanel"
@@ -572,5 +605,8 @@ SLASH_DygMesSoundFile1 = "/DygMesSoundFile"
 
 --SlashCmdList["DygColorPanel"] = DygColorPanel;
 --SLASH_DygColorPanel1 = "/DygColorPanel"
+
+SlashCmdList["DygBindingTab"] = DygBindingTab;
+SLASH_DygBindingTab1 = "/DygBindingTab"
 
 

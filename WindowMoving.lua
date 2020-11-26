@@ -21,6 +21,7 @@ local window = {
     MacroFrame,
     --StaticPopup1,
     KeyBindingFrame,
+    BNToastFrame,
 }
 
 
@@ -105,3 +106,5 @@ frame1:RegisterEvent("AUCTION_HOUSE_SHOW")
 frame1:SetScript("OnEvent", function(...)
 WindowMoving(AuctionHouseFrame)
 end)
+    WindowMoving(ExtraAbilityContainer, true);
+
