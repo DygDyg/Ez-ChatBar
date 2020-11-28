@@ -137,8 +137,9 @@ function MesButton(args)
 
     for i=1, 50 do
         if(_G['ChatFrame'..i..'Tab']) then
-            _G['ChatFrame'..i..'Tab']:SetScript("OnHide", function(self) self:SetParent(TabHide); MesButton() end);
-            _G['ChatFrame'..i..'Tab']:SetScript("OnShow", function(self) if(self:GetParent() == TabHide) then self:Hide(); end; MesButton() end);
+            _G['ChatFrame'..i..'Tab']:SetScript("OnHide", function(self) self:SetParent(TabHide); MesButton(); ChatBar(); end);
+            _G['ChatFrame'..i..'Tab']:SetScript("OnShow", function(self) if(self:GetParent() == TabHide) then self:Hide(); end; MesButton(); ChatBar(); end);
+            _G['ChatFrame'..i..'Tab']:SetScript("OnMouseDown", function(self) MesButton(); ChatBar(); print("aaa") end);
         end
     end
 

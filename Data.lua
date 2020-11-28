@@ -122,6 +122,9 @@ if(IsControlKeyDown() == false or button == "MiddleButton")then
     --    end
     --    A = A + 1;
     --end
+
+
+        --Dyg_CopyChatFrame.TextEditor:SetText("");
 end
 
     if(IsControlKeyDown() == true or button == "RightButton")then

@@ -80,17 +80,17 @@ WindowPosition = WindowPosition or {};
             end
         end
 
-        Mov:SetScript("OnShow", function(self)
-            --Mov.ShowScript1();
-            if(Mov.ShowScript1)then
-                Mov.ShowScript1(self);
-            end
-
-            if(Mov.ShowScript2)then
-                Mov.ShowScript2(self);
-            end
-        end
-    )
+        --Mov:SetScript("OnShow", function(self)
+        --    --Mov.ShowScript1();
+        --    if(Mov.ShowScript1)then
+        --        Mov.ShowScript1(self);
+        --    end
+--
+        --    if(Mov.ShowScript2)then
+        --        Mov.ShowScript2(self);
+        --    end
+        --end
+        --)
 
     Mov.Scripts = function(self) print("2") end
     end
@@ -104,7 +104,6 @@ end
 local frame1 = CreateFrame("Frame")
 frame1:RegisterEvent("AUCTION_HOUSE_SHOW")
 frame1:SetScript("OnEvent", function(...)
-WindowMoving(AuctionHouseFrame)
 end)
     WindowMoving(ExtraAbilityContainer, true);
 
