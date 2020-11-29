@@ -1,6 +1,5 @@
 WindowMovingDetecting = true;
 
-
 local window = {
     WorldMapFrame,
     AzeriteEmpoweredItemUI,
