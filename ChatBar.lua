@@ -23,6 +23,7 @@ end
 --Создание кнопок
 function ChatBarButton()
     local editBox, chatFrame, messageTypeList, channelList = CBCPanelUpdate();
+    DygSettings["Ball"] = DygSettings["Ball"] or {"start111",};
 
     DygChatBarFrameCore:SetWidth(21);
     DygChatBarFrameCore:SetHeight(21);
@@ -68,8 +69,39 @@ function ChatBarButton()
         end
     end
 
+    local SaveBallList = {};
+    --print(#DygSettings["Ball"])
+    for i=1, #DygSettings["Ball"] do
+        --if(DygSettings["Ball"][i]~="start111")then
+            --print(DygSettings["Ball"][i])
+            local act, color_r, color_g, color_b, title, cmd = ChatBarColor(DygSettings["Ball"][i]);
+            --print(title)
+            SaveBallList[DygSettings["Ball"][i]] = true;
+
+            --print("1=====");
+            --print(act);
+            --print(color_r);
+            --print(color_g);
+            --print(color_b);
+            --print(title);
+            --print(cmd);
+            --print(i);
+            --print("2=====");
+        if(title) then
+
+            GenBal(act, color_r, color_g, color_b, title, cmd, i);
+        end
+    end
+
     for i = 1, num1 do
         local act, color_r, color_g, color_b, title, cmd = ChatBarColor(messageTypeList[i]);
+        if(DygSettings["Ball"][messageTypeList[i]] == nil)then
+            GenBal(act, color_r, color_g, color_b, title, cmd, i);
+        end
+    end
+
+    function GenBal(act, color_r, color_g, color_b, title, cmd, i)
+
         if(act == true) then
             if(DygChatBarFrame.button[i]==nil) then
                 DygChatBarFrame.button[i] = CreateFrame("FRAME", "ChatBarButton"..i, DygChatBarFrame, BackdropTemplateMixin and "BackdropTemplate");
@@ -111,11 +143,37 @@ function ChatBarButton()
                 DygChatBarFrame:SetHeight(DygChatBarFrame:GetHeight()+19);
             end
             DygChatBarFrame.button[i]:Show();
+            DygChatBarFrame.button[i].Info = messageTypeList[i];
 
             --DygChatBarFrame.button[i]:SetScript("OnMouseDown", function(self, button) ChatBarButton() end);
 
             DygChatBarFrame.button[i]:SetScript("OnMouseDown", function(self, button)
+
+                if(button == "LeftButton") then
                 ChatFrame_OpenChat("/"..cmd, chatFrame);
+                end
+                if(button == "RightButton") then
+                    --print(self.Info)
+                    if(IsControlKeyDown() == true)then
+                        DygSettings["Ball"] = DygSettings["Ball"] or {"start111",};
+                        local NameBall = nil;
+                        for i=1, #DygSettings["Ball"] do
+                            if(DygSettings["Ball"][i] == self.Info)then
+                                NameBall = self.Info;
+                                table.remove(DygSettings["Ball"], i);
+                                DygMesTab.TextPanel:Show();
+                                DygMesTab.TextPanel.Text:SetText("Откреплено");
+                            end
+                        end
+
+                        if(NameBall==nil or #DygSettings["Ball"] == 0)then
+                            DygSettings["Ball"][#DygSettings["Ball"]+1] = self.Info;
+                            DygMesTab.TextPanel:Show();
+                            DygMesTab.TextPanel.Text:SetText("Закреплено");
+                        end
+
+                    end
+                end
             end);
 
             DygChatBarFrame.button[i]:SetScript("OnEnter", function(self)
@@ -152,6 +210,10 @@ function ChatBarColor(messageType)
     local title = nil;
     local cmd = nil;
 
+    if(messageType == "start111") then
+        return act, color_r, color_g, color_b, title, cmd;
+    end
+
     if(messageType == "SAY") then
         color_r = 255;
         color_g = 255;
@@ -159,6 +221,7 @@ function ChatBarColor(messageType)
         act = true;
         title = EZCHATBAR_CHATBARCOLOR_TITLE_SAY;
         cmd = "SAY"
+        return act, color_r, color_g, color_b, title, cmd;
     end
 
     if(messageType == "EMOTE") then
@@ -168,6 +231,7 @@ function ChatBarColor(messageType)
         act = true;
         title = EZCHATBAR_CHATBARCOLOR_TITLE_EMOTE;
         cmd = "EMOTE"
+        return act, color_r, color_g, color_b, title, cmd;
     end
 
     if(messageType == "YELL") then
@@ -177,6 +241,7 @@ function ChatBarColor(messageType)
         act = true;
         title = EZCHATBAR_CHATBARCOLOR_TITLE_YELL;
         cmd = "YELL"
+        return act, color_r, color_g, color_b, title, cmd;
     end
 
     if(messageType == "PARTY" and UnitExists("party1")) then
@@ -186,6 +251,7 @@ function ChatBarColor(messageType)
         act = true;
         title = EZCHATBAR_CHATBARCOLOR_TITLE_PARTY;
         cmd = "PARTY"
+        return act, color_r, color_g, color_b, title, cmd;
     end
 
     if(messageType == "RAID"and IsInRaid()) then
@@ -195,6 +261,7 @@ function ChatBarColor(messageType)
         act = true;
         title = EZCHATBAR_CHATBARCOLOR_TITLE_RAID;
         cmd = "RAID"
+        return act, color_r, color_g, color_b, title, cmd;
     end
 
     if(messageType == "RAID_WARNING" and IsInRaid() and (UnitIsGroupLeader("player") or UnitIsGroupAssistant("player"))) then
@@ -204,6 +271,7 @@ function ChatBarColor(messageType)
         act = true;
         title = EZCHATBAR_CHATBARCOLOR_TITLE_RAID_WARNING;
         cmd = "RW"
+        return act, color_r, color_g, color_b, title, cmd;
     end
 
     if(messageType == "GUILD" and IsInGuild()) then
@@ -213,6 +281,7 @@ function ChatBarColor(messageType)
         act = true;
         title = EZCHATBAR_CHATBARCOLOR_TITLE_GUILD;
         cmd = "GUILD"
+        return act, color_r, color_g, color_b, title, cmd;
     end
 
     if(messageType == "OFFICER" and C_GuildInfo.CanEditOfficerNote()) then
@@ -222,6 +291,7 @@ function ChatBarColor(messageType)
         act = true;
         title = EZCHATBAR_CHATBARCOLOR_TITLE_OFFICER;
         cmd = "OFFICER"
+        return act, color_r, color_g, color_b, title, cmd;
     end
 
     if(messageType == "INSTANCE_CHAT" and IsInInstance()) then
@@ -231,9 +301,8 @@ function ChatBarColor(messageType)
         act = true;
         title = EZCHATBAR_CHATBARCOLOR_TITLE_INSTANCE_CHAT;
         cmd = "INSTANCE_CHAT"
+        return act, color_r, color_g, color_b, title, cmd;
     end
-
-
 
     return act, color_r, color_g, color_b, title, cmd;
 end

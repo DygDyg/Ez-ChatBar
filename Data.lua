@@ -94,37 +94,6 @@ function OpenCopyChatFrame(button)
 
 if(IsControlKeyDown() == false or button == "MiddleButton")then
 
-    --Dyg_CopyChatFrame.TextEditor:SetText("|TInterface\\AddOns\\EzChatBar\\image\\smiley-1635449_640:15|t");
-    --for i=1, 5 do
-    --    Dyg_CopyChatFrame.TextEditor:Insert(Dyg_CopyChatFrame.TextEditor:GetText());
-    --end
-
-
-    --text = chatFrame["historyBuffer"]["elements"];
-    --Dyg_CopyChatFrame.TextEditor:SetText("");
-    --A = 1;
-    --while A < #text+1 do
-    --    if(text[A]["message"]~=nil)then
-    --        if(text[A]["r"]~=nil)then
-    --            color = {
-    --                math.ceil(text[A]["r"]*255),
-    --                math.ceil(text[A]["g"]*255),
-    --                math.ceil(text[A]["b"]*255),
-    --            }
-    --            Dyg_CopyChatFrame.TextEditor:Insert("|cff"..format("%02X%02X%02X",color[1],color[2],color[3]).." ")
-    --        end
-    --        patternM = ":%)"
-    --        replaceM = "|TInterface\\AddOns\\EzChatBar\\image\\smiley-1635449_640:15|t";
-    --        TextGsubM = nil;
-    --        TextGsubM = string.gsub(text[A]["message"], patternM, replaceM)
-    --        text[A]["message"] = string.gsub(text[A]["message"], patternM, replaceM)
-    --        Dyg_CopyChatFrame.TextEditor:Insert(TextGsubM.."|r\n")
-    --    end
-    --    A = A + 1;
-    --end
-
-
-        --Dyg_CopyChatFrame.TextEditor:SetText("");
 end
 
     if(IsControlKeyDown() == true or button == "RightButton")then
@@ -211,3 +180,15 @@ function DygScaleAnim(self, time)
         end
     end
 end
+
+
+function DygCalc(num)
+    if(num~="") then
+        print(tonumber(num))
+        print(num)
+    end
+
+end
+
+SlashCmdList["DygCalc"] = DygCalc;
+SLASH_DygCalc1 = "/calc"

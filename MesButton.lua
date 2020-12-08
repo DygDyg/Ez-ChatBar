@@ -137,9 +137,9 @@ function MesButton(args)
 
     for i=1, 50 do
         if(_G['ChatFrame'..i..'Tab']) then
-            _G['ChatFrame'..i..'Tab']:SetScript("OnHide", function(self) self:SetParent(TabHide); MesButton(); ChatBar(); end);
-            _G['ChatFrame'..i..'Tab']:SetScript("OnShow", function(self) if(self:GetParent() == TabHide) then self:Hide(); end; MesButton(); ChatBar(); end);
-            _G['ChatFrame'..i..'Tab']:SetScript("OnMouseDown", function(self) MesButton(); ChatBar(); end);
+            _G['ChatFrame'..i..'Tab']:SetScript("OnHide", function(self) self:SetParent(TabHide); MesButton(); C_Timer.After(0.2, function() ChatBar() end) end);
+            _G['ChatFrame'..i..'Tab']:SetScript("OnShow", function(self) if(self:GetParent() == TabHide) then self:Hide(); end; MesButton(); C_Timer.After(0.2, function() ChatBar() end) end);
+            _G['ChatFrame'..i..'Tab']:SetScript("OnMouseDown", function(self) MesButton(); C_Timer.After(0.2, function() ChatBar() end) end);
         end
     end
 
@@ -183,7 +183,7 @@ function MesButton(args)
                     DropDownList1:SetPoint("TOPLEFT", DygMesTab, "TOPRIGHT", 0, 0);
                 elseif(button == "LeftButton") then
                     OpenTabHide();
-                    ChatBarButton();
+                    C_Timer.After(0.2, function() ChatBarButton() end)
                 end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
                 --C_Timer.After(1, function() self:SetBackdropColor(r, g, b, a)end);
@@ -210,7 +210,7 @@ function MesButton(args)
                 elseif(button == "LeftButton") then
                     DygMesTabLocal[2]:Click(button);
                     OpenTabHide();
-                    ChatBarButton();
+                    C_Timer.After(0.2, function() ChatBarButton() end);
                 end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
                 --C_Timer.After(1, function() self:SetBackdropColor(r, g, b, a)end);
@@ -411,7 +411,7 @@ end
                     self.NewMes:Hide();
                     OpenTabHide();
                     self.OpenTab:Show();
-                    ChatBarButton();
+                    C_Timer.After(0.2, function() ChatBarButton() end);
                     local NameTabText = self.b.Text:GetText();
                     --print(NameTabText);
                     --print(DygSettings["DygBindingTab"]);
@@ -580,20 +580,23 @@ end
 
 function DygBindingTab(comand)
     local asfasfas = CBCPanelUpdate();
-    if(comand=="nil") then
-        DygSettings["DygBindingTab"][asfasfas["chatFrame"]["name"]] = nil;
-        message("Бинд удалён");
-       -- if(DygSettings["DygBindingTab"]) then
-       --
-       -- end
-    elseif(comand=="") then
-       -- if()
-        message("Текущий бинд: /"..DygSettings["DygBindingTab"][asfasfas["chatFrame"]["name"]].."\nЧтобы изменить, введите:\n  /DygBindingTab <Команда>\n\n Чтобы удалить бинд введите \n /DygBindingTab nil");
-
-    else
-        DygSettings["DygBindingTab"] = DygSettings["DygBindingTab"] or {};
-        DygSettings["DygBindingTab"][asfasfas["chatFrame"]["name"]] = comand;
-        message("Бинд изменён на: /"..comand);
+     DygSettings["DygBindingTab"] =  DygSettings["DygBindingTab"] or {};
+    DygSettings["DygBindingTab"][asfasfas["chatFrame"]["name"]] = DygSettings["DygBindingTab"][asfasfas["chatFrame"]["name"]]  or nil;
+    if(asfasfas["chatFrame"]["name"]) then
+        if(comand=="nil") then
+            DygSettings["DygBindingTab"][asfasfas["chatFrame"]["name"]] = nil;
+            message("Бинд удалён");
+        elseif(comand=="") then
+            local bind = DygSettings["DygBindingTab"][asfasfas["chatFrame"]["name"]];
+            if(DygSettings["DygBindingTab"][asfasfas["chatFrame"]["name"]]==nil)then
+                bind = "Не задано";
+            end
+            message("Текущий бинд: /"..bind.."\nЧтобы изменить, введите: /DygBindingTab <Команда>\n Чтобы удалить бинд введите \n /DygBindingTab nil\n\n\n");
+        else
+            DygSettings["DygBindingTab"] = DygSettings["DygBindingTab"] or {};
+            DygSettings["DygBindingTab"][asfasfas["chatFrame"]["name"]] = comand;
+            message("Бинд изменён на: /"..comand);
+        end
     end
 end
 

@@ -264,3 +264,62 @@ SLASH_DygClearMsg1 = "/DygClearMsg"
 --EasyMenu(menu, menuFrame, "cursor", 0 , 0, "MENU");
 
 --EasyMenu(menu, menuFrame, menuFrame, 0 , 0, "MENU");
+
+
+
+local Event1 = CreateFrame("Frame");
+--Event1:RegisterEvent("NAME_PLATE_CREATED");
+--Event1:RegisterEvent("NAME_PLATE_UNIT_ADDED");
+--Event1:RegisterEvent("NAME_PLATE_UNIT_REMOVED");
+Event1:SetScript("OnEvent", function (a2, a1)
+
+    --print(type(a2))
+    local st = true
+    NP = NP or {};
+    if(st==true)then
+        if(type(a2)=="table")then
+            DygTestData = a2;
+            test4126 = test4126 or {}
+            test4126[#test4126+1] = CreateFrame("FRAME", nil, nil, BackdropTemplateMixin and "BackdropTemplate");
+            --test4126:SetParent(a2);
+            test4126[#test4126]:ClearAllPoints();
+            test4126[#test4126]:Hide();
+            test4126[#test4126]:SetPoint("CENTER", a2, 0, 100);
+            test4126[#test4126]:SetSize(25, 25);
+            test4126[#test4126]:SetBackdrop({bgFile = "Interface\\MINIMAP\\TRACKING\\Mailbox",});
+            test4126[#test4126].Text = CreateFrame("FRAME", nil, nil, BackdropTemplateMixin and "BackdropTemplate");
+
+
+
+            NP["nameplate"..#test4126] = test4126[#test4126];
+        end
+
+        if(type(a2)=="string")then
+            if(a1 == "NAME_PLATE_UNIT_ADDED")then
+                local guild = {GetGuildInfo(a2)};
+                -- /dump GetGuildInfo("nameplate1")
+
+                --print(guild[1]);
+                if(guild)then
+                    if(guild[1])then
+                        if(guild[1] == "Пьяный Кабан")then
+                        NP[a2]:Show();
+                        print(guild[1]);
+                        end
+                    end
+                end
+            end
+
+            if(a1 == "NAME_PLATE_UNIT_REMOVED")then
+                NP[a2]:Hide();
+            end
+            --print(a1)
+            --print(a2)
+            --print(GetUnitName(a2))
+            --print(UnitGUID(a2))
+
+        end
+    end
+    return true
+
+end)

@@ -84,14 +84,14 @@ WindowPosition = WindowPosition or {};
         --    if(Mov.ShowScript1)then
         --        Mov.ShowScript1(self);
         --    end
---
+
         --    if(Mov.ShowScript2)then
         --        Mov.ShowScript2(self);
         --    end
         --end
         --)
 
-    Mov.Scripts = function(self) print("2") end
+    --Mov.Scripts = function(self) print("2") end
     end
 end
 end
