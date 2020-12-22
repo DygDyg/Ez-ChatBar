@@ -13,8 +13,23 @@ function ChatBar()
             DygChatBarFrameCore:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background",});
             DygChatBarFrameCore:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
             DygChatBarFrame:SetPoint("TOP", DygChatBarFrameCore, "BOTTOM", 0, -2);
-            DygSettings["PanelHorizontal"] = DygSettings["PanelHorizontal"] or false
+            if(DygSettings["PanelHorizontal"]==nil)then
+                DygSettings["PanelHorizontal"] = DygSettings["PanelHorizontal"] or false;
+            end
+
             WindowMoving(DygChatBarFrameCore, true, "DygChatBarFrame_Core");
+
+            if(DygSettings["ChatBarEnable"] == nil) then
+                DygSettings["ChatBarEnable"] = true;
+            end
+
+            if(DygSettings["ChatBarEnable"]==true)then
+                DygChatBarFrameCore:Show();
+            else
+
+                DygChatBarFrameCore:Hide();
+            end
+
         end
         ChatBarButton()
     --end
