@@ -1,10 +1,10 @@
-tag 51272d15074a275e6481a049f8dcd9462ab73f76 release-0.23
+tag 310376824ae78bc54d3c95f52a72caaeae30c2a4 release-0.32.13
 Author:	DygDyg <33259562+DygDyg@users.noreply.github.com>
-Date:	Sun Sep 13 02:43:19 2020 +0300
+Date:	Thu Dec 24 18:13:30 2020 +0300
 
-commit c14067dc4c317b469eca49642c983710846b51ad
+commit 513bdfad34702ac172b636d13e8025657632e12a
 Author: DygDyg <33259562+DygDyg@users.noreply.github.com>
-Date:   Sun Sep 13 02:43:04 2020 +0300
+Date:   Thu Dec 24 18:12:56 2020 +0300
 
-    Добавил в настройки смену цвета фона
+    Поправил локализации
 
