@@ -248,11 +248,10 @@ local Event = CreateFrame("Frame");
 Event:RegisterEvent("PLAYER_ENTERING_WORLD");
 Event.start = true;
 Event:SetScript("OnEvent", function(...)
-    
 
-    DygSettings = DygSettings or {};
-    DygSettings["SoundMesFile"] = DygSettings["SoundMesFile"] or "message.mp3";
-
+    if(DygSettings == nil) then
+        DygSettings = {}
+    end
 
     if(Event.start == true) then
         Settings_local = DygSettings;

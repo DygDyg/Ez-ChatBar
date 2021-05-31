@@ -546,7 +546,9 @@ Event1:SetScript("OnEvent", function(...)
     if(DygSettings["SoundMes"] == true) then
         if("CHAT_MSG_BN_WHISPER"==args[2] or "CHAT_MSG_WHISPER"==args[2]) then
 
-            if(DygSettings["SoundMesFile"] == nil or DygSettings["SoundMesFile"] == "") then
+
+
+            if(DygSettings["SoundMesFile"] == nil) then
                 DygSettings["SoundMesFile"] = "message.mp3";
             end
             PlaySoundFile("Interface\\AddOns\\EzChatBar\\sound\\"..DygSettings["SoundMesFile"], "master");
