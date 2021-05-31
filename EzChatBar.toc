@@ -1,6 +1,6 @@
 ## Interface: 90002
 ## Title: EzChatBar
-## Version: 0.32.15
+## Version: 0.32.16
 ## Author: ДугДуг
 ## Notes: Addon for to simplify the use of the standard chat.
 ## Notes-ruRU: Аддон для упрощения использования стандартного чата.

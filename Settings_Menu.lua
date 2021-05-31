@@ -251,7 +251,7 @@ Event:SetScript("OnEvent", function(...)
     
 
     DygSettings = DygSettings or {};
-    DygSettings["SoundMesFile"] = DygSettings["SoundMesFile"] or "message.mp3";
+    DygSettings["SoundMesFile"] = DygSettings["SoundMesFile"] or "message1.mp3";
 
 
     if(Event.start == true) then
