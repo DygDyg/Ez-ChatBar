@@ -55,10 +55,14 @@ function MesButtonPanel()
 
 
     if(DygMesTab.ScrollFrame==nil) then
+        DygSettings["scrollframe_Height"] = DygSettings["scrollframe_Height"] or ChatFrame1:GetHeight();
         DygMesTab.frame = CreateFrame("Frame", nil, DygMesTab, BackdropTemplateMixin and "BackdropTemplate");
         DygMesTab.frame:SetWidth(115);
-        DygMesTab.frame:SetHeight(ChatFrame1:GetHeight());
+        
+        DygMesTab.frame:SetHeight(DygSettings["scrollframe_Height"]);
         DygMesTab.frame:SetPoint("TOPLEFT", DygMesTab, "BOTTOMLEFT", 0, 0);
+
+
 
         DygMesTab.frame.ScrollFrame = CreateFrame("ScrollFrame", nil, DygMesTab.frame, BackdropTemplateMixin and "BackdropTemplate");
         DygMesTab.frame.ScrollFrame:SetPoint("TOPLEFT", DygMesTab.frame, "TOPLEFT", 0, 0);
@@ -576,9 +580,36 @@ function DygMesSoundFile(file)
     end
 end
 
+SLASH_DygScrollframeHeight1 = "/DygScrollframeHeight"
+SlashCmdList["DygScrollframeHeight"] = function(msg)
+    if(tonumber(msg)) then
+        DygMesTab.frame:SetHeight(tonumber(msg));
+        print("Ширина изменена на: "..DygMesTab.frame:GetHeight())
+        DygSettings["scrollframe_Height"] = tonumber(msg);
+        --DygSettings["scrollframe_Height"]
+    else
+        print("Текущая ширина: "..DygMesTab.frame:GetHeight())
+        --DygMesTab.frame:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background"})
+        --DygMesTab.frame:SetBackdropColor(0,0,0,0.5);
+        local red, green, blue, alpha = DygMesTab.frame:GetBackdropColor();
+        --print(alpha)
+        if(alpha) then
+            if(alpha == 0) then
+                --DygMesTab.frame:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background"})
+                DygMesTab.frame:SetBackdropColor(0,0,0,0.5);
+            else
+                DygMesTab.frame:SetBackdropColor(0,0,0,0);
+            end
+        else
+        DygMesTab.frame:SetBackdrop({bgFile = "Interface/Tooltips/UI-Tooltip-Background"})
+        DygMesTab.frame:SetBackdropColor(0,0,0,0.5);
+        end
+    end
+end
+
 function DygBindingTab(comand)
     local asfasfas = CBCPanelUpdate();
-     DygSettings["DygBindingTab"] =  DygSettings["DygBindingTab"] or {};
+    DygSettings["DygBindingTab"] =  DygSettings["DygBindingTab"] or {};
     DygSettings["DygBindingTab"][asfasfas["chatFrame"]["name"]] = DygSettings["DygBindingTab"][asfasfas["chatFrame"]["name"]]  or nil;
     if(asfasfas["chatFrame"]["name"]) then
         if(comand=="nil") then
@@ -602,6 +633,9 @@ end
 SlashCmdList["OffsetPanel"] = OffsetPanel;
 SLASH_OffsetPanel1 = "/DygOffsetPanel"
 
+--SlashCmdList['DygScrollframeHeight'] = DygScrollframeHeight();
+--SLASH_DygScrollframeHeight1 = "/DygScrollframeHeight"
+
 SlashCmdList["DygMesSoundFile"] = DygMesSoundFile;
 SLASH_DygMesSoundFile1 = "/DygMesSoundFile"
 
@@ -610,5 +644,7 @@ SLASH_DygMesSoundFile1 = "/DygMesSoundFile"
 
 SlashCmdList["DygBindingTab"] = DygBindingTab;
 SLASH_DygBindingTab1 = "/DygBindingTab"
+
+
 
 

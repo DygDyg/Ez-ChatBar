@@ -252,6 +252,7 @@ Event:SetScript("OnEvent", function(...)
 
     DygSettings = DygSettings or {};
     DygSettings["SoundMesFile"] = DygSettings["SoundMesFile"] or "message1.mp3";
+    DygSettings["VerWOWClient"] = select(4, GetBuildInfo());
 
 
     if(Event.start == true) then
