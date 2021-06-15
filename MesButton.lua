@@ -96,50 +96,73 @@ function Start_Settings()
 
 end
 
-function MesButton(args)
-    DygMesTabLocal = {
-        [1] = ChatFrame1Tab,
-        [2] = ChatFrame2Tab,
-        [3] = ChatFrame3Tab,
-        [4] = ChatFrame4Tab,
-        [5] = ChatFrame5Tab,
-        [6] = ChatFrame6Tab,
-        [7] = ChatFrame7Tab,
-        [8] = ChatFrame8Tab,
-        [9] = ChatFrame9Tab,
-        [10] = ChatFrame10Tab,
-        [11] = ChatFrame11Tab,
-        [12] = ChatFrame12Tab,
-        [13] = ChatFrame13Tab,
-        [14] = ChatFrame14Tab,
-        [15] = ChatFrame15Tab,
-        [16] = ChatFrame16Tab,
-        [17] = ChatFrame17Tab,
-        [18] = ChatFrame18Tab,
-        [19] = ChatFrame19Tab,
-        [20] = ChatFrame20Tab,
-        [21] = ChatFrame21Tab,
-        [22] = ChatFrame22Tab,
-        [23] = ChatFrame23Tab,
-        [24] = ChatFrame24Tab,
-        [25] = ChatFrame25Tab,
-        [26] = ChatFrame26Tab,
-        [27] = ChatFrame27Tab,
-        [28] = ChatFrame28Tab,
-        [29] = ChatFrame29Tab,
-        [30] = ChatFrame30Tab,
-        [31] = ChatFrame31Tab,
-        [32] = ChatFrame32Tab,
-        [33] = ChatFrame33Tab,
-        [34] = ChatFrame34Tab,
-        [35] = ChatFrame35Tab,
-        [36] = ChatFrame36Tab,
-        [37] = ChatFrame37Tab,
-        [38] = ChatFrame38Tab,
-        [39] = ChatFrame39Tab,
-    }
+function test11111()
+    local i = 1;
 
-    for i=1, 50 do
+    while _G['ChatFrame'..i..'Tab'] do
+        i = i + 1;
+    end
+
+    print(i);
+end
+
+function MesButton(args)
+    local i123 = 1;
+    DygMesTabLocal = {};
+
+    while _G['ChatFrame'..i123..'Tab'] do
+        --print(i123)
+        DygMesTabLocal[i123] = _G['ChatFrame'..i123..'Tab'];
+        i123 = i123 + 1;
+    end
+
+    --DygMesTabLocal = {
+    --    [1] = ChatFrame1Tab,
+    --    [2] = ChatFrame2Tab,
+    --    [3] = ChatFrame3Tab,
+    --    [4] = ChatFrame4Tab,
+    --    [5] = ChatFrame5Tab,
+    --    [6] = ChatFrame6Tab,
+    --    [7] = ChatFrame7Tab,
+    --    [8] = ChatFrame8Tab,
+    --    [9] = ChatFrame9Tab,
+    --    [10] = ChatFrame10Tab,
+    --    [11] = ChatFrame11Tab,
+    --    [12] = ChatFrame12Tab,
+    --    [13] = ChatFrame13Tab,
+    --    [14] = ChatFrame14Tab,
+    --    [15] = ChatFrame15Tab,
+    --    [16] = ChatFrame16Tab,
+    --    [17] = ChatFrame17Tab,
+    --    [18] = ChatFrame18Tab,
+    --    [19] = ChatFrame19Tab,
+    --    [20] = ChatFrame20Tab,
+    --    [21] = ChatFrame21Tab,
+    --    [22] = ChatFrame22Tab,
+    --    [23] = ChatFrame23Tab,
+    --    [24] = ChatFrame24Tab,
+    --    [25] = ChatFrame25Tab,
+    --    [26] = ChatFrame26Tab,
+    --    [27] = ChatFrame27Tab,
+    --    [28] = ChatFrame28Tab,
+    --    [29] = ChatFrame29Tab,
+    --    [30] = ChatFrame30Tab,
+    --    [31] = ChatFrame31Tab,
+    --    [32] = ChatFrame32Tab,
+    --    [33] = ChatFrame33Tab,
+    --    [34] = ChatFrame34Tab,
+    --    [35] = ChatFrame35Tab,
+    --    [36] = ChatFrame36Tab,
+    --    [37] = ChatFrame37Tab,
+    --    [38] = ChatFrame38Tab,
+    --    [39] = ChatFrame39Tab,
+    --    [40] = ChatFrame40Tab,
+    --    [41] = ChatFrame41Tab,
+    --}
+
+    
+
+    for i=1, 100 do
         if(_G['ChatFrame'..i..'Tab']) then
             _G['ChatFrame'..i..'Tab']:SetScript("OnHide", function(self) self:SetParent(TabHide); MesButton(); C_Timer.After(0.2, function() ChatBar() end) end);
             _G['ChatFrame'..i..'Tab']:SetScript("OnShow", function(self) if(self:GetParent() == TabHide) then self:Hide(); end; MesButton(); C_Timer.After(0.2, function() ChatBar() end) end);
