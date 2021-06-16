@@ -250,6 +250,22 @@ function ChatBarSettings()
         ChatBar2Settings:SetFrameStrata("DIALOG");
     end
 
+    if(ChatBar2Settings.ancor==nil) then
+        ChatBar2Settings.ancor = CreateFrame("FRAME", "ancor", ChatBar2Settings, BackdropTemplateMixin and "BackdropTemplate");
+        ChatBar2Settings.ancor:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background",});
+        ChatBar2Settings.ancor:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], 0.8);
+        ChatBar2Settings.ancor:ClearAllPoints();
+        ChatBar2Settings.ancor:SetPoint("CENTER", EZChatBar,"CENTER", 0, 200);
+        ChatBar2Settings.ancor:SetWidth(600);
+        ChatBar2Settings.ancor:SetHeight(24);
+        --ChatBar2Settings.ancor:SetFrameStrata("DIALOG");
+        ChatBar2Settings:ClearAllPoints();
+        ChatBar2Settings:SetPoint("TOP", ChatBar2Settings.ancor,"BOTTOM", 0, -2);
+        --ChatBar2Settings.ancor:Raise();
+        
+    end
+    WindowMoving(ChatBar2Settings.ancor);
+
     if(ChatBar2Settings.core==nil) then
         ChatBar2Settings.core = CreateFrame("FRAME", "ChatBar2Settings_core", ChatBar2Settings, BackdropTemplateMixin and "BackdropTemplate");
         --ChatBar2Settings.core:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background",});
@@ -288,13 +304,22 @@ function ChatBarSettings()
     ChatBar2Settings:Show();
 
     if(ChatBar2Settings.exit==nil) then
-        ChatBar2Settings.exit = CreateFrame("FRAME", "Exit", ChatBar2Settings, BackdropTemplateMixin and "BackdropTemplate");
+        ChatBar2Settings.exit = CreateFrame("FRAME", "Exit", ChatBar2Settings.ancor, BackdropTemplateMixin and "BackdropTemplate");
         ChatBar2Settings.exit:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background",});
         ChatBar2Settings.exit:SetBackdropColor(255/255, 0/255, 0/255, 0.8);
         ChatBar2Settings.exit:ClearAllPoints();
-        ChatBar2Settings.exit:SetPoint("TOPRIGHT", ChatBar2Settings,"TOPRIGHT", -4, -4);
+        ChatBar2Settings.exit:SetPoint("TOPRIGHT", ChatBar2Settings.ancor,"TOPRIGHT", -4, -4);
         ChatBar2Settings.exit:SetWidth(16);
         ChatBar2Settings.exit:SetHeight(16);
+
+        ChatBar2Settings.exit.x = CreateFrame("FRAME", "Exit", ChatBar2Settings.exit, BackdropTemplateMixin and "BackdropTemplate");
+        ChatBar2Settings.exit.x:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Close",});
+        ChatBar2Settings.exit.x:SetBackdropColor(1, 1, 1, 1);
+        ChatBar2Settings.exit.x:ClearAllPoints();
+        ChatBar2Settings.exit.x:SetPoint("CENTER", ChatBar2Settings.exit,"CENTER", 0, 0);
+        ChatBar2Settings.exit.x:SetWidth(12);
+        ChatBar2Settings.exit.x:SetHeight(12);
+
         ChatBar2Settings.exit:SetScript("OnMouseDown", function(self, button)
 
             if(button == "LeftButton") then
@@ -308,7 +333,7 @@ function ChatBarSettings()
     
     if(ChatBar2Settings.add==nil) then
         ChatBar2Settings.add = CreateFrame("FRAME", "add", ChatBar2Settings, BackdropTemplateMixin and "BackdropTemplate");
-        ChatBar2Settings.add:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background",});
+        ChatBar2Settings.add:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\ButtonChatBar2",});
         --ChatBar2Settings.add:SetBackdropColor(255/255, 0/255, 0/255, 0.8);
         ChatBar2Settings.add:ClearAllPoints();
         ChatBar2Settings.add:SetPoint("TOPLEFT", ChatBar2Settings,"TOPLEFT", 4, -4);
@@ -331,6 +356,51 @@ function ChatBarSettings()
         end)
 
         --ChatBar2Settings.exit:SetFrameStrata("DIALOG");
+    end
+
+    if(ChatBar2Settings.label1==nil)then
+        ChatBar2Settings.label1 = CreateFrame("EditBox", "label1", ChatBar2Settings.add, BackdropTemplateMixin and "BackdropTemplate");
+        ChatBar2Settings.label1:ClearAllPoints();
+        ChatBar2Settings.label1:SetPoint("LEFT", ChatBar2Settings.add,"RIGHT", 10, 0);
+        ChatBar2Settings.label1:SetWidth(150);
+        ChatBar2Settings.label1:SetHeight(32);
+        ChatBar2Settings.label1:SetTextInsets(8, 8, 0, 0);
+        ChatBar2Settings.label1:SetFontObject('ChatFontNormal');
+        ChatBar2Settings.label1:SetBackdropColor(0, 0, 0, 0.8);
+        ChatBar2Settings.label1:SetBackdropBorderColor(1, 1, 1, 0.8);
+        ChatBar2Settings.label1:SetText(EZCHATBAR_CHATBAR2_SETTINGS_label1);
+        --ChatBar2Settings.edit[i].title:ClearFocus();
+        ChatBar2Settings.label1:Disable();
+    end
+
+    if(ChatBar2Settings.label2==nil)then
+        ChatBar2Settings.label2 = CreateFrame("EditBox", "label2", ChatBar2Settings.label1, BackdropTemplateMixin and "BackdropTemplate");
+        ChatBar2Settings.label2:ClearAllPoints();
+        ChatBar2Settings.label2:SetPoint("LEFT", ChatBar2Settings.label1,"RIGHT", 10, 0);
+        ChatBar2Settings.label2:SetWidth(200);
+        ChatBar2Settings.label2:SetHeight(32);
+        ChatBar2Settings.label2:SetTextInsets(8, 8, 0, 0);
+        ChatBar2Settings.label2:SetFontObject('ChatFontNormal');
+        ChatBar2Settings.label2:SetBackdropColor(0, 0, 0, 0.8);
+        ChatBar2Settings.label2:SetBackdropBorderColor(1, 1, 1, 0.8);
+        ChatBar2Settings.label2:SetText(EZCHATBAR_CHATBAR2_SETTINGS_label2);
+        --ChatBar2Settings.edit[i].title:ClearFocus();
+        ChatBar2Settings.label2:Disable();
+    end
+
+    if(ChatBar2Settings.label3==nil)then
+        ChatBar2Settings.label3 = CreateFrame("EditBox", "label3", ChatBar2Settings.label2, BackdropTemplateMixin and "BackdropTemplate");
+        ChatBar2Settings.label3:ClearAllPoints();
+        ChatBar2Settings.label3:SetPoint("LEFT", ChatBar2Settings.label2,"RIGHT", 10, 0);
+        ChatBar2Settings.label3:SetWidth(100);
+        ChatBar2Settings.label3:SetHeight(32);
+        ChatBar2Settings.label3:SetTextInsets(8, 8, 0, 0);
+        ChatBar2Settings.label3:SetFontObject('ChatFontNormal');
+        ChatBar2Settings.label3:SetBackdropColor(0, 0, 0, 0.8);
+        ChatBar2Settings.label3:SetBackdropBorderColor(1, 1, 1, 0.8);
+        ChatBar2Settings.label3:SetText(EZCHATBAR_CHATBAR2_SETTINGS_label3);
+        --ChatBar2Settings.edit[i].title:ClearFocus();
+        ChatBar2Settings.label3:Disable();
     end
 
 
@@ -530,9 +600,9 @@ function ChatBarSettings()
                 end)
 
                 StaticPopupDialogs["removeBall"..i] = {
-                    text = "Удалить шарик "..i.." " ..Dygbubbles[i]["title"].."?" ,
-                    button1 = "Да",
-                    button2 = "Нет",
+                    text = EZCHATBAR_CHATBAR2_removeBall_TITLE..i..") " ..Dygbubbles[i]["title"].."?" ,
+                    button1 = EZCHATBAR_GENERALTAB_BUTTON_YES,
+                    button2 = EZCHATBAR_GENERALTAB_BUTTON_NO,
                     OnAccept = function()
                         table.remove(Dygbubbles, i)
                         ChatBar2();
