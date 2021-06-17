@@ -225,7 +225,8 @@ function Ball(data)
         ChatBar2Frame.ball[i]:SetScript("OnMouseDown", function(self, button)
 
             if(button == "LeftButton") then
-                ChatFrame_OpenChat(data["cmd"], chatFrame);
+                local str = Dyg_Variables(data["cmd"]);
+                ChatFrame_OpenChat(str, chatFrame);
             end
         end)
         
@@ -237,6 +238,27 @@ function Ball(data)
         ChatBar2Frame.ball.i = 0;
     end
 end
+
+
+function Dyg_Variables(str)
+
+    if(string.match(str, "#keystone#"))then
+        local locate, _, _, steps  = C_Scenario.GetInfo();
+        if(locate==nil) then
+            return string.gsub(str, "#keystone#", "я не в подземелье")
+        end
+
+        local targets, _, _, prochents, final_value, _, _, quantity = C_Scenario.GetCriteriaInfo(steps);
+        local keylvl = C_ChallengeMode.GetActiveKeystoneInfo(); 
+        keylvl = keylvl or "nil"
+
+        return string.gsub(str, "#keystone#", 'Я сейчас в "'..locate..' ('..keylvl..')", выполняю цель №'..steps..' "'..targets..'"');
+        --return 'Я сейчас в "'..locate..' ('..keylvl..')", выполняю цель №'..steps..' "'..targets..'"';
+    end
+
+    return str;
+end
+
 
 function ChatBarSettings()
     if(ChatBar2Settings==nil) then
