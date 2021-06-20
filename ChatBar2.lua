@@ -117,12 +117,27 @@ function GetBubbles()
 end
 
 function ChatBar2()
+
+    --if(DygSettings["skins"]==nil)then
+        DygSettings["skins"]= DygSettings["skins"] or "bubble1";
+    --end
+
+    if(DygSettings["ChatBar2_enabled"]==false)then
+        if(ChatBar2Frame) then
+            ChatBar2Frame:Hide()
+        end
+    else
+
+    if(DygSettings["PanelHorizontal"]==nil)then
+        DygSettings["PanelHorizontal"] = DygSettings["PanelHorizontal"] or false;
+    end
+
     local EZChatBar = BaseFrameAddons();
     
     if(ChatBar2Frame==nil) then
         ChatBar2Frame = CreateFrame("FRAME", "ChatBarPanel2", EZChatBar, BackdropTemplateMixin and "BackdropTemplate");
-        ChatBar2Frame:SetWidth(1);
-        ChatBar2Frame:SetHeight(1);
+        ChatBar2Frame:SetWidth(21);
+        ChatBar2Frame:SetHeight(21);
         ------------------------
         --ChatBarSettings();
         ------------------------
@@ -130,15 +145,27 @@ function ChatBar2()
 
     if(ChatBar2Frame.bg==nil) then
         ChatBar2Frame.bg = CreateFrame("FRAME", "bg", ChatBar2Frame, BackdropTemplateMixin and "BackdropTemplate");
-        ChatBar2Frame.bg:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background2",});
-        ChatBar2Frame.bg:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
         ChatBar2Frame.bg:ClearAllPoints();
-        ChatBar2Frame.bg:SetPoint("TOP", ChatBar2Frame,"TOP", 0, 2);
-        ChatBar2Frame.bg:SetWidth(21);
+
+
         --ChatBar2Frame.bg:Lower();
         --ChatBar2Frame.bg:Raise();
         --ChatBar2Frame.bg:SetHeight(24);
     end
+    if(DygSettings["PanelHorizontal"]==false)then
+        ChatBar2Frame.bg:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background2",});
+        ChatBar2Frame.bg:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
+
+        ChatBar2Frame.bg:SetPoint("TOP", ChatBar2Frame,"TOP", 0, 2);
+        ChatBar2Frame.bg:SetWidth(21);
+    else
+        ChatBar2Frame.bg:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background2_90",});
+        ChatBar2Frame.bg:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
+
+        ChatBar2Frame.bg:SetPoint("BOTTOMLEFT", ChatBar2Frame,"BOTTOMLEFT", 2, 0);
+        ChatBar2Frame.bg:SetHeight(21);
+    end
+
     ChatBar2Frame.bg:Lower();
 
     if(ChatBar2Frame.anchor==nil) then
@@ -146,12 +173,22 @@ function ChatBar2()
         ChatBar2Frame.anchor:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background",});
         ChatBar2Frame.anchor:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
         ChatBar2Frame.anchor:ClearAllPoints();
-        ChatBar2Frame.anchor:SetPoint("BOTTOM", EZChatBar, "TOP");
-        ChatBar2Frame.anchor:SetWidth(21);
-        ChatBar2Frame.anchor:SetHeight(8);
         ChatBar2Frame.anchor:Lower();
-        ChatBar2Frame:ClearAllPoints();
-        ChatBar2Frame:SetPoint("TOP", ChatBar2Frame.anchor, "BOTTOM", 0, -3);
+
+        if(DygSettings["PanelHorizontal"]==false)then
+            ChatBar2Frame.anchor:SetPoint("BOTTOM", EZChatBar, "TOP");
+            ChatBar2Frame.anchor:SetWidth(21);
+            ChatBar2Frame.anchor:SetHeight(9);
+            ChatBar2Frame:ClearAllPoints();
+            ChatBar2Frame:SetPoint("TOP", ChatBar2Frame.anchor, "BOTTOM", 0, -3);
+        else
+            ChatBar2Frame.anchor:SetPoint("BOTTOMLEFT", EZChatBar, "TOPLEFT");
+            ChatBar2Frame.anchor:SetWidth(9);
+            ChatBar2Frame.anchor:SetHeight(21);
+            ChatBar2Frame:ClearAllPoints();
+            ChatBar2Frame:SetPoint("LEFT", ChatBar2Frame.anchor, "RIGHT", 0, 0);
+        end
+
         WindowMoving(ChatBar2Frame.anchor, true);
 
         ChatBar2Frame.anchor:HookScript("OnMouseDown", function(self, button)
@@ -162,8 +199,10 @@ function ChatBar2()
         end)
     end
 
-    Ball();
 
+
+    Ball();
+    ChatBar2Frame.bg:Lower();
 
     for i=1, #Dygbubbles do
         --print(Dygbubbles[i]["perm"]);
@@ -172,6 +211,8 @@ function ChatBar2()
         end
     end
     --Ball();
+    end
+
 end
 
 
@@ -184,30 +225,43 @@ function Ball(data)
     if(data)then
         ChatBar2Frame.ball.i=ChatBar2Frame.ball.i+1;
         local i = ChatBar2Frame.ball.i;
+
         if(ChatBar2Frame.ball[i]==nil)then
             ChatBar2Frame.ball[i] = ChatBar2Frame.ball[i] or CreateFrame("FRAME", "ball", ChatBar2Frame, BackdropTemplateMixin and "BackdropTemplate");
+            
+            --ChatBar2Frame.ball[i]:SetScript("OnEnter", function(self)
+            --    print(data["title"]);
+            --end)
+            
             ChatBar2Frame.ball[i]:HookScript("OnEnter", function(self)
-                ChatBar2Frame.ball[i].glow:Show();
-                DygMesTab.TextPanel:Show();
-                DygMesTab.TextPanel.Text:SetText(data["title"]);
-                --DygChatBarFrame.button[i]:SetBackdropColor((color_r+100)/255, (color_g+100)/255, (color_b+100)/255, 255/255);
+
             end)
 
             ChatBar2Frame.ball[i]:HookScript("OnLeave", function(self)
                 ChatBar2Frame.ball[i].glow:Hide();
                 DygMesTab.TextPanel:Hide();
-                --DygChatBarFrame.button[i]:SetBackdropColor(color_r/255, color_g/255, color_b/255, 255/255);
-
             end)
-
         end
+
+        ChatBar2Frame.ball[i]:SetScript("OnEnter", function(self)
+            DygMesTab.TextPanel.Text:SetText(data["title"]);
+            ChatBar2Frame.ball[i].glow:Show();
+            DygMesTab.TextPanel:Show();
+
+        end)
 
         ChatBar2Frame.ball[i]:Show();
         ChatBar2Frame.ball[i]:SetWidth(buble_size);
         ChatBar2Frame.ball[i]:SetHeight(buble_size-1);
         ChatBar2Frame.ball[i]:ClearAllPoints();
-        ChatBar2Frame.ball[i]:SetPoint("BOTTOM", ChatBar2Frame, "TOP", 0, 0 - i*(buble_size+2));
-        ChatBar2Frame.ball[i]:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\ButtonChatBar2",});
+
+        if(DygSettings["PanelHorizontal"]==false)then
+            ChatBar2Frame.ball[i]:SetPoint("BOTTOM", ChatBar2Frame, "TOP", 0, 0 - i*(buble_size+2));
+        else
+            ChatBar2Frame.ball[i]:SetPoint("LEFT", ChatBar2Frame, "LEFT", 0 + i*(buble_size+2)-(buble_size)+5, 0);
+        end
+
+        ChatBar2Frame.ball[i]:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\skins\\"..DygSettings["skins"].."\\bubble",});
         ChatBar2Frame.ball[i]:SetBackdropColor(data["r"], data["g"], data["b"]);
         --ChatBar2Frame.ball[i]:Raise();
 
@@ -215,7 +269,7 @@ function Ball(data)
         ChatBar2Frame.ball[i].glow:Hide();
         ChatBar2Frame.ball[i].glow:SetWidth(buble_size);
         ChatBar2Frame.ball[i].glow:SetHeight(buble_size-1);
-        ChatBar2Frame.ball[i].glow:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\glow3",});
+        ChatBar2Frame.ball[i].glow:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\skins\\"..DygSettings["skins"].."\\glow",});
         ChatBar2Frame.ball[i].glow:SetPoint("CENTER", ChatBar2Frame.ball[i], "CENTER");
         ChatBar2Frame.ball[i].glow:SetBackdropColor(1, 1, 1, 0.7);
         --ChatBar2Frame.ball[i].glow:Raise();
@@ -234,7 +288,12 @@ function Ball(data)
         for i=1, ChatBar2Frame.ball.i do
             ChatBar2Frame.ball[i]:Hide();
         end
-        ChatBar2Frame.bg:SetHeight(buble_size*ChatBar2Frame.ball.i + 24);
+        if(DygSettings["PanelHorizontal"]==false)then
+            ChatBar2Frame.bg:SetHeight(buble_size*ChatBar2Frame.ball.i + 24);
+        else
+            ChatBar2Frame.bg:SetWidth(buble_size*ChatBar2Frame.ball.i + 24);
+        end
+
         ChatBar2Frame.ball.i = 0;
     end
 end
@@ -355,7 +414,7 @@ function ChatBarSettings()
     
     if(ChatBar2Settings.add==nil) then
         ChatBar2Settings.add = CreateFrame("FRAME", "add", ChatBar2Settings, BackdropTemplateMixin and "BackdropTemplate");
-        ChatBar2Settings.add:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\ButtonChatBar2",});
+        ChatBar2Settings.add:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\skins\\"..DygSettings["skins"].."\\bubble",});
         --ChatBar2Settings.add:SetBackdropColor(255/255, 0/255, 0/255, 0.8);
         ChatBar2Settings.add:ClearAllPoints();
         ChatBar2Settings.add:SetPoint("TOPLEFT", ChatBar2Settings,"TOPLEFT", 4, -4);
@@ -376,6 +435,41 @@ function ChatBarSettings()
                 ChatBarSettings();
             end
         end)
+
+        if(ChatBar2Settings.add.glow==nil) then
+            ChatBar2Settings.add.glow = CreateFrame("FRAME", "glow", ChatBar2Settings.add, BackdropTemplateMixin and "BackdropTemplate");
+        end
+
+        ChatBar2Settings.add.glow:Hide();
+        ChatBar2Settings.add.glow:SetWidth(16);
+        ChatBar2Settings.add.glow:SetHeight(16);
+        ChatBar2Settings.add.glow:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\skins\\"..DygSettings["skins"].."\\glow",});
+        ChatBar2Settings.add.glow:SetPoint("CENTER", ChatBar2Settings.add, "CENTER");
+        ChatBar2Settings.add.glow:SetBackdropColor(1, 1, 1, 0.7);
+
+        ChatBar2Settings.add:SetScript("OnLeave", function(self)
+            ChatBar2Settings.add.glow:Hide();
+        end)
+    
+        ChatBar2Settings.add:SetScript("OnEnter", function(self)
+            ChatBar2Settings.add.glow:Show();
+        end)
+
+        if(ChatBar2Settings.add.plus==nil)then
+            ChatBar2Settings.add.plus = CreateFrame("EditBox", "plus", ChatBar2Settings.add, BackdropTemplateMixin and "BackdropTemplate");
+            ChatBar2Settings.add.plus:ClearAllPoints();
+            ChatBar2Settings.add.plus:SetPoint("CENTER", ChatBar2Settings.add,"CENTER");
+            ChatBar2Settings.add.plus:SetWidth(25);
+            ChatBar2Settings.add.plus:SetHeight(25);
+            ChatBar2Settings.add.plus:SetTextInsets(8, 8, 0, 0);
+            ChatBar2Settings.add.plus:SetFontObject('ChatFontNormal');
+            ChatBar2Settings.add.plus:SetBackdropColor(0, 0, 0, 1);
+            ChatBar2Settings.add.plus:SetBackdropBorderColor(1, 1, 1, 0.8);
+            ChatBar2Settings.add.plus:SetText("+");
+            --ChatBar2Settings.edit[i].title:ClearFocus();
+            ChatBar2Settings.add.plus:Disable();
+            ChatBar2Settings.add.plus:Hide();
+        end
 
         --ChatBar2Settings.exit:SetFrameStrata("DIALOG");
     end
@@ -446,6 +540,7 @@ function ChatBarSettings()
             end)
 
             ChatBar2Settings.edit[i].title:SetScript("OnEditFocusLost", function(self)
+                Dygbubbles[i]["title"] = ChatBar2Settings.edit[i].title:GetText()
                 ChatBar2Settings.edit[i].title:Disable();
             end)
 
@@ -529,20 +624,34 @@ function ChatBarSettings()
             ChatBar2Settings.edit[i].perm = CreateFrame("EditBox", "SearchFrame", ChatBar2Settings.edit[i].cmd, BackdropTemplateMixin and "BackdropTemplate");
 
             ChatBar2Settings.edit[i].perm:SetScript("OnMouseDown", function(self)
-                ChatBar2Settings.edit[i].perm:Enable();
+                --ChatBar2Settings.edit[i].perm:Enable();
+
+                local menu = {
+                    --{ text = "Select an Option", isTitle = true},
+                    { text = "ALL", func = function() Dygbubbles[i]["perm"] = "ALL"; ChatBar2Settings.edit[i].perm:SetText("ALL"); ChatBar2(); end },
+                    { text = "PARTY", func = function() Dygbubbles[i]["perm"] = "PARTY"; ChatBar2Settings.edit[i].perm:SetText("PARTY"); ChatBar2(); end },
+                    { text = "RAID", func = function() Dygbubbles[i]["perm"] = "RAID"; ChatBar2Settings.edit[i].perm:SetText("RAID"); ChatBar2(); end },
+                    { text = "RAID_WARNING", func = function() Dygbubbles[i]["perm"] = "RAID_WARNING"; ChatBar2Settings.edit[i].perm:SetText("RAID_WARNING"); ChatBar2(); end },
+                    { text = "GUILD", func = function() Dygbubbles[i]["perm"] = "GUILD"; ChatBar2Settings.edit[i].perm:SetText("GUILD"); ChatBar2(); end },
+                    { text = "OFFICER", func = function() Dygbubbles[i]["perm"] = "OFFICER"; ChatBar2Settings.edit[i].perm:SetText("OFFICER"); ChatBar2(); end },
+                    { text = "INSTANCE_CHAT", func = function() Dygbubbles[i]["perm"] = "INSTANCE_CHAT"; ChatBar2Settings.edit[i].perm:SetText("INSTANCE_CHAT"); ChatBar2(); end },
+                    
+                }
+
+                EasyMenu(menu, DropBoxFrame, ChatBar2Settings.edit[i].perm, 0 , 0, "MENU");
             end)
 
-            ChatBar2Settings.edit[i].perm:SetScript("OnEditFocusLost", function(self)
-                Dygbubbles[i]["perm"] = ChatBar2Settings.edit[i].perm:GetText();
-                ChatBar2Settings.edit[i].perm:Disable();
-                ChatBar2();
-            end)
-
-            ChatBar2Settings.edit[i].perm:SetScript("OnEnterPressed", function(self)
-                Dygbubbles[i]["perm"] = ChatBar2Settings.edit[i].perm:GetText();
-                ChatBar2Settings.edit[i].perm:Disable();
-                ChatBar2();
-            end)
+            --ChatBar2Settings.edit[i].perm:SetScript("OnEditFocusLost", function(self)
+            --    Dygbubbles[i]["perm"] = ChatBar2Settings.edit[i].perm:GetText();
+            --    ChatBar2Settings.edit[i].perm:Disable();
+            --    ChatBar2();
+            --end)
+--
+            --ChatBar2Settings.edit[i].perm:SetScript("OnEnterPressed", function(self)
+            --    Dygbubbles[i]["perm"] = ChatBar2Settings.edit[i].perm:GetText();
+            --    ChatBar2Settings.edit[i].perm:Disable();
+            --    ChatBar2();
+            --end)
         end
 
         ChatBar2Settings.edit[i].perm:SetBackdrop({
@@ -572,13 +681,16 @@ function ChatBarSettings()
             ChatBar2Settings.edit[i].GetColor = CreateFrame("FRAME", "GetColor", ChatBar2Settings.edit[i].perm, BackdropTemplateMixin and "BackdropTemplate");
         end
 
-        ChatBar2Settings.edit[i].GetColor:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\ButtonChatBar2",});
+        ChatBar2Settings.edit[i].GetColor:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\skins\\"..DygSettings["skins"].."\\bubble",});
         ChatBar2Settings.edit[i].GetColor:SetBackdropColor(Dygbubbles[i]["r"], Dygbubbles[i]["g"], Dygbubbles[i]["b"]);
         ChatBar2Settings.edit[i].GetColor:ClearAllPoints();
         ChatBar2Settings.edit[i].GetColor:SetPoint("LEFT", ChatBar2Settings.edit[i].perm,"RIGHT", 10, 0);
         ChatBar2Settings.edit[i].GetColor:SetWidth(25);
         ChatBar2Settings.edit[i].GetColor:SetHeight(25);
+
         ChatBar2Settings.edit[i].GetColor:SetScript("OnMouseDown", function(self, button)
+
+
     
                 if(button == "LeftButton") then
                     
@@ -589,6 +701,25 @@ function ChatBarSettings()
                     ColorPickerFrame:SetColorRGB(Dygbubbles[i]["r"], Dygbubbles[i]["g"], Dygbubbles[i]["b"]); 
                     ColorPickerFrame:Show();
                 end
+            end)
+
+            if(ChatBar2Settings.edit[i].GetColor.glow==nil) then
+                ChatBar2Settings.edit[i].GetColor.glow = CreateFrame("FRAME", "glow", ChatBar2Settings.edit[i].GetColor, BackdropTemplateMixin and "BackdropTemplate");
+            end
+    
+            ChatBar2Settings.edit[i].GetColor.glow:Hide();
+            ChatBar2Settings.edit[i].GetColor.glow:SetWidth(25);
+            ChatBar2Settings.edit[i].GetColor.glow:SetHeight(25);
+            ChatBar2Settings.edit[i].GetColor.glow:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\skins\\"..DygSettings["skins"].."\\glow",});
+            ChatBar2Settings.edit[i].GetColor.glow:SetPoint("CENTER", ChatBar2Settings.edit[i].GetColor, "CENTER");
+            ChatBar2Settings.edit[i].GetColor.glow:SetBackdropColor(1, 1, 1, 0.7);
+    
+            ChatBar2Settings.edit[i].GetColor:SetScript("OnLeave", function(self)
+                ChatBar2Settings.edit[i].GetColor.glow:Hide();
+            end)
+        
+            ChatBar2Settings.edit[i].GetColor:SetScript("OnEnter", function(self)
+                ChatBar2Settings.edit[i].GetColor.glow:Show();
             end)
 
             ColorPickerFrame.func = function()

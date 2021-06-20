@@ -78,7 +78,8 @@ function MesButtonPanel()
 end
 
 function Start_Settings()
-    ChatBar()
+    ChatBar();
+    --ChatBar2();
     if(DygSettings["DefaultPanel"] == true) then
         GeneralDockManager:Show();
     else
@@ -229,11 +230,12 @@ function MesButton(args)
         DygMesTab.Settings:SetScript("OnMouseDown", function(self, button)
             self:SetBackdropColor(1, 1, 1, 1);
                 if(button == "RightButton") then
+                    ChatBarSettings();
                     if(IsControlKeyDown() == true)then
 
                     end
                 elseif(button == "LeftButton") then
-                    InterfaceOptionsFrame_OpenToCategory(SettingsMyAddon.panel);
+                    InterfaceOptionsFrame_OpenToCategory(SettingsMyAddon.childpanelChat);
                 end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
                 self:SetBackdropColor(r, g, b, a);
