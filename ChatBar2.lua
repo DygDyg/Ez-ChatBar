@@ -3,16 +3,17 @@
     --Создание фона
     maxlinedata = 0;
 
+
 local perms = 
-{
-    ["ALL"] = function() return true end,
-    ["PARTY"] = function() return UnitExists("party1") end,
-    ["RAID"] = function() return IsInRaid() end,
-    ["RAID_WARNING"] = function() return IsInRaid() and (UnitIsGroupLeader("player") or UnitIsGroupAssistant("player")) end,
-    ["GUILD"] = function() return IsInGuild() end,
-    ["OFFICER"] = function() return C_GuildInfo.CanEditOfficerNote() end,
-    ["INSTANCE_CHAT"] = function() return IsInInstance() end,
-}
+    {
+        ["ALL"] = function() return true end,
+        ["PARTY"] = function() return UnitExists("party1") end,
+        ["RAID"] = function() return IsInRaid() end,
+        ["RAID_WARNING"] = function() return IsInRaid() and (UnitIsGroupLeader("player") or UnitIsGroupAssistant("player")) end,
+        ["GUILD"] = function() return IsInGuild() end,
+        ["OFFICER"] = function() return C_GuildInfo.CanEditOfficerNote() end,
+        ["INSTANCE_CHAT"] = function() return IsInInstance() end,
+    }
 
 local function ScrollFrame_OnMouseWheel(self, delta)
     local newValue = self:GetVerticalScroll() - (delta * 20);
@@ -119,7 +120,8 @@ end
 function ChatBar2()
 
     --if(DygSettings["skins"]==nil)then
-        DygSettings["skins"]= DygSettings["skins"] or "bubble1";
+        DygSettings["skins"] = DygSettings["skins"] or "bubble1";
+        DygSettings["mirror_flip"] = DygSettings["mirror_flip"] or 1;
     --end
 
     if(DygSettings["ChatBar2_enabled"]==false)then
@@ -153,16 +155,21 @@ function ChatBar2()
         --ChatBar2Frame.bg:SetHeight(24);
     end
     if(DygSettings["PanelHorizontal"]==false)then
-        ChatBar2Frame.bg:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background2",});
+        ChatBar2Frame.bg:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background2_"..DygSettings["mirror_flip"],});
         ChatBar2Frame.bg:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
 
         ChatBar2Frame.bg:SetPoint("TOP", ChatBar2Frame,"TOP", 0, 2);
         ChatBar2Frame.bg:SetWidth(21);
     else
-        ChatBar2Frame.bg:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background2_90",});
+        ChatBar2Frame.bg:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background2_"..DygSettings["mirror_flip"].."_90",});
         ChatBar2Frame.bg:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
 
-        ChatBar2Frame.bg:SetPoint("BOTTOMLEFT", ChatBar2Frame,"BOTTOMLEFT", 2, 0);
+        if(DygSettings["mirror_flip"]<0)then
+            ChatBar2Frame.bg:SetPoint("BOTTOMLEFT", ChatBar2Frame,"BOTTOMLEFT", 14, 0);
+        else
+            ChatBar2Frame.bg:SetPoint("BOTTOMLEFT", ChatBar2Frame,"BOTTOMLEFT", 2, 0);
+        end
+        
         ChatBar2Frame.bg:SetHeight(21);
     end
 
@@ -180,13 +187,23 @@ function ChatBar2()
             ChatBar2Frame.anchor:SetWidth(21);
             ChatBar2Frame.anchor:SetHeight(9);
             ChatBar2Frame:ClearAllPoints();
-            ChatBar2Frame:SetPoint("TOP", ChatBar2Frame.anchor, "BOTTOM", 0, -3);
+
+            if(DygSettings["mirror_flip"]<0)then
+                ChatBar2Frame:SetPoint("TOP", ChatBar2Frame.anchor, "CENTER", 0, -6*DygSettings["mirror_flip"]);
+            else
+                ChatBar2Frame:SetPoint("TOP", ChatBar2Frame.anchor, "CENTER", 0, -9*DygSettings["mirror_flip"]);
+            end
         else
             ChatBar2Frame.anchor:SetPoint("BOTTOMLEFT", EZChatBar, "TOPLEFT");
             ChatBar2Frame.anchor:SetWidth(9);
             ChatBar2Frame.anchor:SetHeight(21);
             ChatBar2Frame:ClearAllPoints();
-            ChatBar2Frame:SetPoint("LEFT", ChatBar2Frame.anchor, "RIGHT", 0, 0);
+
+            if(DygSettings["mirror_flip"]<0)then
+                ChatBar2Frame:SetPoint("CENTER", ChatBar2Frame.anchor, "CENTER", -10, 0);
+            else
+                ChatBar2Frame:SetPoint("LEFT", ChatBar2Frame.anchor, "RIGHT", 0, 0);
+            end
         end
 
         WindowMoving(ChatBar2Frame.anchor, true);
@@ -256,9 +273,15 @@ function Ball(data)
         ChatBar2Frame.ball[i]:ClearAllPoints();
 
         if(DygSettings["PanelHorizontal"]==false)then
-            ChatBar2Frame.ball[i]:SetPoint("BOTTOM", ChatBar2Frame, "TOP", 0, 0 - i*(buble_size+2));
+            
+            if(DygSettings["mirror_flip"]<0)then
+                ChatBar2Frame.ball[i]:SetPoint("BOTTOM", ChatBar2Frame, "TOP", 0, (0 - i*(buble_size+2)+(buble_size-5))*DygSettings["mirror_flip"]);
+            else
+                ChatBar2Frame.ball[i]:SetPoint("BOTTOM", ChatBar2Frame, "TOP", 0, 0 - i*(buble_size+2)*DygSettings["mirror_flip"]);
+            end
+
         else
-            ChatBar2Frame.ball[i]:SetPoint("LEFT", ChatBar2Frame, "LEFT", 0 + i*(buble_size+2)-(buble_size)+5, 0);
+            ChatBar2Frame.ball[i]:SetPoint("LEFT", ChatBar2Frame, "LEFT", (0 + i*(buble_size+2)-(buble_size)+5)*DygSettings["mirror_flip"], 0);
         end
 
         ChatBar2Frame.ball[i]:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\skins\\"..DygSettings["skins"].."\\bubble",});
@@ -289,9 +312,9 @@ function Ball(data)
             ChatBar2Frame.ball[i]:Hide();
         end
         if(DygSettings["PanelHorizontal"]==false)then
-            ChatBar2Frame.bg:SetHeight(buble_size*ChatBar2Frame.ball.i + 24);
+            ChatBar2Frame.bg:SetHeight((buble_size*ChatBar2Frame.ball.i + 24)*DygSettings["mirror_flip"]);
         else
-            ChatBar2Frame.bg:SetWidth(buble_size*ChatBar2Frame.ball.i + 24);
+            ChatBar2Frame.bg:SetWidth((buble_size*ChatBar2Frame.ball.i + 24)*DygSettings["mirror_flip"]);
         end
 
         ChatBar2Frame.ball.i = 0;
@@ -530,6 +553,9 @@ function ChatBarSettings()
         ChatBar2Settings.edit = ChatBar2Settings.edit or {};
         ChatBar2Settings.edit[i] = ChatBar2Settings.edit[i] or {};
 
+
+
+
         -------------------------------------
         if(ChatBar2Settings.edit[i].title==nil)then
             ChatBar2Settings.edit[i].title = CreateFrame("EditBox", "SearchFrame", ChatBar2Settings.core, BackdropTemplateMixin and "BackdropTemplate");
@@ -736,6 +762,9 @@ function ChatBarSettings()
                 Dygbubbles[i]["r"], Dygbubbles[i]["g"], Dygbubbles[i]["b"] = ColorPickerFrame.previousValues[1], ColorPickerFrame.previousValues[2], ColorPickerFrame.previousValues[3];
                 ChatBar2();
             end
+            
+
+--------------------------------------------------------------------
 
             if(ChatBar2Settings.edit[i].remove == nil) then
                 ChatBar2Settings.edit[i].remove = CreateFrame("FRAME", "remove", ChatBar2Settings.edit[i].GetColor, BackdropTemplateMixin and "BackdropTemplate");
@@ -751,6 +780,80 @@ function ChatBarSettings()
                 StaticPopup_Show ("removeBall"..i)
         
                 end)
+--------------------------------------------------------------------
+
+            if(ChatBar2Settings.edit[i].up==nil)then
+                ChatBar2Settings.edit[i].up = CreateFrame("FRAME", "ChatBar2Settings", ChatBar2Settings.edit[i].remove, BackdropTemplateMixin and "BackdropTemplate");
+
+                --ChatBar2Settings.edit[i].up.texture =  ChatBar2Settings.edit[i].up:CreateTexture(nil, ChatBar2Settings.edit[i].remove);
+                --ChatBar2Settings.edit[i].up.texture:SetAllPoints();
+                --ChatBar2Settings.edit[i].up.texture:SetTexture("Interface\\AddOns\\EzChatBar\\image\\tree", false);
+                --ChatBar2Settings.edit[i].up.texture:SetRotation(0);
+
+                --ChatBar2Settings.edit[i].up.texture:SetRotation(3.2);
+                --ChatBar2Settings.edit[i].up.texture:SetColorTexture(1, 1, 1, 0.8);
+                ChatBar2Settings.edit[i].up:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\tree",});
+                --ChatBar2Settings.edit[i].up:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], 0.8);
+                ChatBar2Settings.edit[i].up:SetBackdropColor(1, 1, 1, 0.8);
+                ChatBar2Settings.edit[i].up:ClearAllPoints();
+                ChatBar2Settings.edit[i].up:SetPoint("TOPLEFT", ChatBar2Settings.edit[i].remove,"TOPRIGHT", 10, 0);
+                ChatBar2Settings.edit[i].up:SetWidth(20);
+                ChatBar2Settings.edit[i].up:SetHeight(9);
+            end
+
+            ChatBar2Settings.edit[i].up:SetScript("OnMouseDown", function(self, button)
+                --StaticPopup_Show ("removeBall"..i)
+                Dyg_Buble_offset(-1, i);
+            end)
+
+---------------------------------------------------------------------
+
+
+            if(ChatBar2Settings.edit[i].down==nil)then
+                ChatBar2Settings.edit[i].down = CreateFrame("FRAME", "ChatBar2Settings", ChatBar2Settings.edit[i].up, BackdropTemplateMixin and "BackdropTemplate");
+
+                --ChatBar2Settings.edit[i].down.texture =  ChatBar2Settings.edit[i].down:CreateTexture(nil, ChatBar2Settings.edit[i].down);
+                --ChatBar2Settings.edit[i].down.texture:SetAllPoints();
+                --ChatBar2Settings.edit[i].down.texture:SetTexture("Interface\\AddOns\\EzChatBar\\image\\tree", false);
+                --ChatBar2Settings.edit[i].down.texture:SetRotation(3.15);
+
+                ChatBar2Settings.edit[i].down:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\tree2",});
+                --ChatBar2Settings.edit[i].down:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], 0.8);
+                ChatBar2Settings.edit[i].down:SetBackdropColor(1, 1, 1, 0.8);
+
+                ChatBar2Settings.edit[i].down:ClearAllPoints();
+                ChatBar2Settings.edit[i].down:SetPoint("TOP", ChatBar2Settings.edit[i].up,"BOTTOM", 0, -2);
+                ChatBar2Settings.edit[i].down:SetWidth(20);
+                ChatBar2Settings.edit[i].down:SetHeight(9);
+            end
+
+            ChatBar2Settings.edit[i].down:SetScript("OnMouseDown", function(self, button)
+                --StaticPopup_Show ("removeBall"..i)
+                Dyg_Buble_offset(1, i);
+        
+            end)
+
+            function Dyg_Buble_offset(offset, i)
+                offset = i + offset;
+
+                
+
+                if(offset > #Dygbubbles) then
+                    offset = 1;
+                elseif(offset<1 ) then
+                    offset = #Dygbubbles;
+                end
+                
+                local temp = Dygbubbles[offset];
+                Dygbubbles[offset] = Dygbubbles[i];
+                Dygbubbles[i] = temp;
+
+
+                ChatBar2();
+                ChatBarSettings();
+            end
+
+---------------------------------------------------------------------
 
                 StaticPopupDialogs["removeBall"..i] = {
                     text = EZCHATBAR_CHATBAR2_removeBall_TITLE..i..") " ..Dygbubbles[i]["title"].."?" ,
