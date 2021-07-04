@@ -79,7 +79,6 @@ end
 
 function Start_Settings()
     ChatBar();
-    --ChatBar2();
     if(DygSettings["DefaultPanel"] == true) then
         GeneralDockManager:Show();
     else
