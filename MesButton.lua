@@ -78,7 +78,7 @@ function MesButtonPanel()
 end
 
 function Start_Settings()
-    ChatBar();
+    -- ;
     if(DygSettings["DefaultPanel"] == true) then
         GeneralDockManager:Show();
     else
@@ -119,9 +119,9 @@ function MesButton(args)
 
     for i=1, 100 do
         if(_G['ChatFrame'..i..'Tab']) then
-            _G['ChatFrame'..i..'Tab']:SetScript("OnHide", function(self) self:SetParent(TabHide); MesButton(); C_Timer.After(0.2, function() ChatBar() end) end);
-            _G['ChatFrame'..i..'Tab']:SetScript("OnShow", function(self) if(self:GetParent() == TabHide) then self:Hide(); end; MesButton(); C_Timer.After(0.2, function() ChatBar() end) end);
-            _G['ChatFrame'..i..'Tab']:SetScript("OnMouseDown", function(self) MesButton(); C_Timer.After(0.2, function() ChatBar() end) end);
+            _G['ChatFrame'..i..'Tab']:SetScript("OnHide", function(self) self:SetParent(TabHide); MesButton(); C_Timer.After(0.2, function()   end) end);
+            _G['ChatFrame'..i..'Tab']:SetScript("OnShow", function(self) if(self:GetParent() == TabHide) then self:Hide(); end; MesButton(); C_Timer.After(0.2, function()   end) end);
+            _G['ChatFrame'..i..'Tab']:SetScript("OnMouseDown", function(self) MesButton(); C_Timer.After(0.2, function()   end) end);
         end
     end
 

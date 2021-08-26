@@ -215,7 +215,7 @@ function Start_Option()
     local num = 1;
     Dyg_OPT_Create_CheckBox(num, EZCHATBAR_SETTINGS1_CHECKBOX1, EZCHATBAR_SETTINGS1_CHECKBOX1_TITLE, true, "DefaultPanel", pan); num = num + 1;
     Dyg_OPT_Create_CheckBox(num, EZCHATBAR_SETTINGS1_CHECKBOX2, EZCHATBAR_SETTINGS1_CHECKBOX2_TITLE, true, "MyPanel", pan); num = num + 1;
-    Dyg_OPT_Create_CheckBox(num, EZCHATBAR_SETTINGS1_CHECKBOX_CHATBAR, EZCHATBAR_SETTINGS1_CHECKBOX_CHATBAR_TITLE, false, "ChatBarEnable", pan); num = num + 1;
+    --Dyg_OPT_Create_CheckBox(num, EZCHATBAR_SETTINGS1_CHECKBOX_CHATBAR, EZCHATBAR_SETTINGS1_CHECKBOX_CHATBAR_TITLE, false, "ChatBarEnable", pan); num = num + 1;
     Dyg_OPT_Create_CheckBox(num, EZCHATBAR_SETTINGS1_CHECKBOX_CHATBAR.." (2.0)", EZCHATBAR_SETTINGS1_CHECKBOX_CHATBAR_TITLE.." (2.0)", true, "ChatBar2_enabled", pan); num = num + 1;
     Dyg_OPT_Create_CheckBox(num, EZCHATBAR_SETTINGS1_CHECKBOX3, EZCHATBAR_SETTINGS1_CHECKBOX3_TITLE, true, "SoundMes", pan); num = num + 1;
     Dyg_OPT_Create_CheckBox(num, EZCHATBAR_SETTINGS1_CHECKBOX4, EZCHATBAR_SETTINGS1_CHECKBOX4_TITLE, false, "FixBar", pan); num = num + 1;
