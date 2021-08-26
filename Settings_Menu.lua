@@ -62,7 +62,7 @@ InterfaceOptions_AddCategory(SettingsMyAddon.childpanelChat);
 SettingsMyAddon.childpanelIstory = CreateFrame( "Frame", "MyAddonPanel", SettingsMyAddon.panel, BackdropTemplateMixin and "BackdropTemplate");
 SettingsMyAddon.childpanelIstory.name = EZCHATBAR_SETTINGS1_PANELNAME2;
 SettingsMyAddon.childpanelIstory.parent = SettingsMyAddon.panel.name;
-InterfaceOptions_AddCategory(SettingsMyAddon.childpanelIstory);
+--InterfaceOptions_AddCategory(SettingsMyAddon.childpanelIstory);
 
 
 

@@ -48,5 +48,27 @@ EZCHATBAR_CHATBAR2_SETTINGS_label1 = "Название"
 EZCHATBAR_CHATBAR2_SETTINGS_label2 = "Команда"
 EZCHATBAR_CHATBAR2_SETTINGS_label3 = "условие"
 
+EZCHATBAR_EXPORT_POPUP_TEXT1 = "Сохранить эти настройки в глобальную переменную?"
+EZCHATBAR_EXPORT_MES_TEXT1 = "Настройки текущего персонажа сохранены глобально."
+
+EZCHATBAR_IMPORT_POPUP_TEXT1 = "Загрузить настройки с другого пользователя?"
+EZCHATBAR_IMPORT_MES_TEXT1 = "Настройки загружены для этого персонажа."
+
+EZCHATBAR_SLASHCOMMAND_HELP = {
+    "_________________EZHelp______________________",
+    "|cff1eff00/EZScrollframeHeight ''значение''|r",
+    "       Позволяет изменить высоту панели",
+    "       если значение пусто, то покажет текущее значение",
+    "",
+    "|cff1eff00/EZExport|r",
+    "       Сохраняет настройки текущего персонажа",
+    "       в общий буфер",
+    "",
+    "|cff1eff00/EZImport|r",
+    "       Загружает настройки из общего буфера",
+    "       в текущего персонажа",
+    "____________________________________________",
+}
+
 
 --end

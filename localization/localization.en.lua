@@ -40,5 +40,27 @@ EZCHATBAR_SETTINGS1_PANELNAME2 = "Chat history settings (In the development)"
 EZCHATBAR_SETTINGS2_CHECKBOX1 = "Logging of chat (In the development)"
 EZCHATBAR_SETTINGS2_CHECKBOX1_TITLE = "To include the preservation of the history of personal correspondence"
 
+EZCHATBAR_EXPORT_POPUP_TEXT1 = "Save these settings to a global variable?"
+EZCHATBAR_EXPORT_MES_TEXT1 = "The settings of the current character are saved globally."
+
+EZCHATBAR_IMPORT_POPUP_TEXT1 = "Download settings from another user?"
+EZCHATBAR_IMPORT_MES_TEXT1 = "The settings are loaded for this character."
+
+EZCHATBAR_SLASHCOMMAND_HELP = {
+    "_________________EZHelp_____________________",
+    "|cff1eff00/EZScrollframeHeight ''value''|r",
+    "       Allows you to change the height of the panel.",
+    "       if empty, it will show the current value",
+    "",
+    "|cff1eff00/EZExport|r",
+    "       Saves the settings of the current",
+    "       character to the shared buffer",
+    "",
+    "|cff1eff00/EZImport|r",
+    "       Loads settings from the shared",
+    "       buffer to the current character",
+    "____________________________________________",
+}
+
 
 end

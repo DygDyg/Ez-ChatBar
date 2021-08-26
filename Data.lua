@@ -182,24 +182,24 @@ function DygScaleAnim(self, time)
 end
 
 function EZHelp(a, b)
-    local help = {
-        "____________________________________________",
-        "|cff1eff00/EZScrollframeHeight ''значение''|r",
-        "       Позволяет изменить высоту панели",
-        "       если пустой, то покажет текущее значение",
-        "",
-        "|cff1eff00/EZExport|r",
-        "       Сохраняет настройки текущего персонажа",
-        "       в общий буфер",
-        "",
-        "|cff1eff00/EZImport|r",
-        "       Загружает настройки из общего буфера",
-        "       в текущего персонажа",
-        "____________________________________________",
-    }
-    
-    for i=1, #help do
-        print(help[i]);
+    --local help = {
+    --    "____________________________________________",
+    --    "|cff1eff00/EZScrollframeHeight ''значение''|r",
+    --    "       Позволяет изменить высоту панели",
+    --    "       если пустой, то покажет текущее значение",
+    --    "",
+    --    "|cff1eff00/EZExport|r",
+    --    "       Сохраняет настройки текущего персонажа",
+    --    "       в общий буфер",
+    --    "",
+    --    "|cff1eff00/EZImport|r",
+    --    "       Загружает настройки из общего буфера",
+    --    "       в текущего персонажа",
+    --    "____________________________________________",
+    --}
+
+    for i=1, #EZCHATBAR_SLASHCOMMAND_HELP do
+        print(EZCHATBAR_SLASHCOMMAND_HELP[i]);
     end
 
 end
@@ -216,13 +216,54 @@ function DygCalc(num)
 end
 
 function EZImport()
-    DygSettings = DygSettingsGlobal;
-    print("Настройки загружены для этого персонажа.");
+    if(DygSettingsGlobal) then
+
+    StaticPopupDialogs["EZImport_POPUP"] = {
+        text = DygSettingsGlobal["player"]..". "..EZCHATBAR_IMPORT_POPUP_TEXT1,
+        button1 = EZCHATBAR_GENERALTAB_BUTTON_YES,
+        button2 = EZCHATBAR_GENERALTAB_BUTTON_NO,
+        OnAccept = function()
+            DygSettings = DygSettingsGlobal;
+            WindowPosition = WindowPositionGlobal;
+            Dygbubbles = DygbubblesGlobal;
+            C_UI.Reload();
+            print(DygSettingsGlobal["player"]);
+            print(EZCHATBAR_IMPORT_MES_TEXT1);
+        end,
+        timeout = 0,
+        whileDead = true,
+        hideOnEscape = true,
+        preferredIndex = 3,
+    }
+
+    StaticPopup_Show ("EZImport_POPUP");
+    else
+        print("No DATA");
+    end
 end
 
 function EZExport()
-    DygSettingsGlobal = DygSettings;
-    print("Настройки текущего персонажа сохранены глобально.");
+    local player = GetUnitName("player").." "..GetRealmName();
+    StaticPopupDialogs["EZExport_POPUP"] = {
+        text = player..". "..EZCHATBAR_EXPORT_POPUP_TEXT1,
+        button1 = EZCHATBAR_GENERALTAB_BUTTON_YES,
+        button2 = EZCHATBAR_GENERALTAB_BUTTON_NO,
+        OnAccept = function()
+            WindowPositionGlobal = WindowPosition;
+            DygSettingsGlobal = DygSettings;
+            DygbubblesGlobal = Dygbubbles;
+            DygSettingsGlobal["player"] = player;
+            print(player); 
+            print(EZCHATBAR_EXPORT_MES_TEXT1);
+        end,
+        timeout = 0,
+        whileDead = true,
+        hideOnEscape = true,
+        preferredIndex = 3,
+    }
+    StaticPopup_Show ("EZExport_POPUP");
+
+
 end
 
 SlashCmdList["DygCalc"] = DygCalc;
