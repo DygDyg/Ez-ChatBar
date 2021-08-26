@@ -165,7 +165,7 @@ function MesButton(args)
                     DropDownList1:SetPoint("TOPLEFT", DygMesTab, "TOPRIGHT", 0, 0);
                 elseif(button == "LeftButton") then
                     OpenTabHide();
-                    C_Timer.After(0.2, function() ChatBarButton() end)
+                    --C_Timer.After(0.2, function() ChatBarButton() end)
                 end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
                 --C_Timer.After(1, function() self:SetBackdropColor(r, g, b, a)end);
@@ -192,7 +192,7 @@ function MesButton(args)
                 elseif(button == "LeftButton") then
                     DygMesTabLocal[2]:Click(button);
                     OpenTabHide();
-                    C_Timer.After(0.2, function() ChatBarButton() end);
+                    --C_Timer.After(0.2, function() ChatBarButton() end);
                 end
                 PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON);
                 --C_Timer.After(1, function() self:SetBackdropColor(r, g, b, a)end);
@@ -402,7 +402,7 @@ end
                     self.NewMes:Hide();
                     OpenTabHide();
                     self.OpenTab:Show();
-                    C_Timer.After(0.2, function() ChatBarButton() end);
+                    --C_Timer.After(0.2, function() ChatBarButton() end);
                     local NameTabText = self.b.Text:GetText();
                     --print(NameTabText);
                     --print(DygSettings["DygBindingTab"]);
