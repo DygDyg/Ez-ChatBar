@@ -181,14 +181,56 @@ function DygScaleAnim(self, time)
     end
 end
 
+function EZHelp(a, b)
+    local help = {
+        "____________________________________________",
+        "|cff1eff00/EZScrollframeHeight ''значение''|r",
+        "       Позволяет изменить высоту панели",
+        "       если пустой, то покажет текущее значение",
+        "",
+        "|cff1eff00/EZExport|r",
+        "       Сохраняет настройки текущего персонажа",
+        "       в общий буфер",
+        "",
+        "|cff1eff00/EZImport|r",
+        "       Загружает настройки из общего буфера",
+        "       в текущего персонажа",
+        "____________________________________________",
+    }
+    
+    for i=1, #help do
+        print(help[i]);
+    end
+
+end
+
+SlashCmdList["EZHelp"] = EZHelp;
+SLASH_EZHelp1 = "/EZHelp"
+
 
 function DygCalc(num)
     if(num~="") then
         print(tonumber(num))
         print(num)
     end
+end
 
+function EZImport()
+    DygSettings = DygSettingsGlobal;
+    print("Настройки загружены для этого персонажа.");
+end
+
+function EZExport()
+    DygSettingsGlobal = DygSettings;
+    print("Настройки текущего персонажа сохранены глобально.");
 end
 
 SlashCmdList["DygCalc"] = DygCalc;
 SLASH_DygCalc1 = "/calc"
+
+SlashCmdList["EZImport"] = EZImport;
+SLASH_EZImport1 = "/EZImport"
+
+SlashCmdList["EZExport"] = EZExport;
+SLASH_EZExport1 = "/EZExport"
+

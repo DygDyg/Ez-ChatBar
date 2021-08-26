@@ -571,8 +571,8 @@ function DygMesSoundFile(file)
     end
 end
 
-SLASH_DygScrollframeHeight1 = "/DygScrollframeHeight"
-SlashCmdList["DygScrollframeHeight"] = function(msg)
+SLASH_EZScrollframeHeight1 = "/EZScrollframeHeight"
+SlashCmdList["EZScrollframeHeight"] = function(msg)
     if(tonumber(msg)) then
         DygMesTab.frame:SetHeight(tonumber(msg));
         print("Ширина изменена на: "..DygMesTab.frame:GetHeight())
@@ -624,8 +624,8 @@ end
 SlashCmdList["OffsetPanel"] = OffsetPanel;
 SLASH_OffsetPanel1 = "/DygOffsetPanel"
 
---SlashCmdList['DygScrollframeHeight'] = DygScrollframeHeight();
---SLASH_DygScrollframeHeight1 = "/DygScrollframeHeight"
+--SlashCmdList['EZScrollframeHeight'] = EZScrollframeHeight();
+--SLASH_EZScrollframeHeight1 = "/EZScrollframeHeight"
 
 SlashCmdList["DygMesSoundFile"] = DygMesSoundFile;
 SLASH_DygMesSoundFile1 = "/DygMesSoundFile"

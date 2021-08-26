@@ -2,7 +2,7 @@
 --Создание фона
 function ChatBar()
     --if(DebugCheck == true) then
-    DygSettings["mirror_flip"] = DygSettings["mirror_flip"] or 1;
+    DygSettings["mirror_flip"] = DygSettings["mirror_flip"] or false;
         if(DygChatBarFrame==nil) then
             DygChatBarFrameCore = DygChatBarFrameCore or CreateFrame("FRAME", "ChatBarPanel", BaseFrameAddons(), BackdropTemplateMixin and "BackdropTemplate");
             DygChatBarFrame = DygChatBarFrame or CreateFrame("FRAME", "ChatBar", DygChatBarFrameCore, BackdropTemplateMixin and "BackdropTemplate");
@@ -40,6 +40,14 @@ end
 --Создание кнопок
 function ChatBarButton()
     local editBox, chatFrame, messageTypeList, channelList = CBCPanelUpdate();
+    local mirror_flip;
+
+    if(DygSettings["mirror_flip"] == true) then
+        mirror_flip = -1;
+    else
+        mirror_flip = 1;
+    end
+
     DygSettings["Ball"] = DygSettings["Ball"] or {"start111",};
 
     DygChatBarFrameCore:SetWidth(21);
@@ -53,14 +61,14 @@ function ChatBarButton()
         DygChatBarFrame:SetWidth(8);
         DygChatBarFrame:SetHeight(21);
         DygChatBarFrameCore:SetWidth(9);
-        DygChatBarFrame:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background2_"..DygSettings["mirror_flip"].."_90",});
+        DygChatBarFrame:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background2_"..mirror_flip.."_90",});
         DygChatBarFrame:ClearAllPoints();
         DygChatBarFrame:SetPoint("TOPLEFT", DygChatBarFrameCore, "TOPRIGHT", 2, 0);
     else
         DygChatBarFrame:SetWidth(21);
         DygChatBarFrame:SetHeight(8);
         DygChatBarFrameCore:SetHeight(9);
-        DygChatBarFrame:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background2"..DygSettings["mirror_flip"],});
+        DygChatBarFrame:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background2"..mirror_flip,});
         DygChatBarFrame:ClearAllPoints();
         DygChatBarFrame:SetPoint("TOP", DygChatBarFrameCore, "BOTTOM", 0, -2);
     end

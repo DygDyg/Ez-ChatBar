@@ -165,11 +165,17 @@ InterfaceOptions_AddCategory(SettingsMyAddon.childpanelIstory);
         end
     end
 
-    function Dyg_OPT_Create_DropBox(i, text, panel)
+    function Dyg_OPT_Create_DropBox(i, text, Base, type, panel)
         local pos2342355 = -20 * i;
         local menu1 = {}
-        for i = 1, #Dyg_Sound_PlayList_Message do
-            menu1[i] = { text = Dyg_Sound_PlayList_Message[i], func = function() Dyg_OPT_Sound_edit(Dyg_Sound_PlayList_Message[i]); end }
+        for i = 1, #Base do
+            if(type == 1)then
+                menu1[i] = { text = Base[i], func = function() Dyg_OPT_Sound_edit(Base[i]); end }
+            end
+
+            if(type == 2)then
+                menu1[i] = { text = Base[i], func = function() Dyg_skins_buble_edit(Base[i]); end }
+            end
         end
 
         if(panel.DropBoxFrame == nil) then
@@ -189,6 +195,11 @@ InterfaceOptions_AddCategory(SettingsMyAddon.childpanelIstory);
             end)
         end
     end
+
+function Dyg_skins_buble_edit(file)
+    DygSettings["skins"] = file;
+    BuferButtonEdit12342345:SetText(file); 
+end
 
 function Dyg_OPT_Sound_edit(file)
     --print(file);
@@ -210,8 +221,10 @@ function Start_Option()
     Dyg_OPT_Create_CheckBox(num, EZCHATBAR_SETTINGS1_CHECKBOX4, EZCHATBAR_SETTINGS1_CHECKBOX4_TITLE, false, "FixBar", pan); num = num + 1;
     Dyg_OPT_Create_CheckBox(num, EZCHATBAR_SETTINGS1_CHECKBOX6, EZCHATBAR_SETTINGS1_CHECKBOX6_TITLE, false, "FixBarCombat", pan); num = num + 1;
     Dyg_OPT_Create_CheckBox(num, EZCHATBAR_SETTINGS1_CHECKBOX5, EZCHATBAR_SETTINGS1_CHECKBOX5_TITLE, false, "PanelHorizontal", pan); num = num + 1;
+    Dyg_OPT_Create_CheckBox(num, EZCHATBAR_SETTINGS1_CHECKBOX7, EZCHATBAR_SETTINGS1_CHECKBOX7_TITLE, false, "mirror_flip", pan); num = num + 1;
     Dyg_OPT_Create_Button_Color(num, EZCHATBAR_SETTINGS1_COLOR1, EZCHATBAR_SETTINGS1_COLOR1_TITLE, true, 1, pan); num = num + 1;
-    Dyg_OPT_Create_DropBox(num, DygSettings["SoundMesFile"], pan); num = num + 1;
+    Dyg_OPT_Create_DropBox(num, DygSettings["SoundMesFile"], Dyg_Sound_PlayList_Message, 1, pan); num = num + 1;
+    Dyg_OPT_Create_DropBox(num, DygSettings["skins"], Dyg_skins_buble_list,  2, pan); num = num + 1;
     --Dyg_OPT_Create_Button_Color(5, "Цвет Значков", "Уведомление о входящем личном сообщении", true, 2, pan); num = num + 1;
 
     num = 1;

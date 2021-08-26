@@ -1,6 +1,6 @@
 ## Interface: 90100
 ## Title: EzChatBar
-## Version: 0.32.37
+## Version: 0.32.38
 ## Author: ДугДуг
 ## Notes: Addon for to simplify the use of the standard chat.
 ## Notes-ruRU: Аддон для упрощения использования стандартного чата.
@@ -9,7 +9,7 @@
 ## X-Category: Chat
 ## RequiredDeps:
 ## OptionalDeps:
-## SavedVariables: DebugCheck, DygTestData, data, Message
+## SavedVariables: DebugCheck, DygTestData, data, Message, DygSettingsGlobal
 ## SavedVariablesPerCharacter: DygSettings, Dygbubbles, WindowPosition
 
 ##UI_Dyg.xml

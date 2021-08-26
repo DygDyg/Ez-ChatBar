@@ -2,6 +2,12 @@
 
     --Создание фона
     maxlinedata = 0;
+    mirror_flip = false;
+
+    Dyg_skins_buble_list = {
+        "bubble1",
+        "square1"
+    }
 
 
 local perms = 
@@ -121,8 +127,14 @@ function ChatBar2()
 
     --if(DygSettings["skins"]==nil)then
         DygSettings["skins"] = DygSettings["skins"] or "bubble1";
-        DygSettings["mirror_flip"] = DygSettings["mirror_flip"] or 1;
+        DygSettings["mirror_flip"] = DygSettings["mirror_flip"] or false;
+
     --end
+    if(DygSettings["mirror_flip"] == true) then
+        mirror_flip = -1;
+    else
+        mirror_flip = 1;
+    end
 
     if(DygSettings["ChatBar2_enabled"]==false)then
         if(ChatBar2Frame) then
@@ -155,16 +167,16 @@ function ChatBar2()
         --ChatBar2Frame.bg:SetHeight(24);
     end
     if(DygSettings["PanelHorizontal"]==false)then
-        ChatBar2Frame.bg:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background2_"..DygSettings["mirror_flip"],});
+        ChatBar2Frame.bg:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background2_"..mirror_flip,});
         ChatBar2Frame.bg:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
 
         ChatBar2Frame.bg:SetPoint("TOP", ChatBar2Frame,"TOP", 0, 2);
         ChatBar2Frame.bg:SetWidth(21);
     else
-        ChatBar2Frame.bg:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background2_"..DygSettings["mirror_flip"].."_90",});
+        ChatBar2Frame.bg:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background2_"..mirror_flip.."_90",});
         ChatBar2Frame.bg:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
 
-        if(DygSettings["mirror_flip"]<0)then
+        if(mirror_flip<0)then
             ChatBar2Frame.bg:SetPoint("BOTTOMLEFT", ChatBar2Frame,"BOTTOMLEFT", 14, 0);
         else
             ChatBar2Frame.bg:SetPoint("BOTTOMLEFT", ChatBar2Frame,"BOTTOMLEFT", 2, 0);
@@ -189,10 +201,10 @@ function ChatBar2()
             ChatBar2Frame.anchor:SetHeight(9);
             ChatBar2Frame:ClearAllPoints();
 
-            if(DygSettings["mirror_flip"]<0)then
-                ChatBar2Frame:SetPoint("TOP", ChatBar2Frame.anchor, "CENTER", 0, -6*DygSettings["mirror_flip"]);
+            if(mirror_flip<0)then
+                ChatBar2Frame:SetPoint("TOP", ChatBar2Frame.anchor, "CENTER", 0, -6*mirror_flip);
             else
-                ChatBar2Frame:SetPoint("TOP", ChatBar2Frame.anchor, "CENTER", 0, -9*DygSettings["mirror_flip"]);
+                ChatBar2Frame:SetPoint("TOP", ChatBar2Frame.anchor, "CENTER", 0, -9*mirror_flip);
             end
         else
             ChatBar2Frame.anchor:SetPoint("BOTTOMLEFT", EZChatBar, "TOPLEFT");
@@ -200,7 +212,7 @@ function ChatBar2()
             ChatBar2Frame.anchor:SetHeight(21);
             ChatBar2Frame:ClearAllPoints();
 
-            if(DygSettings["mirror_flip"]<0)then
+            if(mirror_flip<0)then
                 ChatBar2Frame:SetPoint("CENTER", ChatBar2Frame.anchor, "CENTER", -10, 0);
             else
                 ChatBar2Frame:SetPoint("LEFT", ChatBar2Frame.anchor, "RIGHT", 0, 0);
@@ -276,14 +288,14 @@ function Ball(data)
 
         if(DygSettings["PanelHorizontal"]==false)then
             
-            if(DygSettings["mirror_flip"]<0)then
-                ChatBar2Frame.ball[i]:SetPoint("BOTTOM", ChatBar2Frame, "TOP", 0, (0 - i*(buble_size+2)+(buble_size-5))*DygSettings["mirror_flip"]);
+            if(mirror_flip<0)then
+                ChatBar2Frame.ball[i]:SetPoint("BOTTOM", ChatBar2Frame, "TOP", 0, (0 - i*(buble_size+2)+(buble_size-5))*mirror_flip);
             else
-                ChatBar2Frame.ball[i]:SetPoint("BOTTOM", ChatBar2Frame, "TOP", 0, 0 - i*(buble_size+2)*DygSettings["mirror_flip"]);
+                ChatBar2Frame.ball[i]:SetPoint("BOTTOM", ChatBar2Frame, "TOP", 0, 0 - i*(buble_size+2)*mirror_flip);
             end
 
         else
-            ChatBar2Frame.ball[i]:SetPoint("LEFT", ChatBar2Frame, "LEFT", (0 + i*(buble_size+2)-(buble_size)+5)*DygSettings["mirror_flip"], 0);
+            ChatBar2Frame.ball[i]:SetPoint("LEFT", ChatBar2Frame, "LEFT", (0 + i*(buble_size+2)-(buble_size)+5)*mirror_flip, 0);
         end
 
         ChatBar2Frame.ball[i]:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\skins\\"..DygSettings["skins"].."\\bubble",});
@@ -314,9 +326,9 @@ function Ball(data)
             ChatBar2Frame.ball[i]:Hide();
         end
         if(DygSettings["PanelHorizontal"]==false)then
-            ChatBar2Frame.bg:SetHeight((buble_size*ChatBar2Frame.ball.i + 24)*DygSettings["mirror_flip"]);
+            ChatBar2Frame.bg:SetHeight((buble_size*ChatBar2Frame.ball.i + 24)*mirror_flip);
         else
-            ChatBar2Frame.bg:SetWidth((buble_size*ChatBar2Frame.ball.i + 24)*DygSettings["mirror_flip"]);
+            ChatBar2Frame.bg:SetWidth((buble_size*ChatBar2Frame.ball.i + 24)*mirror_flip);
         end
 
         ChatBar2Frame.ball.i = 0;

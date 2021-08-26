@@ -1,3 +1,5 @@
+local LDBIcon = LibStub("LibDBIcon-1.0")
+--LDBIcon:Register("EzChatBar")
 
 function EzChatBar2SettingsMenuList(data)
     if(SettingList == nil)then
