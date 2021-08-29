@@ -64,6 +64,11 @@ SettingsMyAddon.childpanelIstory.name = EZCHATBAR_SETTINGS1_PANELNAME2;
 SettingsMyAddon.childpanelIstory.parent = SettingsMyAddon.panel.name;
 --InterfaceOptions_AddCategory(SettingsMyAddon.childpanelIstory);
 
+SettingsMyAddon.childpanelDebug = CreateFrame( "Frame", "MyAddonPanel", SettingsMyAddon.panel, BackdropTemplateMixin and "BackdropTemplate");
+SettingsMyAddon.childpanelDebug.name = "Debug";
+SettingsMyAddon.childpanelDebug.parent = SettingsMyAddon.panel.name;
+InterfaceOptions_AddCategory(SettingsMyAddon.childpanelDebug);
+
 
 
 
@@ -195,6 +200,140 @@ SettingsMyAddon.childpanelIstory.parent = SettingsMyAddon.panel.name;
             end)
         end
     end
+    function Dyg_OPT_Create_Scroll_Text(i, text, type, panel)
+        local pos2342355 = -25 * i;
+
+        if(panel.ScrollFrameFrame == nil) then
+            panel.ScrollFrameFrame = {};
+        end
+
+        if(panel.ScrollFrameFrame[i] == nil) then
+            --panel.ScrollFrameFrame[i] = CreateFrame("Button", nil, panel, "GameMenuButtonTemplate"); 
+            panel.ScrollFrameFrame[i] = CreateFrame("ScrollFrame", nil, panel, "UIPanelScrollFrameTemplate");
+            panel.ScrollFrameFrame[i]:SetWidth(550);
+            panel.ScrollFrameFrame[i]:SetHeight(480);
+            panel.ScrollFrameFrame[i]:SetPoint("TOPLEFT", 20, -25*2);
+
+            panel.ScrollFrameFrame[i].TextEditor =  panel.ScrollFrameFrame[i].TextEditor or CreateFrame("EditBox", "TextErrorLogLUAScript",  panel.ScrollFrameFrame[i].ScrollFrame);
+            panel.ScrollFrameFrame[i].TextEditor:SetWidth(panel.ScrollFrameFrame[i]:GetWidth());
+            panel.ScrollFrameFrame[i].TextEditor:SetMultiLine(true);
+            panel.ScrollFrameFrame[i].TextEditor:SetFontObject(GameFontNormal);
+            panel.ScrollFrameFrame[i].TextEditor:SetPoint("TOP", panel.ScrollFrameFrame[i],0,-30);
+            panel.ScrollFrameFrame[i].TextEditor:Disable();
+            panel.ScrollFrameFrame[i]:SetScrollChild( panel.ScrollFrameFrame[i].TextEditor);
+            panel.base = {};
+            panel.numer = 0;
+
+            ScriptErrorsFrame:HookScript("OnShow", function(self) 
+                panel.base[#panel.base+1] = ScriptErrorsFrame.ScrollFrame.Text:GetText();
+                panel.numer=#panel.base;
+                panel.ScrollFrameFrame[i].TextEditor:SetText(ScriptErrorsFrame.ScrollFrame.Text:GetText());
+                panel.ScrollFrameFrame[i].TextEditor:HighlightText();
+                
+                if(DygSettings["Disable BLUAError"]==false)then
+                    ScriptErrorsFrame:Hide();
+                end
+
+            end);
+
+            panel.ScrollFrameFrame[i].TextEditor:SetScript("OnEnter", function(self) 
+                panel.ScrollFrameFrame[i].TextEditor:Enable();
+                panel.ScrollFrameFrame[i].TextEditor:HighlightText();
+            end);
+
+            panel.ScrollFrameFrame[i].TextEditor:SetScript("OnLeave", function(self) 
+                panel.ScrollFrameFrame[i].TextEditor:Disable(); 
+            end);
+        end
+    end
+
+
+
+    function Dyg_OPT_Create_Button(i, text, type, panel)
+        local pos2342355 = -20 * i;
+        
+        DygSettings["Disable BLUAError"] = DygSettings["Disable BLUAError"] or false;
+
+
+        if(panel.ButtonFrame == nil) then
+            panel.ButtonFrame = {};
+        end
+
+        if(panel.ButtonFrame[i] == nil) then
+            panel.ButtonFrame[i] = CreateFrame("Button", nil, panel, "GameMenuButtonTemplate");
+            panel.ButtonFrame[i]:SetID(i);
+            panel.ButtonFrame[i]:SetText(text);
+            panel.ButtonFrame[i]:SetWidth(150);
+            panel.ButtonFrame[i]:SetHeight(22);
+            
+
+            if(type=="scriptErrors")then
+                panel.ButtonFrame[i]:SetPoint("TOPLEFT", 20, pos2342355);
+                EZ_ScriptErrors(false, panel.ButtonFrame[i]);
+            end
+
+            if(type=="CustomScriptErrors")then
+                --EZ_ScriptErrors(false, panel.ButtonFrame[i]);
+                panel.ButtonFrame[i]:SetPoint("TOPLEFT", 20+155, pos2342355+20);
+
+                if(DygSettings["Disable BLUAError"]==false)then
+                    panel.ButtonFrame[i]:SetText("Disable BLUAError");
+                else
+                    panel.ButtonFrame[i]:SetText("Enabled BLUAError");
+                end
+            end
+
+            if(type=="CustomScriptErrorsBack")then
+                --EZ_ScriptErrors(false, panel.ButtonFrame[i]);
+                panel.ButtonFrame[i]:SetWidth(22);
+                panel.ButtonFrame[i]:SetPoint("TOPLEFT", 20+155+150+22, pos2342355+20*2);
+                panel.ButtonFrame[i]:SetText("<");
+
+            end
+
+            if(type=="CustomScriptErrorsNext")then
+                --EZ_ScriptErrors(false, panel.ButtonFrame[i]);
+                panel.ButtonFrame[i]:SetWidth(22);
+                panel.ButtonFrame[i]:SetPoint("TOPLEFT", 20+155+150+22+22, pos2342355+20*3);
+                panel.ButtonFrame[i]:SetText(">");
+            end
+
+            panel.ButtonFrame[i]:SetScript("OnMouseDown", function(self, button)
+                if(type=="scriptErrors")then
+                    EZ_ScriptErrors(true, panel.ButtonFrame[i]);
+                end
+
+                if(type=="CustomScriptErrors")then
+                    --EZ_ScriptErrors(true, panel.ButtonFrame[i]);
+                    if(DygSettings["Disable BLUAError"]==false)then
+                        DygSettings["Disable BLUAError"] = true;
+                        panel.ButtonFrame[i]:SetText("Enabled BLUAError");
+                    else
+                        DygSettings["Disable BLUAError"] = false;
+                        panel.ButtonFrame[i]:SetText("Disable BLUAError");
+                    end
+                end
+
+                if(type=="CustomScriptErrorsBack")then
+                    if(panel.numer-1 >= 1) then
+                        panel.numer = panel.numer-1;
+                        --print(panel.numer);
+                        TextErrorLogLUAScript:SetText(panel.base[panel.numer]);
+                    end
+                end
+
+                if(type=="CustomScriptErrorsNext")then
+                    if(panel.numer+1 <= #panel.base) then
+                        panel.numer = panel.numer+1;
+                        --print(panel.numer);
+                        TextErrorLogLUAScript:SetText(panel.base[panel.numer]);
+                        --EZ_LUA_Error_Log_Edit
+                    end
+                end
+
+            end)
+        end
+    end
 
 function Dyg_skins_buble_edit(file)
     DygSettings["skins"] = file;
@@ -206,6 +345,28 @@ function Dyg_OPT_Sound_edit(file)
     PlaySoundFile("Interface\\AddOns\\EzChatBar\\sound\\"..file, "master");
     DygSettings["SoundMesFile"] = file;
     BuferButtonEdit12342345:SetText(file);
+end
+
+function EZ_ScriptErrors(edit, panel)
+    if(GetCVar("scriptErrors")=="1")then
+        if(edit == true)then
+            SetCVar("scriptErrors", false);
+            print("LUA Errors off");
+            panel:SetText("LUA Errors off");
+        else
+            panel:SetText("LUA Errors on");
+        end
+        
+    else
+        if(edit == true)then
+            SetCVar("scriptErrors", true);
+            print("LUA Errors on");
+            panel:SetText("LUA Errors on");
+        else
+            panel:SetText("LUA Errors off");
+        end
+        
+    end
 end
 
 
@@ -231,6 +392,16 @@ function Start_Option()
     pan = SettingsMyAddon.childpanelIstory;
     Dyg_OPT_Create_CheckBox(1, EZCHATBAR_SETTINGS2_CHECKBOX1, EZCHATBAR_SETTINGS2_CHECKBOX1_TITLE, false, "LogChat", pan); num = num + 1;
 --  Dyg_OPT_Create_CheckBox(4, "Звук входящего сообщения гильдии", "Уведомление о входящем сообщении гильдии", true, "SoundMesGuild", pan); num = num + 1;
+
+    num = 1;
+    pan = SettingsMyAddon.childpanelDebug;
+    Dyg_OPT_Create_Button(num, "Вывод ошибок", "scriptErrors", pan); num = num + 1;
+    Dyg_OPT_Create_Button(num, "Вывод ошибок", "CustomScriptErrors", pan); num = num + 1;
+    Dyg_OPT_Create_Button(num, "Вывод ошибок", "CustomScriptErrorsBack", pan); num = num + 1;
+    Dyg_OPT_Create_Button(num, "Вывод ошибок", "CustomScriptErrorsNext", pan); num = num + 1;
+    Dyg_OPT_Create_Scroll_Text(num, nil, "CustomScriptErrors", pan); num = num + 1;
+
+    
 end
 
 
