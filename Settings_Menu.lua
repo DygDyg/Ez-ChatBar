@@ -252,7 +252,7 @@ InterfaceOptions_AddCategory(SettingsMyAddon.childpanelDebug);
     function Dyg_OPT_Create_Button(i, text, type, panel)
         local pos2342355 = -20 * i;
         
-        DygSettings["Disable BLUAError"] = DygSettings["Disable BLUAError"] or false;
+        DygSettings["Disable BLUAError"] = DygSettings["Disable BLUAError"] or true;
 
 
         if(panel.ButtonFrame == nil) then
