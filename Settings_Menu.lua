@@ -230,7 +230,7 @@ InterfaceOptions_AddCategory(SettingsMyAddon.childpanelDebug);
                 panel.ScrollFrameFrame[i].TextEditor:SetText(ScriptErrorsFrame.ScrollFrame.Text:GetText());
                 panel.ScrollFrameFrame[i].TextEditor:HighlightText();
                 
-                if(DygSettings["Disable BLUAError"]==false)then
+                if(DygSettings["DisableBLUAError"]==false)then
                     ScriptErrorsFrame:Hide();
                 end
 
@@ -251,8 +251,11 @@ InterfaceOptions_AddCategory(SettingsMyAddon.childpanelDebug);
 
     function Dyg_OPT_Create_Button(i, text, type, panel)
         local pos2342355 = -20 * i;
-        
-        DygSettings["Disable BLUAError"] = DygSettings["Disable BLUAError"] or true;
+        print(DygSettings["DisableBLUAError"]);
+
+        if(DygSettings["DisableBLUAError"]==nil) then
+            DygSettings["DisableBLUAError"] = true;
+        end
 
 
         if(panel.ButtonFrame == nil) then
@@ -276,8 +279,8 @@ InterfaceOptions_AddCategory(SettingsMyAddon.childpanelDebug);
                 --EZ_ScriptErrors(false, panel.ButtonFrame[i]);
                 panel.ButtonFrame[i]:SetPoint("TOPLEFT", 20+155, pos2342355+20);
 
-                if(DygSettings["Disable BLUAError"]==false)then
-                    panel.ButtonFrame[i]:SetText("Disable BLUAError");
+                if(DygSettings["DisableBLUAError"]==false)then
+                    panel.ButtonFrame[i]:SetText("DisableBLUAError");
                 else
                     panel.ButtonFrame[i]:SetText("Enabled BLUAError");
                 end
@@ -305,12 +308,12 @@ InterfaceOptions_AddCategory(SettingsMyAddon.childpanelDebug);
 
                 if(type=="CustomScriptErrors")then
                     --EZ_ScriptErrors(true, panel.ButtonFrame[i]);
-                    if(DygSettings["Disable BLUAError"]==false)then
-                        DygSettings["Disable BLUAError"] = true;
+                    if(DygSettings["DisableBLUAError"]==false)then
+                        DygSettings["DisableBLUAError"] = true;
                         panel.ButtonFrame[i]:SetText("Enabled BLUAError");
                     else
-                        DygSettings["Disable BLUAError"] = false;
-                        panel.ButtonFrame[i]:SetText("Disable BLUAError");
+                        DygSettings["DisableBLUAError"] = false;
+                        panel.ButtonFrame[i]:SetText("DisableBLUAError");
                     end
                 end
 
