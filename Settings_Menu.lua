@@ -251,7 +251,6 @@ InterfaceOptions_AddCategory(SettingsMyAddon.childpanelDebug);
 
     function Dyg_OPT_Create_Button(i, text, type, panel)
         local pos2342355 = -20 * i;
-        print(DygSettings["DisableBLUAError"]);
 
         if(DygSettings["DisableBLUAError"]==nil) then
             DygSettings["DisableBLUAError"] = true;
@@ -280,7 +279,7 @@ InterfaceOptions_AddCategory(SettingsMyAddon.childpanelDebug);
                 panel.ButtonFrame[i]:SetPoint("TOPLEFT", 20+155, pos2342355+20);
 
                 if(DygSettings["DisableBLUAError"]==false)then
-                    panel.ButtonFrame[i]:SetText("DisableBLUAError");
+                    panel.ButtonFrame[i]:SetText("Disable BLUAError");
                 else
                     panel.ButtonFrame[i]:SetText("Enabled BLUAError");
                 end
@@ -313,7 +312,7 @@ InterfaceOptions_AddCategory(SettingsMyAddon.childpanelDebug);
                         panel.ButtonFrame[i]:SetText("Enabled BLUAError");
                     else
                         DygSettings["DisableBLUAError"] = false;
-                        panel.ButtonFrame[i]:SetText("DisableBLUAError");
+                        panel.ButtonFrame[i]:SetText("Disable BLUAError");
                     end
                 end
 
