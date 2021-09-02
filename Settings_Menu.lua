@@ -232,8 +232,9 @@ InterfaceOptions_AddCategory(SettingsMyAddon.childpanelDebug);
                 
                 if(DygSettings["DisableBLUAError"]==false)then
                     ScriptErrorsFrame:Hide();
+                    EZErrorCheckIndicator.num:SetText(#panel.base);
+                    EZErrorCheckIndicator:Show();
                 end
-
             end);
 
             panel.ScrollFrameFrame[i].TextEditor:SetScript("OnEnter", function(self) 
@@ -261,6 +262,7 @@ InterfaceOptions_AddCategory(SettingsMyAddon.childpanelDebug);
             panel.ButtonFrame = {};
         end
 
+
         if(panel.ButtonFrame[i] == nil) then
             panel.ButtonFrame[i] = CreateFrame("Button", nil, panel, "GameMenuButtonTemplate");
             panel.ButtonFrame[i]:SetID(i);
@@ -275,6 +277,34 @@ InterfaceOptions_AddCategory(SettingsMyAddon.childpanelDebug);
             end
 
             if(type=="CustomScriptErrors")then
+                if(CharacterMicroButton)then
+                    if(EZErrorCheckIndicator==nil)then
+                        EZErrorCheckIndicator = CreateFrame("Frame", nil, CharacterMicroButton, BackdropTemplateMixin and "BackdropTemplate");
+                        EZErrorCheckIndicator:SetHeight(30);
+                        EZErrorCheckIndicator:SetWidth(30);
+                        EZErrorCheckIndicator:SetPoint("RIGHT", CharacterMicroButton, "LEFT");
+                        EZErrorCheckIndicator:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\glow",});
+                        EZErrorCheckIndicator:SetBackdropColor(1, 0, 0);
+
+                        EZErrorCheckIndicator.num = EZErrorCheckIndicator:CreateFontString(f, "OVERLAY", "GameTooltipText");
+                        EZErrorCheckIndicator.num:SetPoint("CENTER", 0, 0);
+                        --EZErrorCheckIndicator.num:SetText(1);
+                        EZErrorCheckIndicator:Hide();
+
+                        EZErrorCheckIndicator:SetScript("OnMouseDown", function(self, button)
+                            InterfaceOptionsFrame_OpenToCategory(SettingsMyAddon.childpanelDebug);
+                        end)
+
+                        EZErrorCheckIndicator:SetScript("OnEnter", function(self) 
+                            EZErrorCheckIndicator:SetBackdropColor(1, 0.5, 0.5);
+                        end);
+            
+                        EZErrorCheckIndicator:SetScript("OnLeave", function(self) 
+                            EZErrorCheckIndicator:SetBackdropColor(1, 0, 0);
+                        end);
+
+                    end
+                end
                 --EZ_ScriptErrors(false, panel.ButtonFrame[i]);
                 panel.ButtonFrame[i]:SetPoint("TOPLEFT", 20+155, pos2342355+20);
 
@@ -467,3 +497,16 @@ SettingsMyAddon.panel.logo:SetWidth(300);
 SettingsMyAddon.panel.logo:SetHeight(300);
 SettingsMyAddon.panel.logo:SetPoint("CENTER");
 SettingsMyAddon.panel.logo:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\logo",});
+
+--SettingsMyAddon.panel.name_version = CreateFrame("Frame", nil, SettingsMyAddon.panel, BackdropTemplateMixin and "BackdropTemplate");
+SettingsMyAddon.panel.name_version = CreateFrame("EditBox", nil,  SettingsMyAddon.panel);
+SettingsMyAddon.panel.name_version:SetMultiLine(true);
+SettingsMyAddon.panel.name_version:SetWidth(300);
+SettingsMyAddon.panel.name_version:SetHeight(30);
+SettingsMyAddon.panel.name_version:SetPoint("TOPLEFT", 5, -5);
+SettingsMyAddon.panel.name_version:SetFontObject(GameFontNormal);
+SettingsMyAddon.panel.name_version:SetText(GetAddOnMetadata("EzChatBar", "Title").." "..GetAddOnMetadata("EzChatBar", "Version").."\nBy "..GetAddOnMetadata("EzChatBar", "Author"));
+SettingsMyAddon.panel.name_version:SetCursorPosition(0);
+SettingsMyAddon.panel.name_version:Disable();
+
+

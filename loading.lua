@@ -13,8 +13,11 @@ f:SetScript("OnEvent", function(self, event, AddonName, isReload)
             ChatBar2Load() 
         end
 
-
-
+    --FIX LUA ERROR FRAME
+    ScriptErrorsFrame:SetWidth(400);
+    ScriptErrorsFrame.ScrollFrame:SetWidth(360);
+    ScriptErrorsFrame.ScrollFrame.Text:SetWidth(360);
+    --FIX LUA ERROR FRAME
     end
 end
 )
