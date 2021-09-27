@@ -366,6 +366,11 @@ end
             HideButtonColl = HideButtonColl + 1;
             DygMesTab[num1].b.Text:SetTextColor(DygMesTabLocal[i].Text:GetTextColor());
             DygMesTab[num1]:SetScript("OnMouseDown", function(self, button)
+
+                if(DygMesTab[num1].OpenTab:IsShown()==false)then
+                -- if(this.OpenTab:IsShown()==false)then
+                    ClearChatFrames();
+                end
                 DygMesTabLocal[i]:Click(button);
                 if(button == "RightButton") then                                                           --Правая кнопка
                     local x, y = GetCursorPosition();
@@ -465,6 +470,19 @@ end
 function CopyButton()
     --print("click")
     ChatFrame_OpenChat("/g ", chatFrame);
+end
+
+function ClearChatFrames()
+
+    local i = 1;
+
+    while _G['ChatFrame'..i] do
+        -- print(_G['ChatFrame'..i])
+        _G['ChatFrame'..i]:Hide()
+        i =i+1;
+        
+    end
+
 end
 
 function DygColorPanel(self, type)

@@ -293,6 +293,7 @@ InterfaceOptions_AddCategory(SettingsMyAddon.childpanelDebug);
 
                         EZErrorCheckIndicator:SetScript("OnMouseDown", function(self, button)
                             InterfaceOptionsFrame_OpenToCategory(SettingsMyAddon.childpanelDebug);
+                            EZErrorCheckIndicator:Hide();
                         end)
 
                         EZErrorCheckIndicator:SetScript("OnEnter", function(self) 
