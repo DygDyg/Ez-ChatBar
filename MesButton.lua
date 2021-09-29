@@ -366,9 +366,9 @@ end
             HideButtonColl = HideButtonColl + 1;
             DygMesTab[num1].b.Text:SetTextColor(DygMesTabLocal[i].Text:GetTextColor());
             DygMesTab[num1]:SetScript("OnMouseDown", function(self, button)
+                
 
-                if(DygMesTab[num1].OpenTab:IsShown()==false)then
-                -- if(this.OpenTab:IsShown()==false)then
+                if(self.OpenTab:IsShown()==false)then                
                     ClearChatFrames();
                 end
                 DygMesTabLocal[i]:Click(button);
