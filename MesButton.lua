@@ -367,10 +367,10 @@ end
             DygMesTab[num1].b.Text:SetTextColor(DygMesTabLocal[i].Text:GetTextColor());
             DygMesTab[num1]:SetScript("OnMouseDown", function(self, button)
                 
-
                 if(self.OpenTab:IsShown()==false)then                
                     ClearChatFrames();
                 end
+                
                 DygMesTabLocal[i]:Click(button);
                 if(button == "RightButton") then                                                           --Правая кнопка
                     local x, y = GetCursorPosition();
@@ -478,8 +478,12 @@ function ClearChatFrames()
 
     while _G['ChatFrame'..i] do
         -- print(_G['ChatFrame'..i])
-        _G['ChatFrame'..i]:Hide()
-        i =i+1;
+        if(_G['ChatFrame'..i].isLocked)then
+            _G['ChatFrame'..i]:Hide()
+            --print(_G['ChatFrame'..i].isLocked)
+        end
+        --print(_G['ChatFrame'..i].isLocked)
+        i=i+1;
         
     end
 
