@@ -108,24 +108,32 @@ end
 
 function MesButton(args)
     local i123 = 1;
-    --DygMesTabLocal = {};
+    --local i1234 = 1;
+    DygMesTabLocal = {};
+    table.insert(DygMesTabLocal, ChatFrame1Tab);
+    table.insert(DygMesTabLocal, ChatFrame2Tab);
 
-    DygMesTabLocal = {ChatFrame1Tab, ChatFrame2Tab, GeneralDockManagerScrollFrameChild:GetChildren()}
+    --DygMesTabLocal = {ChatFrame1Tab, ChatFrame2Tab, GeneralDockManagerScrollFrameChild:GetChildren()}
     --s = {}
 
-    --while _G['ChatFrame'..i123..'Tab'] do
+    while _G['ChatFrame'..i123..'Tab'] do
         --print(i123)
---        if(_G['ChatFrame'..i123..'Tab']:GetParent():GetName()=="GeneralDockManagerScrollFrameChild")then
+        --if(_G['ChatFrame'..i123]:GetParent():GetName()=="GeneralDockManagerScrollFrameChild")then
+        if(_G['ChatFrame'..i123].isLocked)then
+            table.insert(DygMesTabLocal, _G['ChatFrame'..i123..'Tab']);
             --DygMesTabLocal[i123] = _G['ChatFrame'..i123..'Tab'];
-            --i123 = i123 + 1;
---        end
-    --end
+            --print(" 1) ".._G['ChatFrame'..i123]:GetName().." 2) ".._G['ChatFrame'..i123..'Tab']:GetName())
+        end
+
+            i123 = i123 + 1;
+        --end
+    end
 
 
         --DygMesTabLocal = s
 
 
-    --test123 = DygMesTabLocal;
+    test123 = DygMesTabLocal;
 
 
     for i=1, 100 do
@@ -559,7 +567,12 @@ end
 
 
 
-
+local Event1 = CreateFrame("Frame");
+Event1:RegisterEvent("VOICE_CHAT_CHANNEL_TRANSCRIBING_CHANGED");
+Event1:SetScript("OnEvent", function(...)
+    local args = {...};
+    MesButton(args)
+end)
 
 
 local Event1 = CreateFrame("Frame");
