@@ -110,8 +110,8 @@ function MesButton(args)
     local i123 = 1;
     --local i1234 = 1;
     DygMesTabLocal = {};
-    table.insert(DygMesTabLocal, ChatFrame1Tab);
-    table.insert(DygMesTabLocal, ChatFrame2Tab);
+    --table.insert(DygMesTabLocal, ChatFrame1Tab);
+    --table.insert(DygMesTabLocal, ChatFrame2Tab);
 
     --DygMesTabLocal = {ChatFrame1Tab, ChatFrame2Tab, GeneralDockManagerScrollFrameChild:GetChildren()}
     --s = {}
@@ -375,7 +375,7 @@ end
 
 
 
-        if(DygMesTabLocal[i]~=nil and DygMesTabLocal[i]:IsShown() == true and i > DygSettings["OffsetPanel"]) then
+        if(DygMesTabLocal[i]~=nil and DygMesTabLocal[i]:IsShown() == true) then
             if(DygMesTab[i] == nil) then
 
             end
