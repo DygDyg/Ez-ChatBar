@@ -108,13 +108,24 @@ end
 
 function MesButton(args)
     local i123 = 1;
-    DygMesTabLocal = {};
+    --DygMesTabLocal = {};
 
-    while _G['ChatFrame'..i123..'Tab'] do
+    DygMesTabLocal = {ChatFrame1Tab, ChatFrame2Tab, GeneralDockManagerScrollFrameChild:GetChildren()}
+    --s = {}
+
+    --while _G['ChatFrame'..i123..'Tab'] do
         --print(i123)
-        DygMesTabLocal[i123] = _G['ChatFrame'..i123..'Tab'];
-        i123 = i123 + 1;
-    end
+--        if(_G['ChatFrame'..i123..'Tab']:GetParent():GetName()=="GeneralDockManagerScrollFrameChild")then
+            --DygMesTabLocal[i123] = _G['ChatFrame'..i123..'Tab'];
+            --i123 = i123 + 1;
+--        end
+    --end
+
+
+        --DygMesTabLocal = s
+
+
+    --test123 = DygMesTabLocal;
 
 
     for i=1, 100 do

@@ -1,17 +1,19 @@
 local LDBIcon = LibStub("LibDBIcon-1.0")
 --LDBIcon:Register("EzChatBar")
 
+if(SettingList == nil)then
+    SettingList = {
+      --  {
+      --      ["name"] = "Главная", ["func"] = function() SettingsHideAllMenu();  end,
+      --  },
+        {
+            ["name"] = "Модули", ["func"] = function() SettingsHideAllMenu(); end,
+        },
+    }
+end
+
 function EzChatBar2SettingsMenuList(data)
-    if(SettingList == nil)then
-        SettingList = {
-            {
-                ["name"] = "Главная", ["func"] = function()  end,
-            },
-            {
-                ["name"] = "Модули", ["func"] = function()  end,
-            }
-        }
-    end
+
 
     if (data~=nil and data ~="") then
         SettingList[#SettingList+1] = data
@@ -116,7 +118,9 @@ function EzChatBar2SettingsCreateButton(SettingList, i)
             
             --i = EzChatBar2Settings.menu.i + 1;
         end
+        
         menu:SetScript("OnMouseDown", SettingList[i]["func"])
+        --menu:HookScript("OnMouseDown", function() SettingsHideAllMenu() print("a") end, LE_SCRIPT_BINDING_TYPE_INTRINSIC_PRECALL)
 
         menu:SetScript("OnEnter", function(self)
             menu.text:SetTextColor(1, 1, 0, 1)
@@ -134,4 +138,49 @@ function EzChatBar2SettingsCreateButton(SettingList, i)
         --print(menu.text:GetTextColor())
         menu.text:SetText(SettingList[i]["name"])
     end
+end
+
+function SettingsHideAllMenu()
+    for i = 1, #EZCHtBarSettingsFrameList do
+        EZCHtBarSettingsFrameList[i]:Hide();
+    end
+
+end
+
+function GetEZCheckBox(target, mas)
+    local m = 1
+
+    for i=1, #mas do 
+        if(target[i]==nil)then
+
+        --    target[i] = CreateFrame("FRAME", nil, target.core, BackdropTemplateMixin and "BackdropTemplate");
+        if(mas[i][1]=="CheckButton")then
+            target[i] = CreateFrame("CheckButton", nil, target.core, "ChatConfigCheckButtonTemplate");
+            target[i].tooltip = mas[i][3]..i;
+            target[i]:SetCheckedTexture("Interface\\AddOns\\EzChatBar\\image\\glow")
+            -- target[i]:SetNormalTexture("Interface\\AddOns\\EzChatBar\\image\\check-box_2")
+            -- target[i]:SetPushedTexture("Interface\\AddOns\\EzChatBar\\image\\blank-check-box1")
+            target[i]:SetDisabledCheckedTexture("Interface\\AddOns\\EzChatBar\\image\\glow3")
+        end
+            if (i % 2 ~= 0) then
+                target[i]:SetPoint("TOPLEFT", target.core, "TOPLEFT", 10, (-26*m)+26);
+                target[i]:SetChecked(false) 
+            else
+                target[i]:SetPoint("TOPLEFT", target.core, "TOPLEFT", 600/2, (-26*m)+26);
+                target[i]:SetChecked(true) 
+                m = m+1;
+            end
+            target[i].Text:SetText(mas[i][2]..i);
+            
+            
+            target[i]:SetWidth(25);
+            target[i]:SetHeight(25);
+            -- target[i]:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background",});
+        end
+        -- if(target[i]==nil)then
+            -- target[i] = CreateFrame("CheckButton", "target.core", parentFrame, "ChatConfigCheckButtonTemplate");
+        -- end
+    end
+
+        return EZCheckBox;
 end

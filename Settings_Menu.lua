@@ -329,6 +329,7 @@ InterfaceOptions_AddCategory(SettingsMyAddon.childpanelDebug);
                 panel.ButtonFrame[i]:SetWidth(22);
                 panel.ButtonFrame[i]:SetPoint("TOPLEFT", 20+155+150+22+22, pos2342355+20*3);
                 panel.ButtonFrame[i]:SetText(">");
+                panel.ButtonFrame[i].tooltip = "aaa"
             end
 
             panel.ButtonFrame[i]:SetScript("OnMouseDown", function(self, button)

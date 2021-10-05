@@ -1,4 +1,4 @@
-
+EZCHtBarSettingsFrameList = EZCHtBarSettingsFrameList or {};
 
     --Создание фона
     maxlinedata = 0;
@@ -153,7 +153,7 @@ function ChatBar2()
         ChatBar2Frame:SetWidth(21);
         ChatBar2Frame:SetHeight(21);
         ------------------------
-        --ChatBarSettings();
+        --ChatBarSettingsEdit();
         ------------------------
     end
 
@@ -224,7 +224,7 @@ function ChatBar2()
         ChatBar2Frame.anchor:HookScript("OnMouseDown", function(self, button)
 
             if(button == "RightButton") then
-                --ChatBarSettings();
+                --ChatBarSettingsEdit();
                 EzChatBar2SettingsMenu();
             end
         end)
@@ -355,74 +355,127 @@ function Dyg_Variables(str)
     return str;
 end
 
+function ChatBarSettingsConfig()
 
-function ChatBarSettings()
     if(ChatBar2Settings==nil) then
         ChatBar2Settings = EzChatBar2SettingsMenu();
     end
 
-    --if(ChatBar2Settings==nil) then
-    --    ChatBar2Settings = CreateFrame("FRAME", "ChatBar2Settings", EZChatBar, BackdropTemplateMixin and "BackdropTemplate");
-    --    ChatBar2Settings:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background",});
-    --    ChatBar2Settings:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], 0.8);
-    --    ChatBar2Settings:ClearAllPoints();
-    --    ChatBar2Settings:SetPoint("CENTER", EZChatBar,"CENTER", 0, 0);
-    --    ChatBar2Settings:SetWidth(600);
-    --    ChatBar2Settings:SetHeight(410);
-    --    ChatBar2Settings:SetFrameStrata("DIALOG");
-    --end
+    if(ChatBar2Settings.bubble2==nil) then
+        ChatBar2Settings.bubble2 = CreateFrame("FRAME", nil, ChatBar2Settings, BackdropTemplateMixin and "BackdropTemplate");
+        table.insert(EZCHtBarSettingsFrameList, ChatBar2Settings.bubble2)
+    end
+    ChatBar2Settings.bubble2:Show();
 
-    --if(ChatBar2Settings.ancor==nil) then
-    --    ChatBar2Settings.ancor = CreateFrame("FRAME", "ancor", ChatBar2Settings, BackdropTemplateMixin and "BackdropTemplate");
-    --    ChatBar2Settings.ancor:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background",});
-    --    ChatBar2Settings.ancor:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], 0.8);
-    --    ChatBar2Settings.ancor:ClearAllPoints();
-    --    ChatBar2Settings.ancor:SetPoint("CENTER", EZChatBar,"CENTER", 0, 200);
-    --    ChatBar2Settings.ancor:SetWidth(600);
-    --    ChatBar2Settings.ancor:SetHeight(24);
-    --    --ChatBar2Settings.ancor:SetFrameStrata("DIALOG");
-    --    ChatBar2Settings:ClearAllPoints();
-    --    ChatBar2Settings:SetPoint("TOP", ChatBar2Settings.ancor,"BOTTOM", 0, -2);
-    --    --ChatBar2Settings.ancor:Raise();
-    --    
-    --end
-    --WindowMoving(ChatBar2Settings.ancor);
-    if(ChatBar2Settings.main==nil) then
-        ChatBar2Settings.main = CreateFrame("FRAME", nil, ChatBar2Settings, BackdropTemplateMixin and "BackdropTemplate");
-        --ChatBar2Settings.main:SetPoint("CENTER", ChatBar2Settings,"CENTER", 0, 0);
-        --ChatBar2Settings.main:SetWidth(1);
-        --ChatBar2Settings.main:SetHeight(1);
+    
+    if(ChatBar2Settings.bubble2.core==nil) then
+        ChatBar2Settings.bubble2.core = CreateFrame("FRAME", "ChatBar2SettingsBubble2", ChatBar2Settings, BackdropTemplateMixin and "BackdropTemplate");
+        --ChatBar2Settings.bubble2.core:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background",});
+        --ChatBar2Settings.bubble2.core:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], 0.8);
+        ChatBar2Settings.bubble2.core:ClearAllPoints();
+        ChatBar2Settings.bubble2.core:SetPoint("CENTER", ChatBar2Settings,"CENTER", 0, 0);
+        ChatBar2Settings.bubble2.core:SetWidth(1);
+        ChatBar2Settings.bubble2.core:SetHeight(1);
+        
     end
 
-    if(ChatBar2Settings.core==nil) then
-        ChatBar2Settings.core = CreateFrame("FRAME", "ChatBar2Settings", ChatBar2Settings, BackdropTemplateMixin and "BackdropTemplate");
-        --ChatBar2Settings.core:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background",});
-        --ChatBar2Settings.core:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], 0.8);
-        ChatBar2Settings.core:ClearAllPoints();
-        ChatBar2Settings.core:SetPoint("CENTER", ChatBar2Settings,"CENTER", 0, 0);
-        ChatBar2Settings.core:SetWidth(1);
-        ChatBar2Settings.core:SetHeight(1);
+    if(ChatBar2Settings.bubble2.scroll==nil) then
+        ChatBar2Settings.bubble2.scroll = CreateFrame("ScrollFrame", "ChatBar2Scroll", ChatBar2Settings.bubble2, BackdropTemplateMixin and "BackdropTemplate");
+
+
+        ChatBar2Settings.bubble2.scroll:SetPoint("TOPLEFT", ChatBar2Settings, "TOPLEFT", 0, 0);
+        ChatBar2Settings.bubble2.scroll:SetPoint("BOTTOMRIGHT", ChatBar2Settings, "BOTTOMRIGHT", 0, 0);
+        ChatBar2Settings.bubble2.scroll:SetScrollChild(ChatBar2Settings.bubble2.core);
+
+
+
+        ChatBar2Settings.bubble2.scroll:SetScript("OnMouseWheel", function(self, offset)
+            ScrollFrame_OnMouseWheel(self, offset)
+        end);
+
+        -- if(ChatBar2Settings.bubble2.slider==nil)then
+            -- ChatBar2Settings.bubble2.slider = CreateFrame("Slider", "MySliderGlobalName", ChatBar2Settings.bubble2.scroll, "OptionsSliderTemplate")
+            -- ChatBar2Settings.bubble2.slider:SetWidth(20)
+            -- ChatBar2Settings.bubble2.slider:SetHeight(100)
+            -- ChatBar2Settings.bubble2.slider:SetOrientation('VERTICAL')
+            -- ChatBar2Settings.bubble2.slider:SetPoint("CENTER", ChatBar2Settings.bubble2.scroll, "CENTER", 0, 0);
+        -- end
         
-        --ChatBar2Settings.core:SetFrameStrata("DIALOG");
+
+        GetEZCheckBox(ChatBar2Settings.bubble2, {
+            {"CheckButton", "name", "tooltip", },
+            {"CheckButton", "name", "tooltip", },
+        })
+
+        -- m = 1
+        -- for i=1, 100 do 
+            -- if(ChatBar2Settings.bubble2[i]==nil)then
+-- 
+            --    ChatBar2Settings.bubble2[i] = CreateFrame("FRAME", nil, ChatBar2Settings.bubble2.core, BackdropTemplateMixin and "BackdropTemplate");
+-- 
+                -- ChatBar2Settings.bubble2[i] = CreateFrame("CheckButton", nil, ChatBar2Settings.bubble2.core, "ChatConfigCheckButtonTemplate");
+                -- if (i % 2 ~= 0) then
+                    -- ChatBar2Settings.bubble2[i]:SetPoint("TOPLEFT", ChatBar2Settings.bubble2.core, "TOPLEFT", 10, (-26*m)+26);
+                    -- ChatBar2Settings.bubble2[i]:SetChecked(false) 
+                -- else
+                    -- ChatBar2Settings.bubble2[i]:SetPoint("TOPLEFT", ChatBar2Settings.bubble2.core, "TOPLEFT", 410/2, (-26*m)+26);
+                    -- ChatBar2Settings.bubble2[i]:SetChecked(true) 
+                    -- m = m+1;
+                -- end
+                -- ChatBar2Settings.bubble2[i].Text:SetText("bubble2."..i);
+                -- ChatBar2Settings.bubble2[i].tooltip = "bubble2."..i;
+                -- 
+                -- ChatBar2Settings.bubble2[i]:SetWidth(25);
+                -- ChatBar2Settings.bubble2[i]:SetHeight(25);
+
+                -- ChatBar2Settings.bubble2[i]:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background",});
+
+            -- end
+            -- if(ChatBar2Settings.bubble2[i]==nil)then
+                -- ChatBar2Settings.bubble2[i] = CreateFrame("CheckButton", "ChatBar2Settings.bubble2.core", parentFrame, "ChatConfigCheckButtonTemplate");
+            -- end
+        -- end
+
+    end
+end
+
+----------------------------------------------------------------------------------------------------------------
+
+function ChatBarSettingsEdit()
+    if(ChatBar2Settings==nil) then
+        ChatBar2Settings = EzChatBar2SettingsMenu();
     end
 
-    if(ChatBar2Settings.scroll==nil) then
-        ChatBar2Settings.scroll = CreateFrame("ScrollFrame", "ChatBar2Scroll", ChatBar2Settings.main, BackdropTemplateMixin and "BackdropTemplate");
-        --ChatBar2Settings.scroll:SetWidth(ChatBar2Settings:GetWidth());
+
+    if(ChatBar2Settings.bubble1==nil) then
+        ChatBar2Settings.bubble1 = CreateFrame("FRAME", nil, ChatBar2Settings, BackdropTemplateMixin and "BackdropTemplate");
+        table.insert(EZCHtBarSettingsFrameList, ChatBar2Settings.bubble1)
+    end
+
+    ChatBar2Settings.bubble1:Show();
+
+    if(ChatBar2Settings.bubble1.core==nil) then
+        ChatBar2Settings.bubble1.core = CreateFrame("FRAME", "ChatBar2SettingsBubble1", ChatBar2Settings, BackdropTemplateMixin and "BackdropTemplate");
+        --ChatBar2Settings.bubble1.core:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background",});
+        --ChatBar2Settings.bubble1.core:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], 0.8);
+        ChatBar2Settings.bubble1.core:ClearAllPoints();
+        ChatBar2Settings.bubble1.core:SetPoint("CENTER", ChatBar2Settings,"CENTER", 0, 0);
+        ChatBar2Settings.bubble1.core:SetWidth(1);
+        ChatBar2Settings.bubble1.core:SetHeight(1);
         
-        --ChatBar2Settings.scroll:SetHeight(ChatBar2Settings:GetHeight());
-        --ChatBar2Settings.scroll:SetPoint("CENTER", ChatBar2Settings, "CENTER", 0, 0);
+    end
 
-        ChatBar2Settings.scroll:SetPoint("TOPLEFT", ChatBar2Settings, "TOPLEFT", 0, -25);
-        ChatBar2Settings.scroll:SetPoint("BOTTOMRIGHT", ChatBar2Settings, "BOTTOMRIGHT", 0, 0);
-        ChatBar2Settings.scroll:SetScrollChild(ChatBar2Settings.core);
+    if(ChatBar2Settings.bubble1.scroll==nil) then
+        ChatBar2Settings.bubble1.scroll = CreateFrame("ScrollFrame", "ChatBar2Scroll", ChatBar2Settings.bubble1, BackdropTemplateMixin and "BackdropTemplate");
 
-        --ChatBar2Settings.scroll:SetScript("OnVerticalScroll", function(self, offset)
-            --print(offset)
-            --FauxScrollFrame_OnVerticalScroll(self, offset, BUTTON_HEIGHT, update)
-        --end)
 
-        ChatBar2Settings.scroll:SetScript("OnMouseWheel", function(self, offset)
+        ChatBar2Settings.bubble1.scroll:SetPoint("TOPLEFT", ChatBar2Settings, "TOPLEFT", 0, -25);
+        ChatBar2Settings.bubble1.scroll:SetPoint("BOTTOMRIGHT", ChatBar2Settings, "BOTTOMRIGHT", 0, 0);
+        ChatBar2Settings.bubble1.scroll:SetScrollChild(ChatBar2Settings.bubble1.core);
+
+
+
+        ChatBar2Settings.bubble1.scroll:SetScript("OnMouseWheel", function(self, offset)
             ScrollFrame_OnMouseWheel(self, offset)
         end);
 
@@ -431,36 +484,11 @@ function ChatBarSettings()
 
     ChatBar2Settings:Show();
 
-    --if(ChatBar2Settings.exit==nil) then
-    --    ChatBar2Settings.exit = CreateFrame("FRAME", "Exit", ChatBar2Settings.ancor, BackdropTemplateMixin and "BackdropTemplate");
-    --    ChatBar2Settings.exit:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background",});
-    --    ChatBar2Settings.exit:SetBackdropColor(255/255, 0/255, 0/255, 0.8);
-    --    ChatBar2Settings.exit:ClearAllPoints();
-    --    ChatBar2Settings.exit:SetPoint("TOPRIGHT", ChatBar2Settings.ancor,"TOPRIGHT", -4, -4);
-    --    ChatBar2Settings.exit:SetWidth(16);
-    --    ChatBar2Settings.exit:SetHeight(16);
---
-    --    ChatBar2Settings.exit.x = CreateFrame("FRAME", "Exit", ChatBar2Settings.exit, BackdropTemplateMixin and "BackdropTemplate");
-    --    ChatBar2Settings.exit.x:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Close",});
-    --    ChatBar2Settings.exit.x:SetBackdropColor(1, 1, 1, 1);
-    --    ChatBar2Settings.exit.x:ClearAllPoints();
-    --    ChatBar2Settings.exit.x:SetPoint("CENTER", ChatBar2Settings.exit,"CENTER", 0, 0);
-    --    ChatBar2Settings.exit.x:SetWidth(12);
-    --    ChatBar2Settings.exit.x:SetHeight(12);
---
-    --    ChatBar2Settings.exit:SetScript("OnMouseDown", function(self, button)
---
-    --        if(button == "LeftButton") then
-    --            ChatBar2Settings:Hide();
-    --        end
-    --    end)
---
-    --    --ChatBar2Settings.exit:SetFrameStrata("DIALOG");
-    --end
+
 
     
     if(ChatBar2Settings.add==nil) then
-        ChatBar2Settings.add = CreateFrame("FRAME", "add", ChatBar2Settings.main, BackdropTemplateMixin and "BackdropTemplate");
+        ChatBar2Settings.add = CreateFrame("FRAME", "add", ChatBar2Settings.bubble1, BackdropTemplateMixin and "BackdropTemplate");
         ChatBar2Settings.add:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\skins\\"..DygSettings["skins"].."\\bubble",});
         --ChatBar2Settings.add:SetBackdropColor(255/255, 0/255, 0/255, 0.8);
         ChatBar2Settings.add:ClearAllPoints();
@@ -479,7 +507,7 @@ function ChatBarSettings()
                     b=math.random(),
                 }
                 ChatBar2();
-                ChatBarSettings();
+                ChatBarSettingsEdit();
             end
         end)
 
@@ -582,8 +610,8 @@ function ChatBarSettings()
 
         -------------------------------------
         if(ChatBar2Settings.edit[i].title==nil)then
-            ChatBar2Settings.edit[i].title = CreateFrame("EditBox", "SearchFrame", ChatBar2Settings.core, BackdropTemplateMixin and "BackdropTemplate");
-            --ChatBar2Settings.scroll:SetScrollChild(ChatBar2Settings.edit[i].title);
+            ChatBar2Settings.edit[i].title = CreateFrame("EditBox", "SearchFrame", ChatBar2Settings.bubble1.core, BackdropTemplateMixin and "BackdropTemplate");
+            --ChatBar2Settings.bubble1.scroll:SetScrollChild(ChatBar2Settings.edit[i].title);
             
             ChatBar2Settings.edit[i].title:SetScript("OnMouseDown", function(self)
                 ChatBar2Settings.edit[i].title:Enable();
@@ -612,7 +640,7 @@ function ChatBarSettings()
         });
 
         ChatBar2Settings.edit[i].title:ClearAllPoints();
-        ChatBar2Settings.edit[i].title:SetPoint("TOPLEFT", ChatBar2Settings.core,"TOPLEFT", 10, -40*(i-1));
+        ChatBar2Settings.edit[i].title:SetPoint("TOPLEFT", ChatBar2Settings.bubble1.core,"TOPLEFT", 10, -40*(i-1));
         ChatBar2Settings.edit[i].title:SetWidth(150);
         ChatBar2Settings.edit[i].title:SetHeight(32);
         ChatBar2Settings.edit[i].title:SetTextInsets(8, 8, 0, 0);
@@ -796,14 +824,6 @@ function ChatBarSettings()
 
             if(ChatBar2Settings.edit[i].up==nil)then
                 ChatBar2Settings.edit[i].up = CreateFrame("FRAME", "ChatBar2Settings", ChatBar2Settings.edit[i].remove, BackdropTemplateMixin and "BackdropTemplate");
-
-                --ChatBar2Settings.edit[i].up.texture =  ChatBar2Settings.edit[i].up:CreateTexture(nil, ChatBar2Settings.edit[i].remove);
-                --ChatBar2Settings.edit[i].up.texture:SetAllPoints();
-                --ChatBar2Settings.edit[i].up.texture:SetTexture("Interface\\AddOns\\EzChatBar\\image\\tree", false);
-                --ChatBar2Settings.edit[i].up.texture:SetRotation(0);
-
-                --ChatBar2Settings.edit[i].up.texture:SetRotation(3.2);
-                --ChatBar2Settings.edit[i].up.texture:SetColorTexture(1, 1, 1, 0.8);
                 ChatBar2Settings.edit[i].up:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\tree",});
                 --ChatBar2Settings.edit[i].up:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], 0.8);
                 ChatBar2Settings.edit[i].up:SetBackdropColor(1, 1, 1, 0.8);
@@ -823,12 +843,6 @@ function ChatBarSettings()
 
             if(ChatBar2Settings.edit[i].down==nil)then
                 ChatBar2Settings.edit[i].down = CreateFrame("FRAME", "ChatBar2Settings", ChatBar2Settings.edit[i].up, BackdropTemplateMixin and "BackdropTemplate");
-
-                --ChatBar2Settings.edit[i].down.texture =  ChatBar2Settings.edit[i].down:CreateTexture(nil, ChatBar2Settings.edit[i].down);
-                --ChatBar2Settings.edit[i].down.texture:SetAllPoints();
-                --ChatBar2Settings.edit[i].down.texture:SetTexture("Interface\\AddOns\\EzChatBar\\image\\tree", false);
-                --ChatBar2Settings.edit[i].down.texture:SetRotation(3.15);
-
                 ChatBar2Settings.edit[i].down:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\tree2",});
                 --ChatBar2Settings.edit[i].down:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], 0.8);
                 ChatBar2Settings.edit[i].down:SetBackdropColor(1, 1, 1, 0.8);
@@ -862,7 +876,7 @@ function ChatBarSettings()
 
 
                 ChatBar2();
-                ChatBarSettings();
+                ChatBarSettingsEdit();
             end
 
 ---------------------------------------------------------------------
@@ -874,7 +888,7 @@ function ChatBarSettings()
                     OnAccept = function()
                         table.remove(Dygbubbles, i)
                         ChatBar2();
-                        ChatBarSettings();
+                        ChatBarSettingsEdit();
                         
                     end,
                     timeout = 0,
@@ -905,6 +919,8 @@ end
 
 
 
+
+
 function ChatBar2Load()
     GetBubbles();
     local f = CreateFrame("Frame");
@@ -924,13 +940,14 @@ function ChatBar2Load()
         if(DygSettings["ChatBar2_enabled"])then
             --GetBubbles();
             ChatBar2();
-            --ChatBarSettings()
+            --ChatBarSettingsEdit()
         end
     end)
+    EzChatBar2SettingsMenuList({
+        ["name"] = "Настройки Bubbles", ["func"] = function() SettingsHideAllMenu(); ChatBarSettingsConfig()end,
+    });
 
-    local data = {
-        ["name"] = "Изменить Bubbles", ["func"] = function() ChatBarSettings() end,
-    }
-
-    EzChatBar2SettingsMenuList(data);
+    EzChatBar2SettingsMenuList({
+            ["name"] = "Изменить Bubbles", ["func"] = function() SettingsHideAllMenu(); ChatBarSettingsEdit() end,
+        });
 end

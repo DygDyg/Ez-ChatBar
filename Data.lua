@@ -1,3 +1,15 @@
+function dump(msg)
+	if (not Kiosk.IsEnabled() and not ScriptsDisallowedForBeta()) then
+		if ( not AreDangerousScriptsAllowed() ) then
+			StaticPopup_Show("DANGEROUS_SCRIPTS_WARNING");
+			return;
+		end
+		UIParentLoadAddOn("Blizzard_DebugTools");
+		DevTools_DumpCommand(msg);
+	end
+end
+
+
 function BaseFrameAddons()
     local BaseFrame = EZChatBar
     local BaseFrameName = "EZChatBar"
