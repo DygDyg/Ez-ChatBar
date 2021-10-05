@@ -174,7 +174,7 @@ function MesButton(args)
 
         DygMesTab.GeberalTab:SetScript("OnMouseDown", function(self, button)
             self:SetBackdropColor(1, 1, 1, 1);
-            DygMesTabLocal[1]:Click(button);
+                ChatFrame1Tab:Click(button);
                 if(button == "RightButton") then
                     if(IsControlKeyDown() == true)then
                         Debug("Contrl");
@@ -203,13 +203,13 @@ function MesButton(args)
                     if(IsControlKeyDown() == true)then
                         Debug("Contrl");
                     else
-                        DygMesTabLocal[2]:Click(button);
+                        ChatFrame2Tab:Click(button);
                         local x, y = GetCursorPosition();
                         local scale = UIParent:GetEffectiveScale();
                         DropDownList1:SetPoint("TOPLEFT", DygMesTab, "TOPRIGHT", 0, 0);
                     end
                 elseif(button == "LeftButton") then
-                    DygMesTabLocal[2]:Click(button);
+                    ChatFrame2Tab:Click(button);
                     OpenTabHide();
                     --C_Timer.After(0.2, function() ChatBarButton() end);
                 end

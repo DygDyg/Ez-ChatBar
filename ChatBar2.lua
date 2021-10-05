@@ -159,13 +159,9 @@ function ChatBar2()
 
     if(ChatBar2Frame.bg==nil) then
         ChatBar2Frame.bg = CreateFrame("FRAME", "bg", ChatBar2Frame, BackdropTemplateMixin and "BackdropTemplate");
-        ChatBar2Frame.bg:ClearAllPoints();
-
-
-        --ChatBar2Frame.bg:Lower();
-        --ChatBar2Frame.bg:Raise();
-        --ChatBar2Frame.bg:SetHeight(24);
     end
+
+    ChatBar2Frame.bg:ClearAllPoints();
     if(DygSettings["PanelHorizontal"]==false)then
         ChatBar2Frame.bg:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background2_"..mirror_flip,});
         ChatBar2Frame.bg:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
@@ -190,6 +186,7 @@ function ChatBar2()
 
     if(ChatBar2Frame.anchor==nil) then
         ChatBar2Frame.anchor = CreateFrame("FRAME", "ChatBarPanel_anchor", ChatBar2Frame, BackdropTemplateMixin and "BackdropTemplate");
+    end
         ChatBar2Frame.anchor:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background",});
         ChatBar2Frame.anchor:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], DygSettings["Color1"]["a"]);
         ChatBar2Frame.anchor:ClearAllPoints();
@@ -228,7 +225,7 @@ function ChatBar2()
                 EzChatBar2SettingsMenu();
             end
         end)
-    end
+    
 
 
 
@@ -403,8 +400,9 @@ function ChatBarSettingsConfig()
         
 
         GetEZCheckBox(ChatBar2Settings.bubble2, {
-            {"CheckButton", "name", "tooltip", },
-            {"CheckButton", "name", "tooltip", },
+            {"CheckButton", EZCHATBAR_SETTINGS1_CHECKBOX5, EZCHATBAR_SETTINGS1_CHECKBOX5_TITLE, false, "PanelHorizontal"},
+            {"CheckButton", EZCHATBAR_SETTINGS1_CHECKBOX7, EZCHATBAR_SETTINGS1_CHECKBOX7_TITLE, false, "mirror_flip"},
+            {"Button", EZCHATBAR_SETTINGS1_CHECKBOX7, EZCHATBAR_SETTINGS1_CHECKBOX7_TITLE, false, "mirror_flip"},
         })
 
         -- m = 1
@@ -845,7 +843,7 @@ function ChatBarSettingsEdit()
                 ChatBar2Settings.edit[i].down = CreateFrame("FRAME", "ChatBar2Settings", ChatBar2Settings.edit[i].up, BackdropTemplateMixin and "BackdropTemplate");
                 ChatBar2Settings.edit[i].down:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\tree2",});
                 --ChatBar2Settings.edit[i].down:SetBackdropColor(DygSettings["Color1"]["r"], DygSettings["Color1"]["g"], DygSettings["Color1"]["b"], 0.8);
-                ChatBar2Settings.edit[i].down:SetBackdropColor(1, 1, 1, 0.8);
+                ChatBar2Settings.edit[i].down:SetBackdropColor(1, 1, 1, 8);
 
                 ChatBar2Settings.edit[i].down:ClearAllPoints();
                 ChatBar2Settings.edit[i].down:SetPoint("TOP", ChatBar2Settings.edit[i].up,"BOTTOM", 0, -2);
@@ -949,5 +947,5 @@ function ChatBar2Load()
 
     EzChatBar2SettingsMenuList({
             ["name"] = "Изменить Bubbles", ["func"] = function() SettingsHideAllMenu(); ChatBarSettingsEdit() end,
-        });
+    });
 end

@@ -147,7 +147,7 @@ function SettingsHideAllMenu()
 
 end
 
-function GetEZCheckBox(target, mas)
+function GetEZCheckBox(target, mas, default, settings)
     local m = 1
 
     for i=1, #mas do 
@@ -156,25 +156,53 @@ function GetEZCheckBox(target, mas)
         --    target[i] = CreateFrame("FRAME", nil, target.core, BackdropTemplateMixin and "BackdropTemplate");
         if(mas[i][1]=="CheckButton")then
             target[i] = CreateFrame("CheckButton", nil, target.core, "ChatConfigCheckButtonTemplate");
-            target[i].tooltip = mas[i][3]..i;
+            target[i].tooltip = mas[i][3];
             target[i]:SetCheckedTexture("Interface\\AddOns\\EzChatBar\\image\\glow")
             -- target[i]:SetNormalTexture("Interface\\AddOns\\EzChatBar\\image\\check-box_2")
             -- target[i]:SetPushedTexture("Interface\\AddOns\\EzChatBar\\image\\blank-check-box1")
             target[i]:SetDisabledCheckedTexture("Interface\\AddOns\\EzChatBar\\image\\glow3")
+
+            if(DygSettings[mas[5]])then
+                target[i]:SetChecked(DygSettings[mas[i][5]]) 
+            else
+                target[i]:SetChecked(mas[i][4]) 
+            end
+            target[i].Text:SetText(mas[i][2]);
+
+            target[i]:SetScript("OnClick", function() 
+                --print(target[i]:GetChecked())
+                DygSettings[mas[i][5]] = target[i]:GetChecked()
+                ChatBar2()
+            end)
         end
-            if (i % 2 ~= 0) then
+
+        if(mas[i][1]=="Button")then
+            target[i] = CreateFrame("Frame", nil, target.core, BackdropTemplateMixin and "BackdropTemplate");
+            target[i]:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background",});
+            target[i]:SetBackdropColor(0,0,0,0.9)
+            target[i]:SetWidth(128);
+            target[i]:SetHeight(16);
+
+            target[i]:SetScript("OnMouseDown", function() 
+                --print(target[i]:GetChecked())
+                --DygSettings[mas[i][5]] = target[i]:GetChecked()
+                print("a")
+                --ChatBar2()
+            end)
+        end
+
+
+        
+        if (i % 2 ~= 0) then
                 target[i]:SetPoint("TOPLEFT", target.core, "TOPLEFT", 10, (-26*m)+26);
-                target[i]:SetChecked(false) 
+                --target[i]:SetChecked(false) 
             else
                 target[i]:SetPoint("TOPLEFT", target.core, "TOPLEFT", 600/2, (-26*m)+26);
-                target[i]:SetChecked(true) 
+                --target[i]:SetChecked(true) 
                 m = m+1;
             end
-            target[i].Text:SetText(mas[i][2]..i);
             
-            
-            target[i]:SetWidth(25);
-            target[i]:SetHeight(25);
+
             -- target[i]:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background",});
         end
         -- if(target[i]==nil)then
