@@ -107,7 +107,7 @@ function test11111()
 end
 
 function MesButton(args)
-    local i123 = 1;
+    local i123 = 3;
     --local i1234 = 1;
     DygMesTabLocal = {};
     --table.insert(DygMesTabLocal, ChatFrame1Tab);
@@ -492,20 +492,20 @@ function CopyButton()
 end
 
 function ClearChatFrames()
-
-    local i = 1;
-
-    while _G['ChatFrame'..i] do
-        -- print(_G['ChatFrame'..i])
-        if(_G['ChatFrame'..i].isLocked)then
-            _G['ChatFrame'..i]:Hide()
+    if(DygSettings["ClearChatFrames"]~=false)then
+        local i = 1;
+        print("a")
+        while _G['ChatFrame'..i] do
+            -- print(_G['ChatFrame'..i])
+            if(_G['ChatFrame'..i].isLocked)then
+                _G['ChatFrame'..i]:Hide()
+                --print(_G['ChatFrame'..i].isLocked)
+            end
             --print(_G['ChatFrame'..i].isLocked)
-        end
-        --print(_G['ChatFrame'..i].isLocked)
-        i=i+1;
-        
-    end
+            i=i+1;
 
+        end
+    end
 end
 
 function DygColorPanel(self, type)
