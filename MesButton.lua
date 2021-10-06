@@ -248,7 +248,7 @@ function MesButton(args)
         DygMesTab.Settings:SetScript("OnMouseDown", function(self, button)
             self:SetBackdropColor(1, 1, 1, 1);
                 if(button == "RightButton") then
-                    ChatBarSettings();
+                    --ChatBarSettings();
                     if(IsControlKeyDown() == true)then
 
                     end
