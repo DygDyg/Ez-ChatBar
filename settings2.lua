@@ -1,4 +1,5 @@
 local LDBIcon = LibStub("LibDBIcon-1.0")
+local LCG = LibStub("LibCustomGlow-1.0");
 --LDBIcon:Register("EzChatBar")
 
 if(SettingList == nil)then
@@ -135,7 +136,7 @@ function EzChatBar2SettingsCreateButton(SettingList, i)
             menu.text:SetPoint("CENTER", 0, 0)
             menu.text:SetTextColor(1, 0.82, 0, 1)
         end
-        --print(menu.text:GetTextColor())
+        -- print(menu.text:GetTextColor())
         menu.text:SetText(SettingList[i]["name"])
     end
 end
@@ -146,6 +147,33 @@ function SettingsHideAllMenu()
     end
 
 end
+function EZButton(target)
+
+    if(target==nil)then
+        target = UIParent;
+    end
+
+    local button = CreateFrame("Frame", nil, target, BackdropTemplateMixin and "BackdropTemplate");
+    button:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\Background",});
+    button:SetBackdropColor(0,0,0,0.9);
+    button:SetPoint("CENTER", 0, 0)
+    button:SetWidth(128);
+    button:SetHeight(16);
+    button.text = button:CreateFontString(nil, "ARTWORK", "GameFontNormal")
+    button.text:SetPoint("CENTER", 0, 0, "CENTER")
+    button.text:SetTextColor(1, 0.82, 0, 1)
+    button.text:SetText("test")
+    -- LCG.ButtonGlow_Start(button);
+    -- LCG.PixelGlow_Start(button);
+    -- LCG.AutoCastGlow_Start(button);
+    --LCG.ShowOverlayGlow(button);
+    
+    -- button:SetPoint("CENTER", target, "CENTER", 0, 0);
+
+    return button;
+end
+
+
 
 function GetEZCheckBox(target, mas, default, settings)
     local m = 1
@@ -153,7 +181,7 @@ function GetEZCheckBox(target, mas, default, settings)
     for i=1, #mas do 
         if(target[i]==nil)then
 
-        --    target[i] = CreateFrame("FRAME", nil, target.core, BackdropTemplateMixin and "BackdropTemplate");
+        -- target[i] = CreateFrame("FRAME", nil, target.core, BackdropTemplateMixin and "BackdropTemplate");
         if(mas[i][1]=="CheckButton")then
             target[i] = CreateFrame("CheckButton", nil, target.core, "ChatConfigCheckButtonTemplate");
             target[i].tooltip = mas[i][3];
