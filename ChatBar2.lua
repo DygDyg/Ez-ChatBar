@@ -121,6 +121,17 @@ function GetBubbles()
             b=9/255,
         }
     end
+
+    if(DygSettings["CheckVersion"]<1)then
+        Dygbubbles[#Dygbubbles+1]={
+            cmd="#key#",
+            perm = "ALL",
+            title=EZCHATBAR_CHATBARCOLOR_TITLE_KEY,
+            r=255/255,
+            g=0/255,
+            b=255/255,
+        }
+    end
 end
 
 function ChatBar2()
@@ -314,7 +325,9 @@ function Ball(data)
 
             if(button == "LeftButton") then
                 local str = Dyg_Variables(data["cmd"]);
-                ChatFrame_OpenChat(str, chatFrame);
+                local a = ChatFrame_OpenChat(str, chatFrame);
+                --print(a)
+                --test123 = a;
             end
         end)
         
@@ -347,6 +360,34 @@ function Dyg_Variables(str)
 
         return string.gsub(str, "#keystone#", 'Я сейчас в "'..locate..' ('..keylvl..')", выполняю цель №'..steps..' "'..targets..'"');
         --return 'Я сейчас в "'..locate..' ('..keylvl..')", выполняю цель №'..steps..' "'..targets..'"';
+    end
+
+    if(string.match(str, "#key#"))then
+        for b = BACKPACK_CONTAINER, NUM_BAG_SLOTS do
+            for s = 1, GetContainerNumSlots(b) do
+                local a = GetContainerItemLink(b, s)
+                
+                if a then
+                    --print(bag, slot, itemLink)
+                    
+                    local b = {string.find(a, "|?c?f?f?(%x*)|?H?([^:]*):?(%d+):?(%d*):?(%d*):?(%d*):?(%d*):?(%d*):?(%-?%d*):?(%-?%d*):?(%d*):?(%d*):?(%-?%d*)|?h?%[?([^%[%]]*)%]?|?h?|?r?")}
+                    
+                    
+                    --            if a then
+                    if b[4] == "keystone" then
+                        
+                        for i=1, #b do
+                            --print(b[i])
+                        end
+                        --print(a)
+                        --print(GetContainerItemLink(b, s))
+                        --dump(b)
+                        --                end
+                        return a
+                    end
+                end
+            end
+        end
     end
 
     return str;

@@ -133,7 +133,7 @@ function MesButton(args)
         --DygMesTabLocal = s
 
 
-    test123 = DygMesTabLocal;
+    --test123 = DygMesTabLocal;
 
 
     for i=1, 100 do
