@@ -494,7 +494,7 @@ end
 function ClearChatFrames()
     if(DygSettings["ClearChatFrames"]~=false)then
         local i = 1;
-        print("a")
+        -- print("a")
         while _G['ChatFrame'..i] do
             -- print(_G['ChatFrame'..i])
             if(_G['ChatFrame'..i].isLocked)then

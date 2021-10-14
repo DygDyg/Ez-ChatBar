@@ -214,7 +214,7 @@ function GetEZCheckBox(target, mas, default, settings)
             target[i]:SetScript("OnMouseDown", function() 
                 --print(target[i]:GetChecked())
                 --DygSettings[mas[i][5]] = target[i]:GetChecked()
-                print("a")
+                -- print("a")
                 --ChatBar2()
             end)
         end
