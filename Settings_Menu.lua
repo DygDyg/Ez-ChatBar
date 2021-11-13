@@ -8,17 +8,6 @@ if(DropBoxFrame == nil) then
     DropBoxFrame:SetPoint("Center", UIParent, "Center");
     DropBoxFrame:Hide();
 end
-function Debug(mes)
-    if(DebugCheck == true) then
-        print(mes)
-    else
-        --print("Дебаг не включён");
-    end
-end
-
-function Log(mes)
-    Debug(mes)
-end
 
 function DebugEnable(check)
 
@@ -41,34 +30,57 @@ SlashCmdList["DebugEnable"] = DebugEnable;
 SLASH_DebugEnable1 = "/Debug"
 
 
+function EZ_old_settings()
+
+    SettingsMyAddon = {};
+    --if Settings == nil then Settings = {}; end
+    --pos2342355 = -20;
+    SettingsMyAddon.myButton = {};
+    
+    SettingsMyAddon.panel = CreateFrame( "Frame", "MyAddonPanel", UIParent, BackdropTemplateMixin and "BackdropTemplate" );
+    SettingsMyAddon.panel.name = "EzChatBar";
+    SettingsMyAddon.panel.okay = function (self) DygSettings = Settings_local; Start_Settings(); end;
+    SettingsMyAddon.panel.cancel = function (self) DygSettings = Settings_local; Start_Settings(); end;
+    InterfaceOptions_AddCategory(SettingsMyAddon.panel);
+    
+    SettingsMyAddon.childpanelChat = CreateFrame( "Frame", "MyAddonPanel", SettingsMyAddon.panel, BackdropTemplateMixin and "BackdropTemplate");
+    SettingsMyAddon.childpanelChat.name = EZCHATBAR_SETTINGS1_PANELNAME1;
+    SettingsMyAddon.childpanelChat.parent = SettingsMyAddon.panel.name;
+    InterfaceOptions_AddCategory(SettingsMyAddon.childpanelChat);
+    
+    SettingsMyAddon.childpanelIstory = CreateFrame( "Frame", "MyAddonPanel", SettingsMyAddon.panel, BackdropTemplateMixin and "BackdropTemplate");
+    SettingsMyAddon.childpanelIstory.name = EZCHATBAR_SETTINGS1_PANELNAME2;
+    SettingsMyAddon.childpanelIstory.parent = SettingsMyAddon.panel.name;
+    --InterfaceOptions_AddCategory(SettingsMyAddon.childpanelIstory);
+    
+    SettingsMyAddon.childpanelDebug = CreateFrame( "Frame", "MyAddonPanel", SettingsMyAddon.panel, BackdropTemplateMixin and "BackdropTemplate");
+    SettingsMyAddon.childpanelDebug.name = "Debug";
+    SettingsMyAddon.childpanelDebug.parent = SettingsMyAddon.panel.name;
+    InterfaceOptions_AddCategory(SettingsMyAddon.childpanelDebug);
 
 
-SettingsMyAddon = {};
---if Settings == nil then Settings = {}; end
---pos2342355 = -20;
-SettingsMyAddon.myButton = {};
+    ---------------------------------
 
-SettingsMyAddon.panel = CreateFrame( "Frame", "MyAddonPanel", UIParent, BackdropTemplateMixin and "BackdropTemplate" );
-SettingsMyAddon.panel.name = "EzChatBar";
-SettingsMyAddon.panel.okay = function (self) DygSettings = Settings_local; Start_Settings(); end;
-SettingsMyAddon.panel.cancel = function (self) DygSettings = Settings_local; Start_Settings(); end;
-InterfaceOptions_AddCategory(SettingsMyAddon.panel);
+    SettingsMyAddon.panel.logo = CreateFrame("Frame", nil, SettingsMyAddon.panel, BackdropTemplateMixin and "BackdropTemplate");
+SettingsMyAddon.panel.logo:SetWidth(300);
+SettingsMyAddon.panel.logo:SetHeight(300);
+SettingsMyAddon.panel.logo:SetPoint("CENTER");
+SettingsMyAddon.panel.logo:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\logo",});
 
-SettingsMyAddon.childpanelChat = CreateFrame( "Frame", "MyAddonPanel", SettingsMyAddon.panel, BackdropTemplateMixin and "BackdropTemplate");
-SettingsMyAddon.childpanelChat.name = EZCHATBAR_SETTINGS1_PANELNAME1;
-SettingsMyAddon.childpanelChat.parent = SettingsMyAddon.panel.name;
-InterfaceOptions_AddCategory(SettingsMyAddon.childpanelChat);
+--SettingsMyAddon.panel.name_version = CreateFrame("Frame", nil, SettingsMyAddon.panel, BackdropTemplateMixin and "BackdropTemplate");
+SettingsMyAddon.panel.name_version = CreateFrame("EditBox", nil,  SettingsMyAddon.panel);
+SettingsMyAddon.panel.name_version:SetMultiLine(true);
+SettingsMyAddon.panel.name_version:SetWidth(300);
+SettingsMyAddon.panel.name_version:SetHeight(30);
+SettingsMyAddon.panel.name_version:SetPoint("TOPLEFT", 5, -5);
+SettingsMyAddon.panel.name_version:SetFontObject(GameFontNormal);
+SettingsMyAddon.panel.name_version:SetText(GetAddOnMetadata("EzChatBar", "Title").." "..GetAddOnMetadata("EzChatBar", "Version").."\nBy "..GetAddOnMetadata("EzChatBar", "Author"));
+SettingsMyAddon.panel.name_version:SetCursorPosition(0);
+SettingsMyAddon.panel.name_version:Disable();
+-------------------------------------------
 
-SettingsMyAddon.childpanelIstory = CreateFrame( "Frame", "MyAddonPanel", SettingsMyAddon.panel, BackdropTemplateMixin and "BackdropTemplate");
-SettingsMyAddon.childpanelIstory.name = EZCHATBAR_SETTINGS1_PANELNAME2;
-SettingsMyAddon.childpanelIstory.parent = SettingsMyAddon.panel.name;
---InterfaceOptions_AddCategory(SettingsMyAddon.childpanelIstory);
-
-SettingsMyAddon.childpanelDebug = CreateFrame( "Frame", "MyAddonPanel", SettingsMyAddon.panel, BackdropTemplateMixin and "BackdropTemplate");
-SettingsMyAddon.childpanelDebug.name = "Debug";
-SettingsMyAddon.childpanelDebug.parent = SettingsMyAddon.panel.name;
-InterfaceOptions_AddCategory(SettingsMyAddon.childpanelDebug);
-
+    -- EZ_old_settings2()
+end
 
 
 
@@ -253,9 +265,7 @@ InterfaceOptions_AddCategory(SettingsMyAddon.childpanelDebug);
     function Dyg_OPT_Create_Button(i, text, type, panel)
         local pos2342355 = -20 * i;
 
-        if(DygSettings["DisableBLUAError"]==nil) then
-            DygSettings["DisableBLUAError"] = true;
-        end
+
 
 
         if(panel.ButtonFrame == nil) then
@@ -442,7 +452,7 @@ end
 
 
 local Event = CreateFrame("Frame");
-Event:RegisterEvent("ADDON_LOADED");
+-- Event:RegisterEvent("ADDON_LOADED");
 Event.start = false;
 Event:SetScript("OnEvent", function(...)
 
@@ -459,18 +469,19 @@ Event:SetScript("OnEvent", function(...)
         Favorit();
         Event.start = false;
     end
+
 end)
 
 
 --Событие при старте игры, чтоб прогрузились сохранённые данные
 local Event = CreateFrame("Frame");
-Event:RegisterEvent("PLAYER_ENTERING_WORLD");
+-- Event:RegisterEvent("PLAYER_ENTERING_WORLD");
 Event.start = true;
-Event:SetScript("OnEvent", function(...)
+-- Event:SetScript("OnEvent", function(...)
 
+function EZ_old_settings2()
     DygSettings = DygSettings or {};
     DygSettings["SoundMesFile"] = DygSettings["SoundMesFile"] or "message1.mp3";
-    DygSettings["VerWOWClient"] = select(4, GetBuildInfo());
 
 
     if(Event.start == true) then
@@ -482,8 +493,8 @@ Event:SetScript("OnEvent", function(...)
 
         Event.start = false;
     end
-
-end)
+end
+-- end)
 
 
 
@@ -494,21 +505,6 @@ Event2:SetScript("OnEvent", function(...)
 end)
 
 
-SettingsMyAddon.panel.logo = CreateFrame("Frame", nil, SettingsMyAddon.panel, BackdropTemplateMixin and "BackdropTemplate");
-SettingsMyAddon.panel.logo:SetWidth(300);
-SettingsMyAddon.panel.logo:SetHeight(300);
-SettingsMyAddon.panel.logo:SetPoint("CENTER");
-SettingsMyAddon.panel.logo:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\logo",});
 
---SettingsMyAddon.panel.name_version = CreateFrame("Frame", nil, SettingsMyAddon.panel, BackdropTemplateMixin and "BackdropTemplate");
-SettingsMyAddon.panel.name_version = CreateFrame("EditBox", nil,  SettingsMyAddon.panel);
-SettingsMyAddon.panel.name_version:SetMultiLine(true);
-SettingsMyAddon.panel.name_version:SetWidth(300);
-SettingsMyAddon.panel.name_version:SetHeight(30);
-SettingsMyAddon.panel.name_version:SetPoint("TOPLEFT", 5, -5);
-SettingsMyAddon.panel.name_version:SetFontObject(GameFontNormal);
-SettingsMyAddon.panel.name_version:SetText(GetAddOnMetadata("EzChatBar", "Title").." "..GetAddOnMetadata("EzChatBar", "Version").."\nBy "..GetAddOnMetadata("EzChatBar", "Author"));
-SettingsMyAddon.panel.name_version:SetCursorPosition(0);
-SettingsMyAddon.panel.name_version:Disable();
 
 

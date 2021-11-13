@@ -120,9 +120,10 @@ function GetBubbles()
             g=78/255,
             b=9/255,
         }
-    end
+    -- end
 
-    if(DygSettings["CheckVersion"]<1)then
+    -- if(DygSettings["CheckVersion"]<1)then
+
         Dygbubbles[#Dygbubbles+1]={
             cmd="#key#",
             perm = "ALL",
@@ -481,6 +482,11 @@ end
 ----------------------------------------------------------------------------------------------------------------
 
 function ChatBarSettingsEdit()
+    if(DygSettings["skins"]==nil)then
+        DygSettings["skins"] = "bubble1";
+    end
+
+    
     if(ChatBar2Settings==nil) then
         ChatBar2Settings = EzChatBar2SettingsMenu();
     end
@@ -528,6 +534,7 @@ function ChatBarSettingsEdit()
     
     if(ChatBar2Settings.add==nil) then
         ChatBar2Settings.add = CreateFrame("FRAME", "add", ChatBar2Settings.bubble1, BackdropTemplateMixin and "BackdropTemplate");
+        test123 = DygSettings;
         ChatBar2Settings.add:SetBackdrop({bgFile = "Interface\\AddOns\\EzChatBar\\image\\skins\\"..DygSettings["skins"].."\\bubble",});
         --ChatBar2Settings.add:SetBackdropColor(255/255, 0/255, 0/255, 0.8);
         ChatBar2Settings.add:ClearAllPoints();
@@ -967,14 +974,12 @@ function ChatBar2Load()
 	f:RegisterEvent("CHAT_MSG_CHANNEL_NOTICE");
 	f:RegisterEvent("GROUP_ROSTER_UPDATE");
 	f:RegisterEvent("PLAYER_GUILD_UPDATE");
-    f:RegisterEvent("VARIABLES_LOADED");
+    -- f:RegisterEvent("VARIABLES_LOADED");
 
     f:SetScript("OnEvent", function(...)
         --GetBubbles();
         --DygSettings["ChatBar2_enabled"] = DygSettings["ChatBar2_enabled"] or true;
-        if(DygSettings["ChatBar2_enabled"]==nil)then
-            DygSettings["ChatBar2_enabled"] = false;
-        end
+
         
         if(DygSettings["ChatBar2_enabled"])then
             --GetBubbles();
