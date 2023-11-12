@@ -38,6 +38,7 @@ EZCHATBAR_SETTINGS1_COLOR1 = "Background color"
 EZCHATBAR_SETTINGS1_COLOR1_TITLE = "Notification of an incoming personal message"
 EZCHATBAR_SETTINGS1_PANELNAME1 = "Dialog list settings"
 EZCHATBAR_SETTINGS1_PANELNAME2 = "Chat history settings (In the development)"
+EZCHATBAR_SETTINGS1_PANELNAME3 = "Debug"
 EZCHATBAR_SETTINGS2_CHECKBOX1 = "Logging of chat (In the development)"
 EZCHATBAR_SETTINGS2_CHECKBOX1_TITLE = "To include the preservation of the history of personal correspondence"
 

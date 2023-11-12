@@ -41,6 +41,7 @@ EZCHATBAR_SETTINGS1_COLOR1 = "Цвет фона окна аддона"
 EZCHATBAR_SETTINGS1_COLOR1_TITLE = "Изменить цвет окна аддона"
 EZCHATBAR_SETTINGS1_PANELNAME1 = "Настройки списка диалогов"
 EZCHATBAR_SETTINGS1_PANELNAME2 = "Настройки истории чата (В разработке)"
+EZCHATBAR_SETTINGS1_PANELNAME3 = "Дебаг"
 EZCHATBAR_SETTINGS2_CHECKBOX1 = "Логирование чата (В разработке)"
 EZCHATBAR_SETTINGS2_CHECKBOX1_TITLE = "Включить сохранение истории личных переписок"
 

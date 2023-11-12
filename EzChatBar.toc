@@ -1,6 +1,6 @@
-## Interface: 90105
+## Interface: 100002
 ## Title: EzChatBar
-## Version: 0.32.61
+## Version: 0.33.00
 ## Author: Вульперняга
 ## Notes: Addon for to simplify the use of the standard chat.
 ## Notes-ruRU: Аддон для упрощения использования стандартного чата.
@@ -9,7 +9,7 @@
 ## X-Category: Chat
 ## RequiredDeps:
 ## OptionalDeps:
-## SavedVariables: DebugCheck, DygTestData, data, Message, DygSettingsGlobal, WindowPositionGlobal, DygbubblesGlobal
+## SavedVariables: DebugCheck, DygTestData, data, Message, DygSettingsGlobal, WindowPositionGlobal, DygbubblesGlobal, DygDygTest
 ## SavedVariablesPerCharacter: DygSettings, Dygbubbles, WindowPosition
 
 libs\Libs.xml
@@ -20,9 +20,10 @@ base64.lua
 sound\base.lua
 Settings_Menu.lua
 Data.lua
-MesButton.lua
+# MesButton.lua
 ChatBar2.lua
 settings2.lua
+EZTabButton.1.5.lua
 
 ###################
 loading.lua

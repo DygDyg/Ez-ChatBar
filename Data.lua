@@ -9,6 +9,31 @@ function dump(msg)
 	end
 end
 
+function ScrollFrame_OnMouseWheel(self, delta)
+    local newValue = self:GetVerticalScroll() - (delta * 20);
+
+	if (newValue < 0) then
+        newValue = 0;
+
+	elseif newValue > self:GetVerticalScrollRange() then
+		newValue = self:GetVerticalScrollRange();
+	end
+
+	self:SetVerticalScroll(newValue);
+    -- print(newValue)
+end
+
+function CBCPanelUpdate()
+    local editBox = ChatEdit_ChooseBoxForSend();
+    local chatFrame = editBox.chatFrame;
+    --local chatType, channelIndex = string.gmatch(chatType, "([^%d]*)([%d]*)$")();
+    local messageTypeList = editBox.chatFrame.messageTypeList;
+    local channelList = editBox.chatFrame.channelList;
+
+
+    return editBox, chatFrame, messageTypeList, channelList;
+end
+
 
 function BaseFrameAddons()
     local BaseFrame = EZChatBar

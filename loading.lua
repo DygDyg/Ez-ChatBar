@@ -3,39 +3,42 @@ f:RegisterEvent("ADDON_LOADED")
 
 f:SetScript("OnEvent", function(self, event, AddonName, isReload)
     if(AddonName == "EzChatBar")then
-        EZ_default_settings()
-        DygSettings["VerWOWClient"] = select(4, GetBuildInfo());
+        --C_Timer.After(5, function()
+            EZ_default_settings()
+            DygSettings["VerWOWClient"] = select(4, GetBuildInfo());
 
+            --Настройки
+            --EzChatBar2SettingsMenu()
+            --ChatBarSettings()
 
-        
+            EZ_old_settings()
 
-        --Настройки
-        --EzChatBar2SettingsMenu()
-        --ChatBarSettings()
+            Settings_local = DygSettings;
+            
+            -- MesPanelStart();
+            -- Start_Option();
+            -- MesButtonPanel();
+            -- MesButton();
+            -- Start_Settings();
+            -- Favorit();
 
-        EZ_old_settings()
+            -- EZTabButtonStart() --Табы отключеный
 
-        Settings_local = DygSettings;
-        Start_Option();
-        MesButtonPanel();
-        MesButton();
-        Start_Settings();
-        -- Favorit();
+            EZ_old_settings2()
 
-        EZ_old_settings2()
+            --Панель с шариками
+            if(DygSettings["ChatBar2_enabled"]) then 
+                ChatBar2Load() 
+            end
 
-        --Панель с шариками
-        if(DygSettings["ChatBar2_enabled"]) then 
-            ChatBar2Load() 
-        end
+            --FIX LUA ERROR FRAME
+            ScriptErrorsFrame:SetWidth(400);
+            ScriptErrorsFrame.ScrollFrame:SetWidth(360);
+            ScriptErrorsFrame.ScrollFrame.Text:SetWidth(360);
+            --FIX LUA ERROR FRAME
+            -- DygSettings["CheckVersion"] = 1
 
-    --FIX LUA ERROR FRAME
-    ScriptErrorsFrame:SetWidth(400);
-    ScriptErrorsFrame.ScrollFrame:SetWidth(360);
-    ScriptErrorsFrame.ScrollFrame.Text:SetWidth(360);
-    --FIX LUA ERROR FRAME
-    -- DygSettings["CheckVersion"] = 1
-
+        --end)
     end
 end
 )
@@ -112,4 +115,3 @@ function EZ_default_settings()
         DygSettings["SoundMes"] = true;
     end
 end
-

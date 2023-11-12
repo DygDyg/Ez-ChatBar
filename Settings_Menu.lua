@@ -39,8 +39,8 @@ function EZ_old_settings()
     
     SettingsMyAddon.panel = CreateFrame( "Frame", "MyAddonPanel", UIParent, BackdropTemplateMixin and "BackdropTemplate" );
     SettingsMyAddon.panel.name = "EzChatBar";
-    SettingsMyAddon.panel.okay = function (self) DygSettings = Settings_local; Start_Settings(); end;
-    SettingsMyAddon.panel.cancel = function (self) DygSettings = Settings_local; Start_Settings(); end;
+    -- SettingsMyAddon.panel.okay = function (self) DygSettings = Settings_local; Start_Settings(); end;
+    -- SettingsMyAddon.panel.cancel = function (self) DygSettings = Settings_local; Start_Settings(); end;
     InterfaceOptions_AddCategory(SettingsMyAddon.panel);
     
     SettingsMyAddon.childpanelChat = CreateFrame( "Frame", "MyAddonPanel", SettingsMyAddon.panel, BackdropTemplateMixin and "BackdropTemplate");
@@ -54,7 +54,7 @@ function EZ_old_settings()
     --InterfaceOptions_AddCategory(SettingsMyAddon.childpanelIstory);
     
     SettingsMyAddon.childpanelDebug = CreateFrame( "Frame", "MyAddonPanel", SettingsMyAddon.panel, BackdropTemplateMixin and "BackdropTemplate");
-    SettingsMyAddon.childpanelDebug.name = "Debug";
+    SettingsMyAddon.childpanelDebug.name = EZCHATBAR_SETTINGS1_PANELNAME3;
     SettingsMyAddon.childpanelDebug.parent = SettingsMyAddon.panel.name;
     InterfaceOptions_AddCategory(SettingsMyAddon.childpanelDebug);
 
@@ -465,7 +465,7 @@ Event:SetScript("OnEvent", function(...)
         Start_Option();
         MesButtonPanel();
         MesButton();
-        Start_Settings();
+        -- Start_Settings();
         Favorit();
         Event.start = false;
     end
@@ -487,9 +487,9 @@ function EZ_old_settings2()
     if(Event.start == true) then
         Settings_local = DygSettings;
         Start_Option();
-        MesButtonPanel();
-        MesButton();
-        Start_Settings();
+        -- MesButtonPanel();
+        -- MesButton();
+        -- Start_Settings();
 
         Event.start = false;
     end
@@ -501,7 +501,7 @@ end
 local Event2 = CreateFrame("Frame");
 Event2:RegisterEvent("CHAT_MSG_CHANNEL_NOTICE");
 Event2:SetScript("OnEvent", function(...)
-    MesButton();
+    --MesButton();
 end)
 
 

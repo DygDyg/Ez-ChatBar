@@ -7,14 +7,13 @@ if(SettingList == nil)then
       --  {
       --      ["name"] = "Главная", ["func"] = function() SettingsHideAllMenu();  end,
       --  },
-        {
-            ["name"] = "Модули", ["func"] = function() SettingsHideAllMenu(); end,
-        },
+        -- {
+            -- ["name"] = "Модули", ["func"] = function() SettingsHideAllMenu(); end,
+        -- },
     }
 end
 
 function EzChatBar2SettingsMenuList(data)
-
 
     if (data~=nil and data ~="") then
         SettingList[#SettingList+1] = data
@@ -56,6 +55,13 @@ function EzChatBar2SettingsMenu()
         EzChatBar2Settings.ancor:SetWidth(600);
         EzChatBar2Settings.ancor:SetHeight(24);
         --EzChatBar2Settings.ancor:SetFrameStrata("DIALOG");
+
+        EzChatBar2Settings.ancor.text = EzChatBar2Settings.ancor:CreateFontString(nil, "ARTWORK", "GameFontNormal")
+        EzChatBar2Settings.ancor.text:SetPoint("CENTER", 0, 0)
+        EzChatBar2Settings.ancor.text:SetTextColor(1, 1, 1, 1)
+        EzChatBar2Settings.ancor.text:SetText("");
+
+
         EzChatBar2Settings:ClearAllPoints();
         EzChatBar2Settings:SetPoint("TOP", EzChatBar2Settings.ancor,"BOTTOM", 0, -2);
         --EzChatBar2Settings.ancor:Raise();
@@ -211,11 +217,25 @@ function GetEZCheckBox(target, mas, default, settings)
             target[i]:SetWidth(128);
             target[i]:SetHeight(16);
 
-            target[i]:SetScript("OnMouseDown", function() 
-                --print(target[i]:GetChecked())
-                --DygSettings[mas[i][5]] = target[i]:GetChecked()
-                -- print("a")
-                --ChatBar2()
+            target[i].text = target[i]:CreateFontString(nil, "ARTWORK", "GameFontNormal")
+            target[i].text:SetPoint("CENTER", 0, 0)
+            target[i].text:SetTextColor(1, 1, 1, 1)
+            target[i].text:SetText(DygSettings[mas[i][6]]);
+
+
+            target[i]:SetScript("OnMouseDown", function(this) 
+                local menu = {}
+                for ii=1, #mas[i][7] do
+                    print(i.."  "..ii.." "..mas[i][6])
+                    table.insert(menu, { text = mas[i][7][ii], func = function()
+                        DygSettings[mas[i][6]] = mas[i][7][ii];
+                        this.text:SetText(DygSettings[mas[i][6]]);
+                        
+                        ChatBar2();
+                    end })
+                end
+       
+                EasyMenu(menu, DropBoxFrame, target[i], 0 , 0, "MENU");
             end)
         end
 
@@ -239,4 +259,62 @@ function GetEZCheckBox(target, mas, default, settings)
     end
 
         return EZCheckBox;
+end
+
+function ChatBarSettingsDebug()
+
+    if(ChatBar2Settings==nil) then
+        ChatBar2Settings = EzChatBar2SettingsMenu();
+    end
+    
+
+    
+
+    
+    if(ChatBar2Settings.Debug == nil) then
+        ChatBar2Settings.Debug = CreateFrame("FRAME", nil, ChatBar2Settings, BackdropTemplateMixin and "BackdropTemplate");
+        table.insert(EZCHtBarSettingsFrameList, ChatBar2Settings.Debug)
+        ChatBar2Settings.Debug:SetWidth(550);
+        ChatBar2Settings.Debug:SetHeight(480);
+        ChatBar2Settings.Debug:SetPoint("TOPLEFT");
+        --ChatBar2Settings.Debug = CreateFrame("Button", nil, ChatBar2Settings.Debug, "GameMenuButtonTemplate"); 
+        -- ChatBar2Settings.Debug.scroll = CreateFrame("ScrollFrame", nil, ChatBar2Settings.Debug, BackdropTemplateMixin and "BackdropTemplate");
+        -- ChatBar2Settings.Debug.scroll:SetWidth(550);
+        -- ChatBar2Settings.Debug.scroll:SetHeight(480);
+        -- ChatBar2Settings.Debug.scroll:SetPoint("TOPLEFT", 20, -25*2);
+        -- print("1111111")
+
+        ChatBar2Settings.Debug.TextEditor =  ChatBar2Settings.Debug.TextEditor or CreateFrame("EditBox", "TextErrorLogLUAScript",  ChatBar2Settings.Debug);
+        ChatBar2Settings.Debug.TextEditor:SetWidth(ChatBar2Settings.Debug:GetWidth());
+        ChatBar2Settings.Debug.TextEditor:SetMultiLine(true);
+        ChatBar2Settings.Debug.TextEditor:SetFontObject(GameFontNormal);
+        ChatBar2Settings.Debug.TextEditor:SetPoint("TOP", ChatBar2Settings.Debug,0,-30);
+        -- ChatBar2Settings.Debug.TextEditor:Disable();
+        -- ChatBar2Settings.Debug.scroll:SetScrollChild( ChatBar2Settings.Debug.TextEditor);
+        -- ChatBar2Settings.Debug.scroll.base = {};
+        -- ChatBar2Settings.Debug.scroll.numer = 0;
+
+        ScriptErrorsFrame:HookScript("OnShow", function(self) 
+            ChatBar2Settings.Debug.base[#ChatBar2Settings.Debug.base+1] = ScriptErrorsFrame.ScrollFrame.Text:GetText();
+            ChatBar2Settings.Debug.numer=#ChatBar2Settings.Debug.base;
+            ChatBar2Settings.Debug.TextEditor:SetText(ScriptErrorsFrame.ScrollFrame.Text:GetText());
+            ChatBar2Settings.Debug.TextEditor:HighlightText();
+            
+            if(DygSettings["DisableBLUAError"]==false)then
+                ScriptErrorsFrame:Hide();
+                EZErrorCheckIndicator.num:SetText(#ChatBar2Settings.Debug.base);
+                EZErrorCheckIndicator:Show();
+            end
+        end);
+
+        ChatBar2Settings.Debug.TextEditor:SetScript("OnEnter", function(self) 
+            ChatBar2Settings.Debug.TextEditor:Enable();
+            ChatBar2Settings.Debug.TextEditor:HighlightText();
+        end);
+
+        ChatBar2Settings.Debug.TextEditor:SetScript("OnLeave", function(self) 
+            ChatBar2Settings.Debug.TextEditor:Disable(); 
+        end);
+    end
+    ChatBar2Settings.Debug:Show();
 end

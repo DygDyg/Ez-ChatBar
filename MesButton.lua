@@ -1,7 +1,11 @@
+function MesPanelStart()
+
+
 local cor = -2-- -17;
 local a1 = 2;
 local start = start or true;
 local HideButtonColl = 0;
+
 
 TabHide =  TabHide or CreateFrame("frame", "TabHide"); TabHide:Hide();
 
@@ -23,17 +27,6 @@ local function ScrollFrame_OnMouseWheel(self, delta)
         --print(HideButtonColl)
         --print(self:GetVerticalScrollRange())
 	self:SetVerticalScroll(newValue);
-end
-
-function CBCPanelUpdate()
-    local editBox = ChatEdit_ChooseBoxForSend();
-    local chatFrame = editBox.chatFrame;
-    --local chatType, channelIndex = string.gmatch(chatType, "([^%d]*)([%d]*)$")();
-    local messageTypeList = editBox.chatFrame.messageTypeList;
-    local channelList = editBox.chatFrame.channelList;
-
-
-    return editBox, chatFrame, messageTypeList, channelList;
 end
 
 function MesButtonPanel()
@@ -64,7 +57,7 @@ function MesButtonPanel()
 
 
 
-        DygMesTab.frame.ScrollFrame = CreateFrame("ScrollFrame", nil, DygMesTab.frame, BackdropTemplateMixin and "BackdropTemplate");
+        DygMesTab.frame.ScrollFrame = CreateFrame("ScrollFrame", "TabScrollFrame", DygMesTab.frame, BackdropTemplateMixin and "BackdropTemplate");
         DygMesTab.frame.ScrollFrame:SetPoint("TOPLEFT", DygMesTab.frame, "TOPLEFT", 0, 0);
         DygMesTab.frame.ScrollFrame:SetPoint("BOTTOMRIGHT", DygMesTab.frame, "BOTTOMRIGHT", 0, 0);
         DygMesTab.frame.ScrollFrame:SetScript("OnMouseWheel", ScrollFrame_OnMouseWheel);
@@ -338,6 +331,13 @@ function MesButton(args)
             DygMesTab[i].OpenTab:Hide();
 
             cor = cor - 19;
+        end
+        --DygMesTab[i]:SetParent(DygMesTab.frame2)
+    end
+
+    function fixMesTabButton()
+        for i=1, 100 do
+            DygMesTab[i]:SetParent(DygMesTab.frame2)
         end
     end
 
@@ -682,6 +682,7 @@ SLASH_DygMesSoundFile1 = "/DygMesSoundFile"
 SlashCmdList["DygBindingTab"] = DygBindingTab;
 SLASH_DygBindingTab1 = "/DygBindingTab"
 
+end
 
 
 
