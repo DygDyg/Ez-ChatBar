@@ -302,7 +302,6 @@ function aura_env.update_btn(aura_env)
     end
 end
 if(not aura_env.addon) then
-    print("start start start startstartstartstart startvstartvstartv startv ")
     aura_env.update_btn(aura_env)
 end
 

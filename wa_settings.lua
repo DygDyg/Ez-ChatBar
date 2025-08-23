@@ -2,7 +2,6 @@ local frame = CreateFrame("Frame")
 frame:RegisterEvent("ADDON_LOADED")
 
 frame:SetScript("OnEvent", function(self, event, addonName)
-    print(addonName)
     if (string.lower(addonName) == string.lower("EzChatBar")) then
         _G.EzChatBar.config = EZ_ChatBar_Bubble.config or {
             bubbles = {
