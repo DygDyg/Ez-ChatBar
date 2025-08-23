@@ -1,0 +1,62 @@
+{
+    "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
+    
+    "diagnostics": {
+        "globals": [
+            "aura_env",
+            "WeakAuras",
+            "C_Timer",
+            "GetTime",
+            "UnitGUID",
+            "CombatLogGetCurrentEventInfo",
+            "UnitName",
+            "UnitHealth",
+            "IsInGroup",
+            "IsInRaid",
+            "SendChatMessage"
+        ],
+        "disable": [
+            "undefined-global",
+            "duplicate-set-field",
+            "unused-local"
+        ],
+        "enable": true,
+        "severity": {
+            "undefined-global": "Warning",
+            "duplicate-set-field": "Hint"
+        }
+    },
+    
+    "runtime": {
+        "version": "Lua 5.1",
+        "special": {
+            "require": "require"
+        }
+    },
+    
+    "workspace": {
+        "library": [
+            "${3rd}/love2d/library",
+            "${3rd}/busted/library"
+        ],
+        "ignoreDir": [".vscode", "node_modules"],
+        "ignoreSubmodules": true
+    },
+    
+    "completion": {
+        "enable": true,
+        "callSnippet": "Both",
+        "keywordSnippet": "Both"
+    },
+    
+    "hint": {
+        "enable": true,
+        "paramType": true,
+        "paramName": "All",
+        "setType": true
+    },
+    
+    "telemetry": {
+        "enable": false
+    }
+}

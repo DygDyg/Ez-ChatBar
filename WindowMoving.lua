@@ -1,26 +1,7 @@
 WindowMovingDetecting = true;
 
 local window = {
-    WorldMapFrame,
-    AzeriteEmpoweredItemUI,
-    PVEFrame,
-    CharacterFrame,
-    SpellBookFrame,
-    PlayerTalentFrame,
-    AchievementFrame,
-    WorldMapFrame,
-    CommunitiesFrame,
-    CollectionsJournal,
-    EncounterJournal,
-    GameMenuFrame,
-    FriendsFrame,
-    VideoOptionsFrame,
-    InterfaceOptionsFrame,
-    AddonList,
-    MacroFrame,
-    --StaticPopup1,
-    KeyBindingFrame,
-    BNToastFrame,
+    -- EZ_BUBBLE
 }
 
 

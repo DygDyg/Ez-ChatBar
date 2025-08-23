@@ -1,4 +1,4 @@
-## Interface: 100200
+## Interface: 110200
 ## Title: EzChatBar
 ## Version: 0.34.02
 ## Author: Вульперняга
@@ -8,22 +8,20 @@
 ## X-Curse-Project-ID: 403805
 ## X-Category: Chat
 ## RequiredDeps:
-## OptionalDeps:
-## SavedVariables: DebugCheck, DygTestData, data, Message, DygSettingsGlobal, WindowPositionGlobal, DygbubblesGlobal, DygDygTest
-## SavedVariablesPerCharacter: DygSettings, Dygbubbles, WindowPosition
+## SavedVariables: EZ_ChatBar_Bubble, WindowPosition
+## SavedVariablesPerCharacter: EZ_ChatBar_Bubble_Pers
+## OptionalDeps: Ace3
 
-libs\Libs.xml
-locals.xml
+Libs\LibStub\LibStub.lua
+Libs\AceAddon-3.0\AceAddon-3.0.xml
+Libs\AceDB-3.0\AceDB-3.0.xml
+Libs\AceConfig-3.0\AceConfig-3.0.xml
+Libs\AceConfigDialog-3.0\AceConfigDialog-3.0.xml
 
 WindowMoving.lua
-base64.lua
-sound\base.lua
-Settings_Menu.lua
-Data.lua
-# MesButton.lua
-ChatBar2.lua
-settings2.lua
-EZTabButton.1.5.lua
+wa_core.lua
+locals.xml
+wa_settings.lua
+EZ_ChatBar_Bubble.lua
 
 ###################
-loading.lua
