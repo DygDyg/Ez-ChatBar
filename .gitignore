@@ -1,11 +1,4 @@
 
-image/BLPConverter.exe
-*.png
-*.png
 *.bat
 *.psd
-image/BLPConverter_8-4.zip
 *.exe
-.vs/slnx.sqlite
-.vs/EzChatBar/v16/.suo
-.vs/VSWorkspaceState.json
