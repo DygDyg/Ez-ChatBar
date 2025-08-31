@@ -22,5 +22,6 @@ if ( GetLocale() ~= "ruRU" ) then
     _G.EzChatBar.lang.desc_delete = "Delete this bubble"
     _G.EzChatBar.lang.name_reset_pos = "Reset position"
     _G.EzChatBar.lang.desc_reset_pos = "Reset position addon"
-
+    _G.EzChatBar.lang.name_button_label = "Letter in the bubble"
+    _G.EzChatBar.lang.desc_button_label = "Shows the first letter of the command in the bubbles"
 end

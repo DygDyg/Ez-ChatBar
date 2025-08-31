@@ -96,6 +96,20 @@ frame:SetScript("OnEvent", function(self, event, addonName)
                 handler = _G.EzChatBar,
                 type = "group",
                 args = {
+                    button_label = {
+                        name = _G.EzChatBar.lang.name_button_label, -- название (локализуй, если нужно)
+                        desc = _G.EzChatBar.lang.desc_button_label, -- описание (локализуй, если нужно)
+                        type = "toggle",
+                        get = function() 
+                            return _G.EzChatBar.config.button_label or false 
+                        end,
+                        set = function(_, value)
+                            _G.EzChatBar.config.button_label = value
+                            _G.EzChatBar.update_btn(_G.EzChatBar)
+                            EZ_ChatBar_Bubble.config = _G.EzChatBar.config
+                        end,
+                        order = 6
+                    },
                     size_slider = {
                         name = _G.EzChatBar.lang.name_button_size,
                         desc = _G.EzChatBar.lang.name_button_desc,

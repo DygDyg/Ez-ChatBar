@@ -285,7 +285,13 @@ function aura_env.SetBubble(param_, aura_env)
         aura_env.region.framedata[bubl_it].text:SetFont("Fonts\\FRIZQT__.TTF", aura_env.config["size_btn"] / 1.1, "OUTLINE")  -- Размер шрифта адаптирован под кнопку
         -- print(string.upper(string.gsub(param_["cmd"], "/", ""):sub(1, 1)))
     end
-    aura_env.region.framedata[bubl_it].text:SetText(string.upper(string.gsub(param_["cmd"], "/", ""):sub(1, 1)))
+    aura_env.config["button_label"] = aura_env.config["button_label"] or false
+    if(aura_env.config["button_label"]) then
+        aura_env.region.framedata[bubl_it].text:SetText(string.upper(string.gsub(param_["cmd"], "/", ""):sub(1, 1)))
+        aura_env.region.framedata[bubl_it].text:Show()
+    else
+        aura_env.region.framedata[bubl_it].text:Hide()
+    end
 
     bubl_it = bubl_it + 1
 end
