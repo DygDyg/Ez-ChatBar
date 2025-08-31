@@ -276,6 +276,17 @@ function aura_env.SetBubble(param_, aura_env)
             self.mask:Hide()
         end
     end)
+
+    -- Добавление буквы G в центр бабла
+    if not aura_env.region.framedata[bubl_it].text then
+        aura_env.region.framedata[bubl_it].text = aura_env.region.framedata[bubl_it]:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+        aura_env.region.framedata[bubl_it].text:SetPoint("CENTER")
+        aura_env.region.framedata[bubl_it].text:SetTextColor(1, 1, 1, 1)  -- Белый цвет для текста (светлый на тёмной теме)
+        aura_env.region.framedata[bubl_it].text:SetFont("Fonts\\FRIZQT__.TTF", aura_env.config["size_btn"] / 1.1, "OUTLINE")  -- Размер шрифта адаптирован под кнопку
+        -- print(string.upper(string.gsub(param_["cmd"], "/", ""):sub(1, 1)))
+    end
+    aura_env.region.framedata[bubl_it].text:SetText(string.upper(string.gsub(param_["cmd"], "/", ""):sub(1, 1)))
+
     bubl_it = bubl_it + 1
 end
 
@@ -304,4 +315,3 @@ end
 if(not aura_env.addon) then
     aura_env.update_btn(aura_env)
 end
-
