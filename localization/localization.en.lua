@@ -20,6 +20,7 @@ if ( GetLocale() ~= "ruRU" ) then
     _G.EzChatBar.lang.desc_color = "Select the color of the bubble"
     _G.EzChatBar.lang.name_delete = "Delete Bubble"
     _G.EzChatBar.lang.desc_delete = "Delete this bubble"
-
+    _G.EzChatBar.lang.name_reset_pos = "Reset position"
+    _G.EzChatBar.lang.desc_reset_pos = "Reset position addon"
 
 end

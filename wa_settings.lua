@@ -1,4 +1,5 @@
 local frame = CreateFrame("Frame")
+
 frame:RegisterEvent("ADDON_LOADED")
 
 frame:SetScript("OnEvent", function(self, event, addonName)
@@ -138,6 +139,17 @@ frame:SetScript("OnEvent", function(self, event, addonName)
                         end,
                         order = 3
                     },
+                    reset_position = {
+                        name = _G.EzChatBar.lang.name_reset_pos,
+                        desc = _G.EzChatBar.lang.desc_reset_pos,
+                        type = "execute",
+                        func = function()
+                            print(_G.EzChatBar.lang.name_reset_pos)
+                            _G.EzChatBar.region:ClearAllPoints();
+                            _G.EzChatBar.region:SetPoint("CENTER", UIParent, "CENTER", 0, 0);
+                        end,
+                        order = 0
+                    },
                     orientation_select = {
                         name = _G.EzChatBar.lang.name_button_shape,
                         desc = _G.EzChatBar.lang.desc_button_shape,
@@ -167,6 +179,7 @@ frame:SetScript("OnEvent", function(self, event, addonName)
                                         color = { 1, 1, 1 }
                                     })
                                     LibStub("AceConfigRegistry-3.0"):NotifyChange("EzChatBar")
+                                    _G.EzChatBar:SetupOptions()
                                     _G.EzChatBar.update_btn(_G.EzChatBar)
                                     EZ_ChatBar_Bubble.config = _G.EzChatBar.config
                                 end,
@@ -195,6 +208,7 @@ frame:SetScript("OnEvent", function(self, event, addonName)
                                 _G.EzChatBar.update_btn(_G.EzChatBar)
                                 EZ_ChatBar_Bubble.config = _G.EzChatBar.config
                                 -- _G.EzChatBar:ApplySettings()
+                                
                             end,
                             order = 1
                         },

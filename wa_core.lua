@@ -1,4 +1,5 @@
 
+local LCG = LibStub("LibCustomGlow-1.0")
 EZ_ChatBar_Bubble = EZ_ChatBar_Bubble or{}
 _G.EzChatBar = {};
 _G.EzChatBar.addon = true;
@@ -13,15 +14,17 @@ _G.EzChatBar.region:SetBackdrop({
     edgeSize = 0,
     insets = { left = 0, right = 0, top = 0, bottom = 0 }
 })
-_G.EzChatBar.region:SetBackdropColor(0, 0, 0, 0)
+_G.EzChatBar.region:SetBackdropColor(0, 0, 0, 0.1)
 WindowMoving(_G.EzChatBar.region)
 
 _G.EzChatBar.region:SetScript("OnEnter", function(self)
-    _G.EzChatBar.region:SetBackdropColor(0, 0, 0, 0.3)
+    _G.EzChatBar.region:SetBackdropColor(0, 0, 0, 0.5)
+    LCG.ButtonGlow_Start(self)
 end)
 
 _G.EzChatBar.region:SetScript("OnLeave", function(self)
-    _G.EzChatBar.region:SetBackdropColor(0, 0, 0, 0)
+    _G.EzChatBar.region:SetBackdropColor(0, 0, 0, 0.1)
+    LCG.ButtonGlow_Stop(self)
 end)
 -- Функция инициализации
 function _G.EzChatBar:OnInitialize()
