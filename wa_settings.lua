@@ -280,18 +280,21 @@ frame:SetScript("OnEvent", function(self, event, addonName)
         end
 
         -- Инициализация базы данных профиля
-        function _G.EzChatBar:OnInitialize()
-            -- Инициализируем базу данных с копией конфигурации
-            self.db = LibStub("AceDB-3.0"):New("EzChatBarDB", {
-                profile = {
-                    size_btn = _G.EzChatBar.config.size_btn,
-                    interval_btn = _G.EzChatBar.config.interval_btn,
-                    bubbles = _G.EzChatBar.config.bubbles
-                }
-            })
-            self:SetupOptions()
-            LibStub("AceConfigDialog-3.0"):AddToBlizOptions("EzChatBar", "EzChatBar")
-        end
+function _G.EzChatBar:OnInitialize()
+    -- Инициализируем базу данных с копией конфигурации
+    self.db = LibStub("AceDB-3.0"):New("EzChatBarDB", {
+        profile = {
+            size_btn = _G.EzChatBar.config.size_btn,
+            interval_btn = _G.EzChatBar.config.interval_btn,
+            bubbles = _G.EzChatBar.config.bubbles
+        }
+    })
+    self:SetupOptions()
+    -- Проверяем, не добавлен ли EzChatBar уже в Blizzard Options
+    if not LibStub("AceConfigDialog-3.0").BlizOptions["EzChatBar"] then
+        LibStub("AceConfigDialog-3.0"):AddToBlizOptions("EzChatBar", "EzChatBar")
+    end
+end
 
         _G.EzChatBar:OnInitialize()
         _G.EzChatBar.update_btn(_G.EzChatBar)

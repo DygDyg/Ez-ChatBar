@@ -1,6 +1,6 @@
 ## Interface: 110200
 ## Title: EzChatBar
-## Version: 0.51.6
+## Version: 0.51.7
 ## Author: Вульперняга
 ## Notes: Addon for to simplify the use of the standard chat.
 ## Notes-ruRU: Аддон для упрощения использования стандартного чата.
@@ -20,9 +20,9 @@ Libs\AceConfig-3.0\AceConfig-3.0.xml
 Libs\AceConfigDialog-3.0\AceConfigDialog-3.0.xml
 
 WindowMoving.lua
+wa_settings.lua
 wa_core.lua
 locals.xml
-wa_settings.lua
 EZ_ChatBar_Bubble.lua
 
 ###################

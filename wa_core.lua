@@ -40,8 +40,7 @@ local frame = CreateFrame("Frame")
 frame:RegisterEvent("ADDON_LOADED")
 frame:SetScript("OnEvent", function(self, event, addonName)
     if addonName == "EzChatBar" then
-        _G.EzChatBar:OnInitialize()
-        _G.EzChatBar:ApplySettings()
+        --_G.EzChatBar:ApplySettings() -- Оставляем только ApplySettings, если он нужен
     end
 end)
 
