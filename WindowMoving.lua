@@ -12,8 +12,13 @@ function WindowMoving(Mov, pickup)
         WindowPosition = WindowPosition or {};
         local Uid = UnitGUID("player");
         WindowPosition[Uid] = WindowPosition[Uid] or {}
+        -- local name, realm = UnitFullName("player")
+        -- print(name)
+        -- print(realm)
+        -- WindowPosition[Uid]["username"] = WindowPosition[Uid]["username"] or name.."-"..realm
 
         if(SaveName ~= nil)then
+            
             if(WindowPosition[Uid][SaveName]~=nil)then
                 if(WindowPosition[Uid][SaveName][1] ~=nil)then
                     Mov:ClearAllPoints();
@@ -40,6 +45,7 @@ WindowPosition = WindowPosition or {};
         end)
 
         Mov:SetScript("OnMouseUp", function(self, button)
+            WindowPosition[Uid] = WindowPosition[Uid] or {}
             if (button == "LeftButton") then
                 Mov:StopMovingOrSizing();
                 if(SaveName~=nil)then

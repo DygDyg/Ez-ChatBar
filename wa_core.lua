@@ -14,7 +14,7 @@ _G.EzChatBar.region:SetBackdrop({
     edgeSize = 0,
     insets = { left = 0, right = 0, top = 0, bottom = 0 }
 })
-_G.EzChatBar.region:SetBackdropColor(0, 0, 0, 0.1)
+_G.EzChatBar.region:SetBackdropColor(0, 0, 0, 0.3)
 WindowMoving(_G.EzChatBar.region)
 
 _G.EzChatBar.region:SetScript("OnEnter", function(self)
@@ -23,8 +23,21 @@ _G.EzChatBar.region:SetScript("OnEnter", function(self)
 end)
 
 _G.EzChatBar.region:SetScript("OnLeave", function(self)
-    _G.EzChatBar.region:SetBackdropColor(0, 0, 0, 0.1)
+    _G.EzChatBar.region:SetBackdropColor(0, 0, 0, 0.3)
     LCG.ButtonGlow_Stop(self)
+end)
+
+
+--- Открытие настрокек по ПКМ
+_G.EzChatBar.region:SetScript("OnMouseDown", function(self, button)
+    if button == "RightButton" then
+        -- Проверяем, зарегистрированы ли опции
+        if LibStub and LibStub("AceConfigDialog-3.0") then
+            LibStub("AceConfigDialog-3.0"):Open("EzChatBar")
+        else
+            print("⚙️ Настройки EzChatBar не найдены или не инициализированы.")
+        end
+    end
 end)
 -- Функция инициализации
 function _G.EzChatBar:OnInitialize()
@@ -34,6 +47,7 @@ function _G.EzChatBar:OnInitialize()
     -- Регистрируем опции
     self:SetupOptions()
 end
+
 
 -- Регистрируем события
 local frame = CreateFrame("Frame")
