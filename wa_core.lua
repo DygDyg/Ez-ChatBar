@@ -29,7 +29,7 @@ end)
 
 
 --- Открытие настрокек по ПКМ
-_G.EzChatBar.region:SetScript("OnMouseDown", function(self, button)
+_G.EzChatBar.region:HookScript("OnMouseDown", function(self, button)
     if button == "RightButton" then
         -- Проверяем, зарегистрированы ли опции
         if LibStub and LibStub("AceConfigDialog-3.0") then

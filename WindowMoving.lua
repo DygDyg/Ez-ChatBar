@@ -33,6 +33,7 @@ WindowPosition = WindowPosition or {};
         Mov:SetUserPlaced(true)
         --Mov:StartMoving()
         --Mov:StopMovingOrSizing()
+        
         Mov:SetScript("OnMouseDown", function(self, button)
             if (button == "LeftButton" ) then
                 if(UnitAffectingCombat("player") ~= true or DygSettings["FixBarCombat"] ~= true) then
