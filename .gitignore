@@ -1,4 +1,8 @@
-
+# Ignore tooling / source art junk (not shipped in releases)
 *.bat
 *.psd
 *.exe
+*.zip
+.DS_Store
+Thumbs.db
+.release/
