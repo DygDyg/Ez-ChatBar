@@ -6,11 +6,43 @@ https://www.wowace.com/projects/libbuttonglow-1-0
 -- luacheck: globals CreateFromMixins ObjectPoolMixin CreateTexturePool CreateFramePool
 
 local MAJOR_VERSION = "LibCustomGlow-1.0"
-local MINOR_VERSION = 21
+local MINOR_VERSION = 25
 if not LibStub then error(MAJOR_VERSION .. " requires LibStub.") end
 local lib, oldversion = LibStub:NewLibrary(MAJOR_VERSION, MINOR_VERSION)
 if not lib then return end
 local Masque = LibStub("Masque", true)
+
+-- AnimateTexCoords was a FrameXML helper; removed/unavailable in Midnight 12.0+.
+local AnimateTexCoords = _G.AnimateTexCoords
+if not AnimateTexCoords then
+    function AnimateTexCoords(texture, textureWidth, textureHeight, frameWidth, frameHeight, numFrames, elapsed, throttle)
+        if not texture.frame then
+            texture.frame = 1
+            texture.throttle = throttle
+            texture.numColumns = math.floor(textureWidth / frameWidth)
+            texture.numRows = math.floor(textureHeight / frameHeight)
+            texture.columnWidth = frameWidth / textureWidth
+            texture.rowHeight = frameHeight / textureHeight
+        end
+        local interval = throttle or 0.033
+        if not texture.throttle then
+            texture.throttle = interval
+        end
+        texture.throttle = texture.throttle - elapsed
+        if texture.throttle < 0 then
+            texture.throttle = interval
+            local left = ((texture.frame - 1) % texture.numColumns) * texture.columnWidth
+            local right = left + texture.columnWidth
+            local bottom = math.ceil(texture.frame / texture.numColumns) * texture.rowHeight
+            local top = bottom - texture.rowHeight
+            texture:SetTexCoord(left, right, top, bottom)
+            texture.frame = texture.frame + 1
+            if texture.frame > numFrames then
+                texture.frame = 1
+            end
+        end
+    end
+end
 
 local isRetail = WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
 local textureList = {
@@ -540,12 +572,14 @@ local function bgHide(self)
 end
 
 local function bgUpdate(self, elapsed)
-    AnimateTexCoords(self.ants, 256, 256, 48, 48, 22, elapsed, self.throttle);
-    local cooldown = self:GetParent().cooldown;
-    if(cooldown and cooldown:IsShown() and cooldown:GetCooldownDuration() > 3000) then
-        self:SetAlpha(0.5);
+    AnimateTexCoords(self.ants, 256, 256, 48, 48, 22, elapsed, self.throttle)
+    local cooldown = self:GetParent().cooldown
+    local duration = cooldown and cooldown:IsShown() and cooldown:GetCooldownDuration()
+    -- GetCooldownDuration can be secret in Midnight; never compare opaque values.
+    if (not issecretvalue or not issecretvalue(duration)) and duration and duration > 3000 then
+        self:SetAlpha(0.5)
     else
-        self:SetAlpha(1.0);
+        self:SetAlpha(1.0)
     end
 end
 

@@ -37,7 +37,9 @@ local function IsAllowed(perm)
     elseif perm == 6 then
         return IsInGuild() and C_GuildInfo.CanEditOfficerNote()
     elseif perm == 7 then
-        return IsInGroup(LE_PARTY_CATEGORY_INSTANCE)
+        -- LE_PARTY_CATEGORY_INSTANCE == 2 (instance/LFG group)
+        local category = LE_PARTY_CATEGORY_INSTANCE or 2
+        return IsInGroup(category)
     end
 
     return false

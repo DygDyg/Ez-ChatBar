@@ -116,12 +116,26 @@ function ns:Refresh()
     end
 end
 
+local pendingRefresh = false
+
+local function RequestRefresh()
+    if InCombatLockdown() then
+        pendingRefresh = true
+        return
+    end
+    pendingRefresh = false
+    if ns.config then
+        ns:Refresh()
+    end
+end
+
 local loader = CreateFrame("Frame")
 loader:RegisterEvent("ADDON_LOADED")
 loader:RegisterEvent("PLAYER_LOGIN")
 loader:RegisterEvent("GROUP_ROSTER_UPDATE")
 loader:RegisterEvent("PLAYER_GUILD_UPDATE")
 loader:RegisterEvent("PLAYER_ENTERING_WORLD")
+loader:RegisterEvent("PLAYER_REGEN_ENABLED")
 loader:SetScript("OnEvent", function(_, event, arg1)
     if event == "ADDON_LOADED" then
         if arg1 ~= ADDON_NAME then
@@ -138,15 +152,22 @@ loader:SetScript("OnEvent", function(_, event, arg1)
     if event == "PLAYER_LOGIN" then
         ns:EnsureConfig()
         ns:CreateAnchor()
-        ns:Refresh()
+        RequestRefresh()
         if ns.RegisterBlizzardOptions then
             ns:RegisterBlizzardOptions()
         end
         return
     end
 
+    if event == "PLAYER_REGEN_ENABLED" then
+        if pendingRefresh then
+            RequestRefresh()
+        end
+        return
+    end
+
     if ns.config then
-        ns:Refresh()
+        RequestRefresh()
     end
 end)
 

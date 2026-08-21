@@ -42,7 +42,8 @@ function ns:EnableMoving(frame, pickupOnly)
         if pickupOnly then
             return
         end
-        if InCombatLockdown and InCombatLockdown() then
+        -- Global InCombatLockdown (also C_RestrictedActions) — StartMoving is blocked in lockdown.
+        if InCombatLockdown() then
             return
         end
         self:StartMoving()

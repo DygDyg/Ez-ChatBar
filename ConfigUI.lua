@@ -208,8 +208,15 @@ function ns:CreateConfigUI()
     UI:SetMovable(true)
     UI:EnableMouse(true)
     UI:RegisterForDrag("LeftButton")
-    UI:SetScript("OnDragStart", UI.StartMoving)
-    UI:SetScript("OnDragStop", UI.StopMovingOrSizing)
+    UI:SetScript("OnDragStart", function(self)
+        if InCombatLockdown() then
+            return
+        end
+        self:StartMoving()
+    end)
+    UI:SetScript("OnDragStop", function(self)
+        self:StopMovingOrSizing()
+    end)
     UI:SetClampedToScreen(true)
     UI:SetFrameStrata("DIALOG")
     UI:SetBackdrop({
